@@ -62,6 +62,46 @@ OPTIONS:
 
 See [Sample Configs](Sample%20Configs/README.md) for all configuration options.
 
+## Privileges
+
+`kmart` requires the following **user privileges** in order to report correctly.
+
+**Recommendations:**
+*   Create a separate Jamf Pro User Account
+*   Do not just add these permissions to an existing account
+*   If you are not reporting on everything, only enable the privileges that are required
+
+| **Privilege** | **Create** | **Read** | **Update** | **Delete** |
+| :------------ | :--------: | :------: | :--------: | :--------: |
+| Advanced Computer Searches | - | :white_check_mark: | - | - |
+| Advanced Mobile Device | - | :white_check_mark: | - | - |
+| Buildings | - | :white_check_mark: | - | - |
+| Categories | - | :white_check_mark: | - | - |
+| Computer Extension Attributes | - | :white_check_mark: | - | - |
+| Computers | - | :white_check_mark: | - | - |
+| Departments | - | :white_check_mark: | - | - |
+| Directory Bindings | - | :white_check_mark: | - | - |
+| Disk Encryption Configurations | - | :white_check_mark: | - | - |
+| Dock Items | - | :white_check_mark: | - | - |
+| eBooks | - | :white_check_mark: | - | - |
+| iBeacons | - | :white_check_mark: | - | - |
+| Mac App Store Apps | - | :white_check_mark: | - | - |
+| macOS Configuration Profiles | - | :white_check_mark: | - | - |
+| Mobile Device Apps | - | :white_check_mark: | - | - |
+| Mobile Device Configuration Profiles | - | :white_check_mark: | - | - |
+| Mobile Device Extension Attributes | - | :white_check_mark: | - | - |
+| Mobile Devices | - | :white_check_mark: | - | - |
+| Network Segments | - | :white_check_mark: | - | - |
+| Packages | - | :white_check_mark: | - | - |
+| Policies | - | :white_check_mark: | - | - |
+| Printers | - | :white_check_mark: | - | - |
+| Restricted Software Records | - | :white_check_mark: | - | - |
+| Scripts | - | :white_check_mark: | - | - |
+| Smart Computer Groups | - | :white_check_mark: | - | - |
+| Smart Mobile Device Groups | - | :white_check_mark: | - | - |
+| Static Computer Groups | - | :white_check_mark: | - | - |
+| Static Mobile Device Groups | - | :white_check_mark: | - | - |
+
 ## Build Requirements
 
 *   Swift **5.3**.
