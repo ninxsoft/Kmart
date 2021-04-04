@@ -1,0 +1,936 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 52;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		350CBBB925E5AD21002F44D6 /* Double+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 350CBBB825E5AD21002F44D6 /* Double+Extension.swift */; };
+		573CD6E52611E62700CE156E /* Ink in Frameworks */ = {isa = PBXBuildFile; productRef = 573CD6E42611E62700CE156E /* Ink */; };
+		5743A36A25EBAD4A00919383 /* KMARTMobileTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5743A36925EBAD4A00919383 /* KMARTMobileTests.swift */; };
+		5743A37025EBB1D200919383 /* KMARTCommonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5743A36F25EBB1D200919383 /* KMARTCommonTests.swift */; };
+		5743A37C25ECA2B800919383 /* Lint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5743A37B25ECA2B800919383 /* Lint.swift */; };
+		5756B94625DE29CE001215DF /* Yams in Frameworks */ = {isa = PBXBuildFile; productRef = 5756B94525DE29CE001215DF /* Yams */; };
+		5756B94A25DF60ED001215DF /* MacDeviceHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5756B94925DF60ED001215DF /* MacDeviceHistory.swift */; };
+		5756B94F25DF6733001215DF /* MacPolicyLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5756B94E25DF6732001215DF /* MacPolicyLog.swift */; };
+		5756B95425DFA9DB001215DF /* OutputType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5756B95325DFA9DB001215DF /* OutputType.swift */; };
+		577AC6D42612D1F20086D80E /* Shell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 577AC6D32612D1F20086D80E /* Shell.swift */; };
+		577AC6D92613331C0086D80E /* SwiftSMTP in Frameworks */ = {isa = PBXBuildFile; productRef = 577AC6D82613331C0086D80E /* SwiftSMTP */; };
+		577AC6DD261333730086D80E /* Emailer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 577AC6DC261333730086D80E /* Emailer.swift */; };
+		578B884E25E62766003A89BF /* Int+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 578B884D25E62766003A89BF /* Int+Extension.swift */; };
+		578B885925E658E9003A89BF /* KMARTMacTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 578B885825E658E9003A89BF /* KMARTMacTests.swift */; };
+		578B888225E65F9E003A89BF /* MacAdvancedSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E253F125DA39A900931A0B /* MacAdvancedSearch.swift */; };
+		578B888525E65FA9003A89BF /* StaticGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E2540925DA39E200931A0B /* StaticGroup.swift */; };
+		578B888625E65FA9003A89BF /* MacTargets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5793802225DB317500A76D7D /* MacTargets.swift */; };
+		578B888725E65FA9003A89BF /* MacPrinter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E2541625DA39FF00931A0B /* MacPrinter.swift */; };
+		578B888825E65FA9003A89BF /* MacDiskEncryption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E2540025DA39CE00931A0B /* MacDiskEncryption.swift */; };
+		578B888925E65FA9003A89BF /* Criterion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5793803A25DB5D2F00A76D7D /* Criterion.swift */; };
+		578B888A25E65FA9003A89BF /* MacPackage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E2541025DA39EF00931A0B /* MacPackage.swift */; };
+		578B888B25E65FA9003A89BF /* MacPolicyLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5756B94E25DF6732001215DF /* MacPolicyLog.swift */; };
+		578B888C25E65FA9003A89BF /* MacDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E253FA25DA39C100931A0B /* MacDevice.swift */; };
+		578B888D25E65FA9003A89BF /* MacScript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E2541C25DA3A0A00931A0B /* MacScript.swift */; };
+		578B888E25E65FA9003A89BF /* IBeacon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5793804925DB75E400A76D7D /* IBeacon.swift */; };
+		578B888F25E65FA9003A89BF /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E253E725DA31D600931A0B /* Category.swift */; };
+		578B889025E65FA9003A89BF /* MobileExtensionAttribute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E2542B25DA3A3100931A0B /* MobileExtensionAttribute.swift */; };
+		578B889125E65FA9003A89BF /* SmartGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E2540C25DA39E600931A0B /* SmartGroup.swift */; };
+		578B889225E65FA9003A89BF /* Building.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E253E425DA2F5800931A0B /* Building.swift */; };
+		578B889325E65FA9003A89BF /* Limitations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5793802825DB318500A76D7D /* Limitations.swift */; };
+		578B889425E65FA9003A89BF /* MacRestrictedSoftware.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E2541925DA3A0600931A0B /* MacRestrictedSoftware.swift */; };
+		578B889525E65FA9003A89BF /* MacDeviceHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5756B94925DF60ED001215DF /* MacDeviceHistory.swift */; };
+		578B889625E65FA9003A89BF /* MobileAdvancedSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E2541F25DA3A1400931A0B /* MobileAdvancedSearch.swift */; };
+		578B889725E65FA9003A89BF /* EBook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E253ED25DA397400931A0B /* EBook.swift */; };
+		578B889825E65FA9003A89BF /* MacDirectoryBinding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E253FD25DA39C600931A0B /* MacDirectoryBinding.swift */; };
+		578B889925E65FA9003A89BF /* MacConfigurationProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E253F725DA39BD00931A0B /* MacConfigurationProfile.swift */; };
+		578B889A25E65FA9003A89BF /* MobileExclusions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5793803425DB538000A76D7D /* MobileExclusions.swift */; };
+		578B889B25E65FA9003A89BF /* MacApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E253F425DA39B300931A0B /* MacApplication.swift */; };
+		578B889C25E65FA9003A89BF /* MacExtensionAttribute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E2540625DA39DA00931A0B /* MacExtensionAttribute.swift */; };
+		578B889D25E65FA9003A89BF /* NetworkSegment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5793804625DB75D600A76D7D /* NetworkSegment.swift */; };
+		578B889E25E65FA9003A89BF /* MobileConfigurationProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E2542525DA3A2600931A0B /* MobileConfigurationProfile.swift */; };
+		578B889F25E65FA9003A89BF /* MacExclusions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5793802525DB317E00A76D7D /* MacExclusions.swift */; };
+		578B88A025E65FA9003A89BF /* MacPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E2541325DA39FB00931A0B /* MacPolicy.swift */; };
+		578B88A125E65FA9003A89BF /* MobileTargets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5793802D25DB3B7500A76D7D /* MobileTargets.swift */; };
+		578B88A225E65FA9003A89BF /* MobileApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E2542225DA3A1E00931A0B /* MobileApplication.swift */; };
+		578B88A325E65FA9003A89BF /* Department.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E253EA25DA31DD00931A0B /* Department.swift */; };
+		578B88A425E65FA9003A89BF /* MacDockItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E2540325DA39D200931A0B /* MacDockItem.swift */; };
+		578B88A525E65FA9003A89BF /* MobileDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E2542825DA3A2900931A0B /* MobileDevice.swift */; };
+		578B88AB25E65FC1003A89BF /* ReportType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E253CA25D8E74100931A0B /* ReportType.swift */; };
+		578B88AD25E65FC1003A89BF /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E2539E25D8CC8000931A0B /* Endpoint.swift */; };
+		578B88AF25E65FC1003A89BF /* OutputType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5756B95325DFA9DB001215DF /* OutputType.swift */; };
+		578B88B225E65FC9003A89BF /* Reporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5793805825DB883C00A76D7D /* Reporter.swift */; };
+		578B88B525E65FCE003A89BF /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E253B925D8CE5200931A0B /* String+Extension.swift */; };
+		578B88B625E65FCE003A89BF /* Dictionary+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E253D725D9DD4600931A0B /* Dictionary+Extension.swift */; };
+		578B88B725E65FCE003A89BF /* Int+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 578B884D25E62766003A89BF /* Int+Extension.swift */; };
+		578B88B825E65FCE003A89BF /* Double+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 350CBBB825E5AD21002F44D6 /* Double+Extension.swift */; };
+		578B88B925E65FCE003A89BF /* Sequence+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E253DB25D9E4E400931A0B /* Sequence+Extension.swift */; };
+		578B88C525E66196003A89BF /* Objects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E253D325D8F89500931A0B /* Objects.swift */; };
+		578B88CB25E661A4003A89BF /* PrettyPrint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5793805425DB817800A76D7D /* PrettyPrint.swift */; };
+		578B88D725E661D1003A89BF /* Yams in Frameworks */ = {isa = PBXBuildFile; productRef = 578B88D625E661D1003A89BF /* Yams */; };
+		578B88E625E66245003A89BF /* Reports.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5793805D25DB898100A76D7D /* Reports.swift */; };
+		578B88E925E66256003A89BF /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E253BF25D8CF6A00931A0B /* Configuration.swift */; };
+		578B88ED25E6626B003A89BF /* ArgumentParser in Frameworks */ = {isa = PBXBuildFile; productRef = 578B88EC25E6626B003A89BF /* ArgumentParser */; };
+		5793802325DB317500A76D7D /* MacTargets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5793802225DB317500A76D7D /* MacTargets.swift */; };
+		5793802625DB317E00A76D7D /* MacExclusions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5793802525DB317E00A76D7D /* MacExclusions.swift */; };
+		5793802925DB318500A76D7D /* Limitations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5793802825DB318500A76D7D /* Limitations.swift */; };
+		5793802E25DB3B7500A76D7D /* MobileTargets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5793802D25DB3B7500A76D7D /* MobileTargets.swift */; };
+		5793803525DB538000A76D7D /* MobileExclusions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5793803425DB538000A76D7D /* MobileExclusions.swift */; };
+		5793803B25DB5D2F00A76D7D /* Criterion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5793803A25DB5D2F00A76D7D /* Criterion.swift */; };
+		5793804725DB75D600A76D7D /* NetworkSegment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5793804625DB75D600A76D7D /* NetworkSegment.swift */; };
+		5793804A25DB75E400A76D7D /* IBeacon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5793804925DB75E400A76D7D /* IBeacon.swift */; };
+		5793805525DB817800A76D7D /* PrettyPrint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5793805425DB817800A76D7D /* PrettyPrint.swift */; };
+		5793805925DB883C00A76D7D /* Reporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5793805825DB883C00A76D7D /* Reporter.swift */; };
+		5793805E25DB898100A76D7D /* Reports.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5793805D25DB898100A76D7D /* Reports.swift */; };
+		57B4F63F26195B07006F894F /* Markdown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B4F63E26195B07006F894F /* Markdown.swift */; };
+		57B4F64526195B12006F894F /* ReportOptionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B4F64426195B12006F894F /* ReportOptionType.swift */; };
+		57B4F65226195BAE006F894F /* ReportOptionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B4F64426195B12006F894F /* ReportOptionType.swift */; };
+		57B4F65726195C06006F894F /* Lint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5743A37B25ECA2B800919383 /* Lint.swift */; };
+		57B4F65A26195C1F006F894F /* ReporterMac.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57CD1EE925EA401500FBF34B /* ReporterMac.swift */; };
+		57B4F65D26195C35006F894F /* Email.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FB8EDC2618771A00464C1F /* Email.swift */; };
+		57B4F66026195C39006F894F /* Markdown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B4F63E26195B07006F894F /* Markdown.swift */; };
+		57B4F66326195C40006F894F /* Shell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 577AC6D32612D1F20086D80E /* Shell.swift */; };
+		57B4F66826195C63006F894F /* Ink in Frameworks */ = {isa = PBXBuildFile; productRef = 57B4F66726195C63006F894F /* Ink */; };
+		57CD1ED525EA3B0A00FBF34B /* ReporterCommon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57CD1ED425EA3B0A00FBF34B /* ReporterCommon.swift */; };
+		57CD1ED925EA3B6600FBF34B /* GroupType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57CD1ED825EA3B6600FBF34B /* GroupType.swift */; };
+		57CD1EDC25EA3B6D00FBF34B /* GroupType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57CD1ED825EA3B6600FBF34B /* GroupType.swift */; };
+		57CD1EE425EA3F4700FBF34B /* ReporterMobile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57CD1EE325EA3F4700FBF34B /* ReporterMobile.swift */; };
+		57CD1EEA25EA401500FBF34B /* ReporterMac.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57CD1EE925EA401500FBF34B /* ReporterMac.swift */; };
+		57CD1EEF25EA557C00FBF34B /* ReporterMobile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57CD1EE325EA3F4700FBF34B /* ReporterMobile.swift */; };
+		57CD1EF025EA557C00FBF34B /* ReporterCommon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57CD1ED425EA3B0A00FBF34B /* ReporterCommon.swift */; };
+		57E2539225D8CB7E00931A0B /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E2539125D8CB7E00931A0B /* main.swift */; };
+		57E2539F25D8CC8000931A0B /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E2539E25D8CC8000931A0B /* Endpoint.swift */; };
+		57E253A425D8CCDE00931A0B /* ArgumentParser in Frameworks */ = {isa = PBXBuildFile; productRef = 57E253A325D8CCDE00931A0B /* ArgumentParser */; };
+		57E253B525D8CDDF00931A0B /* KMART.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E253B425D8CDDF00931A0B /* KMART.swift */; };
+		57E253BA25D8CE5200931A0B /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E253B925D8CE5200931A0B /* String+Extension.swift */; };
+		57E253BD25D8CF3200931A0B /* Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E253BC25D8CF3200931A0B /* Version.swift */; };
+		57E253C025D8CF6A00931A0B /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E253BF25D8CF6A00931A0B /* Configuration.swift */; };
+		57E253CB25D8E74100931A0B /* ReportType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E253CA25D8E74100931A0B /* ReportType.swift */; };
+		57E253CF25D8F64A00931A0B /* HTTP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E253CE25D8F64A00931A0B /* HTTP.swift */; };
+		57E253D425D8F89500931A0B /* Objects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E253D325D8F89500931A0B /* Objects.swift */; };
+		57E253D825D9DD4600931A0B /* Dictionary+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E253D725D9DD4600931A0B /* Dictionary+Extension.swift */; };
+		57E253DC25D9E4E400931A0B /* Sequence+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E253DB25D9E4E400931A0B /* Sequence+Extension.swift */; };
+		57E253E525DA2F5800931A0B /* Building.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E253E425DA2F5800931A0B /* Building.swift */; };
+		57E253E825DA31D600931A0B /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E253E725DA31D600931A0B /* Category.swift */; };
+		57E253EB25DA31DD00931A0B /* Department.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E253EA25DA31DD00931A0B /* Department.swift */; };
+		57E253EE25DA397400931A0B /* EBook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E253ED25DA397400931A0B /* EBook.swift */; };
+		57E253F225DA39A900931A0B /* MacAdvancedSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E253F125DA39A900931A0B /* MacAdvancedSearch.swift */; };
+		57E253F525DA39B300931A0B /* MacApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E253F425DA39B300931A0B /* MacApplication.swift */; };
+		57E253F825DA39BD00931A0B /* MacConfigurationProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E253F725DA39BD00931A0B /* MacConfigurationProfile.swift */; };
+		57E253FB25DA39C100931A0B /* MacDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E253FA25DA39C100931A0B /* MacDevice.swift */; };
+		57E253FE25DA39C600931A0B /* MacDirectoryBinding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E253FD25DA39C600931A0B /* MacDirectoryBinding.swift */; };
+		57E2540125DA39CE00931A0B /* MacDiskEncryption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E2540025DA39CE00931A0B /* MacDiskEncryption.swift */; };
+		57E2540425DA39D200931A0B /* MacDockItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E2540325DA39D200931A0B /* MacDockItem.swift */; };
+		57E2540725DA39DA00931A0B /* MacExtensionAttribute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E2540625DA39DA00931A0B /* MacExtensionAttribute.swift */; };
+		57E2540A25DA39E200931A0B /* StaticGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E2540925DA39E200931A0B /* StaticGroup.swift */; };
+		57E2540D25DA39E600931A0B /* SmartGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E2540C25DA39E600931A0B /* SmartGroup.swift */; };
+		57E2541125DA39EF00931A0B /* MacPackage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E2541025DA39EF00931A0B /* MacPackage.swift */; };
+		57E2541425DA39FB00931A0B /* MacPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E2541325DA39FB00931A0B /* MacPolicy.swift */; };
+		57E2541725DA39FF00931A0B /* MacPrinter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E2541625DA39FF00931A0B /* MacPrinter.swift */; };
+		57E2541A25DA3A0600931A0B /* MacRestrictedSoftware.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E2541925DA3A0600931A0B /* MacRestrictedSoftware.swift */; };
+		57E2541D25DA3A0A00931A0B /* MacScript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E2541C25DA3A0A00931A0B /* MacScript.swift */; };
+		57E2542025DA3A1400931A0B /* MobileAdvancedSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E2541F25DA3A1400931A0B /* MobileAdvancedSearch.swift */; };
+		57E2542325DA3A1E00931A0B /* MobileApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E2542225DA3A1E00931A0B /* MobileApplication.swift */; };
+		57E2542625DA3A2600931A0B /* MobileConfigurationProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E2542525DA3A2600931A0B /* MobileConfigurationProfile.swift */; };
+		57E2542925DA3A2A00931A0B /* MobileDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E2542825DA3A2900931A0B /* MobileDevice.swift */; };
+		57E2542C25DA3A3100931A0B /* MobileExtensionAttribute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E2542B25DA3A3100931A0B /* MobileExtensionAttribute.swift */; };
+		57FB8EDD2618771A00464C1F /* Email.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FB8EDC2618771A00464C1F /* Email.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		57E2538C25D8CB7E00931A0B /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		350CBBB825E5AD21002F44D6 /* Double+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Extension.swift"; sourceTree = "<group>"; };
+		5743A36925EBAD4A00919383 /* KMARTMobileTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KMARTMobileTests.swift; sourceTree = "<group>"; };
+		5743A36F25EBB1D200919383 /* KMARTCommonTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KMARTCommonTests.swift; sourceTree = "<group>"; };
+		5743A37B25ECA2B800919383 /* Lint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lint.swift; sourceTree = "<group>"; };
+		5756B94925DF60ED001215DF /* MacDeviceHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacDeviceHistory.swift; sourceTree = "<group>"; };
+		5756B94E25DF6732001215DF /* MacPolicyLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacPolicyLog.swift; sourceTree = "<group>"; };
+		5756B95325DFA9DB001215DF /* OutputType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutputType.swift; sourceTree = "<group>"; };
+		577AC6D32612D1F20086D80E /* Shell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shell.swift; sourceTree = "<group>"; };
+		577AC6DC261333730086D80E /* Emailer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Emailer.swift; sourceTree = "<group>"; };
+		578B884D25E62766003A89BF /* Int+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Extension.swift"; sourceTree = "<group>"; };
+		578B885625E658E9003A89BF /* KMARTTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KMARTTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		578B885825E658E9003A89BF /* KMARTMacTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KMARTMacTests.swift; sourceTree = "<group>"; };
+		578B885A25E658E9003A89BF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5793802225DB317500A76D7D /* MacTargets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacTargets.swift; sourceTree = "<group>"; };
+		5793802525DB317E00A76D7D /* MacExclusions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacExclusions.swift; sourceTree = "<group>"; };
+		5793802825DB318500A76D7D /* Limitations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Limitations.swift; sourceTree = "<group>"; };
+		5793802D25DB3B7500A76D7D /* MobileTargets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileTargets.swift; sourceTree = "<group>"; };
+		5793803425DB538000A76D7D /* MobileExclusions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileExclusions.swift; sourceTree = "<group>"; };
+		5793803A25DB5D2F00A76D7D /* Criterion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Criterion.swift; sourceTree = "<group>"; };
+		5793804625DB75D600A76D7D /* NetworkSegment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkSegment.swift; sourceTree = "<group>"; };
+		5793804925DB75E400A76D7D /* IBeacon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IBeacon.swift; sourceTree = "<group>"; };
+		5793805425DB817800A76D7D /* PrettyPrint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrettyPrint.swift; sourceTree = "<group>"; };
+		5793805825DB883C00A76D7D /* Reporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reporter.swift; sourceTree = "<group>"; };
+		5793805D25DB898100A76D7D /* Reports.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reports.swift; sourceTree = "<group>"; };
+		57B4F63E26195B07006F894F /* Markdown.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Markdown.swift; sourceTree = "<group>"; };
+		57B4F64426195B12006F894F /* ReportOptionType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportOptionType.swift; sourceTree = "<group>"; };
+		57CD1ED425EA3B0A00FBF34B /* ReporterCommon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReporterCommon.swift; sourceTree = "<group>"; };
+		57CD1ED825EA3B6600FBF34B /* GroupType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupType.swift; sourceTree = "<group>"; };
+		57CD1EE325EA3F4700FBF34B /* ReporterMobile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReporterMobile.swift; sourceTree = "<group>"; };
+		57CD1EE925EA401500FBF34B /* ReporterMac.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReporterMac.swift; sourceTree = "<group>"; };
+		57E2538E25D8CB7E00931A0B /* kmart */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = kmart; sourceTree = BUILT_PRODUCTS_DIR; };
+		57E2539125D8CB7E00931A0B /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		57E2539E25D8CC8000931A0B /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
+		57E253B425D8CDDF00931A0B /* KMART.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KMART.swift; sourceTree = "<group>"; };
+		57E253B925D8CE5200931A0B /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
+		57E253BC25D8CF3200931A0B /* Version.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Version.swift; sourceTree = "<group>"; };
+		57E253BF25D8CF6A00931A0B /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
+		57E253CA25D8E74100931A0B /* ReportType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportType.swift; sourceTree = "<group>"; };
+		57E253CE25D8F64A00931A0B /* HTTP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTP.swift; sourceTree = "<group>"; };
+		57E253D325D8F89500931A0B /* Objects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Objects.swift; sourceTree = "<group>"; };
+		57E253D725D9DD4600931A0B /* Dictionary+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dictionary+Extension.swift"; sourceTree = "<group>"; };
+		57E253DB25D9E4E400931A0B /* Sequence+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sequence+Extension.swift"; sourceTree = "<group>"; };
+		57E253E425DA2F5800931A0B /* Building.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Building.swift; sourceTree = "<group>"; };
+		57E253E725DA31D600931A0B /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
+		57E253EA25DA31DD00931A0B /* Department.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Department.swift; sourceTree = "<group>"; };
+		57E253ED25DA397400931A0B /* EBook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EBook.swift; sourceTree = "<group>"; };
+		57E253F125DA39A900931A0B /* MacAdvancedSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacAdvancedSearch.swift; sourceTree = "<group>"; };
+		57E253F425DA39B300931A0B /* MacApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacApplication.swift; sourceTree = "<group>"; };
+		57E253F725DA39BD00931A0B /* MacConfigurationProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacConfigurationProfile.swift; sourceTree = "<group>"; };
+		57E253FA25DA39C100931A0B /* MacDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacDevice.swift; sourceTree = "<group>"; };
+		57E253FD25DA39C600931A0B /* MacDirectoryBinding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacDirectoryBinding.swift; sourceTree = "<group>"; };
+		57E2540025DA39CE00931A0B /* MacDiskEncryption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacDiskEncryption.swift; sourceTree = "<group>"; };
+		57E2540325DA39D200931A0B /* MacDockItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacDockItem.swift; sourceTree = "<group>"; };
+		57E2540625DA39DA00931A0B /* MacExtensionAttribute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacExtensionAttribute.swift; sourceTree = "<group>"; };
+		57E2540925DA39E200931A0B /* StaticGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticGroup.swift; sourceTree = "<group>"; };
+		57E2540C25DA39E600931A0B /* SmartGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartGroup.swift; sourceTree = "<group>"; };
+		57E2541025DA39EF00931A0B /* MacPackage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacPackage.swift; sourceTree = "<group>"; };
+		57E2541325DA39FB00931A0B /* MacPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacPolicy.swift; sourceTree = "<group>"; };
+		57E2541625DA39FF00931A0B /* MacPrinter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacPrinter.swift; sourceTree = "<group>"; };
+		57E2541925DA3A0600931A0B /* MacRestrictedSoftware.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacRestrictedSoftware.swift; sourceTree = "<group>"; };
+		57E2541C25DA3A0A00931A0B /* MacScript.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacScript.swift; sourceTree = "<group>"; };
+		57E2541F25DA3A1400931A0B /* MobileAdvancedSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileAdvancedSearch.swift; sourceTree = "<group>"; };
+		57E2542225DA3A1E00931A0B /* MobileApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileApplication.swift; sourceTree = "<group>"; };
+		57E2542525DA3A2600931A0B /* MobileConfigurationProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileConfigurationProfile.swift; sourceTree = "<group>"; };
+		57E2542825DA3A2900931A0B /* MobileDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileDevice.swift; sourceTree = "<group>"; };
+		57E2542B25DA3A3100931A0B /* MobileExtensionAttribute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileExtensionAttribute.swift; sourceTree = "<group>"; };
+		57FB8EDC2618771A00464C1F /* Email.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Email.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		578B885325E658E9003A89BF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				57B4F66826195C63006F894F /* Ink in Frameworks */,
+				578B88ED25E6626B003A89BF /* ArgumentParser in Frameworks */,
+				578B88D725E661D1003A89BF /* Yams in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		57E2538B25D8CB7E00931A0B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				573CD6E52611E62700CE156E /* Ink in Frameworks */,
+				5756B94625DE29CE001215DF /* Yams in Frameworks */,
+				577AC6D92613331C0086D80E /* SwiftSMTP in Frameworks */,
+				57E253A425D8CCDE00931A0B /* ArgumentParser in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		578B885725E658E9003A89BF /* KMARTTests */ = {
+			isa = PBXGroup;
+			children = (
+				5743A36F25EBB1D200919383 /* KMARTCommonTests.swift */,
+				578B885825E658E9003A89BF /* KMARTMacTests.swift */,
+				5743A36925EBAD4A00919383 /* KMARTMobileTests.swift */,
+				578B885A25E658E9003A89BF /* Info.plist */,
+			);
+			path = KMARTTests;
+			sourceTree = "<group>";
+		};
+		57CD1ECF25EA3AF800FBF34B /* Reporter */ = {
+			isa = PBXGroup;
+			children = (
+				5793805825DB883C00A76D7D /* Reporter.swift */,
+				57CD1ED425EA3B0A00FBF34B /* ReporterCommon.swift */,
+				57CD1EE925EA401500FBF34B /* ReporterMac.swift */,
+				57CD1EE325EA3F4700FBF34B /* ReporterMobile.swift */,
+			);
+			path = Reporter;
+			sourceTree = "<group>";
+		};
+		57E2538525D8CB7E00931A0B = {
+			isa = PBXGroup;
+			children = (
+				57E2539025D8CB7E00931A0B /* KMART */,
+				578B885725E658E9003A89BF /* KMARTTests */,
+				57E2538F25D8CB7E00931A0B /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		57E2538F25D8CB7E00931A0B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				57E2538E25D8CB7E00931A0B /* kmart */,
+				578B885625E658E9003A89BF /* KMARTTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		57E2539025D8CB7E00931A0B /* KMART */ = {
+			isa = PBXGroup;
+			children = (
+				57E2539D25D8CC6800931A0B /* Commands */,
+				57E253B825D8CE4200931A0B /* Extensions */,
+				57E253D125D8F65000931A0B /* Helpers */,
+				57E2539C25D8CC5A00931A0B /* Model */,
+			);
+			path = KMART;
+			sourceTree = "<group>";
+		};
+		57E2539C25D8CC5A00931A0B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				57E253E125DA2F4400931A0B /* Objects */,
+				57E2539E25D8CC8000931A0B /* Endpoint.swift */,
+				57CD1ED825EA3B6600FBF34B /* GroupType.swift */,
+				57E253D325D8F89500931A0B /* Objects.swift */,
+				5756B95325DFA9DB001215DF /* OutputType.swift */,
+				57B4F64426195B12006F894F /* ReportOptionType.swift */,
+				57E253CA25D8E74100931A0B /* ReportType.swift */,
+				5793805D25DB898100A76D7D /* Reports.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		57E2539D25D8CC6800931A0B /* Commands */ = {
+			isa = PBXGroup;
+			children = (
+				57E2539125D8CB7E00931A0B /* main.swift */,
+				57E253B425D8CDDF00931A0B /* KMART.swift */,
+				57E253BF25D8CF6A00931A0B /* Configuration.swift */,
+				57FB8EDC2618771A00464C1F /* Email.swift */,
+				57E253BC25D8CF3200931A0B /* Version.swift */,
+			);
+			path = Commands;
+			sourceTree = "<group>";
+		};
+		57E253B825D8CE4200931A0B /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				57E253D725D9DD4600931A0B /* Dictionary+Extension.swift */,
+				350CBBB825E5AD21002F44D6 /* Double+Extension.swift */,
+				578B884D25E62766003A89BF /* Int+Extension.swift */,
+				57E253DB25D9E4E400931A0B /* Sequence+Extension.swift */,
+				57E253B925D8CE5200931A0B /* String+Extension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		57E253D125D8F65000931A0B /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				577AC6DC261333730086D80E /* Emailer.swift */,
+				57E253CE25D8F64A00931A0B /* HTTP.swift */,
+				57B4F63E26195B07006F894F /* Markdown.swift */,
+				5793805425DB817800A76D7D /* PrettyPrint.swift */,
+				577AC6D32612D1F20086D80E /* Shell.swift */,
+				57CD1ECF25EA3AF800FBF34B /* Reporter */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		57E253E125DA2F4400931A0B /* Objects */ = {
+			isa = PBXGroup;
+			children = (
+				57E253E425DA2F5800931A0B /* Building.swift */,
+				57E253E725DA31D600931A0B /* Category.swift */,
+				5793803A25DB5D2F00A76D7D /* Criterion.swift */,
+				57E253EA25DA31DD00931A0B /* Department.swift */,
+				57E253ED25DA397400931A0B /* EBook.swift */,
+				5793804925DB75E400A76D7D /* IBeacon.swift */,
+				5793802825DB318500A76D7D /* Limitations.swift */,
+				5743A37B25ECA2B800919383 /* Lint.swift */,
+				57E253F125DA39A900931A0B /* MacAdvancedSearch.swift */,
+				57E253F425DA39B300931A0B /* MacApplication.swift */,
+				57E253F725DA39BD00931A0B /* MacConfigurationProfile.swift */,
+				57E253FA25DA39C100931A0B /* MacDevice.swift */,
+				5756B94925DF60ED001215DF /* MacDeviceHistory.swift */,
+				57E253FD25DA39C600931A0B /* MacDirectoryBinding.swift */,
+				57E2540025DA39CE00931A0B /* MacDiskEncryption.swift */,
+				57E2540325DA39D200931A0B /* MacDockItem.swift */,
+				5793802525DB317E00A76D7D /* MacExclusions.swift */,
+				57E2540625DA39DA00931A0B /* MacExtensionAttribute.swift */,
+				57E2541025DA39EF00931A0B /* MacPackage.swift */,
+				57E2541325DA39FB00931A0B /* MacPolicy.swift */,
+				5756B94E25DF6732001215DF /* MacPolicyLog.swift */,
+				57E2541625DA39FF00931A0B /* MacPrinter.swift */,
+				57E2541925DA3A0600931A0B /* MacRestrictedSoftware.swift */,
+				57E2541C25DA3A0A00931A0B /* MacScript.swift */,
+				5793802225DB317500A76D7D /* MacTargets.swift */,
+				57E2541F25DA3A1400931A0B /* MobileAdvancedSearch.swift */,
+				57E2542225DA3A1E00931A0B /* MobileApplication.swift */,
+				57E2542525DA3A2600931A0B /* MobileConfigurationProfile.swift */,
+				57E2542825DA3A2900931A0B /* MobileDevice.swift */,
+				5793803425DB538000A76D7D /* MobileExclusions.swift */,
+				57E2542B25DA3A3100931A0B /* MobileExtensionAttribute.swift */,
+				5793802D25DB3B7500A76D7D /* MobileTargets.swift */,
+				5793804625DB75D600A76D7D /* NetworkSegment.swift */,
+				57E2540C25DA39E600931A0B /* SmartGroup.swift */,
+				57E2540925DA39E200931A0B /* StaticGroup.swift */,
+			);
+			path = Objects;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		578B885525E658E9003A89BF /* KMARTTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 578B885B25E658E9003A89BF /* Build configuration list for PBXNativeTarget "KMARTTests" */;
+			buildPhases = (
+				578B885225E658E9003A89BF /* Sources */,
+				578B885325E658E9003A89BF /* Frameworks */,
+				578B885425E658E9003A89BF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = KMARTTests;
+			packageProductDependencies = (
+				578B88D625E661D1003A89BF /* Yams */,
+				578B88EC25E6626B003A89BF /* ArgumentParser */,
+				57B4F66726195C63006F894F /* Ink */,
+			);
+			productName = KMARTTests;
+			productReference = 578B885625E658E9003A89BF /* KMARTTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		57E2538D25D8CB7E00931A0B /* KMART */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 57E2539525D8CB7E00931A0B /* Build configuration list for PBXNativeTarget "KMART" */;
+			buildPhases = (
+				57E2538A25D8CB7E00931A0B /* Sources */,
+				57E2538B25D8CB7E00931A0B /* Frameworks */,
+				57E2538C25D8CB7E00931A0B /* CopyFiles */,
+				57E253A825D8CD5E00931A0B /* Run SwiftLint */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = KMART;
+			packageProductDependencies = (
+				57E253A325D8CCDE00931A0B /* ArgumentParser */,
+				5756B94525DE29CE001215DF /* Yams */,
+				573CD6E42611E62700CE156E /* Ink */,
+				577AC6D82613331C0086D80E /* SwiftSMTP */,
+			);
+			productName = kmart;
+			productReference = 57E2538E25D8CB7E00931A0B /* kmart */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		57E2538625D8CB7E00931A0B /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1240;
+				LastUpgradeCheck = 1240;
+				TargetAttributes = {
+					578B885525E658E9003A89BF = {
+						CreatedOnToolsVersion = 12.4;
+					};
+					57E2538D25D8CB7E00931A0B = {
+						CreatedOnToolsVersion = 12.4;
+					};
+				};
+			};
+			buildConfigurationList = 57E2538925D8CB7E00931A0B /* Build configuration list for PBXProject "KMART" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 57E2538525D8CB7E00931A0B;
+			packageReferences = (
+				57E253A225D8CCDE00931A0B /* XCRemoteSwiftPackageReference "swift-argument-parser" */,
+				5756B94425DE29CE001215DF /* XCRemoteSwiftPackageReference "Yams" */,
+				573CD6E32611E62700CE156E /* XCRemoteSwiftPackageReference "Ink" */,
+				577AC6D72613331C0086D80E /* XCRemoteSwiftPackageReference "Swift-SMTP" */,
+			);
+			productRefGroup = 57E2538F25D8CB7E00931A0B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				57E2538D25D8CB7E00931A0B /* KMART */,
+				578B885525E658E9003A89BF /* KMARTTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		578B885425E658E9003A89BF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		57E253A825D8CD5E00931A0B /* Run SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Run SwiftLint";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = "/usr/bin/env bash";
+			shellScript = "if which swiftlint >/dev/null ; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n\nexit 0\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		578B885225E658E9003A89BF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				57B4F65A26195C1F006F894F /* ReporterMac.swift in Sources */,
+				578B888A25E65FA9003A89BF /* MacPackage.swift in Sources */,
+				578B88A425E65FA9003A89BF /* MacDockItem.swift in Sources */,
+				578B88A025E65FA9003A89BF /* MacPolicy.swift in Sources */,
+				578B88B225E65FC9003A89BF /* Reporter.swift in Sources */,
+				578B888B25E65FA9003A89BF /* MacPolicyLog.swift in Sources */,
+				578B889925E65FA9003A89BF /* MacConfigurationProfile.swift in Sources */,
+				57CD1EF025EA557C00FBF34B /* ReporterCommon.swift in Sources */,
+				57CD1EEF25EA557C00FBF34B /* ReporterMobile.swift in Sources */,
+				578B88AB25E65FC1003A89BF /* ReportType.swift in Sources */,
+				57B4F66026195C39006F894F /* Markdown.swift in Sources */,
+				57CD1EDC25EA3B6D00FBF34B /* GroupType.swift in Sources */,
+				578B888925E65FA9003A89BF /* Criterion.swift in Sources */,
+				578B88E925E66256003A89BF /* Configuration.swift in Sources */,
+				578B889E25E65FA9003A89BF /* MobileConfigurationProfile.swift in Sources */,
+				578B885925E658E9003A89BF /* KMARTMacTests.swift in Sources */,
+				578B88A525E65FA9003A89BF /* MobileDevice.swift in Sources */,
+				578B889525E65FA9003A89BF /* MacDeviceHistory.swift in Sources */,
+				578B889A25E65FA9003A89BF /* MobileExclusions.swift in Sources */,
+				578B889025E65FA9003A89BF /* MobileExtensionAttribute.swift in Sources */,
+				57B4F65226195BAE006F894F /* ReportOptionType.swift in Sources */,
+				578B888525E65FA9003A89BF /* StaticGroup.swift in Sources */,
+				578B888E25E65FA9003A89BF /* IBeacon.swift in Sources */,
+				578B88AD25E65FC1003A89BF /* Endpoint.swift in Sources */,
+				578B889225E65FA9003A89BF /* Building.swift in Sources */,
+				578B889725E65FA9003A89BF /* EBook.swift in Sources */,
+				57B4F65726195C06006F894F /* Lint.swift in Sources */,
+				578B888C25E65FA9003A89BF /* MacDevice.swift in Sources */,
+				578B889F25E65FA9003A89BF /* MacExclusions.swift in Sources */,
+				578B888D25E65FA9003A89BF /* MacScript.swift in Sources */,
+				578B88E625E66245003A89BF /* Reports.swift in Sources */,
+				578B88A325E65FA9003A89BF /* Department.swift in Sources */,
+				578B888725E65FA9003A89BF /* MacPrinter.swift in Sources */,
+				5743A36A25EBAD4A00919383 /* KMARTMobileTests.swift in Sources */,
+				578B888F25E65FA9003A89BF /* Category.swift in Sources */,
+				578B88B625E65FCE003A89BF /* Dictionary+Extension.swift in Sources */,
+				578B88AF25E65FC1003A89BF /* OutputType.swift in Sources */,
+				578B88B725E65FCE003A89BF /* Int+Extension.swift in Sources */,
+				578B889B25E65FA9003A89BF /* MacApplication.swift in Sources */,
+				578B888625E65FA9003A89BF /* MacTargets.swift in Sources */,
+				578B889125E65FA9003A89BF /* SmartGroup.swift in Sources */,
+				578B88C525E66196003A89BF /* Objects.swift in Sources */,
+				578B889325E65FA9003A89BF /* Limitations.swift in Sources */,
+				578B889C25E65FA9003A89BF /* MacExtensionAttribute.swift in Sources */,
+				578B889825E65FA9003A89BF /* MacDirectoryBinding.swift in Sources */,
+				57B4F65D26195C35006F894F /* Email.swift in Sources */,
+				578B889425E65FA9003A89BF /* MacRestrictedSoftware.swift in Sources */,
+				578B88CB25E661A4003A89BF /* PrettyPrint.swift in Sources */,
+				578B88B825E65FCE003A89BF /* Double+Extension.swift in Sources */,
+				578B88A125E65FA9003A89BF /* MobileTargets.swift in Sources */,
+				578B889625E65FA9003A89BF /* MobileAdvancedSearch.swift in Sources */,
+				578B888225E65F9E003A89BF /* MacAdvancedSearch.swift in Sources */,
+				578B888825E65FA9003A89BF /* MacDiskEncryption.swift in Sources */,
+				57B4F66326195C40006F894F /* Shell.swift in Sources */,
+				578B88A225E65FA9003A89BF /* MobileApplication.swift in Sources */,
+				578B889D25E65FA9003A89BF /* NetworkSegment.swift in Sources */,
+				578B88B525E65FCE003A89BF /* String+Extension.swift in Sources */,
+				578B88B925E65FCE003A89BF /* Sequence+Extension.swift in Sources */,
+				5743A37025EBB1D200919383 /* KMARTCommonTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		57E2538A25D8CB7E00931A0B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				57CD1EEA25EA401500FBF34B /* ReporterMac.swift in Sources */,
+				57E2542625DA3A2600931A0B /* MobileConfigurationProfile.swift in Sources */,
+				57E2541125DA39EF00931A0B /* MacPackage.swift in Sources */,
+				57E253CF25D8F64A00931A0B /* HTTP.swift in Sources */,
+				5756B94A25DF60ED001215DF /* MacDeviceHistory.swift in Sources */,
+				57E2540125DA39CE00931A0B /* MacDiskEncryption.swift in Sources */,
+				57E2541A25DA3A0600931A0B /* MacRestrictedSoftware.swift in Sources */,
+				57E253E525DA2F5800931A0B /* Building.swift in Sources */,
+				57E253FE25DA39C600931A0B /* MacDirectoryBinding.swift in Sources */,
+				57E253F225DA39A900931A0B /* MacAdvancedSearch.swift in Sources */,
+				57E2542925DA3A2A00931A0B /* MobileDevice.swift in Sources */,
+				57E2541725DA39FF00931A0B /* MacPrinter.swift in Sources */,
+				57E253EB25DA31DD00931A0B /* Department.swift in Sources */,
+				57E253F825DA39BD00931A0B /* MacConfigurationProfile.swift in Sources */,
+				5793802325DB317500A76D7D /* MacTargets.swift in Sources */,
+				5743A37C25ECA2B800919383 /* Lint.swift in Sources */,
+				57E253C025D8CF6A00931A0B /* Configuration.swift in Sources */,
+				57E2540A25DA39E200931A0B /* StaticGroup.swift in Sources */,
+				5756B94F25DF6733001215DF /* MacPolicyLog.swift in Sources */,
+				57E2540D25DA39E600931A0B /* SmartGroup.swift in Sources */,
+				5793805925DB883C00A76D7D /* Reporter.swift in Sources */,
+				57E2540725DA39DA00931A0B /* MacExtensionAttribute.swift in Sources */,
+				57CD1ED525EA3B0A00FBF34B /* ReporterCommon.swift in Sources */,
+				578B884E25E62766003A89BF /* Int+Extension.swift in Sources */,
+				5793802925DB318500A76D7D /* Limitations.swift in Sources */,
+				5793802625DB317E00A76D7D /* MacExclusions.swift in Sources */,
+				57E253DC25D9E4E400931A0B /* Sequence+Extension.swift in Sources */,
+				57B4F63F26195B07006F894F /* Markdown.swift in Sources */,
+				5793805E25DB898100A76D7D /* Reports.swift in Sources */,
+				57E2542325DA3A1E00931A0B /* MobileApplication.swift in Sources */,
+				5756B95425DFA9DB001215DF /* OutputType.swift in Sources */,
+				57E2541D25DA3A0A00931A0B /* MacScript.swift in Sources */,
+				57E253EE25DA397400931A0B /* EBook.swift in Sources */,
+				5793805525DB817800A76D7D /* PrettyPrint.swift in Sources */,
+				57E2541425DA39FB00931A0B /* MacPolicy.swift in Sources */,
+				57CD1EE425EA3F4700FBF34B /* ReporterMobile.swift in Sources */,
+				57E253BA25D8CE5200931A0B /* String+Extension.swift in Sources */,
+				57E253CB25D8E74100931A0B /* ReportType.swift in Sources */,
+				5793804725DB75D600A76D7D /* NetworkSegment.swift in Sources */,
+				57E253D825D9DD4600931A0B /* Dictionary+Extension.swift in Sources */,
+				57B4F64526195B12006F894F /* ReportOptionType.swift in Sources */,
+				57E253BD25D8CF3200931A0B /* Version.swift in Sources */,
+				57E253D425D8F89500931A0B /* Objects.swift in Sources */,
+				577AC6DD261333730086D80E /* Emailer.swift in Sources */,
+				57E2539F25D8CC8000931A0B /* Endpoint.swift in Sources */,
+				57FB8EDD2618771A00464C1F /* Email.swift in Sources */,
+				350CBBB925E5AD21002F44D6 /* Double+Extension.swift in Sources */,
+				57E2542025DA3A1400931A0B /* MobileAdvancedSearch.swift in Sources */,
+				5793804A25DB75E400A76D7D /* IBeacon.swift in Sources */,
+				5793802E25DB3B7500A76D7D /* MobileTargets.swift in Sources */,
+				57E253FB25DA39C100931A0B /* MacDevice.swift in Sources */,
+				57E2542C25DA3A3100931A0B /* MobileExtensionAttribute.swift in Sources */,
+				57E2540425DA39D200931A0B /* MacDockItem.swift in Sources */,
+				57E253F525DA39B300931A0B /* MacApplication.swift in Sources */,
+				57CD1ED925EA3B6600FBF34B /* GroupType.swift in Sources */,
+				577AC6D42612D1F20086D80E /* Shell.swift in Sources */,
+				57E253B525D8CDDF00931A0B /* KMART.swift in Sources */,
+				5793803B25DB5D2F00A76D7D /* Criterion.swift in Sources */,
+				57E2539225D8CB7E00931A0B /* main.swift in Sources */,
+				5793803525DB538000A76D7D /* MobileExclusions.swift in Sources */,
+				57E253E825DA31D600931A0B /* Category.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		578B885C25E658E9003A89BF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 7K3HVCLV7Z;
+				INFOPLIST_FILE = KMARTTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.ninxsoft.KMARTTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		578B885D25E658E9003A89BF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 7K3HVCLV7Z;
+				INFOPLIST_FILE = KMARTTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.ninxsoft.KMARTTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		57E2539325D8CB7E00931A0B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		57E2539425D8CB7E00931A0B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Release;
+		};
+		57E2539625D8CB7E00931A0B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 7K3HVCLV7Z;
+				ENABLE_HARDENED_RUNTIME = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ninxsoft.kmart;
+				PRODUCT_NAME = kmart;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		57E2539725D8CB7E00931A0B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 7K3HVCLV7Z;
+				ENABLE_HARDENED_RUNTIME = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ninxsoft.kmart;
+				PRODUCT_NAME = kmart;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		578B885B25E658E9003A89BF /* Build configuration list for PBXNativeTarget "KMARTTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				578B885C25E658E9003A89BF /* Debug */,
+				578B885D25E658E9003A89BF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		57E2538925D8CB7E00931A0B /* Build configuration list for PBXProject "KMART" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				57E2539325D8CB7E00931A0B /* Debug */,
+				57E2539425D8CB7E00931A0B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		57E2539525D8CB7E00931A0B /* Build configuration list for PBXNativeTarget "KMART" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				57E2539625D8CB7E00931A0B /* Debug */,
+				57E2539725D8CB7E00931A0B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		573CD6E32611E62700CE156E /* XCRemoteSwiftPackageReference "Ink" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/JohnSundell/Ink";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.5.0;
+			};
+		};
+		5756B94425DE29CE001215DF /* XCRemoteSwiftPackageReference "Yams" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/jpsim/Yams";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.5;
+			};
+		};
+		577AC6D72613331C0086D80E /* XCRemoteSwiftPackageReference "Swift-SMTP" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Kitura/Swift-SMTP.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.1.200;
+			};
+		};
+		57E253A225D8CCDE00931A0B /* XCRemoteSwiftPackageReference "swift-argument-parser" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-argument-parser";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.4.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		573CD6E42611E62700CE156E /* Ink */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 573CD6E32611E62700CE156E /* XCRemoteSwiftPackageReference "Ink" */;
+			productName = Ink;
+		};
+		5756B94525DE29CE001215DF /* Yams */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5756B94425DE29CE001215DF /* XCRemoteSwiftPackageReference "Yams" */;
+			productName = Yams;
+		};
+		577AC6D82613331C0086D80E /* SwiftSMTP */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 577AC6D72613331C0086D80E /* XCRemoteSwiftPackageReference "Swift-SMTP" */;
+			productName = SwiftSMTP;
+		};
+		578B88D625E661D1003A89BF /* Yams */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5756B94425DE29CE001215DF /* XCRemoteSwiftPackageReference "Yams" */;
+			productName = Yams;
+		};
+		578B88EC25E6626B003A89BF /* ArgumentParser */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 57E253A225D8CCDE00931A0B /* XCRemoteSwiftPackageReference "swift-argument-parser" */;
+			productName = ArgumentParser;
+		};
+		57B4F66726195C63006F894F /* Ink */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 573CD6E32611E62700CE156E /* XCRemoteSwiftPackageReference "Ink" */;
+			productName = Ink;
+		};
+		57E253A325D8CCDE00931A0B /* ArgumentParser */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 57E253A225D8CCDE00931A0B /* XCRemoteSwiftPackageReference "swift-argument-parser" */;
+			productName = ArgumentParser;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 57E2538625D8CB7E00931A0B /* Project object */;
+}
