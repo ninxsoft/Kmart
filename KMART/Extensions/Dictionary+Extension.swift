@@ -285,7 +285,7 @@ extension Dictionary where Key == String, Value == Any {
 
         self["dataType"] = dataType
         self["inputType"] = inputType
-        self["scriptContents"] = dictionary["script"] as? String ?? ""
+        self["scriptContents"] = (dictionary["script"] as? String)?.replacingOccurrences(of: "\r\n", with: "\n") ?? ""
         self["linterWarnings"] = []
         self["linterErrors"] = []
     }
