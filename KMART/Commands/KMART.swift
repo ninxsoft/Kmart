@@ -60,6 +60,11 @@ struct KMART: ParsableCommand {
         reports.saveToDisk(using: configuration)
         let reportEnd: Date = Date()
         PrettyPrint.print(.info, string: String(format: "Total Reporting Time: %.1f seconds", reportEnd.timeIntervalSince(reportStart)))
+
+        guard configuration.email.enabled else {
+            return
+        }
+
         let emailStart: Date = Date()
         Emailer.email(reports, using: configuration)
         let emailEnd: Date = Date()
