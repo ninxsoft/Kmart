@@ -105,7 +105,7 @@ See [Sample Configs](Sample%20Configs/README.md) for all configuration options.
 ## Build Requirements
 
 *   Swift **5.3**.
-*   Runs on macOS High Sierra **10.13** and later.
+*   Runs on macOS Catalina **10.15** and later.
 
 ## Download
 
