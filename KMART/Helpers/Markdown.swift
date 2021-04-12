@@ -135,7 +135,7 @@ struct Markdown {
         }
 
         let link: String = "\(url)/\(type.jamfProSlug)\(identifier)"
-        let formattedName: String = name.replacingOccurrences(of: "[", with: "\\[").replacingOccurrences(of: "|", with: "\\|")
+        let formattedName: String = name.escapingMarkdown()
 
         switch type {
         case .macDevicesDuplicateNames, .macDevicesDuplicateSerialNumbers, .macDevicesLastCheckIn, .macDevicesLastInventory, .mobileDevicesLastInventory:
@@ -161,7 +161,7 @@ struct Markdown {
                 }
 
                 let formattedCode: String = "https://github.com/koalaman/shellcheck/wiki/SC\(code)"
-                let formattedMessage: String = message.replacingOccurrences(of: "[", with: "\\[").replacingOccurrences(of: "|", with: "\\|").trimmingCharacters(in: .newlines)
+                let formattedMessage: String = message.escapingMarkdown().trimmingCharacters(in: .newlines)
 
                 if index == 0 {
                     string.append("| [\(identifier)](\(link)) | \(formattedName) | \(line) | \(column) | \(formattedMessage) | [\(code)](\(formattedCode)) |\n")

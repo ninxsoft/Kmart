@@ -12,4 +12,11 @@ extension String {
     static let identifier: String = "com.ninxsoft.\(appName)"
     static let abstract: String = "Kick-Ass Mac Admin Reporting Tool"
     static let discussion: String = "Generate kick-ass Jamf Pro reports."
+
+    func escapingMarkdown() -> String {
+        self.replacingOccurrences(of: "[", with: "\\[")
+            .replacingOccurrences(of: "]", with: "\\]")
+            .replacingOccurrences(of: "|", with: "\\|")
+            .replacingOccurrences(of: "_", with: "\\_")
+    }
 }
