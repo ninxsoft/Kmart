@@ -60,6 +60,8 @@
 			<true/>
 			<key>mac_policies_no_payload</key>
 			<true/>
+			<key>mac_policies_jamf_remote</key>
+			<true/>
 			<key>mac_policies_last_executed</key>
 			<true/>
 			<key>mac_policies_failed_threshold</key>

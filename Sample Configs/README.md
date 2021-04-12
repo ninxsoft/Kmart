@@ -45,6 +45,7 @@
         *   [mac_policies_no_scope](#mac_policies_no_scope)
         *   [mac_policies_disabled](#mac_policies_disabled)
         *   [mac_policies_no_payload](#mac_policies_no_payload)
+        *   [mac_policies_jamf_remote](#mac_policies_jamf_remote)
         *   [mac_policies_last_executed](#mac_policies_last_executed)
         *   [mac_policies_failed_threshold](#mac_policies_failed_threshold)
         *   [mac_printers_not_linked](#mac_printers_not_linked)
@@ -390,6 +391,14 @@ Report all **Mac Policies** that are disabled.
 | `boolean` | :no_good: | `false` |
 
 Report all **Mac Policies** that have no payload defined.
+
+#### mac_policies_jamf_remote
+
+| **Type** | **Required** | **Default** |
+| :------: | :----------: | :---------: |
+| `boolean` | :no_good: | `false` |
+
+Report all **Mac Policies** that were created via Jamf Remote.
 
 #### mac_policies_last_executed
 

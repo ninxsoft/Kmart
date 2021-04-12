@@ -33,6 +33,7 @@ struct Reports {
     var macPoliciesNoScope: [MacPolicy] = []
     var macPoliciesDisabled: [MacPolicy] = []
     var macPoliciesNoPayload: [MacPolicy] = []
+    var macPoliciesJamfRemote: [MacPolicy] = []
     var macPoliciesLastExecuted: [MacPolicy] = []
     var macPoliciesFailedThreshold: [MacPolicy] = []
     var macPrintersNotLinked: [MacPrinter] = []
@@ -108,6 +109,7 @@ struct Reports {
         case .macPoliciesNoScope:                   return macPoliciesNoScope.map { $0.dictionary }
         case .macPoliciesDisabled:                  return macPoliciesDisabled.map { $0.dictionary }
         case .macPoliciesNoPayload:                 return macPoliciesNoPayload.map { $0.dictionary }
+        case .macPoliciesJamfRemote:                return macPoliciesJamfRemote.map { $0.dictionary }
         case .macPoliciesLastExecuted:              return macPoliciesLastExecuted.map { $0.dictionary }
         case .macPoliciesFailedThreshold:           return macPoliciesFailedThreshold.map { $0.dictionary }
         case .macPrintersNotLinked:                 return macPrintersNotLinked.map { $0.dictionary }

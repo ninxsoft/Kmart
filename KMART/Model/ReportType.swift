@@ -33,6 +33,7 @@ enum ReportType: String, CaseIterable {
     case macPoliciesNoScope = "mac_policies_no_scope"
     case macPoliciesDisabled = "mac_policies_disabled"
     case macPoliciesNoPayload = "mac_policies_no_payload"
+    case macPoliciesJamfRemote = "mac_policies_jamf_remote"
     case macPoliciesLastExecuted = "mac_policies_last_executed"
     case macPoliciesFailedThreshold = "mac_policies_failed_threshold"
     case macPrintersNotLinked = "mac_printers_not_linked"
@@ -92,6 +93,7 @@ enum ReportType: String, CaseIterable {
         case .macPackagesNotLinked:                  return [.macPackages, .macPolicies]
         case .macPoliciesNoScope:                    return [.macPolicies]
         case .macPoliciesDisabled:                   return [.macPolicies]
+        case .macPoliciesJamfRemote:                 return [.macPolicies]
         case .macPoliciesNoPayload:                  return [.macPolicies]
         case .macPoliciesLastExecuted:               return [.macDevicesHistory, .macPolicies]
         case .macPoliciesFailedThreshold:            return [.macDevicesHistory, .macPolicies]
@@ -121,49 +123,86 @@ enum ReportType: String, CaseIterable {
 
     var endpoint: Endpoint {
         switch self {
-        case .buildingsNotLinked:                                                                                                     return .buildings
-        case .categoriesNotLinked:                                                                                                    return .categories
-        case .departmentsNotLinked:                                                                                                   return .departments
-        case .eBooksNoScope:                                                                                                          return .eBooks
-        case .iBeaconsNotLinked:                                                                                                      return .iBeacons
-        case .macAdvancedSearchesNoCriteria, .macAdvancedSearchesInvalidCriteria:                                                     return .macAdvancedSearches
-        case .macApplicationsNoScope:                                                                                                 return .macApplications
-        case .macConfigurationProfilesNoScope:                                                                                        return .macConfigurationProfiles
-        case .macDevicesDuplicateNames, .macDevicesDuplicateSerialNumbers, .macDevicesLastCheckIn, .macDevicesLastInventory:          return .macDevices
-        case .macDirectoryBindingsNotLinked:                                                                                          return .macDirectoryBindings
-        case .macDiskEncryptionsNotLinked:                                                                                            return .macDiskEncryptions
-        case .macDockItemsNotLinked:                                                                                                  return .macDockItems
-        case .macExtensionAttributesNotLinked, .macExtensionAttributesDisabled,
-            .macExtensionAttributesLinterErrors, .macExtensionAttributesLinterWarnings:                                               return .macExtensionAttributes
-        case .macPackagesNotLinked:                                                                                                   return .macPackages
-        case .macPoliciesNoScope, .macPoliciesDisabled, .macPoliciesNoPayload, .macPoliciesLastExecuted, .macPoliciesFailedThreshold: return .macPolicies
-        case .macPrintersNotLinked:                                                                                                   return .macPrinters
-        case .macRestrictedSoftwareNoScope:                                                                                           return .macRestrictedSoftware
-        case .macScriptsNotLinked, .macScriptsLinterErrors, .macScriptsLinterWarnings:                                                return .macScripts
-        case .macSmartGroupsNotLinked, .macSmartGroupsNoCriteria, .macStaticGroupsNotLinked, .macStaticGroupsEmpty:                   return .macGroups
-        case .mobileAdvancedSearchesNoCriteria, .mobileAdvancedSearchesInvalidCriteria:                                               return .mobileAdvancedSearches
-        case .mobileApplicationsNoScope:                                                                                              return .mobileApplications
-        case .mobileConfigurationProfilesNoScope:                                                                                     return .mobileConfigurationProfiles
-        case .mobileDevicesLastInventory:                                                                                             return .mobileDevices
-        case .mobileExtensionAttributesNotLinked:                                                                                     return .mobileExtensionAttributes
-        case .mobileSmartGroupsNotLinked, .mobileSmartGroupsNoCriteria, .mobileStaticGroupsNotLinked, .mobileStaticGroupsEmpty:       return .mobileGroups
-        case .networkSegmentsNotLinked:                                                                                               return .networkSegments
+        case .buildingsNotLinked:                                                                                                                             return .buildings
+        case .categoriesNotLinked:                                                                                                                            return .categories
+        case .departmentsNotLinked:                                                                                                                           return .departments
+        case .eBooksNoScope:                                                                                                                                  return .eBooks
+        case .iBeaconsNotLinked:                                                                                                                              return .iBeacons
+        case .macAdvancedSearchesNoCriteria, .macAdvancedSearchesInvalidCriteria:                                                                             return .macAdvancedSearches
+        case .macApplicationsNoScope:                                                                                                                         return .macApplications
+        case .macConfigurationProfilesNoScope:                                                                                                                return .macConfigurationProfiles
+        case .macDevicesDuplicateNames, .macDevicesDuplicateSerialNumbers, .macDevicesLastCheckIn, .macDevicesLastInventory:                                  return .macDevices
+        case .macDirectoryBindingsNotLinked:                                                                                                                  return .macDirectoryBindings
+        case .macDiskEncryptionsNotLinked:                                                                                                                    return .macDiskEncryptions
+        case .macDockItemsNotLinked:                                                                                                                          return .macDockItems
+        case .macExtensionAttributesNotLinked, .macExtensionAttributesDisabled, .macExtensionAttributesLinterErrors, .macExtensionAttributesLinterWarnings:   return .macExtensionAttributes
+        case .macPackagesNotLinked:                                                                                                                           return .macPackages
+        case .macPoliciesNoScope, .macPoliciesDisabled, .macPoliciesNoPayload, .macPoliciesJamfRemote, .macPoliciesLastExecuted, .macPoliciesFailedThreshold: return .macPolicies
+        case .macPrintersNotLinked:                                                                                                                           return .macPrinters
+        case .macRestrictedSoftwareNoScope:                                                                                                                   return .macRestrictedSoftware
+        case .macScriptsNotLinked, .macScriptsLinterErrors, .macScriptsLinterWarnings:                                                                        return .macScripts
+        case .macSmartGroupsNotLinked, .macSmartGroupsNoCriteria, .macStaticGroupsNotLinked, .macStaticGroupsEmpty:                                           return .macGroups
+        case .mobileAdvancedSearchesNoCriteria, .mobileAdvancedSearchesInvalidCriteria:                                                                       return .mobileAdvancedSearches
+        case .mobileApplicationsNoScope:                                                                                                                      return .mobileApplications
+        case .mobileConfigurationProfilesNoScope:                                                                                                             return .mobileConfigurationProfiles
+        case .mobileDevicesLastInventory:                                                                                                                     return .mobileDevices
+        case .mobileExtensionAttributesNotLinked:                                                                                                             return .mobileExtensionAttributes
+        case .mobileSmartGroupsNotLinked, .mobileSmartGroupsNoCriteria, .mobileStaticGroupsNotLinked, .mobileStaticGroupsEmpty:                               return .mobileGroups
+        case .networkSegmentsNotLinked:                                                                                                                       return .networkSegments
         }
     }
 
     var group: GroupType {
         switch self {
-        case .buildingsNotLinked, .categoriesNotLinked, .departmentsNotLinked, .eBooksNoScope, .iBeaconsNotLinked, .networkSegmentsNotLinked:
+        case .buildingsNotLinked,
+            .categoriesNotLinked,
+            .departmentsNotLinked,
+            .eBooksNoScope,
+            .iBeaconsNotLinked,
+            .networkSegmentsNotLinked:
             return .common
-        case .macAdvancedSearchesNoCriteria, .macAdvancedSearchesInvalidCriteria, .macApplicationsNoScope, .macConfigurationProfilesNoScope, .macDevicesDuplicateNames,
-            .macDevicesDuplicateSerialNumbers, .macDevicesLastCheckIn, .macDevicesLastInventory, .macDirectoryBindingsNotLinked, .macDiskEncryptionsNotLinked, .macDockItemsNotLinked,
-            .macExtensionAttributesNotLinked, .macExtensionAttributesDisabled, .macExtensionAttributesLinterErrors, .macExtensionAttributesLinterWarnings, .macPackagesNotLinked, .macPoliciesNoScope,
-            .macPoliciesDisabled, .macPoliciesNoPayload, .macPoliciesLastExecuted, .macPoliciesFailedThreshold, .macPrintersNotLinked, .macRestrictedSoftwareNoScope, .macScriptsNotLinked,
-            .macScriptsLinterErrors, .macScriptsLinterWarnings, .macSmartGroupsNotLinked, .macSmartGroupsNoCriteria, .macStaticGroupsNotLinked, .macStaticGroupsEmpty:
+        case .macAdvancedSearchesNoCriteria,
+            .macAdvancedSearchesInvalidCriteria,
+            .macApplicationsNoScope,
+            .macConfigurationProfilesNoScope,
+            .macDevicesDuplicateNames,
+            .macDevicesDuplicateSerialNumbers,
+            .macDevicesLastCheckIn,
+            .macDevicesLastInventory,
+            .macDirectoryBindingsNotLinked,
+            .macDiskEncryptionsNotLinked,
+            .macDockItemsNotLinked,
+            .macExtensionAttributesNotLinked,
+            .macExtensionAttributesDisabled,
+            .macExtensionAttributesLinterErrors,
+            .macExtensionAttributesLinterWarnings,
+            .macPackagesNotLinked,
+            .macPoliciesNoScope,
+            .macPoliciesDisabled,
+            .macPoliciesNoPayload,
+            .macPoliciesJamfRemote,
+            .macPoliciesLastExecuted,
+            .macPoliciesFailedThreshold,
+            .macPrintersNotLinked,
+            .macRestrictedSoftwareNoScope,
+            .macScriptsNotLinked,
+            .macScriptsLinterErrors,
+            .macScriptsLinterWarnings,
+            .macSmartGroupsNotLinked,
+            .macSmartGroupsNoCriteria,
+            .macStaticGroupsNotLinked,
+            .macStaticGroupsEmpty:
             return .mac
-        case .mobileAdvancedSearchesNoCriteria, .mobileAdvancedSearchesInvalidCriteria, .mobileApplicationsNoScope, .mobileConfigurationProfilesNoScope,
-            .mobileDevicesLastInventory, .mobileExtensionAttributesNotLinked, .mobileSmartGroupsNotLinked,
-            .mobileSmartGroupsNoCriteria, .mobileStaticGroupsNotLinked, .mobileStaticGroupsEmpty:
+        case .mobileAdvancedSearchesNoCriteria,
+            .mobileAdvancedSearchesInvalidCriteria,
+            .mobileApplicationsNoScope,
+            .mobileConfigurationProfilesNoScope,
+            .mobileDevicesLastInventory,
+            .mobileExtensionAttributesNotLinked,
+            .mobileSmartGroupsNotLinked,
+            .mobileSmartGroupsNoCriteria,
+            .mobileStaticGroupsNotLinked,
+            .mobileStaticGroupsEmpty:
         return .mobile
         }
     }
@@ -194,6 +233,7 @@ enum ReportType: String, CaseIterable {
         case .macPoliciesNoScope:                    return "The following Mac Policies have no scope"
         case .macPoliciesDisabled:                   return "The following Mac Policies are disabled"
         case .macPoliciesNoPayload:                  return "The following Mac Policies have no payload"
+        case .macPoliciesJamfRemote:                 return "The following Mac Policies were created via Jamf Remote"
         case .macPoliciesLastExecuted:               return "The following Mac Policies have met the last executed threshold"
         case .macPoliciesFailedThreshold:            return "The following Mac Policies have met the failed threshold"
         case .macPrintersNotLinked:                  return "The following Mac Printers are not linked to any Policies"
@@ -236,7 +276,8 @@ enum ReportType: String, CaseIterable {
         case .macExtensionAttributesNotLinked, .macExtensionAttributesDisabled,
             .macExtensionAttributesLinterErrors, .macExtensionAttributesLinterWarnings:                                               return "computerExtensionAttributes.html?id="
         case .macPackagesNotLinked:                                                                                                   return "packages.html?id="
-        case .macPoliciesNoScope, .macPoliciesDisabled, .macPoliciesNoPayload, .macPoliciesLastExecuted, .macPoliciesFailedThreshold: return "policies.html?id="
+        case .macPoliciesNoScope, .macPoliciesDisabled, .macPoliciesNoPayload, .macPoliciesJamfRemote, .macPoliciesLastExecuted,
+            .macPoliciesFailedThreshold:                                                                                              return "policies.html?id="
         case .macPrintersNotLinked:                                                                                                   return "printers.html?id="
         case .macRestrictedSoftwareNoScope:                                                                                           return "restrictedSoftware.html?id="
         case .macScriptsNotLinked, .macScriptsLinterErrors, .macScriptsLinterWarnings:                                                return "view/settings/computer/scripts/"

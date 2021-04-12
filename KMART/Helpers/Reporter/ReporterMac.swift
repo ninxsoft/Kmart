@@ -7,6 +7,7 @@
 
 import Foundation
 
+// swiftlint:disable:next type_body_length
 struct ReporterMac {
 
     // swiftlint:disable cyclomatic_complexity
@@ -32,6 +33,7 @@ struct ReporterMac {
         case .macPoliciesNoScope:                   reports.macPoliciesNoScope.append(contentsOf: macPoliciesNoScope(objects.macPolicies))
         case .macPoliciesDisabled:                  reports.macPoliciesDisabled.append(contentsOf: macPoliciesDisabled(objects.macPolicies))
         case .macPoliciesNoPayload:                 reports.macPoliciesNoPayload.append(contentsOf: macPoliciesNoPayload(objects.macPolicies))
+        case .macPoliciesJamfRemote:                reports.macPoliciesJamfRemote.append(contentsOf: macPoliciesJamfRemote(objects.macPolicies))
         case .macPoliciesLastExecuted:              reports.macPoliciesLastExecuted.append(contentsOf: macPoliciesLastExecuted(objects, options: options))
         case .macPoliciesFailedThreshold:           reports.macPoliciesFailedThreshold.append(contentsOf: macPoliciesFailedThreshold(objects, options: options))
         case .macPrintersNotLinked:                 reports.macPrintersNotLinked.append(contentsOf: macPrintersNotLinked(objects))
@@ -192,6 +194,11 @@ struct ReporterMac {
 
     static func macPoliciesNoPayload(_ macPolicies: [MacPolicy]) -> [MacPolicy] {
         macPolicies.filter { !$0.payload }
+    }
+
+    static func macPoliciesJamfRemote(_ macPolicies: [MacPolicy]) -> [MacPolicy] {
+        let regex: String = "^\\d{4}-\\d{2}-\\d{2} at \\d{1,2}:\\d{2} [AP]M \\| .* \\| \\d+ Computers?$"
+        return macPolicies.filter { $0.name.range(of: regex, options: .regularExpression) != nil }
     }
 
     static func macPoliciesLastExecuted(_ objects: Objects, options: [ReportOptionType: Int]) -> [MacPolicy] {

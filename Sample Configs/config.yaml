@@ -28,6 +28,7 @@ reports:
   mac_policies_no_scope: true
   mac_policies_disabled: true
   mac_policies_no_payload: true
+  mac_policies_jamf_remote: true
   mac_policies_last_executed: true
   mac_policies_failed_threshold: true
   mac_printers_not_linked: true
