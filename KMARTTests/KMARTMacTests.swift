@@ -370,6 +370,18 @@ class KMARTMacTests: XCTestCase {
         XCTAssertFalse(results.isEmpty)
     }
 
+    func testMacPoliciesNotJamfRemote() throws {
+        let macPolicies: [MacPolicy] = [MacPolicy(id: 1, name: "Test Policy")]
+        let results: [MacPolicy] = ReporterMac.macPoliciesJamfRemote(macPolicies)
+        XCTAssertTrue(results.isEmpty)
+    }
+
+    func testMacPoliciesJamfRemote() throws {
+        let macPolicies: [MacPolicy] = [MacPolicy(id: 1, name: "2021-04-20 at 04:20 PM | ninxsoft | 420 Computers")]
+        let results: [MacPolicy] = ReporterMac.macPoliciesJamfRemote(macPolicies)
+        XCTAssertFalse(results.isEmpty)
+    }
+
     func testMacPoliciesLastExecuted30Days() throws {
         let date: Date = Date()
 
