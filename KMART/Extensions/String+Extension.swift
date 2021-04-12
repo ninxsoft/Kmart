@@ -14,9 +14,10 @@ extension String {
     static let discussion: String = "Generate kick-ass Jamf Pro reports."
 
     func escapingMarkdown() -> String {
-        self.replacingOccurrences(of: "[", with: "\\[")
-            .replacingOccurrences(of: "]", with: "\\]")
-            .replacingOccurrences(of: "|", with: "\\|")
-            .replacingOccurrences(of: "_", with: "\\_")
+        self.replacingOccurrences(of: "\\", with: "&#92;")
+            .replacingOccurrences(of: "[", with: "&#91;")
+            .replacingOccurrences(of: "]", with: "&#93;")
+            .replacingOccurrences(of: "|", with: "&#124;")
+            .replacingOccurrences(of: "_", with: "&#93;")
     }
 }
