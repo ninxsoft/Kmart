@@ -98,7 +98,7 @@ struct Reports {
         case .macDevicesDuplicateSerialNumbers:     return macDevicesDuplicateSerialNumbers.map { $0.dictionary }
         case .macDevicesLastCheckIn:                return macDevicesLastCheckIn.map { $0.dictionary }
         case .macDevicesLastInventory:              return macDevicesLastInventory.map { $0.dictionary }
-        case .macDirectoryBindingsNotLinked:        return macDiskEncryptionsNotLinked.map { $0.dictionary }
+        case .macDirectoryBindingsNotLinked:        return macDirectoryBindingsNotLinked.map { $0.dictionary }
         case .macDiskEncryptionsNotLinked:          return macDiskEncryptionsNotLinked.map { $0.dictionary }
         case .macDockItemsNotLinked:                return macDockItemsNotLinked.map { $0.dictionary }
         case .macExtensionAttributesNotLinked:      return macExtensionAttributesNotLinked.map { $0.dictionary }
