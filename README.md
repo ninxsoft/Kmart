@@ -124,6 +124,14 @@ Grab the latest version of KMART from the [releases page](https://github.com/nin
 
 ## Version History
 
+*   1.1
+    *   Report on one-off Mac Policies that were created via Jamf Remote (`mac_policies_jamf_remote`)
+    *   Less ambiguous descriptions for Markdown / HTML output
+    *   Better escaping of ASCII characters for Markdown / HTML output
+    *   Fixed false-positive linter errors for Mac Extension Attributes with carriage returns (`\r`)
+    *   Fixed Mac Directory Bindings reporting as Mac Disk Encryptions
+    *   Fixed emailing report only if enabled is set to `true`
+
 *   1.0
     *   Initial release
 
