@@ -15,7 +15,8 @@ struct MacPackage: Codable {
     var dictionary: [String: Any] {
         [
             "id": id,
-            "name": name
+            "name": name,
+            "category": category
         ]
     }
 }

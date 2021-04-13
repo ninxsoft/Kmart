@@ -119,6 +119,9 @@ struct Markdown {
         case .macExtensionAttributesLinterErrors, .macScriptsLinterErrors:
             string.append("| **ID** | **Name** | **Line** | **Column** | **Error** | **Reference** |\n")
             string.append("| :----: | :------- | :------: | :--------: | :-------- | :-----------: |\n")
+        case .macPackagesNotLinked:
+            string.append("| **ID** | **Name** | **Category** |\n")
+            string.append("| :----: | :------- | :----------: |\n")
         default:
             string.append("| **ID** | **Name** |\n")
             string.append("| :----: | :------- |\n")
@@ -171,6 +174,13 @@ struct Markdown {
             }
 
             return string
+        case .macPackagesNotLinked:
+
+            guard let category: String = dictionary["category"] as? String else {
+                return nil
+            }
+
+            return "| [\(identifier)](\(link)) | \(formattedName) | \(category.escapingMarkdown()) |\n"
         default:
             return "| [\(identifier)](\(link)) | \(formattedName) |\n"
         }
