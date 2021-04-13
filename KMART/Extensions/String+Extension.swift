@@ -18,6 +18,6 @@ extension String {
             .replacingOccurrences(of: "[", with: "&#91;")
             .replacingOccurrences(of: "]", with: "&#93;")
             .replacingOccurrences(of: "|", with: "&#124;")
-            .replacingOccurrences(of: "_", with: "&#93;")
+            .replacingOccurrences(of: "_", with: "&#95;")
     }
 }
