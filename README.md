@@ -60,7 +60,7 @@ OPTIONS:
 
 ## Configuration
 
-See [Sample Configs](Sample%20Configs/README.md) for all configuration options.
+See [Sample Configs](Sample%20Configs) for all configuration options.
 
 ## Privileges
 
