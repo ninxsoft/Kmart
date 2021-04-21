@@ -8,7 +8,7 @@
 | **File Extension** | **.json** | **.plist** | **.yaml** |
 | **Command** | `kmart --json /path/to/config.json` | `kmart --plist /path/to/config.plist` | `kmart --yaml /path/to/config.yaml` |
 
-**Sample Configuration files** can be found in [this](/) directory.
+**Sample Configuration files** can be found in [this](https://github.com/ninxsoft/Kmart/blob/main/Sample%20Configs/) directory.
 
 ## Options
 
