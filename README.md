@@ -62,6 +62,10 @@ OPTIONS:
 
 See [Sample Configs](Sample%20Configs) for all configuration options.
 
+**Note**: Use the following command to encode your credentials in the configuration file:
+
+`printf 'username:password' | iconv --to-code ISO-8859-1 | base64 --input -`
+
 ## Privileges
 
 `kmart` requires the following **user privileges** in order to report correctly.

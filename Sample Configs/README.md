@@ -122,7 +122,7 @@ Jamf Pro URL.
 
 Base 64 encoded credentials for the Jamf Pro API user.
 
-Use `printf "username:password" | iconv -t ISO-8859-1 | base64 -i -` to encode credentials.
+Use `printf 'username:password' | iconv --to-code ISO-8859-1 | base64 --input -` to encode credentials.
 
 #### api_requests
 
