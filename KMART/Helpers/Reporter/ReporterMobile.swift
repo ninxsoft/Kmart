@@ -19,6 +19,7 @@ struct ReporterMobile {
         case .mobileApplicationsNoScope:             reports.mobileApplicationsNoScope.append(contentsOf: mobileApplicationsNoScope(objects.mobileApplications))
         case .mobileConfigurationProfilesNoScope:    reports.mobileConfigurationProfilesNoScope.append(contentsOf: mobileConfigurationProfilesNoScope(objects.mobileConfigurationProfiles))
         case .mobileDevicesLastInventory:            reports.mobileDevicesLastInventory.append(contentsOf: mobileDevicesLastInventory(objects.mobileDevices, options: options))
+        case .mobileDevicesUnmanaged:                reports.mobileDevicesUnmanaged.append(contentsOf: mobileDevicesUnmanaged(objects.mobileDevices))
         case .mobileExtensionAttributesNotLinked:    reports.mobileExtensionAttributesNotLinked.append(contentsOf: mobileExtensionAttributesNotLinked(objects))
         case .mobileSmartGroupsNotLinked:            reports.mobileSmartGroupsNotLinked.append(contentsOf: mobileSmartGroupsNotLinked(objects))
         case .mobileSmartGroupsNoCriteria:           reports.mobileSmartGroupsNoCriteria.append(contentsOf: mobileSmartGroupsNoCriteria(objects.mobileSmartGroups))
@@ -57,8 +58,12 @@ struct ReporterMobile {
     static func mobileDevicesLastInventory(_ mobileDevices: [MobileDevice], options: [ReportOptionType: Int]) -> [MobileDevice] {
         let lastInventory: Int = options[.mobileDevicesLastInventory] ?? .defaultOption
         let now: Date = Date()
-        let mobileDevices: [MobileDevice] = mobileDevices.filter { $0.lastInventory.daysSince(now) >= lastInventory }
+            let mobileDevices: [MobileDevice] = mobileDevices.filter { $0.lastInventory.daysSince(now) >= lastInventory && $0.managed }
         return mobileDevices
+    }
+
+    static func mobileDevicesUnmanaged(_ mobileDevices: [MobileDevice]) -> [MobileDevice] {
+        mobileDevices.filter { !$0.managed }
     }
 
     static func mobileExtensionAttributesNotLinked(_ objects: Objects) -> [MobileExtensionAttribute] {

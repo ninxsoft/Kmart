@@ -22,6 +22,7 @@ struct ReporterMac {
         case .macDevicesDuplicateSerialNumbers:     reports.macDevicesDuplicateSerialNumbers.append(contentsOf: macDevicesDuplicateSerialNumbers(objects.macDevices))
         case .macDevicesLastCheckIn:                reports.macDevicesLastCheckIn.append(contentsOf: macDevicesLastCheckIn(objects.macDevices, options: options))
         case .macDevicesLastInventory:              reports.macDevicesLastInventory.append(contentsOf: macDevicesLastInventory(objects.macDevices, options: options))
+        case .macDevicesUnmanaged:                  reports.macDevicesUnmanaged.append(contentsOf: macDevicesUnmanaged(objects.macDevices))
         case .macDirectoryBindingsNotLinked:        reports.macDirectoryBindingsNotLinked.append(contentsOf: macDirectoryBindingsNotLinked(objects))
         case .macDiskEncryptionsNotLinked:          reports.macDiskEncryptionsNotLinked.append(contentsOf: macDiskEncryptionsNotLinked(objects))
         case .macDockItemsNotLinked:                reports.macDockItemsNotLinked.append(contentsOf: macDockItemsNotLinked(objects))
@@ -88,13 +89,17 @@ struct ReporterMac {
     static func macDevicesLastCheckIn(_ macDevices: [MacDevice], options: [ReportOptionType: Int]) -> [MacDevice] {
         let lastCheckIn: Int = options[.macDevicesLastCheckIn] ?? .defaultOption
         let now: Date = Date()
-        return macDevices.filter { $0.lastCheckIn.daysSince(now) >= lastCheckIn }
+        return macDevices.filter { $0.lastCheckIn.daysSince(now) >= lastCheckIn && $0.managed }
     }
 
     static func macDevicesLastInventory(_ macDevices: [MacDevice], options: [ReportOptionType: Int]) -> [MacDevice] {
         let lastInventory: Int = options[.macDevicesLastInventory] ?? .defaultOption
         let now: Date = Date()
-        return macDevices.filter { $0.lastInventory.daysSince(now) >= lastInventory }
+        return macDevices.filter { $0.lastInventory.daysSince(now) >= lastInventory && $0.managed }
+    }
+
+    static func macDevicesUnmanaged(_ macDevices: [MacDevice]) -> [MacDevice] {
+        macDevices.filter { !$0.managed }
     }
 
     static func macDirectoryBindingsNotLinked(_ objects: Objects) -> [MacDirectoryBinding] {
