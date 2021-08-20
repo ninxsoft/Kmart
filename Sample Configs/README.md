@@ -17,6 +17,7 @@
   * [url](#url)
   * [credentials](#credentials)
   * [api_requests](#api_requests)
+  * [api_timeout](#api_timeout)
 * [Reports](#reports)
   * Common
     * [buildings_not_linked](#buildings_not_linked)
@@ -135,6 +136,14 @@ Use `printf 'username:password' | iconv --to-code ISO-8859-1 | base64 --input -`
 Number of Jamf Pro API requests to run simultaneously.
 
 **Note:** Use with caution.
+
+#### api_timeout
+
+| **Type** | **Required** | **Default** |
+| :------: | :----------: | :---------: |
+| `integer` | :no_good: | `10` |
+
+Time interval (in seconds) allowed for a Jamf Pro API request before timing out.
 
 [Back to Options](#options)
 

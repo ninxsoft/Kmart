@@ -18,6 +18,7 @@ struct HTTP {
         let authorization: String = configuration.authorization
         let sessionConfiguration: URLSessionConfiguration = URLSessionConfiguration.default
         sessionConfiguration.httpMaximumConnectionsPerHost = configuration.requests
+        sessionConfiguration.timeoutIntervalForRequest = configuration.timeout
         let session: URLSession = URLSession(configuration: sessionConfiguration)
 
         for endpoint in configuration.endpoints {
