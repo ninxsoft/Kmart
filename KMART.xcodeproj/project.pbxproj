@@ -865,7 +865,7 @@
 			repositoryURL = "https://github.com/JohnSundell/Ink";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 0.5.0;
+				minimumVersion = 0.5.1;
 			};
 		};
 		5756B94425DE29CE001215DF /* XCRemoteSwiftPackageReference "Yams" */ = {
@@ -873,7 +873,7 @@
 			repositoryURL = "https://github.com/jpsim/Yams";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 4.0.5;
+				minimumVersion = 4.0.6;
 			};
 		};
 		577AC6D72613331C0086D80E /* XCRemoteSwiftPackageReference "Swift-SMTP" */ = {
@@ -889,7 +889,7 @@
 			repositoryURL = "https://github.com/apple/swift-argument-parser";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 0.4.1;
+				minimumVersion = 0.4.4;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
