@@ -3,6 +3,7 @@
   "url": "https://myorg.jamfcloud.com",
   "credentials": "base_64_encoded_username:password",
   "api_requests": 4,
+  "api_timeout": 10,
   "reports": {
     "buildings_not_linked": true,
     "categories_not_linked": true,
@@ -17,6 +18,7 @@
     "mac_devices_duplicate_serial_numbers": true,
     "mac_devices_last_check_in": true,
     "mac_devices_last_inventory": true,
+    "mac_devices_unmanaged": true,
     "mac_directory_bindings_not_linked": true,
     "mac_disk_encryptions_not_linked": true,
     "mac_dock_items_not_linked": true,
@@ -45,6 +47,7 @@
     "mobile_applications_no_scope": true,
     "mobile_configuration_profiles_no_scope": true,
     "mobile_devices_last_inventory": true,
+    "mobile_devices_unmanaged": true,
     "mobile_extension_attributes_not_linked": true,
     "mobile_smart_groups_not_linked": true,
     "mobile_smart_groups_no_criteria": true,

@@ -27,6 +27,7 @@ struct Configuration {
         "Basic \(credentials)"
     }
     var requests: Int = 4
+    var timeout: Double = 10
     var reports: [ReportType] = []
     var reportOptions: [ReportOptionType: Int] = [:]
     var output: [OutputType: String] = [:]
@@ -97,6 +98,10 @@ struct Configuration {
 
         if let int: Int = dictionary["api_requests"] as? Int {
             requests = int
+        }
+
+        if let int: Int = dictionary["api_timeout"] as? Int {
+            timeout = Double(int)
         }
 
         return true
