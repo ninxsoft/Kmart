@@ -12,87 +12,89 @@
 
 ## Options
 
-*   [General](#general)
-    *   [name](#name)
-    *   [url](#url)
-    *   [credentials](#credentials)
-    *   [api_requests](#api_requests)
-*   [Reports](#reports)
-    *   Common
-        *   [buildings_not_linked](#buildings_not_linked)
-        *   [categories_not_linked](#categories_not_linked)
-        *   [departments_not_linked](#departments_not_linked)
-        *   [ebooks_no_scope](#ebooks_no_scope)
-        *   [ibeacons_not_linked](#ibeacons_not_linked)
-        *   [network_segments_not_linked](#network_segments_not_linked)
-    *   Mac
-        *   [mac_advanced_searches_no_criteria](#mac_advanced_searches_no_criteria)
-        *   [mac_advanced_searches_invalid_criteria](#mac_advanced_searches_invalid_criteria)
-        *   [mac_applications_no_scope](#mac_applications_no_scope)
-        *   [mac_configuration_profiles_no_scope](#mac_configuration_profiles_no_scope)
-        *   [mac_devices_duplicate_names](#mac_devices_duplicate_names)
-        *   [mac_devices_duplicate_serial_numbers](#mac_devices_duplicate_serial_numbers)
-        *   [mac_devices_last_check_in](#mac_devices_last_check_in)
-        *   [mac_devices_last_inventory](#mac_devices_last_inventory")
-        *   [mac_directory_bindings_not_linked](#mac_directory_bindings_not_linked)
-        *   [mac_disk_encryptions_not_linked](#mac_disk_encryptions_not_linked)
-        *   [mac_dock_items_not_linked](#mac_dock_items_not_linked)
-        *   [mac_extension_attributes_not_linked](#mac_extension_attributes_not_linked)
-        *   [mac_extension_attributes_disabled](#mac_extension_attributes_disabled)
-        *   [mac_extension_attributes_linter_warnings](#mac_extension_attributes_linter_warnings)
-        *   [mac_extension_attributes_linter_errors](#mac_extension_attributes_linter_errors)
-        *   [mac_packages_not_linked](#mac_packages_not_linked)
-        *   [mac_policies_no_scope](#mac_policies_no_scope)
-        *   [mac_policies_disabled](#mac_policies_disabled)
-        *   [mac_policies_no_payload](#mac_policies_no_payload)
-        *   [mac_policies_jamf_remote](#mac_policies_jamf_remote)
-        *   [mac_policies_last_executed](#mac_policies_last_executed)
-        *   [mac_policies_failed_threshold](#mac_policies_failed_threshold)
-        *   [mac_printers_not_linked](#mac_printers_not_linked)
-        *   [mac_restricted_software_no_scope](#mac_restricted_software_no_scope)
-        *   [mac_scripts_not_linked](#mac_scripts_not_linked)
-        *   [mac_scripts_linter_warnings](#mac_scripts_linter_warnings)
-        *   [mac_scripts_linter_errors](#mac_scripts_linter_errors)
-        *   [mac_smart_groups_not_linked](#mac_smart_groups_not_linked)
-        *   [mac_smart_groups_no_criteria](#mac_smart_groups_no_criteria)
-        *   [mac_static_groups_not_linked](#mac_static_groups_not_linked)
-        *   [mac_static_groups_empty](#mac_static_groups_empty)
-    *   Mobile
-        *   [mobile_advanced_searches_no_criteria](#mobile_advanced_searches_no_criteria)
-        *   [mobile_advanced_searches_invalid_criteria](#mobile_advanced_searches_invalid_criteria)
-        *   [mobile_applications_no_scope](#mobile_applications_no_scope)
-        *   [mobile_configuration_profiles_no_scope](#mobile_configuration_profiles_no_scope)
-        *   [mobile_devices_last_inventory](#mobile_devices_last_inventory)
-        *   [mobile_extension_attributes_not_linked](#mobile_extension_attributes_not_linked)
-        *   [mobile_smart_groups_not_linked](#mobile_smart_groups_not_linked)
-        *   [mobile_smart_groups_no_criteria](#mobile_smart_groups_no_criteria)
-        *   [mobile_static_groups_not_linked](#mobile_static_groups_not_linked)
-        *   [mobile_static_groups_empty](#mobile_static_groups_empty)
-*   [Report Options](#report-options)
-    *   [mac_devices_last_check_in](#mac_devices_last_check_in)
-    *   [mac_devices_last_inventory](#mac_devices_last_inventory)
-    *   [mac_policies_last_executed](#mac_policies_last_executed)
-    *   [mac_policies_failed_threshold](#mac_policies_failed_threshold)
-    *   [mobile_devices_last_inventory](#mobile_devices_last_inventory)
-*   [Output](#output)
-    *   [json](#json)
-    *   [plist](#plist)
-    *   [yaml](#yaml)
-    *   [markdown](#markdown)
-    *   [html](#html)
-*   [Email](#email)
-    *   [enabled](#enabled)
-    *   [hostname](#hostname)
-    *   [port](#port)
-    *   [username](#username)
-    *   [password](#password)
-    *   [sender_name](#sender_name)
-    *   [sender_email](#sender_email)
-    *   [recipients](#recipients)
-    *   [cc](#cc)
-    *   [bcc](#bcc)
-    *   [subject](#subject)
-    *   [attachments](#attachments)
+* [General](#general)
+  * [name](#name)
+  * [url](#url)
+  * [credentials](#credentials)
+  * [api_requests](#api_requests)
+* [Reports](#reports)
+  * Common
+    * [buildings_not_linked](#buildings_not_linked)
+    * [categories_not_linked](#categories_not_linked)
+    * [departments_not_linked](#departments_not_linked)
+    * [ebooks_no_scope](#ebooks_no_scope)
+    * [ibeacons_not_linked](#ibeacons_not_linked)
+    * [network_segments_not_linked](#network_segments_not_linked)
+  * Mac
+    * [mac_advanced_searches_no_criteria](#mac_advanced_searches_no_criteria)
+    * [mac_advanced_searches_invalid_criteria](#mac_advanced_searches_invalid_criteria)
+    * [mac_applications_no_scope](#mac_applications_no_scope)
+    * [mac_configuration_profiles_no_scope](#mac_configuration_profiles_no_scope)
+    * [mac_devices_duplicate_names](#mac_devices_duplicate_names)
+    * [mac_devices_duplicate_serial_numbers](#mac_devices_duplicate_serial_numbers)
+    * [mac_devices_last_check_in](#mac_devices_last_check_in)
+    * [mac_devices_last_inventory](#mac_devices_last_inventory)
+    * [mac_devices_unmanaged](#mac_devices_unmanaged)
+    * [mac_directory_bindings_not_linked](#mac_directory_bindings_not_linked)
+    * [mac_disk_encryptions_not_linked](#mac_disk_encryptions_not_linked)
+    * [mac_dock_items_not_linked](#mac_dock_items_not_linked)
+    * [mac_extension_attributes_not_linked](#mac_extension_attributes_not_linked)
+    * [mac_extension_attributes_disabled](#mac_extension_attributes_disabled)
+    * [mac_extension_attributes_linter_warnings](#mac_extension_attributes_linter_warnings)
+    * [mac_extension_attributes_linter_errors](#mac_extension_attributes_linter_errors)
+    * [mac_packages_not_linked](#mac_packages_not_linked)
+    * [mac_policies_no_scope](#mac_policies_no_scope)
+    * [mac_policies_disabled](#mac_policies_disabled)
+    * [mac_policies_no_payload](#mac_policies_no_payload)
+    * [mac_policies_jamf_remote](#mac_policies_jamf_remote)
+    * [mac_policies_last_executed](#mac_policies_last_executed)
+    * [mac_policies_failed_threshold](#mac_policies_failed_threshold)
+    * [mac_printers_not_linked](#mac_printers_not_linked)
+    * [mac_restricted_software_no_scope](#mac_restricted_software_no_scope)
+    * [mac_scripts_not_linked](#mac_scripts_not_linked)
+    * [mac_scripts_linter_warnings](#mac_scripts_linter_warnings)
+    * [mac_scripts_linter_errors](#mac_scripts_linter_errors)
+    * [mac_smart_groups_not_linked](#mac_smart_groups_not_linked)
+    * [mac_smart_groups_no_criteria](#mac_smart_groups_no_criteria)
+    * [mac_static_groups_not_linked](#mac_static_groups_not_linked)
+    * [mac_static_groups_empty](#mac_static_groups_empty)
+  * Mobile
+    * [mobile_advanced_searches_no_criteria](#mobile_advanced_searches_no_criteria)
+    * [mobile_advanced_searches_invalid_criteria](#mobile_advanced_searches_invalid_criteria)
+    * [mobile_applications_no_scope](#mobile_applications_no_scope)
+    * [mobile_configuration_profiles_no_scope](#mobile_configuration_profiles_no_scope)
+    * [mobile_devices_last_inventory](#mobile_devices_last_inventory)
+    * [mobile_devices_unmanaged](#mobile_devices_unmanaged)
+    * [mobile_extension_attributes_not_linked](#mobile_extension_attributes_not_linked)
+    * [mobile_smart_groups_not_linked](#mobile_smart_groups_not_linked)
+    * [mobile_smart_groups_no_criteria](#mobile_smart_groups_no_criteria)
+    * [mobile_static_groups_not_linked](#mobile_static_groups_not_linked)
+    * [mobile_static_groups_empty](#mobile_static_groups_empty)
+* [Report Options](#report-options)
+  * [mac_devices_last_check_in](#mac_devices_last_check_in)
+  * [mac_devices_last_inventory](#mac_devices_last_inventory)
+  * [mac_policies_last_executed](#mac_policies_last_executed)
+  * [mac_policies_failed_threshold](#mac_policies_failed_threshold)
+  * [mobile_devices_last_inventory](#mobile_devices_last_inventory)
+* [Output](#output)
+  * [json](#json)
+  * [plist](#plist)
+  * [yaml](#yaml)
+  * [markdown](#markdown)
+  * [html](#html)
+* [Email](#email)
+  * [enabled](#enabled)
+  * [hostname](#hostname)
+  * [port](#port)
+  * [username](#username)
+  * [password](#password)
+  * [sender_name](#sender_name)
+  * [sender_email](#sender_email)
+  * [recipients](#recipients)
+  * [cc](#cc)
+  * [bcc](#bcc)
+  * [subject](#subject)
+  * [attachments](#attachments)
 
 ## General
 
@@ -149,15 +151,16 @@ The following keys can be found in the **reports** dictionary of a configuration
 | `boolean` | :no_good: | `false` |
 
 Report all **Buildings** not linked to any:
-*   Mac Applications
-*   Mac Configuration Profiles
-*   Mac Devices
-*   Mac Policies
-*   Mac Restricted Software
-*   Mobile Applications
-*   Mobile Configuration Profiles
-*   Mobile Devices
-*   Network Segments
+
+* Mac Applications
+* Mac Configuration Profiles
+* Mac Devices
+* Mac Policies
+* Mac Restricted Software
+* Mobile Applications
+* Mobile Configuration Profiles
+* Mobile Devices
+* Network Segments
 
 #### categories_not_linked
 
@@ -166,14 +169,15 @@ Report all **Buildings** not linked to any:
 | `boolean` | :no_good: | `false` |
 
 Report all **Categories** not linked to any:
-*   Mac Applications
-*   Mac Configuration Profiles
-*   Mac Packages
-*   Mac Policies
-*   Mac Printers
-*   Mac Scripts
-*   Mobile Applications
-*   Mobile Configuration Profiles
+
+* Mac Applications
+* Mac Configuration Profiles
+* Mac Packages
+* Mac Policies
+* Mac Printers
+* Mac Scripts
+* Mobile Applications
+* Mobile Configuration Profiles
 
 #### departments_not_linked
 
@@ -182,15 +186,16 @@ Report all **Categories** not linked to any:
 | `boolean` | :no_good: | `false` |
 
 Report all **Departments** not linked to any:
-*   Mac Applications
-*   Mac Configuration Profiles
-*   Mac Devices
-*   Mac Policies
-*   Mac Restricted Software
-*   Mobile Applications
-*   Mobile Configuration Profiles
-*   Mobile Devices
-*   Network Segments
+
+* Mac Applications
+* Mac Configuration Profiles
+* Mac Devices
+* Mac Policies
+* Mac Restricted Software
+* Mobile Applications
+* Mobile Configuration Profiles
+* Mobile Devices
+* Network Segments
 
 #### ebooks_no_scope
 
@@ -208,9 +213,9 @@ Report all **eBooks** with no scope defined.
 
 Report all **iBeacons** not linked to any:
 
-*   Mac Configuration Profiles
-*   Mac Policies
-*   Mobile Configuration Profiles
+* Mac Configuration Profiles
+* Mac Policies
+* Mobile Configuration Profiles
 
 #### network_segments_not_linked
 
@@ -220,14 +225,14 @@ Report all **iBeacons** not linked to any:
 
 Report all **Network Segments** not linked to any:
 
-*   Buildings
-*   Departments
-*   eBooks
-*   Mac Applications
-*   Mac ConfigurationProfiles
-*   Mac Policies
-*   Mobile Applications
-*   Mobile Configuration Profiles
+* Buildings
+* Departments
+* eBooks
+* Mac Applications
+* Mac ConfigurationProfiles
+* Mac Policies
+* Mobile Applications
+* Mobile Configuration Profiles
 
 #### mac_advanced_searches_no_criteria
 
@@ -259,7 +264,7 @@ Report all **Mac Applications** with no scope defined.
 | :------: | :----------: | :---------: |
 | `boolean` | :no_good: | `false` |
 
-Report all **Mac Configuration Profiles* with no scope defined.
+Report all **Mac Configuration Profiles** with no scope defined.
 
 #### mac_devices_duplicate_names
 
@@ -283,7 +288,7 @@ Report all **Mac Devices** that share a serial number.
 | :------: | :----------: | :---------: |
 | `boolean` | :no_good: | `false` |
 
-Report all **Mac Devices** that have not checked-in in `X` days.
+Report all managed **Mac Devices** that have not checked-in in `X` days.
 
 #### mac_devices_last_inventory
 
@@ -291,7 +296,15 @@ Report all **Mac Devices** that have not checked-in in `X` days.
 | :------: | :----------: | :---------: |
 | `boolean` | :no_good: | `false` |
 
-Report all **Mac Devices** that have not performed an Inventory Update in `X` days.
+Report all managed **Mac Devices** that have not performed an Inventory Update in `X` days.
+
+#### mac_devices_unmanaged
+
+| **Type** | **Required** | **Default** |
+| :------: | :----------: | :---------: |
+| `boolean` | :no_good: | `false` |
+
+Report all **Mac Devices** that are unmanaged.
 
 #### mac_directory_bindings_not_linked
 
@@ -325,8 +338,8 @@ Report all **Mac Dock Items** not linked to any Mac Policies.
 
 Report all **Mac Extension Attributes** not linked to any:
 
-*   Mac Advanced Searches
-*   Mac Smart Groups
+* Mac Advanced Searches
+* Mac Smart Groups
 
 #### mac_extension_attributes_disabled
 
@@ -472,11 +485,11 @@ Report all **Mac Scripts** with linter warnings.
 
 Report all **Mac Smart Groups** not linked to any:
 
-*   Mac Advanced Searches
-*   Mac Applications
-*   Mac Configuration Profiles
-*   Mac Policies
-*   Mac Restricted Software
+* Mac Advanced Searches
+* Mac Applications
+* Mac Configuration Profiles
+* Mac Policies
+* Mac Restricted Software
 
 #### mac_smart_groups_no_criteria
 
@@ -494,11 +507,11 @@ Report all **Mac Smart Groups** with no criteria defined.
 
 Report all **Mac Static Groups** not linked to any:
 
-*   Mac Advanced Searches
-*   Mac Applications
-*   Mac Configuration Profiles
-*   Mac Policies
-*   Mac Restricted Software
+* Mac Advanced Searches
+* Mac Applications
+* Mac Configuration Profiles
+* Mac Policies
+* Mac Restricted Software
 
 #### mac_static_groups_empty
 
@@ -546,7 +559,15 @@ Report all **Mobile Configuration Profiles** with no scope defined.
 | :------: | :----------: | :---------: |
 | `boolean` | :no_good: | `false` |
 
-Report all **Mobile Devices** that have not performed an Inventory Update in `X` days.
+Report all managed **Mobile Devices** that have not performed an Inventory Update in `X` days.
+
+#### mobile_devices_unmanaged
+
+| **Type** | **Required** | **Default** |
+| :------: | :----------: | :---------: |
+| `boolean` | :no_good: | `false` |
+
+Report all **Mobile Devices** that are unmanaged.
 
 #### mobile_extension_attributes_not_linked
 
@@ -556,8 +577,8 @@ Report all **Mobile Devices** that have not performed an Inventory Update in `X`
 
 Report all **Mobile Extension Attributes** not linked to any:
 
-*   Mobile Advanced Searches
-*   Mobile Smart Groups
+* Mobile Advanced Searches
+* Mobile Smart Groups
 
 #### mobile_smart_groups_not_linked
 
@@ -567,9 +588,9 @@ Report all **Mobile Extension Attributes** not linked to any:
 
 Report all **Mobile Smart Groups** not linked to any:
 
-*   Mobile Advanced Searches
-*   Mobile Applications
-*   Mobile Configuration Profiles
+* Mobile Advanced Searches
+* Mobile Applications
+* Mobile Configuration Profiles
 
 #### mobile_smart_groups_no_criteria
 
@@ -587,9 +608,9 @@ Report all **Mobile Smart Groups** with no criteria defined.
 
 Report all **Mobile Static Groups** not linked to any:
 
-*   Mobile Advanced Searches
-*   Mobile Applications
-*   Mobile Configuration Profiles
+* Mobile Advanced Searches
+* Mobile Applications
+* Mobile Configuration Profiles
 
 #### mobile_static_groups_empty
 

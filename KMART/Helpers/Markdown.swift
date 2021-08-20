@@ -141,7 +141,7 @@ struct Markdown {
         let formattedName: String = name.escapingMarkdown()
 
         switch type {
-        case .macDevicesDuplicateNames, .macDevicesDuplicateSerialNumbers, .macDevicesLastCheckIn, .macDevicesLastInventory, .mobileDevicesLastInventory:
+        case .macDevicesDuplicateNames, .macDevicesDuplicateSerialNumbers, .macDevicesLastCheckIn, .macDevicesLastInventory, .macDevicesUnmanaged, .mobileDevicesLastInventory, .mobileDevicesUnmanaged:
             guard let serialNumber: String = dictionary["serial_number"] as? String else {
                 return nil
             }

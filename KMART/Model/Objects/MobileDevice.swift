@@ -13,6 +13,7 @@ struct MobileDevice: Codable {
     var name: String = ""
     var serialNumber: String = ""
     var lastInventory: Double = -1
+    var managed: Bool = false
     var building: String = ""
     var department: String = ""
     var dictionary: [String: Any] {

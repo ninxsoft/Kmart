@@ -157,9 +157,12 @@ class KMARTMacTests: XCTestCase {
         }
 
         let macDevices: [MacDevice] = [
-            MacDevice(id: 1, lastCheckIn: fifteenDays.timeIntervalSince1970),
-            MacDevice(id: 2, lastCheckIn: thirtyDays.timeIntervalSince1970),
-            MacDevice(id: 3, lastCheckIn: fortyFiveDays.timeIntervalSince1970)
+            MacDevice(id: 1, lastCheckIn: fifteenDays.timeIntervalSince1970, managed: true),
+            MacDevice(id: 2, lastCheckIn: thirtyDays.timeIntervalSince1970, managed: true),
+            MacDevice(id: 3, lastCheckIn: fortyFiveDays.timeIntervalSince1970, managed: true),
+            MacDevice(id: 4, lastCheckIn: fifteenDays.timeIntervalSince1970, managed: false),
+            MacDevice(id: 5, lastCheckIn: thirtyDays.timeIntervalSince1970, managed: false),
+            MacDevice(id: 6, lastCheckIn: fortyFiveDays.timeIntervalSince1970, managed: false)
         ]
         let options: [ReportOptionType: Int] = [.macDevicesLastCheckIn: 30]
         let results: [MacDevice] = ReporterMac.macDevicesLastCheckIn(macDevices, options: options)
@@ -178,15 +181,36 @@ class KMARTMacTests: XCTestCase {
         }
 
         let macDevices: [MacDevice] = [
-            MacDevice(id: 1, lastInventory: fifteenDays.timeIntervalSince1970),
-            MacDevice(id: 2, lastInventory: thirtyDays.timeIntervalSince1970),
-            MacDevice(id: 3, lastInventory: fortyFiveDays.timeIntervalSince1970)
+            MacDevice(id: 1, lastInventory: fifteenDays.timeIntervalSince1970, managed: true),
+            MacDevice(id: 2, lastInventory: thirtyDays.timeIntervalSince1970, managed: true),
+            MacDevice(id: 3, lastInventory: fortyFiveDays.timeIntervalSince1970, managed: true),
+            MacDevice(id: 4, lastInventory: fifteenDays.timeIntervalSince1970, managed: false),
+            MacDevice(id: 5, lastInventory: thirtyDays.timeIntervalSince1970, managed: false),
+            MacDevice(id: 6, lastInventory: fortyFiveDays.timeIntervalSince1970, managed: false)
         ]
         let options: [ReportOptionType: Int] = [.macDevicesLastInventory: 30]
         let results: [MacDevice] = ReporterMac.macDevicesLastInventory(macDevices, options: options)
         XCTAssertTrue(results.count == 2)
         XCTAssertTrue(results[0].id == 2)
         XCTAssertTrue(results[1].id == 3)
+    }
+
+    func testMacDevicesManaged() throws {
+        let macDevices: [MacDevice] = [
+            MacDevice(id: 1, managed: true),
+            MacDevice(id: 2, managed: true)
+        ]
+        let results: [MacDevice] = ReporterMac.macDevicesUnmanaged(macDevices)
+        XCTAssertTrue(results.isEmpty)
+    }
+
+    func testMacDevicesUnmanaged() throws {
+        let macDevices: [MacDevice] = [
+            MacDevice(id: 1, managed: false),
+            MacDevice(id: 2, managed: false)
+        ]
+        let results: [MacDevice] = ReporterMac.macDevicesUnmanaged(macDevices)
+        XCTAssertFalse(results.isEmpty)
     }
 
     func testMacDirectoryBindingsLinked() throws {

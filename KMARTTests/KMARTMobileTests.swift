@@ -117,15 +117,36 @@ class KMARTMobileTests: XCTestCase {
         }
 
         let mobileDevices: [MobileDevice] = [
-            MobileDevice(id: 1, lastInventory: fifteenDays.timeIntervalSince1970),
-            MobileDevice(id: 2, lastInventory: thirtyDays.timeIntervalSince1970),
-            MobileDevice(id: 3, lastInventory: fortyFiveDays.timeIntervalSince1970)
+            MobileDevice(id: 1, lastInventory: fifteenDays.timeIntervalSince1970, managed: true),
+            MobileDevice(id: 2, lastInventory: thirtyDays.timeIntervalSince1970, managed: true),
+            MobileDevice(id: 3, lastInventory: fortyFiveDays.timeIntervalSince1970, managed: true),
+            MobileDevice(id: 4, lastInventory: fifteenDays.timeIntervalSince1970, managed: false),
+            MobileDevice(id: 5, lastInventory: thirtyDays.timeIntervalSince1970, managed: false),
+            MobileDevice(id: 6, lastInventory: fortyFiveDays.timeIntervalSince1970, managed: false)
         ]
         let options: [ReportOptionType: Int] = [.mobileDevicesLastInventory: 30]
         let results: [MobileDevice] = ReporterMobile.mobileDevicesLastInventory(mobileDevices, options: options)
         XCTAssertTrue(results.count == 2)
         XCTAssertTrue(results[0].id == 2)
         XCTAssertTrue(results[1].id == 3)
+    }
+
+    func testMobileDevicesManaged() throws {
+        let mobileDevices: [MobileDevice] = [
+            MobileDevice(id: 1, managed: true),
+            MobileDevice(id: 2, managed: true)
+        ]
+        let results: [MobileDevice] = ReporterMobile.mobileDevicesUnmanaged(mobileDevices)
+        XCTAssertTrue(results.isEmpty)
+    }
+
+    func testMobileDevicesUnmanaged() throws {
+        let mobileDevices: [MobileDevice] = [
+            MobileDevice(id: 1, managed: false),
+            MobileDevice(id: 2, managed: false)
+        ]
+        let results: [MobileDevice] = ReporterMobile.mobileDevicesUnmanaged(mobileDevices)
+        XCTAssertFalse(results.isEmpty)
     }
 
     func testMobileExtensionAttributesLinked() throws {

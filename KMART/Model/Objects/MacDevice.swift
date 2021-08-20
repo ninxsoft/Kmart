@@ -14,6 +14,7 @@ struct MacDevice: Codable {
     var serialNumber: String = ""
     var lastCheckIn: Double = -1
     var lastInventory: Double = -1
+    var managed: Bool = false
     var building: String = ""
     var department: String = ""
     var dictionary: [String: Any] {

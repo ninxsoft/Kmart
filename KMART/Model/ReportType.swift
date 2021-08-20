@@ -22,6 +22,7 @@ enum ReportType: String, CaseIterable {
     case macDevicesDuplicateSerialNumbers = "mac_devices_duplicate_serial_numbers"
     case macDevicesLastCheckIn = "mac_devices_last_check_in"
     case macDevicesLastInventory = "mac_devices_last_inventory"
+    case macDevicesUnmanaged = "mac_devices_unmanaged"
     case macDirectoryBindingsNotLinked = "mac_directory_bindings_not_linked"
     case macDiskEncryptionsNotLinked = "mac_disk_encryptions_not_linked"
     case macDockItemsNotLinked = "mac_dock_items_not_linked"
@@ -50,6 +51,7 @@ enum ReportType: String, CaseIterable {
     case mobileApplicationsNoScope = "mobile_applications_no_scope"
     case mobileConfigurationProfilesNoScope = "mobile_configuration_profiles_no_scope"
     case mobileDevicesLastInventory = "mobile_devices_last_inventory"
+    case mobileDevicesUnmanaged = "mobile_devices_unmanaged"
     case mobileExtensionAttributesNotLinked = "mobile_extension_attributes_not_linked"
     case mobileSmartGroupsNotLinked = "mobile_smart_groups_not_linked"
     case mobileSmartGroupsNoCriteria = "mobile_smart_groups_no_criteria"
@@ -83,6 +85,7 @@ enum ReportType: String, CaseIterable {
         case .macDevicesDuplicateSerialNumbers:      return [.macDevices]
         case .macDevicesLastCheckIn:                 return [.macDevices]
         case .macDevicesLastInventory:               return [.macDevices]
+        case .macDevicesUnmanaged:                   return [.macDevices]
         case .macDirectoryBindingsNotLinked:         return [.macDirectoryBindings, .macPolicies]
         case .macDiskEncryptionsNotLinked:           return [.macDiskEncryptions, .macPolicies]
         case .macDockItemsNotLinked:                 return [.macDockItems, .macPolicies]
@@ -111,6 +114,7 @@ enum ReportType: String, CaseIterable {
         case .mobileApplicationsNoScope:             return [.mobileApplications]
         case .mobileConfigurationProfilesNoScope:    return [.mobileConfigurationProfiles]
         case .mobileDevicesLastInventory:            return [.mobileDevices]
+        case .mobileDevicesUnmanaged:                return [.mobileDevices]
         case .mobileExtensionAttributesNotLinked:    return [.mobileAdvancedSearches, .mobileExtensionAttributes, .mobileGroups]
         case .mobileSmartGroupsNotLinked:            return [.mobileAdvancedSearches, .mobileApplications, .mobileConfigurationProfiles, .mobileGroups]
         case .mobileSmartGroupsNoCriteria:           return [.mobileGroups]
@@ -131,7 +135,7 @@ enum ReportType: String, CaseIterable {
         case .macAdvancedSearchesNoCriteria, .macAdvancedSearchesInvalidCriteria:                                                                             return .macAdvancedSearches
         case .macApplicationsNoScope:                                                                                                                         return .macApplications
         case .macConfigurationProfilesNoScope:                                                                                                                return .macConfigurationProfiles
-        case .macDevicesDuplicateNames, .macDevicesDuplicateSerialNumbers, .macDevicesLastCheckIn, .macDevicesLastInventory:                                  return .macDevices
+        case .macDevicesDuplicateNames, .macDevicesDuplicateSerialNumbers, .macDevicesLastCheckIn, .macDevicesLastInventory, .macDevicesUnmanaged:            return .macDevices
         case .macDirectoryBindingsNotLinked:                                                                                                                  return .macDirectoryBindings
         case .macDiskEncryptionsNotLinked:                                                                                                                    return .macDiskEncryptions
         case .macDockItemsNotLinked:                                                                                                                          return .macDockItems
@@ -145,7 +149,7 @@ enum ReportType: String, CaseIterable {
         case .mobileAdvancedSearchesNoCriteria, .mobileAdvancedSearchesInvalidCriteria:                                                                       return .mobileAdvancedSearches
         case .mobileApplicationsNoScope:                                                                                                                      return .mobileApplications
         case .mobileConfigurationProfilesNoScope:                                                                                                             return .mobileConfigurationProfiles
-        case .mobileDevicesLastInventory:                                                                                                                     return .mobileDevices
+        case .mobileDevicesLastInventory, .mobileDevicesUnmanaged:                                                                                            return .mobileDevices
         case .mobileExtensionAttributesNotLinked:                                                                                                             return .mobileExtensionAttributes
         case .mobileSmartGroupsNotLinked, .mobileSmartGroupsNoCriteria, .mobileStaticGroupsNotLinked, .mobileStaticGroupsEmpty:                               return .mobileGroups
         case .networkSegmentsNotLinked:                                                                                                                       return .networkSegments
@@ -169,6 +173,7 @@ enum ReportType: String, CaseIterable {
             .macDevicesDuplicateSerialNumbers,
             .macDevicesLastCheckIn,
             .macDevicesLastInventory,
+            .macDevicesUnmanaged,
             .macDirectoryBindingsNotLinked,
             .macDiskEncryptionsNotLinked,
             .macDockItemsNotLinked,
@@ -198,6 +203,7 @@ enum ReportType: String, CaseIterable {
             .mobileApplicationsNoScope,
             .mobileConfigurationProfilesNoScope,
             .mobileDevicesLastInventory,
+            .mobileDevicesUnmanaged,
             .mobileExtensionAttributesNotLinked,
             .mobileSmartGroupsNotLinked,
             .mobileSmartGroupsNoCriteria,
@@ -222,6 +228,7 @@ enum ReportType: String, CaseIterable {
         case .macDevicesDuplicateSerialNumbers:      return "The following Mac Devices have duplicated serial numbers"
         case .macDevicesLastCheckIn:                 return "The following Mac Devices have met the last check-in threshold"
         case .macDevicesLastInventory:               return "The following Mac Devices have met the last inventory threshold"
+        case .macDevicesUnmanaged:                   return "The following Mac Devices are unmanaged"
         case .macDirectoryBindingsNotLinked:         return "The following Mac Directory Bindings are not linked to any Policies"
         case .macDiskEncryptionsNotLinked:           return "The following Mac Disk Encryptions are not linked to any Policies"
         case .macDockItemsNotLinked:                 return "The following Mac Dock Items are not linked to any Policies"
@@ -250,6 +257,7 @@ enum ReportType: String, CaseIterable {
         case .mobileApplicationsNoScope:             return "The following Mobile Applications have no scope"
         case .mobileConfigurationProfilesNoScope:    return "The following Mobile Configuration Profiles have no scope"
         case .mobileDevicesLastInventory:            return "The following Mobile Devices have met the last inventory threshold"
+        case .mobileDevicesUnmanaged:                return "The following Mobile Devices are unmanaged"
         case .mobileExtensionAttributesNotLinked:    return "The following Mobile Extension Attributes are not linked to anything"
         case .mobileSmartGroupsNotLinked:            return "The following Mobile Smart Groups are not linked to anything"
         case .mobileSmartGroupsNoCriteria:           return "The following Mobile Smart Groups have no criteria"
@@ -269,7 +277,8 @@ enum ReportType: String, CaseIterable {
         case .macAdvancedSearchesNoCriteria, .macAdvancedSearchesInvalidCriteria:                                                     return "advancedComputerSearches.html?id="
         case .macApplicationsNoScope:                                                                                                 return "macApps.html?id="
         case .macConfigurationProfilesNoScope:                                                                                        return "OSXConfigurationProfiles.html?id="
-        case .macDevicesDuplicateNames, .macDevicesDuplicateSerialNumbers, .macDevicesLastCheckIn, .macDevicesLastInventory:          return "computers.html?id="
+        case .macDevicesDuplicateNames, .macDevicesDuplicateSerialNumbers, .macDevicesLastCheckIn, .macDevicesLastInventory,
+            .macDevicesUnmanaged:                                                                                                     return "computers.html?id="
         case .macDirectoryBindingsNotLinked:                                                                                          return "directoryBindings.html?id="
         case .macDiskEncryptionsNotLinked:                                                                                            return "diskEncryptions.html?id="
         case .macDockItemsNotLinked:                                                                                                  return "dockItems.html?id="
@@ -286,7 +295,7 @@ enum ReportType: String, CaseIterable {
         case .mobileAdvancedSearchesNoCriteria, .mobileAdvancedSearchesInvalidCriteria:                                               return "advancedMobileDeviceSearches.html?id="
         case .mobileApplicationsNoScope:                                                                                              return "mobileDeviceApps.html?id="
         case .mobileConfigurationProfilesNoScope:                                                                                     return "iOSConfigurationProfiles.html?id="
-        case .mobileDevicesLastInventory:                                                                                             return "/mobileDevices.html?id="
+        case .mobileDevicesLastInventory, .mobileDevicesUnmanaged:                                                                    return "/mobileDevices.html?id="
         case .mobileExtensionAttributesNotLinked:                                                                                     return "/mobileDeviceExtensionAttributes.html?id="
         case .mobileSmartGroupsNotLinked, .mobileSmartGroupsNoCriteria:                                                               return "smartMobileDeviceGroups.html?id="
         case .mobileStaticGroupsNotLinked, .mobileStaticGroupsEmpty:                                                                  return "staticMobileDeviceGroups.html?id="

@@ -63,6 +63,13 @@ extension Dictionary where Key == String, Value == Any {
             self["lastInventory"] = Double(int) / 1000
         }
 
+        if let remoteManagement: [String: Any] = dictionary["remote_management"] as? [String: Any],
+            let managed: Bool = remoteManagement["managed"] as? Bool {
+            self["managed"] = managed
+        } else {
+            self["managed"] = false
+        }
+
         self["softwareUpdates"] = ((dictionary["override_default_settings"] as? [String: Any])?["sus"] as? String) != "default"
     }
 

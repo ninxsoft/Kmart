@@ -22,6 +22,7 @@ struct Reports {
     var macDevicesDuplicateSerialNumbers: [MacDevice] = []
     var macDevicesLastCheckIn: [MacDevice] = []
     var macDevicesLastInventory: [MacDevice] = []
+    var macDevicesUnmanaged: [MacDevice] = []
     var macDirectoryBindingsNotLinked: [MacDirectoryBinding] = []
     var macDiskEncryptionsNotLinked: [MacDiskEncryption] = []
     var macDockItemsNotLinked: [MacDockItem] = []
@@ -50,6 +51,7 @@ struct Reports {
     var mobileApplicationsNoScope: [MobileApplication] = []
     var mobileConfigurationProfilesNoScope: [MobileConfigurationProfile] = []
     var mobileDevicesLastInventory: [MobileDevice] = []
+    var mobileDevicesUnmanaged: [MobileDevice] = []
     var mobileExtensionAttributesNotLinked: [MobileExtensionAttribute] = []
     var mobileSmartGroupsNotLinked: [SmartGroup] = []
     var mobileSmartGroupsNoCriteria: [SmartGroup] = []
@@ -98,6 +100,7 @@ struct Reports {
         case .macDevicesDuplicateSerialNumbers:     return macDevicesDuplicateSerialNumbers.map { $0.dictionary }
         case .macDevicesLastCheckIn:                return macDevicesLastCheckIn.map { $0.dictionary }
         case .macDevicesLastInventory:              return macDevicesLastInventory.map { $0.dictionary }
+        case .macDevicesUnmanaged:                  return macDevicesUnmanaged.map { $0.dictionary }
         case .macDirectoryBindingsNotLinked:        return macDirectoryBindingsNotLinked.map { $0.dictionary }
         case .macDiskEncryptionsNotLinked:          return macDiskEncryptionsNotLinked.map { $0.dictionary }
         case .macDockItemsNotLinked:                return macDockItemsNotLinked.map { $0.dictionary }
@@ -134,6 +137,7 @@ struct Reports {
         case .mobileApplicationsNoScope:             return mobileApplicationsNoScope.map { $0.dictionary }
         case .mobileConfigurationProfilesNoScope:    return mobileConfigurationProfilesNoScope.map { $0.dictionary }
         case .mobileDevicesLastInventory:            return mobileDevicesLastInventory.map { $0.dictionary }
+        case .mobileDevicesUnmanaged:                return mobileDevicesUnmanaged.map { $0.dictionary }
         case .mobileExtensionAttributesNotLinked:    return mobileExtensionAttributesNotLinked.map { $0.dictionary }
         case .mobileSmartGroupsNotLinked:            return mobileSmartGroupsNotLinked.map { $0.dictionary }
         case .mobileSmartGroupsNoCriteria:           return mobileSmartGroupsNoCriteria.map { $0.dictionary }
