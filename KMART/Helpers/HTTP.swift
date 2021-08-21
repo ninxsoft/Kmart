@@ -126,7 +126,7 @@ struct HTTP {
         return object
     }
 
-    private static func errorMessage(_ statusCode: Int, url: URL) -> String {
+    static func errorMessage(_ statusCode: Int, url: URL) -> String {
 
         switch statusCode {
         case 400:

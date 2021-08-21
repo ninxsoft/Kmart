@@ -32,6 +32,7 @@ struct Configuration {
     var reportOptions: [ReportOptionType: Int] = [:]
     var output: [OutputType: String] = [:]
     var email: Email = Email([:])
+    var slack: Slack = Slack([:])
     var endpoints: [Endpoint] {
         let endpoints: [Endpoint] = reports.flatMap { $0.endpoints }
         return Array(Set(endpoints)).sorted { $0.identifier < $1.identifier }
@@ -74,6 +75,7 @@ struct Configuration {
         configureReportOptions(dictionary["reports_options"] as? [String: Int])
         configureOutput(dictionary["output"] as? [String: String])
         configureEmail(dictionary["email"] as? [String: Any])
+        configureSlack(dictionary["slack"] as? [String: Any])
     }
 
     private mutating func configureSetup(_ dictionary: [String: Any]) -> Bool {
@@ -169,5 +171,14 @@ struct Configuration {
         }
 
         email = Email(dictionary)
+    }
+
+    private mutating func configureSlack(_ dictionary: [String: Any]?) {
+
+        guard let dictionary: [String: Any] = dictionary else {
+            return
+        }
+
+        slack = Slack(dictionary)
     }
 }

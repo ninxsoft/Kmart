@@ -27,39 +27,18 @@ struct Emailer {
             attachments.append(attachment)
         }
 
-        if let string: String = email.attachments[.json],
-            let data: Data = reports.data(type: .json, using: configuration) {
-            let attachment: Attachment = Attachment(data: data, mime: "application/json", name: string)
-            attachments.append(attachment)
-        }
+        for outputType in OutputType.allCases {
 
-        if let string: String = email.attachments[.propertyList],
-            let data: Data = reports.data(type: .propertyList, using: configuration) {
-            let attachment: Attachment = Attachment(data: data, mime: "application/x-plist", name: string)
-            attachments.append(attachment)
-        }
-
-        if let string: String = email.attachments[.yaml],
-            let data: Data = reports.data(type: .yaml, using: configuration) {
-            let attachment: Attachment = Attachment(data: data, mime: "application/x-yaml", name: string)
-            attachments.append(attachment)
-        }
-
-        if let string: String = email.attachments[.markdown],
-            let data: Data = reports.data(type: .markdown, using: configuration) {
-            let attachment: Attachment = Attachment(data: data, mime: "text/markdown", name: string)
-            attachments.append(attachment)
-        }
-
-        if let string: String = email.attachments[.html],
-            let data: Data = reports.data(type: .html, using: configuration) {
-            let attachment: Attachment = Attachment(data: data, mime: "text/html", name: string)
-            attachments.append(attachment)
+            if let string: String = email.attachments[outputType],
+                let data: Data = reports.data(type: outputType, using: configuration) {
+                let attachment: Attachment = Attachment(data: data, mime: outputType.mimeType, name: string)
+                attachments.append(attachment)
+            }
         }
 
         let mail: Mail = Mail(from: sender, to: recipients, cc: carbonCopy, bcc: blindCarbonCopy, subject: subject, attachments: attachments)
 
-        PrettyPrint.print(.info, string: "Emailing Report: \(subject)")
+        PrettyPrint.print(.info, string: "Sending Report(s) via Email")
         smtp.send(mail) { error in
 
             if let error: Error = error {
