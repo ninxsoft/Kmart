@@ -1,8 +1,12 @@
 # KMART - Kick-Ass Mac Admin Reporting Tool
 
-A command-line utility generating kick-ass Jamf Pro reports:
+A command-line utility that generaties kick-ass Jamf Pro reports:
 
-![KMART](Readme%20Resources/KMART.png)
+![Email](Readme%20Resources/Email.png)
+
+Optionally sent via Slack:
+
+![Slack](Readme%20Resources/Slack.png)
 
 ## Features
 
@@ -60,11 +64,15 @@ OPTIONS:
 
 ## Configuration
 
-See [Sample Configs](Sample%20Configs) for all configuration options.
+* See [Sample Configs](Sample%20Configs) for all configuration options.
 
-**Note**: Use the following command to encode your credentials in the configuration file:
+  **Note**: Use the following command to encode your credentials in the configuration file:
 
-`printf 'username:password' | iconv --to-code ISO-8859-1 | base64 --input -`
+  `printf 'username:password' | iconv --to-code ISO-8859-1 | base64 --input -`
+
+* For Slack integration, read [Basic app setup](https://api.slack.com/authentication/basics) to create a Slack app with a Bot token.
+
+  **Note:** The Bot token will require the `chat:write` and `files:write` [permission scopes](https://api.slack.com/scopes).
 
 ## Privileges
 
