@@ -80,6 +80,12 @@ struct Slacker {
                 return
             }
 
+            if let string: String = dictionary["error"] as? String {
+                PrettyPrint.print(.error, string: "Error response: \(string)")
+                semaphore.signal()
+                return
+            }
+
             guard let string: String = dictionary["ts"] as? String else {
                 PrettyPrint.print(.error, string: "Missing key 'ts' from response dictionary")
                 semaphore.signal()
@@ -121,24 +127,26 @@ struct Slacker {
 
     private static func upload(_ data: Data, of outputType: OutputType, for slack: Slack, timestamp: String, using semaphore: DispatchSemaphore) {
 
+        let boundary: String = "\(String.identifier).\(UUID().uuidString)"
+
         guard let url: URL = URL(string: filesUploadURL) else {
             PrettyPrint.print(.error, string: "Invalid URL: \(filesUploadURL)")
             return
         }
 
-        guard let data: Data = uploadData(from: data, of: outputType, for: slack, timestamp: timestamp) else {
+        guard let data: Data = uploadData(from: data, of: outputType, for: slack, timestamp: timestamp, boundary: boundary) else {
             return
         }
 
         var request: URLRequest = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("Bearer \(slack.token)", forHTTPHeaderField: "Authorization")
-        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+        request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
         request.httpBody = data
 
         PrettyPrint.print(.info, string: "Uploading \(outputType.description) report via Slack")
 
-        let task: URLSessionDataTask = URLSession.shared.dataTask(with: request) { _, response, error in
+        let task: URLSessionDataTask = URLSession.shared.dataTask(with: request) { data, response, error in
 
             if let error: Error = error {
                 PrettyPrint.print(.error, string: "\(error.localizedDescription)")
@@ -160,6 +168,19 @@ struct Slacker {
                 return
             }
 
+            guard let data: Data = data,
+                let dictionary = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else {
+                PrettyPrint.print(.error, string: "Invalid response data from URL: \(url)")
+                semaphore.signal()
+                return
+            }
+
+            if let string: String = dictionary["error"] as? String {
+                PrettyPrint.print(.error, string: "Error response: \(string)")
+                semaphore.signal()
+                return
+            }
+
             semaphore.signal()
         }
 
@@ -167,10 +188,10 @@ struct Slacker {
         semaphore.wait()
     }
 
-    private static func uploadData(from data: Data, of outputType: OutputType, for slack: Slack, timestamp: String) -> Data? {
+    private static func uploadData(from data: Data, of outputType: OutputType, for slack: Slack, timestamp: String, boundary: String) -> Data? {
 
-        guard let string: String = String(data: data, encoding: .utf8) else {
-            PrettyPrint.print(.error, string: "Invalid \(outputType.description) report data")
+        guard let file: String = String(data: data, encoding: .utf8) else {
+            PrettyPrint.print(.error, string: "Invalid report file data")
             return nil
         }
 
@@ -180,27 +201,28 @@ struct Slacker {
         dateFormatter.dateFormat = "yyyy-MM-dd"
         let dateString: String = dateFormatter.string(from: Date())
         let filename: String = "KMART Report \(dateString).\(outputType.fileExtension)"
-
-        var requestComponents: URLComponents = URLComponents()
-        requestComponents.queryItems = [
-            URLQueryItem(name: "channels", value: slack.channel),
-            URLQueryItem(name: "content", value: string),
-            URLQueryItem(name: "filename", value: filename),
-            URLQueryItem(name: "filetype", value: outputType.filetype),
-            URLQueryItem(name: "thread_ts", value: timestamp),
-            URLQueryItem(name: "title", value: filename)
+        let parameters: [(key: String, value: String, filename: String?)] = [
+            (key: "channels", value: slack.channel, nil),
+            (key: "file", value: file, filename: filename),
+            (key: "filetype", value: outputType.filetype, nil),
+            (key: "thread_ts", value: timestamp, nil),
+            (key: "title", value: filename, nil)
         ]
 
-        guard let query: String = requestComponents.query else {
-            PrettyPrint.print(.error, string: "Invalid query from query items")
-            return nil
+        var string: String = ""
+
+        for parameter in parameters {
+            string.append("--\(boundary)\n")
+
+            if let filename: String = parameter.filename {
+                string.append("Content-Disposition: form-data; name=\"\(parameter.key)\"; filename=\"\(filename)\"\n\n")
+            } else {
+                string.append("Content-Disposition: form-data; name=\"\(parameter.key)\"\n\n")
+            }
+
+            string.append("\(parameter.value)\n")
         }
 
-        guard let data: Data = query.data(using: .utf8) else {
-            PrettyPrint.print(.error, string: "Invalid data from query \(query)")
-            return nil
-        }
-
-        return data
+        return string.data(using: .utf8)
     }
 }
