@@ -9,7 +9,7 @@ import Foundation
 
 struct Slack {
 
-    static let defaultText: String = "KMART Report(s) have been uploaded :partying_face:"
+    static let defaultText: String = "KMART Report(s) have been uploaded."
 
     var enabled: Bool = false
     var token: String = ""
