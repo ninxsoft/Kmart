@@ -34,22 +34,17 @@ struct Slacker {
 
     private static func message(_ slack: Slack, using semaphore: DispatchSemaphore) -> String? {
 
-        var timestamp: String?
-
         guard let url: URL = URL(string: chatPostMessageURL) else {
             PrettyPrint.print(.error, string: "Invalid URL: \(chatPostMessageURL)")
             return nil
         }
 
-        guard let data: Data = messageData(for: slack) else {
-            return nil
-        }
-
+        var timestamp: String?
         var request: URLRequest = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("Bearer \(slack.token)", forHTTPHeaderField: "Authorization")
         request.setValue("application/json; charset=UTF-8", forHTTPHeaderField: "Content-Type")
-        request.httpBody = data
+        request.httpBody = messageData(for: slack)
 
         let task: URLSessionDataTask = URLSession.shared.dataTask(with: request) { data, response, error in
 
@@ -84,6 +79,10 @@ struct Slacker {
                 PrettyPrint.print(.error, string: "Error response: \(string)")
                 semaphore.signal()
                 return
+            }
+
+            if let string: String = dictionary["warning"] as? String {
+                PrettyPrint.print(.error, string: "Warning response: \(string)")
             }
 
             guard let string: String = dictionary["ts"] as? String else {
@@ -127,22 +126,17 @@ struct Slacker {
 
     private static func upload(_ data: Data, of outputType: OutputType, for slack: Slack, timestamp: String, using semaphore: DispatchSemaphore) {
 
-        let boundary: String = "\(String.identifier).\(UUID().uuidString)"
-
         guard let url: URL = URL(string: filesUploadURL) else {
             PrettyPrint.print(.error, string: "Invalid URL: \(filesUploadURL)")
             return
         }
 
-        guard let data: Data = uploadData(from: data, of: outputType, for: slack, timestamp: timestamp, boundary: boundary) else {
-            return
-        }
-
+        let boundary: String = "\(String.identifier).\(UUID().uuidString)"
         var request: URLRequest = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("Bearer \(slack.token)", forHTTPHeaderField: "Authorization")
         request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
-        request.httpBody = data
+        request.httpBody = uploadData(from: data, of: outputType, for: slack, timestamp: timestamp, boundary: boundary)
 
         PrettyPrint.print(.info, string: "Uploading \(outputType.description) report via Slack")
 
@@ -179,6 +173,10 @@ struct Slacker {
                 PrettyPrint.print(.error, string: "Error response: \(string)")
                 semaphore.signal()
                 return
+            }
+
+            if let string: String = dictionary["warning"] as? String {
+                PrettyPrint.print(.error, string: "Warning response: \(string)")
             }
 
             semaphore.signal()
