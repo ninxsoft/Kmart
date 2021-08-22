@@ -22,12 +22,9 @@ struct Slacker {
             return
         }
 
-        for outputType in OutputType.allCases {
-
-            if let boolean: Bool = slack.attachments[outputType],
-                boolean,
-                let data: Data = reports.data(type: outputType, using: configuration) {
-                upload(data, of: outputType, for: slack, timestamp: timestamp, using: semaphore)
+        for attachment in slack.attachments {
+            if let data: Data = reports.data(type: attachment, using: configuration) {
+                upload(data, of: attachment, for: slack, timestamp: timestamp, using: semaphore)
             }
         }
     }

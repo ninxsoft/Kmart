@@ -15,7 +15,7 @@ struct Slack {
     var token: String = ""
     var channel: String = ""
     var text: String = ""
-    var attachments: [OutputType: Bool] = [:]
+    var attachments: [OutputType] = []
 
     init(_ dictionary: [String: Any] = [:]) {
         enabled = dictionary["enabled"] as? Bool ?? false
@@ -23,11 +23,11 @@ struct Slack {
         channel = dictionary["channel"] as? String ?? ""
         text = dictionary["text"] as? String ?? Slack.defaultText
 
-        if let attachmentsDictionary: [String: Any] = dictionary["attachments"] as? [String: Any] {
+        if let array: [String] = dictionary["attachments"] as? [String] {
 
-            for type in OutputType.allCases {
-                if let boolean: Bool = attachmentsDictionary[type.rawValue] as? Bool {
-                    attachments[type] = boolean
+            for item in array {
+                if let attachment: OutputType = OutputType(rawValue: item) {
+                    attachments.append(attachment)
                 }
             }
         }
