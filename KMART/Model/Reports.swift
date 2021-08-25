@@ -202,7 +202,7 @@ struct Reports {
         do {
             switch type {
             case .json:
-                let data: Data = try JSONSerialization.data(withJSONObject: dictionary, options: .prettyPrinted)
+                let data: Data = try JSONSerialization.data(withJSONObject: dictionary, options: [.prettyPrinted, .withoutEscapingSlashes])
                 if let string: String = String(data: data, encoding: .utf8) {
                     return string.data(using: .utf8)
                 }

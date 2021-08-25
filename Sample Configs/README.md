@@ -100,6 +100,12 @@
   * [bcc](#bcc)
   * [subject](#subject)
   * [attachments](#attachments)
+* [Slack](#slack)
+  * [enabled](#enabled)
+  * [token](#token)
+  * [channel](#port)
+  * [text](#username)
+  * [attachments](#attachments)
 
 ## General
 
@@ -653,7 +659,7 @@ The following keys can be found in the **email** dictionary of a configuration f
 
 ### enabled
 
-* **Description:** Set to `false` to disable sending report via Email
+* **Description:** Set to `false` to disable sending reports via Email
 * **Type:** `boolean`
 * **Required:** `false`
 * **Default:**: `false`
@@ -721,15 +727,63 @@ The following keys can be found in the **email** dictionary of a configuration f
 
 ### attachments
 
-* **Description:** Key-pair values to add reports as email attachments:
-  * **json**: `"filename.json"`,
-  * **plist**: `"filename.plist"`,
-  * **yaml**: `"filename.yaml"`,
-  * **markdown**: `"filename.md"`,
-  * **html**: `"filename.html"`
+* **Description:** Key-pair values to add reports as email attachments. Possible values include:
+  * `json`: `filename.json`
+  * `plist`: `filename.plist`
+  * `yaml`: `filename.yaml`
+  * `markdown`: `filename.md`
+  * `html`: `filename.html`
 * **Type:** `dictionary`
 * **Required:** `false`
 
 **Note:** The email will display the report as inline HTML, even if no attachment keys are specified.
+
+[Back to Options](#options)
+
+## Slack
+
+The following keys can be found in the **slack** dictionary of a configuration file.
+
+### enabled
+
+* **Description:** Set to `false` to disable sending reports via Slack
+* **Type:** `boolean`
+* **Required:** `false`
+* **Default:**: `false`
+
+### token
+
+* **Description:** `xoxb-` Bot Token used for authentication to send messages and upload reports via Slack
+* **Type:** `string`
+* **Required:** `true`
+
+**Note:** Read [Basic app setup](https://api.slack.com/authentication/basics) to create a Slack app with a Bot token.
+
+**Note:** The Bot token will require the `chat:write` and `files:write` [permission scopes](https://api.slack.com/scopes).
+
+### channel
+
+* **Description:** Name or ID of the channel used to upload reports via Slack
+* **Type:** `string`
+* **Required:** `true`
+
+### text
+
+* **Description:** Markdown and Emoji supported text used to send messages via Slack
+* **Type:** `string`
+* **Required:** `false`
+
+### attachments
+
+* **Description:** Array of file upload strings. Possible values include:
+  * `json`
+  * `plist`
+  * `yaml`
+  * `markdown`
+  * `html`
+* **Type:** `[string]`
+* **Required:** `false`
+
+**Note:** At least one attachment is required.
 
 [Back to Options](#options)

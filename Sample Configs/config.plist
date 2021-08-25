@@ -179,5 +179,24 @@
 			<string>filename.html</string>
 		</dict>
 	</dict>
+	<key>slack</key>
+	<dict>
+		<key>enabled</key>
+		<true/>
+		<key>token</key>
+		<string>xoxb-your-token</string>
+		<key>channel</key>
+		<string>channel_name_or_id</string>
+		<key>text</key>
+		<string>Custom Slack message supporting Markdown and Emoji.</string>
+		<key>attachments</key>
+		<array>
+			<string>json</string>
+			<string>plist</string>
+			<string>yaml</string>
+			<string>markdown</string>
+			<string>html</string>
+		</array>
+	</dict>
 </dict>
 </plist>

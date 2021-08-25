@@ -61,13 +61,18 @@ struct KMART: ParsableCommand {
         let reportEnd: Date = Date()
         PrettyPrint.print(.info, string: String(format: "Total Reporting Time: %.1f seconds", reportEnd.timeIntervalSince(reportStart)))
 
-        guard configuration.email.enabled else {
-            return
+        if configuration.email.enabled {
+            let emailStart: Date = Date()
+            Emailer.email(reports, using: configuration)
+            let emailEnd: Date = Date()
+            PrettyPrint.print(.info, string: String(format: "Total Email Time: %.1f seconds", emailEnd.timeIntervalSince(emailStart)))
         }
 
-        let emailStart: Date = Date()
-        Emailer.email(reports, using: configuration)
-        let emailEnd: Date = Date()
-        PrettyPrint.print(.info, string: String(format: "Total Email Time: %.1f seconds", emailEnd.timeIntervalSince(emailStart)))
+        if configuration.slack.enabled {
+            let slackStart: Date = Date()
+            Slacker.send(reports, using: configuration)
+            let slackEnd: Date = Date()
+            PrettyPrint.print(.info, string: String(format: "Total Slack Time: %.1f seconds", slackEnd.timeIntervalSince(slackStart)))
+        }
     }
 }

@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		350CBBB925E5AD21002F44D6 /* Double+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 350CBBB825E5AD21002F44D6 /* Double+Extension.swift */; };
+		395DE66226CF72E3004FEF25 /* Slacker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395DE66126CF72E3004FEF25 /* Slacker.swift */; };
+		395DE66426CF73DE004FEF25 /* Slack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395DE66326CF73DE004FEF25 /* Slack.swift */; };
 		573CD6E52611E62700CE156E /* Ink in Frameworks */ = {isa = PBXBuildFile; productRef = 573CD6E42611E62700CE156E /* Ink */; };
 		5743A36A25EBAD4A00919383 /* KMARTMobileTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5743A36925EBAD4A00919383 /* KMARTMobileTests.swift */; };
 		5743A37025EBB1D200919383 /* KMARTCommonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5743A36F25EBB1D200919383 /* KMARTCommonTests.swift */; };
@@ -150,6 +152,8 @@
 
 /* Begin PBXFileReference section */
 		350CBBB825E5AD21002F44D6 /* Double+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Extension.swift"; sourceTree = "<group>"; };
+		395DE66126CF72E3004FEF25 /* Slacker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Slacker.swift; sourceTree = "<group>"; };
+		395DE66326CF73DE004FEF25 /* Slack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Slack.swift; sourceTree = "<group>"; };
 		5743A36925EBAD4A00919383 /* KMARTMobileTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KMARTMobileTests.swift; sourceTree = "<group>"; };
 		5743A36F25EBB1D200919383 /* KMARTCommonTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KMARTCommonTests.swift; sourceTree = "<group>"; };
 		5743A37B25ECA2B800919383 /* Lint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lint.swift; sourceTree = "<group>"; };
@@ -316,6 +320,7 @@
 				57E253B425D8CDDF00931A0B /* KMART.swift */,
 				57E253BF25D8CF6A00931A0B /* Configuration.swift */,
 				57FB8EDC2618771A00464C1F /* Email.swift */,
+				395DE66326CF73DE004FEF25 /* Slack.swift */,
 				57E253BC25D8CF3200931A0B /* Version.swift */,
 			);
 			path = Commands;
@@ -341,6 +346,7 @@
 				57B4F63E26195B07006F894F /* Markdown.swift */,
 				5793805425DB817800A76D7D /* PrettyPrint.swift */,
 				577AC6D32612D1F20086D80E /* Shell.swift */,
+				395DE66126CF72E3004FEF25 /* Slacker.swift */,
 				57CD1ECF25EA3AF800FBF34B /* Reporter */,
 			);
 			path = Helpers;
@@ -603,6 +609,7 @@
 				57E2540D25DA39E600931A0B /* SmartGroup.swift in Sources */,
 				5793805925DB883C00A76D7D /* Reporter.swift in Sources */,
 				57E2540725DA39DA00931A0B /* MacExtensionAttribute.swift in Sources */,
+				395DE66426CF73DE004FEF25 /* Slack.swift in Sources */,
 				57CD1ED525EA3B0A00FBF34B /* ReporterCommon.swift in Sources */,
 				578B884E25E62766003A89BF /* Int+Extension.swift in Sources */,
 				5793802925DB318500A76D7D /* Limitations.swift in Sources */,
@@ -621,6 +628,7 @@
 				57E253CB25D8E74100931A0B /* ReportType.swift in Sources */,
 				5793804725DB75D600A76D7D /* NetworkSegment.swift in Sources */,
 				57E253D825D9DD4600931A0B /* Dictionary+Extension.swift in Sources */,
+				395DE66226CF72E3004FEF25 /* Slacker.swift in Sources */,
 				57B4F64526195B12006F894F /* ReportOptionType.swift in Sources */,
 				57E253BD25D8CF3200931A0B /* Version.swift in Sources */,
 				57E253D425D8F89500931A0B /* Objects.swift in Sources */,

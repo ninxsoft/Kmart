@@ -90,5 +90,18 @@
       "markdown": "filename.md",
       "html": "filename.html"
     }
+  },
+  "slack": {
+    "enabled": true,
+    "token": "xoxb-your-token",
+    "channel": "channel_name_or_id",
+    "text": "Custom Slack message supporting Markdown and Emoji.",
+    "attachments": [
+      "json",
+      "plist",
+      "yaml",
+      "markdown",
+      "html"
+    ]
   }
 }
