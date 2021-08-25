@@ -559,20 +559,65 @@ class KMARTMacTests: XCTestCase {
         XCTAssertFalse(results.isEmpty)
     }
 
-    // TODO: Unit Test
     func testMacScriptsNoLinterErrors() throws {
+        // https://github.com/koalaman/shellcheck/wiki/SC1008
+        let script: String = """
+        #!/bin/mywrapper
+        # shellcheck shell=bash
+
+        echo "Hello World"
+
+        exit 0
+
+        """
+        let macScript: MacScript = MacScript(id: 1, scriptContents: script)
+        let results: [MacScript] = ReporterMac.macScriptsLinterErrors([macScript])
+        XCTAssertTrue(results.isEmpty)
     }
 
-    // TODO: Unit Test
     func testMacScriptsLinterErrors() throws {
+        // https://github.com/koalaman/shellcheck/wiki/SC1008
+        let script: String = """
+        #!/bin/mywrapper
+
+        echo "Hello World"
+
+        exit 0
+
+        """
+        let macScript: MacScript = MacScript(id: 1, scriptContents: script)
+        let results: [MacScript] = ReporterMac.macScriptsLinterErrors([macScript])
+        XCTAssertFalse(results.isEmpty)
     }
 
-    // TODO: Unit Test
     func testMacScriptsNoLinterWarnings() throws {
+        // https://github.com/koalaman/shellcheck/wiki/SC1015
+        let script: String = """
+        #!/usr/bin/env bash
+
+        echo "Hello World"
+
+        exit 0
+
+        """
+        let macScript: MacScript = MacScript(id: 1, scriptContents: script)
+        let results: [MacScript] = ReporterMac.macScriptsLinterWarnings([macScript])
+        XCTAssertTrue(results.isEmpty)
     }
 
-    // TODO: Unit Test
     func testMacScriptsLinterWarnings() throws {
+        // https://github.com/koalaman/shellcheck/wiki/SC1015
+        let script: String = """
+        #!/usr/bin/env bash
+
+        echo “Hello World”
+
+        exit 0
+
+        """
+        let macScript: MacScript = MacScript(id: 1, scriptContents: script)
+        let results: [MacScript] = ReporterMac.macScriptsLinterWarnings([macScript])
+        XCTAssertFalse(results.isEmpty)
     }
 
     func testMacSmartGroupsLinked() throws {

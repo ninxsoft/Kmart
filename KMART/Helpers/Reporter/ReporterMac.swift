@@ -41,7 +41,7 @@ struct ReporterMac {
         case .macRestrictedSoftwareNoScope:         reports.macRestrictedSoftwaresNoScope.append(contentsOf: macRestrictedSoftwaresNoScope(objects.macRestrictedSoftwares))
         case .macScriptsNotLinked:                  reports.macScriptsNotLinked.append(contentsOf: macScriptsNotLinked(objects))
         case .macScriptsLinterErrors:               reports.macScriptsLinterErrors.append(contentsOf: macScriptsLinterErrors(objects.macScripts))
-        case .macScriptsLinterWarnings:             reports.macScriptsLinterWarnings.append(contentsOf: macScriptLinterWarnings(objects.macScripts))
+        case .macScriptsLinterWarnings:             reports.macScriptsLinterWarnings.append(contentsOf: macScriptsLinterWarnings(objects.macScripts))
         case .macSmartGroupsNotLinked:              reports.macSmartGroupsNotLinked.append(contentsOf: macSmartGroupsNotLinked(objects))
         case .macSmartGroupsNoCriteria:             reports.macSmartGroupsNoCriteria.append(contentsOf: macSmartGroupsNoCriteria(objects.macSmartGroups))
         case .macStaticGroupsNotLinked:             reports.macStaticGroupsNotLinked.append(contentsOf: macStaticGroupsNotLinked(objects))
@@ -253,7 +253,7 @@ struct ReporterMac {
         macScriptsLint(macScripts, level: .lintError)
     }
 
-    static func macScriptLinterWarnings(_ macScripts: [MacScript]) -> [MacScript] {
+    static func macScriptsLinterWarnings(_ macScripts: [MacScript]) -> [MacScript] {
         macScriptsLint(macScripts, level: .lintWarning)
     }
 
