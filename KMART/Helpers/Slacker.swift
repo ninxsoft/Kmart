@@ -29,6 +29,15 @@ struct Slacker {
         }
     }
 
+    private static func urlRequest(_ url: URL, token: String, contentType: String, httpBody: Data?) -> URLRequest {
+        var request: URLRequest = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        request.setValue(contentType, forHTTPHeaderField: "Content-Type")
+        request.httpBody = httpBody
+        return request
+    }
+
     private static func message(_ slack: Slack, using semaphore: DispatchSemaphore) -> String? {
 
         guard let url: URL = URL(string: chatPostMessageURL) else {
@@ -37,11 +46,7 @@ struct Slacker {
         }
 
         var timestamp: String?
-        var request: URLRequest = URLRequest(url: url)
-        request.httpMethod = "POST"
-        request.setValue("Bearer \(slack.token)", forHTTPHeaderField: "Authorization")
-        request.setValue("application/json; charset=UTF-8", forHTTPHeaderField: "Content-Type")
-        request.httpBody = messageData(for: slack)
+        let request: URLRequest = urlRequest(url, token: slack.token, contentType: "application/json; charset=UTF-8", httpBody: messageData(for: slack))
 
         let task: URLSessionDataTask = URLSession.shared.dataTask(with: request) { data, response, error in
 
@@ -129,11 +134,12 @@ struct Slacker {
         }
 
         let boundary: String = "\(String.identifier).\(UUID().uuidString)"
-        var request: URLRequest = URLRequest(url: url)
-        request.httpMethod = "POST"
-        request.setValue("Bearer \(slack.token)", forHTTPHeaderField: "Authorization")
-        request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
-        request.httpBody = uploadData(from: data, of: outputType, for: slack, timestamp: timestamp, boundary: boundary)
+        let request: URLRequest = urlRequest(
+            url,
+            token: slack.token,
+            contentType: "multipart/form-data; boundary=\(boundary)",
+            httpBody: uploadData(from: data, of: outputType, for: slack, timestamp: timestamp, boundary: boundary)
+        )
 
         PrettyPrint.print("Uploading \(outputType.description) report via Slack")
 
