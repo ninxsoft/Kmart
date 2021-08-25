@@ -20,19 +20,21 @@ struct HTTP {
         sessionConfiguration.httpMaximumConnectionsPerHost = configuration.requests
         sessionConfiguration.timeoutIntervalForRequest = configuration.timeout
         let session: URLSession = URLSession(configuration: sessionConfiguration)
+        let semaphore: DispatchSemaphore = DispatchSemaphore(value: 0)
 
         for endpoint in configuration.endpoints {
             let primaryURL: String = "\(configuration.url)/JSSResource/\(endpoint == .macDevicesHistory ? "computers" : endpoint.apiSlug)"
-            PrettyPrint.print(.info, string: "Performing lookups for \(endpoint.fullDescription):", newLine: false)
+            let startString: String = "Retrieving \(endpoint.fullDescription)..."
+            PrettyPrint.print(startString, terminator: "")
 
             let start: Date = Date()
 
-            guard let primary: [String: Any] = requestObject(url: primaryURL, with: authorization, using: session) else {
+            guard let primary: [String: Any] = requestObject(url: primaryURL, with: authorization, using: session, semaphore: semaphore) else {
                 continue
             }
 
             guard let array: [[String: Any]] = primary[endpoint.primaryKey] as? [[String: Any]] else {
-                PrettyPrint.print(.error, string: "Unable to find '\(endpoint.primaryKey)' key in URL response")
+                PrettyPrint.print(prefix: "\n  ├─ ", "Unable to find '\(endpoint.primaryKey)' key in URL response")
                 continue
             }
 
@@ -44,13 +46,13 @@ struct HTTP {
 
                 let secondaryURL: String = "\(configuration.url)/JSSResource/\(endpoint.apiSlug)/id/\(identifier)\(endpoint.subset)"
 
-                guard let secondary: [String: Any] = requestObject(url: secondaryURL, with: authorization, using: session) else {
+                guard let secondary: [String: Any] = requestObject(url: secondaryURL, with: authorization, using: session, semaphore: semaphore) else {
                     group.leave()
                     continue
                 }
 
                 guard var dictionary: [String: Any] = secondary[endpoint.secondaryKey] as? [String: Any] else {
-                    PrettyPrint.print(.error, string: "Unable to find '\(endpoint.secondaryKey)' key in URL response")
+                    PrettyPrint.print(prefix: "\n  ├─ ", "Unable to find '\(endpoint.secondaryKey)' key in URL response")
                     group.leave()
                     continue
                 }
@@ -62,50 +64,50 @@ struct HTTP {
 
             let end: Date = Date()
             let delta: TimeInterval = end.timeIntervalSince(start)
-            PrettyPrint.print(.info, prefix: false, string: String(format: " %.1f seconds", delta))
+            let endString: String = String(format: " %.1f seconds", delta)
+            PrettyPrint.print(prefix: "", endString)
         }
 
         return objects
     }
 
-    private static func requestObject(url string: String, with authorization: String, using session: URLSession) -> [String: Any]? {
+    private static func requestObject(url string: String, with authorization: String, using session: URLSession, semaphore: DispatchSemaphore) -> [String: Any]? {
 
         var object: [String: Any]?
 
         guard let url: URL = URL(string: string) else {
-            PrettyPrint.print(.error, string: "Invalid URL: \(string)")
+            PrettyPrint.print(prefix: "\n  ├─ ", "Invalid URL: \(string)")
             return nil
         }
 
         var request: URLRequest = URLRequest(url: url)
         request.setValue("application/json", forHTTPHeaderField: "Accept")
         request.setValue(authorization, forHTTPHeaderField: "Authorization")
-        let semaphore: DispatchSemaphore = DispatchSemaphore(value: 0)
 
         let task: URLSessionDataTask = session.dataTask(with: request) { data, response, error in
 
             if let error: Error = error {
-                PrettyPrint.print(.error, string: "\(error.localizedDescription)")
+                PrettyPrint.print(prefix: "\n  ├─ ", error.localizedDescription)
                 semaphore.signal()
                 return
             }
 
             guard let response: URLResponse = response,
                 let httpResponse: HTTPURLResponse = response as? HTTPURLResponse else {
-                PrettyPrint.print(.error, string: "Unable to get response from URL: \(url)")
+                PrettyPrint.print(prefix: "\n  ├─ ", "Unable to get response from URL: \(url)")
                 semaphore.signal()
                 return
             }
 
             guard httpResponse.statusCode == 200 else {
                 let string: String = errorMessage(httpResponse.statusCode, url: url)
-                PrettyPrint.print(.error, string: string)
+                PrettyPrint.print(prefix: "\n  ├─ ", string)
                 semaphore.signal()
                 return
             }
 
             guard let data: Data = data else {
-                PrettyPrint.print(.error, string: "Invalid data from URL response")
+                PrettyPrint.print(prefix: "\n  ├─ ", "Invalid data from URL response")
                 semaphore.signal()
                 return
             }
@@ -115,7 +117,7 @@ struct HTTP {
                     object = dictionary
                 }
             } catch {
-                PrettyPrint.print(.error, string: "\(error.localizedDescription)")
+                PrettyPrint.print(prefix: "\n  ├─ ", error.localizedDescription)
             }
 
             semaphore.signal()

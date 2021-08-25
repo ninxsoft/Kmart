@@ -19,7 +19,7 @@ struct Shell {
                 try inputData.write(to: url)
                 process.arguments = ["--severity", "warning", "--format", "json1", url.path]
             } catch {
-                PrettyPrint.print(.error, string: "\(error.localizedDescription)")
+                PrettyPrint.print(error.localizedDescription)
                 return nil
             }
         } else {
@@ -52,7 +52,7 @@ struct Shell {
             let lints: [Lint] = try JSONDecoder().decode([Lint].self, from: data).filter { $0.level == level && $0.code != 1071 } // https://github.com/koalaman/shellcheck/wiki/SC1071
             return lints
         } catch {
-            PrettyPrint.print(.error, string: "\(error.localizedDescription)")
+            PrettyPrint.print(error.localizedDescription)
             return nil
         }
     }

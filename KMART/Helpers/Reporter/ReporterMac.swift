@@ -152,7 +152,7 @@ struct ReporterMac {
     private static func macExtensionAttributesLint(_ macExtensionAttributes: [MacExtensionAttribute], level: LintLevel) -> [MacExtensionAttribute] {
 
         guard FileManager.default.fileExists(atPath: "/usr/local/bin/shellcheck") else {
-            PrettyPrint.print(.error, string: "shellcheck is not installed, please visit https://github.com/koalaman/shellcheck")
+            PrettyPrint.print("shellcheck is not installed, please visit https://github.com/koalaman/shellcheck")
             return []
         }
 
@@ -260,7 +260,7 @@ struct ReporterMac {
     private static func macScriptsLint(_ macScripts: [MacScript], level: LintLevel) -> [MacScript] {
 
         guard FileManager.default.fileExists(atPath: "/usr/local/bin/shellcheck") else {
-            PrettyPrint.print(.error, string: "shellcheck is not installed, please visit https://github.com/koalaman/shellcheck")
+            PrettyPrint.print("shellcheck is not installed, please visit https://github.com/koalaman/shellcheck")
             return []
         }
 

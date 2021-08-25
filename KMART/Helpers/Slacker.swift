@@ -16,7 +16,7 @@ struct Slacker {
         let semaphore: DispatchSemaphore = DispatchSemaphore(value: 0)
         let slack: Slack = configuration.slack
 
-        PrettyPrint.print(.info, string: "Sending Report(s) via Slack")
+        PrettyPrint.print("Sending Report(s) via Slack")
 
         guard let timestamp: String = message(slack, using: semaphore) else {
             return
@@ -32,7 +32,7 @@ struct Slacker {
     private static func message(_ slack: Slack, using semaphore: DispatchSemaphore) -> String? {
 
         guard let url: URL = URL(string: chatPostMessageURL) else {
-            PrettyPrint.print(.error, string: "Invalid URL: \(chatPostMessageURL)")
+            PrettyPrint.print("Invalid URL: \(chatPostMessageURL)")
             return nil
         }
 
@@ -46,44 +46,44 @@ struct Slacker {
         let task: URLSessionDataTask = URLSession.shared.dataTask(with: request) { data, response, error in
 
             if let error: Error = error {
-                PrettyPrint.print(.error, string: "\(error.localizedDescription)")
+                PrettyPrint.print(error.localizedDescription)
                 semaphore.signal()
                 return
             }
 
             guard let response: URLResponse = response,
                 let httpResponse: HTTPURLResponse = response as? HTTPURLResponse else {
-                PrettyPrint.print(.error, string: "Unable to get response from URL: \(url)")
+                PrettyPrint.print("Unable to get response from URL: \(url)")
                 semaphore.signal()
                 return
             }
 
             guard httpResponse.statusCode == 200 else {
                 let string: String = HTTP.errorMessage(httpResponse.statusCode, url: url)
-                PrettyPrint.print(.error, string: string)
+                PrettyPrint.print(string)
                 semaphore.signal()
                 return
             }
 
             guard let data: Data = data,
                 let dictionary = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else {
-                PrettyPrint.print(.error, string: "Invalid response data from URL: \(url)")
+                PrettyPrint.print("Invalid response data from URL: \(url)")
                 semaphore.signal()
                 return
             }
 
             if let string: String = dictionary["error"] as? String {
-                PrettyPrint.print(.error, string: "Error response: \(string)")
+                PrettyPrint.print("Error response: \(string)")
                 semaphore.signal()
                 return
             }
 
             if let string: String = dictionary["warning"] as? String {
-                PrettyPrint.print(.error, string: "Warning response: \(string)")
+                PrettyPrint.print("Warning response: \(string)")
             }
 
             guard let string: String = dictionary["ts"] as? String else {
-                PrettyPrint.print(.error, string: "Missing key 'ts' from response dictionary")
+                PrettyPrint.print("Missing 'ts' key in response dictionary")
                 semaphore.signal()
                 return
             }
@@ -114,7 +114,7 @@ struct Slacker {
         ]
 
         guard let data: Data = try? JSONSerialization.data(withJSONObject: dictionary, options: []) else {
-            PrettyPrint.print(.error, string: "Invalid dictionary: \(dictionary)")
+            PrettyPrint.print("Invalid dictionary: \(dictionary)")
             return nil
         }
 
@@ -124,7 +124,7 @@ struct Slacker {
     private static func upload(_ data: Data, of outputType: OutputType, for slack: Slack, timestamp: String, using semaphore: DispatchSemaphore) {
 
         guard let url: URL = URL(string: filesUploadURL) else {
-            PrettyPrint.print(.error, string: "Invalid URL: \(filesUploadURL)")
+            PrettyPrint.print("Invalid URL: \(filesUploadURL)")
             return
         }
 
@@ -135,45 +135,45 @@ struct Slacker {
         request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
         request.httpBody = uploadData(from: data, of: outputType, for: slack, timestamp: timestamp, boundary: boundary)
 
-        PrettyPrint.print(.info, string: "Uploading \(outputType.description) report via Slack")
+        PrettyPrint.print("Uploading \(outputType.description) report via Slack")
 
         let task: URLSessionDataTask = URLSession.shared.dataTask(with: request) { data, response, error in
 
             if let error: Error = error {
-                PrettyPrint.print(.error, string: "\(error.localizedDescription)")
+                PrettyPrint.print(error.localizedDescription)
                 semaphore.signal()
                 return
             }
 
             guard let response: URLResponse = response,
                 let httpResponse: HTTPURLResponse = response as? HTTPURLResponse else {
-                PrettyPrint.print(.error, string: "Unable to get response from URL: \(url)")
+                PrettyPrint.print("Unable to get response from URL: \(url)")
                 semaphore.signal()
                 return
             }
 
             guard httpResponse.statusCode == 200 else {
                 let string: String = HTTP.errorMessage(httpResponse.statusCode, url: url)
-                PrettyPrint.print(.error, string: string)
+                PrettyPrint.print(string)
                 semaphore.signal()
                 return
             }
 
             guard let data: Data = data,
                 let dictionary = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else {
-                PrettyPrint.print(.error, string: "Invalid response data from URL: \(url)")
+                PrettyPrint.print("Invalid response data from URL: \(url)")
                 semaphore.signal()
                 return
             }
 
             if let string: String = dictionary["error"] as? String {
-                PrettyPrint.print(.error, string: "Error response: \(string)")
+                PrettyPrint.print("Error response: \(string)")
                 semaphore.signal()
                 return
             }
 
             if let string: String = dictionary["warning"] as? String {
-                PrettyPrint.print(.error, string: "Warning response: \(string)")
+                PrettyPrint.print("Warning response: \(string)")
             }
 
             semaphore.signal()
@@ -186,7 +186,7 @@ struct Slacker {
     private static func uploadData(from data: Data, of outputType: OutputType, for slack: Slack, timestamp: String, boundary: String) -> Data? {
 
         guard let file: String = String(data: data, encoding: .utf8) else {
-            PrettyPrint.print(.error, string: "Invalid report file data")
+            PrettyPrint.print("Invalid report file data")
             return nil
         }
 

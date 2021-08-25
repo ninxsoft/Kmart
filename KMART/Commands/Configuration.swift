@@ -63,7 +63,7 @@ struct Configuration {
                 }
             }
         } catch {
-            PrettyPrint.print(.error, string: "\(error.localizedDescription)")
+            PrettyPrint.print(error.localizedDescription)
             return nil
         }
 
@@ -85,14 +85,14 @@ struct Configuration {
         }
 
         guard let urlString: String = dictionary["url"] as? String else {
-            PrettyPrint.print(.error, string: "Missing 'url' key in configuration file.")
+            PrettyPrint.print("Missing 'url' key in configuration file.")
             return false
         }
 
         url = urlString
 
         guard let credentialsString: String = dictionary["credentials"] as? String else {
-            PrettyPrint.print(.error, string: "Missing 'credentials' key in configuration file.")
+            PrettyPrint.print("Missing 'credentials' key in configuration file.")
             return false
         }
 

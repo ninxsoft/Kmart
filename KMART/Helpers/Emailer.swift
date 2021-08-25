@@ -38,11 +38,11 @@ struct Emailer {
 
         let mail: Mail = Mail(from: sender, to: recipients, cc: carbonCopy, bcc: blindCarbonCopy, subject: subject, attachments: attachments)
 
-        PrettyPrint.print(.info, string: "Sending Report(s) via Email")
+        PrettyPrint.print("Sending Report(s) via Email")
         smtp.send(mail) { error in
 
             if let error: Error = error {
-                PrettyPrint.print(.error, string: error.localizedDescription)
+                PrettyPrint.print(error.localizedDescription)
             }
 
             semaphore.signal()

@@ -53,7 +53,7 @@ struct Objects {
                 try insertMobile(endpoint, using: data)
             }
         } catch {
-            PrettyPrint.print(.error, string: "\(error.localizedDescription)")
+            PrettyPrint.print(error.localizedDescription)
         }
     }
 

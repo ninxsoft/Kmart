@@ -9,20 +9,14 @@ import Foundation
 
 struct PrettyPrint {
 
-    enum PrintType: String {
-        case info = "✅"
-        case warning = "⚠️"
-        case error = "⛔️"
-
-        var identifier: String {
-            rawValue
-        }
+    static func printHeader(_ header: String) {
+        let horizontal: String = String(repeating: "─", count: header.count + 2)
+        let string: String = "┌\(horizontal)┐\n│ \(header) │\n└\(horizontal)┘"
+        Swift.print(string.color(.blue))
     }
 
-    static func print(_ type: PrintType, prefix: Bool = true, string: String, carriageReturn: Bool = false, newLine: Bool = true) {
-        let carriageReturn: String = carriageReturn ? "\r" : ""
-        let terminator: String = newLine ? "\n" : ""
-        let string: String = "\(prefix ? "\(type.identifier) [\(Date())] - \(string)" : string)\(carriageReturn)"
+    static func print(prefix: String = "  ├─ ", _ string: String, terminator: String = "\n") {
+        let string: String = "\(prefix.color(.green))\(string)"
         Swift.print(string, terminator: terminator)
     }
 }

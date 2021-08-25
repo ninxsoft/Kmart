@@ -14,7 +14,8 @@ struct Reporter {
 
         for report in configuration.reports {
             let start: Date = Date()
-            PrettyPrint.print(.info, string: "Generating report for \(report.identifier):", newLine: false)
+            let startString: String = "Generating \(report.identifier)..."
+            PrettyPrint.print(startString, terminator: "")
 
             switch report.group {
             case .common:
@@ -27,7 +28,8 @@ struct Reporter {
 
             let end: Date = Date()
             let delta: TimeInterval = end.timeIntervalSince(start)
-            PrettyPrint.print(.info, prefix: false, string: String(format: " %.1f seconds", delta))
+            let endString: String = String(format: " %.1f seconds", delta)
+            PrettyPrint.print(prefix: "", endString)
         }
 
         return reports

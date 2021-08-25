@@ -51,28 +51,40 @@ struct KMART: ParsableCommand {
             throw ConfigurationError.invalidFile
         }
 
+        PrettyPrint.printHeader("JAMF PRO API")
         let apiStart: Date = Date()
         let objects: Objects = HTTP.retrieveObjects(using: configuration)
         let apiEnd: Date = Date()
-        PrettyPrint.print(.info, string: String(format: "Total API Retrieval Time: %.1f seconds", apiEnd.timeIntervalSince(apiStart)))
+        let apiString: String = String(format: "Total API Retrieval Time: %.1f seconds", apiEnd.timeIntervalSince(apiStart))
+        PrettyPrint.print(apiString)
+
+        PrettyPrint.printHeader("REPORTS")
+        let reportPrefix: String = configuration.email.enabled || configuration.slack.enabled ? "  ├─ " : "  └─ "
         let reportStart: Date = Date()
         let reports: Reports = Reporter.generateReports(from: objects, using: configuration)
         reports.saveToDisk(using: configuration)
         let reportEnd: Date = Date()
-        PrettyPrint.print(.info, string: String(format: "Total Reporting Time: %.1f seconds", reportEnd.timeIntervalSince(reportStart)))
+        let reportString: String = String(format: "Total Reporting Time: %.1f seconds", reportEnd.timeIntervalSince(reportStart))
+        PrettyPrint.print(prefix: reportPrefix, reportString)
 
         if configuration.email.enabled {
+            PrettyPrint.printHeader("EMAIL")
+            let emailPrefix: String = configuration.slack.enabled ? "  ├─ " : "  └─ "
             let emailStart: Date = Date()
             Emailer.email(reports, using: configuration)
             let emailEnd: Date = Date()
-            PrettyPrint.print(.info, string: String(format: "Total Email Time: %.1f seconds", emailEnd.timeIntervalSince(emailStart)))
+            let emailString: String = String(format: "Total Email Time: %.1f seconds", emailEnd.timeIntervalSince(emailStart))
+            PrettyPrint.print(prefix: emailPrefix, emailString)
         }
 
         if configuration.slack.enabled {
+            PrettyPrint.printHeader("SLACK")
+            let slackPrefix: String = "  └─ "
             let slackStart: Date = Date()
             Slacker.send(reports, using: configuration)
             let slackEnd: Date = Date()
-            PrettyPrint.print(.info, string: String(format: "Total Slack Time: %.1f seconds", slackEnd.timeIntervalSince(slackStart)))
+            let slackString: String = String(format: "Total Slack Time: %.1f seconds", slackEnd.timeIntervalSince(slackStart))
+            PrettyPrint.print(prefix: slackPrefix, slackString)
         }
     }
 }

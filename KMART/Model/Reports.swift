@@ -167,29 +167,29 @@ struct Reports {
                     let data: Data = try JSONSerialization.data(withJSONObject: dictionary, options: .prettyPrinted)
                     if let string: String = String(data: data, encoding: .utf8) {
                         try string.write(toFile: path, atomically: true, encoding: .utf8)
-                        PrettyPrint.print(.info, string: "Saving report as JSON: \(path)")
+                        PrettyPrint.print("Saving report as JSON: \(path)")
                     }
                 case .propertyList:
                     let data: Data = try PropertyListSerialization.data(fromPropertyList: dictionary, format: .xml, options: .bitWidth)
                     if let string: String = String(data: data, encoding: .utf8) {
                         try string.write(toFile: path, atomically: true, encoding: .utf8)
-                        PrettyPrint.print(.info, string: "Saving report as Propery List: \(path)")
+                        PrettyPrint.print("Saving report as Propery List: \(path)")
                     }
                 case .yaml:
                     let string: String = try Yams.dump(object: dictionary)
                     try string.write(toFile: path, atomically: true, encoding: .utf8)
-                    PrettyPrint.print(.info, string: "Saving report as YAML: \(path)")
+                    PrettyPrint.print("Saving report as YAML: \(path)")
                 case .markdown:
                     let string: String = Markdown.generateMarkdown(from: dictionary, name: configuration.name, url: configuration.url)
                     try string.write(toFile: path, atomically: true, encoding: .utf8)
-                    PrettyPrint.print(.info, string: "Saving report as Markdown: \(path)")
+                    PrettyPrint.print("Saving report as Markdown: \(path)")
                 case .html:
                     let string: String = Markdown.generateHTML(from: dictionary, name: configuration.name, url: configuration.url)
                     try string.write(toFile: path, atomically: true, encoding: .utf8)
-                    PrettyPrint.print(.info, string: "Saving report as HTML: \(path)")
+                    PrettyPrint.print("Saving report as HTML: \(path)")
                 }
             } catch {
-                PrettyPrint.print(.error, string: error.localizedDescription)
+                PrettyPrint.print(error.localizedDescription)
             }
         }
     }
@@ -222,7 +222,7 @@ struct Reports {
                 return string.data(using: .utf8)
             }
         } catch {
-            PrettyPrint.print(.error, string: error.localizedDescription)
+            PrettyPrint.print(error.localizedDescription)
         }
 
         return nil
