@@ -10,6 +10,7 @@
 		350CBBB925E5AD21002F44D6 /* Double+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 350CBBB825E5AD21002F44D6 /* Double+Extension.swift */; };
 		395DE66226CF72E3004FEF25 /* Slacker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395DE66126CF72E3004FEF25 /* Slacker.swift */; };
 		395DE66426CF73DE004FEF25 /* Slack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395DE66326CF73DE004FEF25 /* Slack.swift */; };
+		3967934F26D5F7F500DC2D2D /* Slack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395DE66326CF73DE004FEF25 /* Slack.swift */; };
 		573CD6E52611E62700CE156E /* Ink in Frameworks */ = {isa = PBXBuildFile; productRef = 573CD6E42611E62700CE156E /* Ink */; };
 		5743A36A25EBAD4A00919383 /* KMARTMobileTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5743A36925EBAD4A00919383 /* KMARTMobileTests.swift */; };
 		5743A37025EBB1D200919383 /* KMARTCommonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5743A36F25EBB1D200919383 /* KMARTCommonTests.swift */; };
@@ -573,6 +574,7 @@
 				578B88A125E65FA9003A89BF /* MobileTargets.swift in Sources */,
 				578B889625E65FA9003A89BF /* MobileAdvancedSearch.swift in Sources */,
 				578B888225E65F9E003A89BF /* MacAdvancedSearch.swift in Sources */,
+				3967934F26D5F7F500DC2D2D /* Slack.swift in Sources */,
 				578B888825E65FA9003A89BF /* MacDiskEncryption.swift in Sources */,
 				57B4F66326195C40006F894F /* Shell.swift in Sources */,
 				578B88A225E65FA9003A89BF /* MobileApplication.swift in Sources */,

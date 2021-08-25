@@ -295,20 +295,65 @@ class KMARTMacTests: XCTestCase {
         XCTAssertEqual(results.count, 1)
     }
 
-    // TODO: Unit Test
     func testMacExtensionAttributesNoLinterErrors() throws {
+        // https://github.com/koalaman/shellcheck/wiki/SC1008
+        let script: String = """
+        #!/bin/mywrapper
+        # shellcheck shell=bash
+
+        echo "Hello World"
+
+        exit 0
+
+        """
+        let macExtensionAttribute: MacExtensionAttribute = MacExtensionAttribute(id: 1, inputType: "script", scriptContents: script)
+        let results: [MacExtensionAttribute] = ReporterMac.macExtensionAttributesLinterErrors([macExtensionAttribute])
+        XCTAssertTrue(results.isEmpty)
     }
 
-    // TODO: Unit Test
     func testMacExtensionAttributesLinterErrors() throws {
+        // https://github.com/koalaman/shellcheck/wiki/SC1008
+        let script: String = """
+        #!/bin/mywrapper
+
+        echo "Hello World"
+
+        exit 0
+
+        """
+        let macExtensionAttribute: MacExtensionAttribute = MacExtensionAttribute(id: 1, inputType: "script", scriptContents: script)
+        let results: [MacExtensionAttribute] = ReporterMac.macExtensionAttributesLinterErrors([macExtensionAttribute])
+        XCTAssertFalse(results.isEmpty)
     }
 
-    // TODO: Unit Test
     func testMacExtensionAttributesNoLinterWarnings() throws {
+        // https://github.com/koalaman/shellcheck/wiki/SC1015
+        let script: String = """
+        #!/usr/bin/env bash
+
+        echo "Hello World"
+
+        exit 0
+
+        """
+        let macExtensionAttribute: MacExtensionAttribute = MacExtensionAttribute(id: 1, inputType: "script", scriptContents: script)
+        let results: [MacExtensionAttribute] = ReporterMac.macExtensionAttributesLinterWarnings([macExtensionAttribute])
+        XCTAssertTrue(results.isEmpty)
     }
 
-    // TODO: Unit Test
     func testMacExtensionAttributesLinterWarnings() throws {
+        // https://github.com/koalaman/shellcheck/wiki/SC1015
+        let script: String = """
+        #!/usr/bin/env bash
+
+        echo “Hello World”
+
+        exit 0
+
+        """
+        let macExtensionAttribute: MacExtensionAttribute = MacExtensionAttribute(id: 1, inputType: "script", scriptContents: script)
+        let results: [MacExtensionAttribute] = ReporterMac.macExtensionAttributesLinterWarnings([macExtensionAttribute])
+        XCTAssertFalse(results.isEmpty)
     }
 
     func testMacPackagesLinked() throws {
