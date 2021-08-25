@@ -14,7 +14,7 @@ struct Reporter {
 
         for report in configuration.reports {
             let start: Date = Date()
-            let startString: String = "Generating \(report.identifier)..."
+            let startString: String = "Generating report \(report.identifier)..."
             PrettyPrint.print(startString, terminator: "")
 
             switch report.group {

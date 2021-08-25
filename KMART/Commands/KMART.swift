@@ -55,7 +55,7 @@ struct KMART: ParsableCommand {
         let apiStart: Date = Date()
         let objects: Objects = HTTP.retrieveObjects(using: configuration)
         let apiEnd: Date = Date()
-        let apiString: String = String(format: "Total API Retrieval Time: %.1f seconds", apiEnd.timeIntervalSince(apiStart))
+        let apiString: String = String(format: "Total Jamf Pro API Retrieval Time: %.1f seconds", apiEnd.timeIntervalSince(apiStart))
         PrettyPrint.print(apiString)
 
         PrettyPrint.printHeader("REPORTS")
@@ -64,7 +64,7 @@ struct KMART: ParsableCommand {
         let reports: Reports = Reporter.generateReports(from: objects, using: configuration)
         reports.saveToDisk(using: configuration)
         let reportEnd: Date = Date()
-        let reportString: String = String(format: "Total Reporting Time: %.1f seconds", reportEnd.timeIntervalSince(reportStart))
+        let reportString: String = String(format: "Total Report Generation Time: %.1f seconds", reportEnd.timeIntervalSince(reportStart))
         PrettyPrint.print(prefix: reportPrefix, reportString)
 
         if configuration.email.enabled {
