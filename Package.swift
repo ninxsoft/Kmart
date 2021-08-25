@@ -18,11 +18,15 @@ let package = Package(
         .package(name: "SwiftSMTP", url: "https://github.com/Kitura/Swift-SMTP", from: "5.1.200")
     ],
     targets: [
-        .target(name: "KMART", dependencies: [
-            .product(name: "ArgumentParser", package: "swift-argument-parser"),
-            .product(name: "Yams", package: "Yams"),
-            .product(name: "Ink", package: "Ink"),
-            .product(name: "SwiftSMTP", package: "SwiftSMTP")
-        ], path: "KMART")
+        .target(
+            name: "KMART",
+            dependencies: [
+                .product(name: "ArgumentParser", package: "swift-argument-parser"),
+                .product(name: "Yams", package: "Yams"),
+                .product(name: "Ink", package: "Ink"),
+                .product(name: "SwiftSMTP", package: "SwiftSMTP")
+            ],
+            path: "KMART"
+        )
     ]
 )
