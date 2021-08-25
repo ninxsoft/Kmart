@@ -135,6 +135,20 @@ Grab the latest version of KMART from the [releases page](https://github.com/nin
 
 ## Version History
 
+* 1.2
+  * Added support for sending reports via Slack
+    * Read [Basic app setup](https://api.slack.com/authentication/basics) to create a Slack app with a Bot token
+    * **Note:** The Bot token will require the `chat:write` and `files:write` [permission scopes](https://api.slack.com/scopes)
+    * See [Sample Configs](Sample%20Configs#slack) for more information
+  * Added `mac_devices_unmanaged` and `mobile_devices_unmanaged` report types
+    * Mac and Mobile device reports now exclude unmanaged devices
+  * Added support for custom `api_timeout` value (default: `10`)
+  * Mac Packages now also display Categories in Markdown / HTML reports
+  * Improved file handling for Mac Extension Attributes and Mac Scripts over 64KB
+  * Fixed escaping of `\` in JSON reports
+  * Fixed escaping of `_` in Markdown / HTML reports
+  * Reduced verbosity of output messaging (reads much nicer)
+
 * 1.1
   * Report on one-off Mac Policies that were created via Jamf Remote (`mac_policies_jamf_remote`)
   * Less ambiguous descriptions for Markdown / HTML output
