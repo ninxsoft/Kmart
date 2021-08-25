@@ -165,12 +165,9 @@ struct Markdown {
 
                 let formattedCode: String = "https://github.com/koalaman/shellcheck/wiki/SC\(code)"
                 let formattedMessage: String = message.escapingMarkdown().trimmingCharacters(in: .newlines)
-
-                if index == 0 {
-                    string.append("| [\(identifier)](\(link)) | \(formattedName) | \(line) | \(column) | \(formattedMessage) | [\(code)](\(formattedCode)) |\n")
-                } else {
-                    string.append("|  |  | \(line) | \(column) | \(formattedMessage) | [\(code)](\(formattedCode)) |\n")
-                }
+                let stringWithIdentifier: String = "| [\(identifier)](\(link)) | \(formattedName) | \(line) | \(column) | \(formattedMessage) | [\(code)](\(formattedCode)) |\n"
+                let stringWithoutIdentifier: String = "|  |  | \(line) | \(column) | \(formattedMessage) | [\(code)](\(formattedCode)) |\n"
+                string.append(index == 0 ? stringWithIdentifier : stringWithoutIdentifier)
             }
 
             return string
