@@ -1,6 +1,6 @@
 # KMART - Kick-Ass Mac Admin Reporting Tool
 
-A command-line utility that generaties kick-ass Jamf Pro reports:
+A command-line utility that generates kick-ass Jamf Pro reports:
 
 ![Email](Readme%20Resources/Email.png)
 
