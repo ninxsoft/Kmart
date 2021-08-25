@@ -9,4 +9,5 @@ import Foundation
 
 extension Int {
     static let defaultOption: Int = 15
+    static let maximumScriptSize: Int = 32 * 1024
 }

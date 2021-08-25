@@ -12,17 +12,34 @@ struct Shell {
     static func shellcheck(_ inputData: Data, level: LintLevel) -> [Lint]? {
         let process: Process = Process()
         let inputPipe: Pipe = Pipe()
-        inputPipe.fileHandleForWriting.write(inputData)
-        inputPipe.fileHandleForWriting.closeFile()
+        let url: URL = URL(fileURLWithPath: "\(NSTemporaryDirectory())\(String.identifier).\(UUID().uuidString)")
+
+        if inputData.count > Int.maximumScriptSize {
+            do {
+                try inputData.write(to: url)
+                process.arguments = ["--severity", "warning", "--format", "json1", url.path]
+            } catch {
+                PrettyPrint.print(.error, string: "\(error.localizedDescription)")
+                return nil
+            }
+        } else {
+            inputPipe.fileHandleForWriting.write(inputData)
+            inputPipe.fileHandleForWriting.closeFile()
+            process.arguments = ["-", "--severity", "warning", "--format", "json1"]
+        }
+
         let outputPipe: Pipe = Pipe()
         process.executableURL = URL(fileURLWithPath: "/usr/local/bin/shellcheck")
-        process.arguments = ["-", "--severity", "warning", "--format", "json1"]
         process.standardInput = inputPipe
         process.standardOutput = outputPipe
 
         do {
             try process.run()
             process.waitUntilExit()
+
+            if inputData.count > Int.maximumScriptSize {
+                try FileManager.default.removeItem(at: url)
+            }
 
             let outputData: Data = outputPipe.fileHandleForReading.readDataToEndOfFile()
 
