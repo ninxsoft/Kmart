@@ -39,10 +39,10 @@ extension String {
     }
 
     func escapingMarkdown() -> String {
-        self.replacingOccurrences(of: "\\", with: "&#92;")
-            .replacingOccurrences(of: "[", with: "&#91;")
+        self.replacingOccurrences(of: "[", with: "&#91;")
+            .replacingOccurrences(of: "\\", with: "&#92;")
             .replacingOccurrences(of: "]", with: "&#93;")
-            .replacingOccurrences(of: "|", with: "&#124;")
             .replacingOccurrences(of: "_", with: "&#95;")
+            .replacingOccurrences(of: "|", with: "&#124;")
     }
 }
