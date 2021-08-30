@@ -65,7 +65,7 @@ struct KMART: ParsableCommand {
         reports.saveToDisk(using: configuration)
         let reportEnd: Date = Date()
         let reportString: String = String(format: "Total Report Generation Time: %.1f seconds", reportEnd.timeIntervalSince(reportStart))
-        PrettyPrint.print(prefix: reportPrefix, reportString)
+        PrettyPrint.print(reportString, prefix: reportPrefix)
 
         if configuration.email.enabled {
             PrettyPrint.printHeader("EMAIL")
@@ -74,7 +74,7 @@ struct KMART: ParsableCommand {
             Emailer.email(reports, using: configuration)
             let emailEnd: Date = Date()
             let emailString: String = String(format: "Total Email Time: %.1f seconds", emailEnd.timeIntervalSince(emailStart))
-            PrettyPrint.print(prefix: emailPrefix, emailString)
+            PrettyPrint.print(emailString, prefix: emailPrefix)
         }
 
         if configuration.slack.enabled {
@@ -84,7 +84,7 @@ struct KMART: ParsableCommand {
             Slacker.send(reports, using: configuration)
             let slackEnd: Date = Date()
             let slackString: String = String(format: "Total Slack Time: %.1f seconds", slackEnd.timeIntervalSince(slackStart))
-            PrettyPrint.print(prefix: slackPrefix, slackString)
+            PrettyPrint.print(slackString, prefix: slackPrefix)
         }
     }
 }

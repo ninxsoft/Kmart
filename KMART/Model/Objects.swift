@@ -7,6 +7,7 @@
 
 import Foundation
 
+// swiftlint:disable:next type_body_length
 struct Objects {
     var buildings: [Building] = []
     var categories: [Category] = []
@@ -60,13 +61,20 @@ struct Objects {
     private mutating func insertCommon(_ endpoint: Endpoint, using data: Data) throws {
 
         switch endpoint {
-        case .buildings:       try insertBuilding(using: data)
-        case .categories:      try insertCategory(using: data)
-        case .departments:     try insertDepartment(using: data)
-        case .eBooks:          try insertEBook(using: data)
-        case .iBeacons:        try insertIBeacon(using: data)
-        case .networkSegments: try insertNetworkSegment(using: data)
-        default:               return
+        case .buildings:
+            try insertBuilding(using: data)
+        case .categories:
+            try insertCategory(using: data)
+        case .departments:
+            try insertDepartment(using: data)
+        case .eBooks:
+            try insertEBook(using: data)
+        case .iBeacons:
+            try insertIBeacon(using: data)
+        case .networkSegments:
+            try insertNetworkSegment(using: data)
+        default:
+            return
         }
     }
 
@@ -74,35 +82,58 @@ struct Objects {
     private mutating func insertMac(_ endpoint: Endpoint, using data: Data) throws {
 
         switch endpoint {
-        case .macAdvancedSearches:      try insertMacAdvancedSearch(using: data)
-        case .macApplications:          try insertMacApplication(using: data)
-        case .macConfigurationProfiles: try insertMacConfigurationProfile(using: data)
-        case .macDevices:               try insertMacDevice(using: data)
-        case .macDevicesHistory:        try insertMacDeviceHistory(using: data)
-        case .macDirectoryBindings:     try insertMacDirectoryBinding(using: data)
-        case .macDiskEncryptions:       try insertMacDiskEncryption(using: data)
-        case .macDockItems:             try insertMacDockItem(using: data)
-        case .macExtensionAttributes:   try insertMacExtensionAttribute(using: data)
-        case .macGroups:                try insertMacGroup(using: data)
-        case .macPackages:              try insertMacPackage(using: data)
-        case .macPolicies:              try insertMacPolicy(using: data)
-        case .macPrinters:              try insertMacPrinter(using: data)
-        case .macRestrictedSoftware:    try insertMacRestrictedSoftware(using: data)
-        case .macScripts:               try insertMacScript(using: data)
-        default:                        return
+        case .macAdvancedSearches:
+            try insertMacAdvancedSearch(using: data)
+        case .macApplications:
+            try insertMacApplication(using: data)
+        case .macConfigurationProfiles:
+            try insertMacConfigurationProfile(using: data)
+        case .macDevices:
+            try insertMacDevice(using: data)
+        case .macDevicesHistory:
+            try insertMacDeviceHistory(using: data)
+        case .macDirectoryBindings:
+            try insertMacDirectoryBinding(using: data)
+        case .macDiskEncryptions:
+            try insertMacDiskEncryption(using: data)
+        case .macDockItems:
+            try insertMacDockItem(using: data)
+        case .macExtensionAttributes:
+            try insertMacExtensionAttribute(using: data)
+        case .macGroups:
+            try insertMacGroup(using: data)
+        case .macPackages:
+            try insertMacPackage(using: data)
+        case .macPolicies:
+            try insertMacPolicy(using: data)
+        case .macPrinters:
+            try insertMacPrinter(using: data)
+        case .macRestrictedSoftware:
+            try insertMacRestrictedSoftware(using: data)
+        case .macScripts:
+            try insertMacScript(using: data)
+        default:
+            return
         }
     }
 
     private mutating func insertMobile(_ endpoint: Endpoint, using data: Data) throws {
 
         switch endpoint {
-        case .mobileAdvancedSearches:      try insertMobileAdvancedSearch(using: data)
-        case .mobileApplications:          try insertMobileApplication(using: data)
-        case .mobileConfigurationProfiles: try insertMobileConfigurationProfile(using: data)
-        case .mobileDevices:               try insertMobileDevice(using: data)
-        case .mobileExtensionAttributes:   try insertMobileExtensionAttribute(using: data)
-        case .mobileGroups:                try insertMobileGroup(using: data)
-        default:                           return
+        case .mobileAdvancedSearches:
+            try insertMobileAdvancedSearch(using: data)
+        case .mobileApplications:
+            try insertMobileApplication(using: data)
+        case .mobileConfigurationProfiles:
+            try insertMobileConfigurationProfile(using: data)
+        case .mobileDevices:
+            try insertMobileDevice(using: data)
+        case .mobileExtensionAttributes:
+            try insertMobileExtensionAttribute(using: data)
+        case .mobileGroups:
+            try insertMobileGroup(using: data)
+        default:
+            return
         }
     }
 

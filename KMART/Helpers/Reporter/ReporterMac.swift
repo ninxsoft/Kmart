@@ -10,43 +10,76 @@ import Foundation
 // swiftlint:disable:next type_body_length
 struct ReporterMac {
 
-    // swiftlint:disable cyclomatic_complexity
+    // swiftlint:disable:next cyclomatic_complexity function_body_length
     static func update(_ reports: inout Reports, with report: ReportType, from objects: Objects, options: [ReportOptionType: Int]) {
 
         switch report {
-        case .macAdvancedSearchesNoCriteria:        reports.macAdvancedSearchesNoCriteria.append(contentsOf: macAdvancedSearchesNoCriteria(objects.macAdvancedSearches))
-        case .macAdvancedSearchesInvalidCriteria:   reports.macAdvancedSearchesInvalidCriteria.append(contentsOf: macAdvancedSearchesInvalidCriteria(objects))
-        case .macApplicationsNoScope:               reports.macApplicationsNoScope.append(contentsOf: macApplicationsNoScope(objects.macApplications))
-        case .macConfigurationProfilesNoScope:      reports.macConfigurationProfilesNoScope.append(contentsOf: macConfigurationProfilesNoScope(objects.macConfigurationProfiles))
-        case .macDevicesDuplicateNames:             reports.macDevicesDuplicateNames.append(contentsOf: macDevicesDuplicateNames(objects.macDevices))
-        case .macDevicesDuplicateSerialNumbers:     reports.macDevicesDuplicateSerialNumbers.append(contentsOf: macDevicesDuplicateSerialNumbers(objects.macDevices))
-        case .macDevicesLastCheckIn:                reports.macDevicesLastCheckIn.append(contentsOf: macDevicesLastCheckIn(objects.macDevices, options: options))
-        case .macDevicesLastInventory:              reports.macDevicesLastInventory.append(contentsOf: macDevicesLastInventory(objects.macDevices, options: options))
-        case .macDevicesUnmanaged:                  reports.macDevicesUnmanaged.append(contentsOf: macDevicesUnmanaged(objects.macDevices))
-        case .macDirectoryBindingsNotLinked:        reports.macDirectoryBindingsNotLinked.append(contentsOf: macDirectoryBindingsNotLinked(objects))
-        case .macDiskEncryptionsNotLinked:          reports.macDiskEncryptionsNotLinked.append(contentsOf: macDiskEncryptionsNotLinked(objects))
-        case .macDockItemsNotLinked:                reports.macDockItemsNotLinked.append(contentsOf: macDockItemsNotLinked(objects))
-        case .macExtensionAttributesNotLinked:      reports.macExtensionAttributesNotLinked.append(contentsOf: macExtensionAttributesNotLinked(objects))
-        case .macExtensionAttributesDisabled:       reports.macExtensionAttributesDisabled.append(contentsOf: macExtensionAttributesDisabled(objects.macExtensionAttributes))
-        case .macExtensionAttributesLinterErrors:   reports.macExtensionAttributesLinterErrors.append(contentsOf: macExtensionAttributesLinterErrors(objects.macExtensionAttributes))
-        case .macExtensionAttributesLinterWarnings: reports.macExtensionAttributesLinterWarnings.append(contentsOf: macExtensionAttributesLinterWarnings(objects.macExtensionAttributes))
-        case .macPackagesNotLinked:                 reports.macPackagesNotLinked.append(contentsOf: macPackagesNotLinked(objects))
-        case .macPoliciesNoScope:                   reports.macPoliciesNoScope.append(contentsOf: macPoliciesNoScope(objects.macPolicies))
-        case .macPoliciesDisabled:                  reports.macPoliciesDisabled.append(contentsOf: macPoliciesDisabled(objects.macPolicies))
-        case .macPoliciesNoPayload:                 reports.macPoliciesNoPayload.append(contentsOf: macPoliciesNoPayload(objects.macPolicies))
-        case .macPoliciesJamfRemote:                reports.macPoliciesJamfRemote.append(contentsOf: macPoliciesJamfRemote(objects.macPolicies))
-        case .macPoliciesLastExecuted:              reports.macPoliciesLastExecuted.append(contentsOf: macPoliciesLastExecuted(objects, options: options))
-        case .macPoliciesFailedThreshold:           reports.macPoliciesFailedThreshold.append(contentsOf: macPoliciesFailedThreshold(objects, options: options))
-        case .macPrintersNotLinked:                 reports.macPrintersNotLinked.append(contentsOf: macPrintersNotLinked(objects))
-        case .macRestrictedSoftwareNoScope:         reports.macRestrictedSoftwaresNoScope.append(contentsOf: macRestrictedSoftwaresNoScope(objects.macRestrictedSoftwares))
-        case .macScriptsNotLinked:                  reports.macScriptsNotLinked.append(contentsOf: macScriptsNotLinked(objects))
-        case .macScriptsLinterErrors:               reports.macScriptsLinterErrors.append(contentsOf: macScriptsLinterErrors(objects.macScripts))
-        case .macScriptsLinterWarnings:             reports.macScriptsLinterWarnings.append(contentsOf: macScriptsLinterWarnings(objects.macScripts))
-        case .macSmartGroupsNotLinked:              reports.macSmartGroupsNotLinked.append(contentsOf: macSmartGroupsNotLinked(objects))
-        case .macSmartGroupsNoCriteria:             reports.macSmartGroupsNoCriteria.append(contentsOf: macSmartGroupsNoCriteria(objects.macSmartGroups))
-        case .macStaticGroupsNotLinked:             reports.macStaticGroupsNotLinked.append(contentsOf: macStaticGroupsNotLinked(objects))
-        case .macStaticGroupsEmpty:                 reports.macStaticGroupsEmpty.append(contentsOf: macStaticGroupsEmpty(objects.macStaticGroups))
-        default:                                    break
+        case .macAdvancedSearchesNoCriteria:
+            reports.macAdvancedSearchesNoCriteria.append(contentsOf: macAdvancedSearchesNoCriteria(objects.macAdvancedSearches))
+        case .macAdvancedSearchesInvalidCriteria:
+            reports.macAdvancedSearchesInvalidCriteria.append(contentsOf: macAdvancedSearchesInvalidCriteria(objects))
+        case .macApplicationsNoScope:
+            reports.macApplicationsNoScope.append(contentsOf: macApplicationsNoScope(objects.macApplications))
+        case .macConfigurationProfilesNoScope:
+            reports.macConfigurationProfilesNoScope.append(contentsOf: macConfigurationProfilesNoScope(objects.macConfigurationProfiles))
+        case .macDevicesDuplicateNames:
+            reports.macDevicesDuplicateNames.append(contentsOf: macDevicesDuplicateNames(objects.macDevices))
+        case .macDevicesDuplicateSerialNumbers:
+            reports.macDevicesDuplicateSerialNumbers.append(contentsOf: macDevicesDuplicateSerialNumbers(objects.macDevices))
+        case .macDevicesLastCheckIn:
+            reports.macDevicesLastCheckIn.append(contentsOf: macDevicesLastCheckIn(objects.macDevices, options: options))
+        case .macDevicesLastInventory:
+            reports.macDevicesLastInventory.append(contentsOf: macDevicesLastInventory(objects.macDevices, options: options))
+        case .macDevicesUnmanaged:
+            reports.macDevicesUnmanaged.append(contentsOf: macDevicesUnmanaged(objects.macDevices))
+        case .macDirectoryBindingsNotLinked:
+            reports.macDirectoryBindingsNotLinked.append(contentsOf: macDirectoryBindingsNotLinked(objects))
+        case .macDiskEncryptionsNotLinked:
+            reports.macDiskEncryptionsNotLinked.append(contentsOf: macDiskEncryptionsNotLinked(objects))
+        case .macDockItemsNotLinked:
+            reports.macDockItemsNotLinked.append(contentsOf: macDockItemsNotLinked(objects))
+        case .macExtensionAttributesNotLinked:
+            reports.macExtensionAttributesNotLinked.append(contentsOf: macExtensionAttributesNotLinked(objects))
+        case .macExtensionAttributesDisabled:
+            reports.macExtensionAttributesDisabled.append(contentsOf: macExtensionAttributesDisabled(objects.macExtensionAttributes))
+        case .macExtensionAttributesLinterErrors:
+            reports.macExtensionAttributesLinterErrors.append(contentsOf: macExtensionAttributesLinterErrors(objects.macExtensionAttributes))
+        case .macExtensionAttributesLinterWarnings:
+            reports.macExtensionAttributesLinterWarnings.append(contentsOf: macExtensionAttributesLinterWarnings(objects.macExtensionAttributes))
+        case .macPackagesNotLinked:
+            reports.macPackagesNotLinked.append(contentsOf: macPackagesNotLinked(objects))
+        case .macPoliciesNoScope:
+            reports.macPoliciesNoScope.append(contentsOf: macPoliciesNoScope(objects.macPolicies))
+        case .macPoliciesDisabled:
+            reports.macPoliciesDisabled.append(contentsOf: macPoliciesDisabled(objects.macPolicies))
+        case .macPoliciesNoPayload:
+            reports.macPoliciesNoPayload.append(contentsOf: macPoliciesNoPayload(objects.macPolicies))
+        case .macPoliciesJamfRemote:
+            reports.macPoliciesJamfRemote.append(contentsOf: macPoliciesJamfRemote(objects.macPolicies))
+        case .macPoliciesLastExecuted:
+            reports.macPoliciesLastExecuted.append(contentsOf: macPoliciesLastExecuted(objects, options: options))
+        case .macPoliciesFailedThreshold:
+            reports.macPoliciesFailedThreshold.append(contentsOf: macPoliciesFailedThreshold(objects, options: options))
+        case .macPrintersNotLinked:
+            reports.macPrintersNotLinked.append(contentsOf: macPrintersNotLinked(objects))
+        case .macRestrictedSoftwareNoScope:
+            reports.macRestrictedSoftwaresNoScope.append(contentsOf: macRestrictedSoftwaresNoScope(objects.macRestrictedSoftwares))
+        case .macScriptsNotLinked:
+            reports.macScriptsNotLinked.append(contentsOf: macScriptsNotLinked(objects))
+        case .macScriptsLinterErrors:
+            reports.macScriptsLinterErrors.append(contentsOf: macScriptsLinterErrors(objects.macScripts))
+        case .macScriptsLinterWarnings:
+            reports.macScriptsLinterWarnings.append(contentsOf: macScriptsLinterWarnings(objects.macScripts))
+        case .macSmartGroupsNotLinked:
+            reports.macSmartGroupsNotLinked.append(contentsOf: macSmartGroupsNotLinked(objects))
+        case .macSmartGroupsNoCriteria:
+            reports.macSmartGroupsNoCriteria.append(contentsOf: macSmartGroupsNoCriteria(objects.macSmartGroups))
+        case .macStaticGroupsNotLinked:
+            reports.macStaticGroupsNotLinked.append(contentsOf: macStaticGroupsNotLinked(objects))
+        case .macStaticGroupsEmpty:
+            reports.macStaticGroupsEmpty.append(contentsOf: macStaticGroupsEmpty(objects.macStaticGroups))
+        default:
+            break
         }
     }
 
@@ -56,7 +89,7 @@ struct ReporterMac {
 
     static func macAdvancedSearchesInvalidCriteria(_ objects: Objects) -> [MacAdvancedSearch] {
         var identifiers: [Int] = []
-        let names: [String] = objects.macSmartGroups.map { $0.name} + objects.macStaticGroups.map { $0.name }
+        let names: [String] = objects.macSmartGroups.map { $0.name } + objects.macStaticGroups.map { $0.name }
 
         for macAdvancedSearch in objects.macAdvancedSearches {
             for criterion in macAdvancedSearch.criteria where criterion.name == "Computer Group" && !names.contains(criterion.value) {
@@ -161,9 +194,13 @@ struct ReporterMac {
         for macExtensionAttribute in macExtensionAttributes {
 
             guard macExtensionAttribute.inputType == "script",
-                let inputData: Data = macExtensionAttribute.scriptContents.data(using: .utf8),
-                let lints: [Lint] = Shell.shellcheck(inputData, level: level),
-                !lints.isEmpty else {
+                let inputData: Data = macExtensionAttribute.scriptContents.data(using: .utf8) else {
+                continue
+            }
+
+            let lints: [Lint] = Shell.shellcheck(inputData, level: level)
+
+            guard !lints.isEmpty else {
                 continue
             }
 
@@ -268,9 +305,13 @@ struct ReporterMac {
 
         for macScript in macScripts {
 
-            guard let inputData: Data = macScript.scriptContents.data(using: .utf8),
-                let lints: [Lint] = Shell.shellcheck(inputData, level: level),
-                !lints.isEmpty else {
+            guard let inputData: Data = macScript.scriptContents.data(using: .utf8) else {
+                continue
+            }
+
+            let lints: [Lint] = Shell.shellcheck(inputData, level: level)
+
+            guard !lints.isEmpty else {
                 continue
             }
 
@@ -287,7 +328,7 @@ struct ReporterMac {
 
         for macAdvancedSearch in objects.macAdvancedSearches {
             let values: [String] = macAdvancedSearch.criteria.filter { $0.name == "Computer Group" }.map { $0.value }
-            identifiers.append(contentsOf: objects.macSmartGroups.filter { values.contains($0.name) }.map { $0.id  })
+            identifiers.append(contentsOf: objects.macSmartGroups.filter { values.contains($0.name) }.map { $0.id })
         }
 
         identifiers.append(contentsOf: objects.macApplications.flatMap { $0.macTargets.deviceGroups })
@@ -313,7 +354,7 @@ struct ReporterMac {
 
         for macAdvancedSearch in objects.macAdvancedSearches {
             let values: [String] = macAdvancedSearch.criteria.filter { $0.name == "Computer Group" }.map { $0.value }
-            identifiers.append(contentsOf: objects.macStaticGroups.filter { values.contains($0.name) }.map { $0.id  })
+            identifiers.append(contentsOf: objects.macStaticGroups.filter { values.contains($0.name) }.map { $0.id })
         }
 
         identifiers.append(contentsOf: objects.macApplications.flatMap { $0.macTargets.deviceGroups })

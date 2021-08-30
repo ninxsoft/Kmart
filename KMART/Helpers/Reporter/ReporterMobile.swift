@@ -15,17 +15,28 @@ struct ReporterMobile {
         switch report {
         case .mobileAdvancedSearchesNoCriteria:
             reports.mobileAdvancedSearchesNoCriteria.append(contentsOf: mobileAdvancedSearchesNoCriteria(mobileAdvancedSearchesNoCriteria(objects.mobileAdvancedSearches)))
-        case .mobileAdvancedSearchesInvalidCriteria: reports.mobileAdvancedSearchesInvalidCriteria.append(contentsOf: mobileAdvancedSearchesInvalidCriteria(objects))
-        case .mobileApplicationsNoScope:             reports.mobileApplicationsNoScope.append(contentsOf: mobileApplicationsNoScope(objects.mobileApplications))
-        case .mobileConfigurationProfilesNoScope:    reports.mobileConfigurationProfilesNoScope.append(contentsOf: mobileConfigurationProfilesNoScope(objects.mobileConfigurationProfiles))
-        case .mobileDevicesLastInventory:            reports.mobileDevicesLastInventory.append(contentsOf: mobileDevicesLastInventory(objects.mobileDevices, options: options))
-        case .mobileDevicesUnmanaged:                reports.mobileDevicesUnmanaged.append(contentsOf: mobileDevicesUnmanaged(objects.mobileDevices))
-        case .mobileExtensionAttributesNotLinked:    reports.mobileExtensionAttributesNotLinked.append(contentsOf: mobileExtensionAttributesNotLinked(objects))
-        case .mobileSmartGroupsNotLinked:            reports.mobileSmartGroupsNotLinked.append(contentsOf: mobileSmartGroupsNotLinked(objects))
-        case .mobileSmartGroupsNoCriteria:           reports.mobileSmartGroupsNoCriteria.append(contentsOf: mobileSmartGroupsNoCriteria(objects.mobileSmartGroups))
-        case .mobileStaticGroupsNotLinked:           reports.mobileStaticGroupsNotLinked.append(contentsOf: mobileStaticGroupsNotLinked(objects))
-        case .mobileStaticGroupsEmpty:               reports.mobileStaticGroupsEmpty.append(contentsOf: mobileStaticGroupsEmpty(objects.mobileStaticGroups))
-        default:                                     break
+        case .mobileAdvancedSearchesInvalidCriteria:
+            reports.mobileAdvancedSearchesInvalidCriteria.append(contentsOf: mobileAdvancedSearchesInvalidCriteria(objects))
+        case .mobileApplicationsNoScope:
+            reports.mobileApplicationsNoScope.append(contentsOf: mobileApplicationsNoScope(objects.mobileApplications))
+        case .mobileConfigurationProfilesNoScope:
+            reports.mobileConfigurationProfilesNoScope.append(contentsOf: mobileConfigurationProfilesNoScope(objects.mobileConfigurationProfiles))
+        case .mobileDevicesLastInventory:
+            reports.mobileDevicesLastInventory.append(contentsOf: mobileDevicesLastInventory(objects.mobileDevices, options: options))
+        case .mobileDevicesUnmanaged:
+            reports.mobileDevicesUnmanaged.append(contentsOf: mobileDevicesUnmanaged(objects.mobileDevices))
+        case .mobileExtensionAttributesNotLinked:
+            reports.mobileExtensionAttributesNotLinked.append(contentsOf: mobileExtensionAttributesNotLinked(objects))
+        case .mobileSmartGroupsNotLinked:
+            reports.mobileSmartGroupsNotLinked.append(contentsOf: mobileSmartGroupsNotLinked(objects))
+        case .mobileSmartGroupsNoCriteria:
+            reports.mobileSmartGroupsNoCriteria.append(contentsOf: mobileSmartGroupsNoCriteria(objects.mobileSmartGroups))
+        case .mobileStaticGroupsNotLinked:
+            reports.mobileStaticGroupsNotLinked.append(contentsOf: mobileStaticGroupsNotLinked(objects))
+        case .mobileStaticGroupsEmpty:
+            reports.mobileStaticGroupsEmpty.append(contentsOf: mobileStaticGroupsEmpty(objects.mobileStaticGroups))
+        default:
+            break
         }
     }
 
@@ -35,7 +46,7 @@ struct ReporterMobile {
 
     static func mobileAdvancedSearchesInvalidCriteria(_ objects: Objects) -> [MobileAdvancedSearch] {
         var identifiers: [Int] = []
-        let names: [String] = objects.mobileSmartGroups.map { $0.name} + objects.mobileStaticGroups.map { $0.name }
+        let names: [String] = objects.mobileSmartGroups.map { $0.name } + objects.mobileStaticGroups.map { $0.name }
 
         for mobileAdvancedSearch in objects.mobileAdvancedSearches {
             for criterion in mobileAdvancedSearch.criteria where criterion.name == "Mobile Device Group" && !names.contains(criterion.value) {
@@ -89,7 +100,7 @@ struct ReporterMobile {
 
         for mobileAdvancedSearch in objects.mobileAdvancedSearches {
             let values: [String] = mobileAdvancedSearch.criteria.filter { $0.name == "Mobile Device Group" }.map { $0.value }
-            identifiers.append(contentsOf: objects.mobileSmartGroups.filter { values.contains($0.name) }.map { $0.id  })
+            identifiers.append(contentsOf: objects.mobileSmartGroups.filter { values.contains($0.name) }.map { $0.id })
         }
 
         identifiers.append(contentsOf: objects.mobileApplications.flatMap { $0.mobileTargets.deviceGroups })
@@ -111,7 +122,7 @@ struct ReporterMobile {
 
         for mobileAdvancedSearch in objects.mobileAdvancedSearches {
             let values: [String] = mobileAdvancedSearch.criteria.filter { $0.name == "Mobile Device Group" }.map { $0.value }
-            identifiers.append(contentsOf: objects.mobileStaticGroups.filter { values.contains($0.name) }.map { $0.id  })
+            identifiers.append(contentsOf: objects.mobileStaticGroups.filter { values.contains($0.name) }.map { $0.id })
         }
 
         identifiers.append(contentsOf: objects.mobileApplications.flatMap { $0.mobileTargets.deviceGroups })

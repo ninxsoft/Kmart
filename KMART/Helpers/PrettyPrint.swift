@@ -15,7 +15,7 @@ struct PrettyPrint {
         Swift.print(string.color(.blue))
     }
 
-    static func print(prefix: String = "  ├─ ", _ string: String, terminator: String = "\n") {
+    static func print(_ string: String, prefix: String = "  ├─ ", terminator: String = "\n") {
         let string: String = "\(prefix.color(.green))\(string)"
         Swift.print(string, terminator: terminator)
     }

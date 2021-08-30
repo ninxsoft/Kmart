@@ -48,6 +48,7 @@ struct Slacker {
         var timestamp: String?
         let request: URLRequest = urlRequest(url, token: slack.token, contentType: "application/json; charset=UTF-8", httpBody: messageData(for: slack))
 
+        // swiftlint:disable:next closure_body_length
         let task: URLSessionDataTask = URLSession.shared.dataTask(with: request) { data, response, error in
 
             if let error: Error = error {
@@ -143,6 +144,7 @@ struct Slacker {
 
         PrettyPrint.print("Uploading \(outputType.description) report via Slack")
 
+        // swiftlint:disable:next closure_body_length
         let task: URLSessionDataTask = URLSession.shared.dataTask(with: request) { data, response, error in
 
             if let error: Error = error {

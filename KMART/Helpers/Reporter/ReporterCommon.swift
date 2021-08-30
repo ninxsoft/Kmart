@@ -12,12 +12,18 @@ struct ReporterCommon {
     static func update(_ reports: inout Reports, with report: ReportType, from objects: Objects) {
 
         switch report {
-        case .buildingsNotLinked:       reports.buildingsNotLinked.append(contentsOf: buildingsNotLinked(objects))
-        case .categoriesNotLinked:      reports.categoriesNotLinked.append(contentsOf: categoriesNotLinked(objects))
-        case .departmentsNotLinked:     reports.departmentsNotLinked.append(contentsOf: departmentsNotLinked(objects))
-        case .eBooksNoScope:            reports.eBooksNoScope.append(contentsOf: eBooksNoScope(objects.eBooks))
-        case .iBeaconsNotLinked:        reports.iBeaconsNotLinked.append(contentsOf: iBeaconsNotLinked(objects))
-        case .networkSegmentsNotLinked: reports.networkSegmentsNotLinked.append(contentsOf: networkSegmentsNotLinked(objects))
+        case .buildingsNotLinked:
+            reports.buildingsNotLinked.append(contentsOf: buildingsNotLinked(objects))
+        case .categoriesNotLinked:
+            reports.categoriesNotLinked.append(contentsOf: categoriesNotLinked(objects))
+        case .departmentsNotLinked:
+            reports.departmentsNotLinked.append(contentsOf: departmentsNotLinked(objects))
+        case .eBooksNoScope:
+            reports.eBooksNoScope.append(contentsOf: eBooksNoScope(objects.eBooks))
+        case .iBeaconsNotLinked:
+            reports.iBeaconsNotLinked.append(contentsOf: iBeaconsNotLinked(objects))
+        case .networkSegmentsNotLinked:
+            reports.networkSegmentsNotLinked.append(contentsOf: networkSegmentsNotLinked(objects))
         default:
             break
         }

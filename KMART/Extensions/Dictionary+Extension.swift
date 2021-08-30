@@ -55,12 +55,12 @@ extension Dictionary where Key == String, Value == Any {
         self["category"] = ((dictionary["category"] as? [String: Any])?["id"] as? Int)
         self["enabled"] = dictionary["enabled"] as? Bool ?? false
         self["serialNumber"] = dictionary["serial_number"] ?? ""
-        self["lastCheckIn"] = Double(dictionary["last_contact_time_epoch"] as? Int ?? 0) / 1000
+        self["lastCheckIn"] = Double(dictionary["last_contact_time_epoch"] as? Int ?? 0) / 1_000
 
         if let int: Int = dictionary["report_date_epoch"] as? Int {
-            self["lastInventory"] = Double(int) / 1000
+            self["lastInventory"] = Double(int) / 1_000
         } else if let int: Int = dictionary["last_inventory_update_epoch"] as? Int {
-            self["lastInventory"] = Double(int) / 1000
+            self["lastInventory"] = Double(int) / 1_000
         }
 
         if let remoteManagement: [String: Any] = dictionary["remote_management"] as? [String: Any],
@@ -272,7 +272,7 @@ extension Dictionary where Key == String, Value == Any {
             }
 
             policyLogs[index]["id"] = identifier
-            policyLogs[index]["date"] = Double(date) / 1000
+            policyLogs[index]["date"] = Double(date) / 1_000
         }
 
         self["macPolicyLogs"] = policyLogs

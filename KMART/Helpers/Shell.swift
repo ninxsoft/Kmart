@@ -9,7 +9,7 @@ import Foundation
 
 struct Shell {
 
-    static func shellcheck(_ inputData: Data, level: LintLevel) -> [Lint]? {
+    static func shellcheck(_ inputData: Data, level: LintLevel) -> [Lint] {
         let process: Process = Process()
         let inputPipe: Pipe = Pipe()
         let url: URL = URL(fileURLWithPath: "\(NSTemporaryDirectory())\(String.identifier).\(UUID().uuidString)")
@@ -20,7 +20,7 @@ struct Shell {
                 process.arguments = ["--severity", "warning", "--format", "json1", url.path]
             } catch {
                 PrettyPrint.print(error.localizedDescription)
-                return nil
+                return []
             }
         } else {
             inputPipe.fileHandleForWriting.write(inputData)
@@ -45,15 +45,15 @@ struct Shell {
 
             guard let dictionary: [String: Any] = try JSONSerialization.jsonObject(with: outputData, options: []) as? [String: Any],
                 let array: [[String: Any]] = dictionary["comments"] as? [[String: Any]] else {
-                return nil
+                return []
             }
 
             let data: Data = try JSONSerialization.data(withJSONObject: array, options: [])
-            let lints: [Lint] = try JSONDecoder().decode([Lint].self, from: data).filter { $0.level == level && $0.code != 1071 } // https://github.com/koalaman/shellcheck/wiki/SC1071
+            let lints: [Lint] = try JSONDecoder().decode([Lint].self, from: data).filter { $0.level == level && $0.code != 1_071 } // https://github.com/koalaman/shellcheck/wiki/SC1071
             return lints
         } catch {
             PrettyPrint.print(error.localizedDescription)
-            return nil
+            return []
         }
     }
 }

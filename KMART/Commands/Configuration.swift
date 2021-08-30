@@ -71,11 +71,11 @@ struct Configuration {
             return nil
         }
 
-        configureReports(dictionary["reports"] as? [String: Bool])
-        configureReportOptions(dictionary["reports_options"] as? [String: Int])
-        configureOutput(dictionary["output"] as? [String: String])
-        configureEmail(dictionary["email"] as? [String: Any])
-        configureSlack(dictionary["slack"] as? [String: Any])
+        configureReports(dictionary["reports"] as? [String: Bool] ?? [:])
+        configureReportOptions(dictionary["reports_options"] as? [String: Int] ?? [:])
+        configureOutput(dictionary["output"] as? [String: String] ?? [:])
+        configureEmail(dictionary["email"] as? [String: Any] ?? [:])
+        configureSlack(dictionary["slack"] as? [String: Any] ?? [: ])
     }
 
     private mutating func configureSetup(_ dictionary: [String: Any]) -> Bool {
@@ -109,11 +109,7 @@ struct Configuration {
         return true
     }
 
-    private mutating func configureReports(_ dictionary: [String: Bool]?) {
-
-        guard let dictionary: [String: Bool] = dictionary else {
-            return
-        }
+    private mutating func configureReports(_ dictionary: [String: Bool]) {
 
         for key in dictionary.keys {
 
@@ -129,11 +125,7 @@ struct Configuration {
         reports.sort { $0.identifier < $1.identifier }
     }
 
-    private mutating func configureReportOptions(_ dictionary: [String: Int]?) {
-
-        guard let dictionary: [String: Int] = dictionary else {
-            return
-        }
+    private mutating func configureReportOptions(_ dictionary: [String: Int]) {
 
         for key in dictionary.keys.sorted() {
 
@@ -147,11 +139,7 @@ struct Configuration {
         }
     }
 
-    private mutating func configureOutput(_ dictionary: [String: String]?) {
-
-        guard let dictionary: [String: String] = dictionary else {
-            return
-        }
+    private mutating func configureOutput(_ dictionary: [String: String]) {
 
         for key in dictionary.keys.sorted() {
 
@@ -164,21 +152,11 @@ struct Configuration {
         }
     }
 
-    private mutating func configureEmail(_ dictionary: [String: Any]?) {
-
-        guard let dictionary: [String: Any] = dictionary else {
-            return
-        }
-
+    private mutating func configureEmail(_ dictionary: [String: Any]) {
         email = Email(dictionary)
     }
 
-    private mutating func configureSlack(_ dictionary: [String: Any]?) {
-
-        guard let dictionary: [String: Any] = dictionary else {
-            return
-        }
-
+    private mutating func configureSlack(_ dictionary: [String: Any]) {
         slack = Slack(dictionary)
     }
 }

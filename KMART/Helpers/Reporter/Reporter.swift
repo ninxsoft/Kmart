@@ -29,7 +29,7 @@ struct Reporter {
             let end: Date = Date()
             let delta: TimeInterval = end.timeIntervalSince(start)
             let endString: String = String(format: " %.1f seconds", delta)
-            PrettyPrint.print(prefix: "", endString)
+            PrettyPrint.print(endString, prefix: "")
         }
 
         return reports
