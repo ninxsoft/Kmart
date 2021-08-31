@@ -34,7 +34,7 @@ struct KMART: ParsableCommand {
         if !json.isEmpty {
             try execute(type: .json, path: json)
         } else if !plist.isEmpty {
-        try execute(type: .plist, path: plist)
+            try execute(type: .plist, path: plist)
         } else if !yaml.isEmpty {
             try execute(type: .yaml, path: yaml)
         } else if version {
