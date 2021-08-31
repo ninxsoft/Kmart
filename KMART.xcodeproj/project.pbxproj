@@ -428,6 +428,7 @@
 				57E2538B25D8CB7E00931A0B /* Frameworks */,
 				57E2538C25D8CB7E00931A0B /* CopyFiles */,
 				57E253A825D8CD5E00931A0B /* Run SwiftLint */,
+				393C236A26DDDFC9004755BF /* Run DrString */,
 			);
 			buildRules = (
 			);
@@ -497,6 +498,24 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		393C236A26DDDFC9004755BF /* Run DrString */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Run DrString";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = "/usr/bin/env bash";
+			shellScript = "if which drstring > /dev/null ; then\n  drstring check --config-file \"$SRCROOT/.drstring.toml\" || true\nelse\n  echo \"warning: DrString not installed, download from https://github.com/dduan/DrString\"\nfi\n\nexit 0\n";
+		};
 		57E253A825D8CD5E00931A0B /* Run SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;

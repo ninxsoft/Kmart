@@ -1,8 +1,9 @@
-// swift-tools-version:5.3
+// swift-tools-version:5.4
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
 
+/// Package configuration
 let package = Package(
     name: "KMART",
     platforms: [
@@ -18,7 +19,7 @@ let package = Package(
         .package(name: "SwiftSMTP", url: "https://github.com/Kitura/Swift-SMTP", from: "5.1.200")
     ],
     targets: [
-        .target(
+        .executableTarget(
             name: "KMART",
             dependencies: [
                 .product(name: "ArgumentParser", package: "swift-argument-parser"),
