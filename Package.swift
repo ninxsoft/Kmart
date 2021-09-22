@@ -13,7 +13,7 @@ let package = Package(
         .executable(name: "kmart", targets: ["KMART"])
     ],
     dependencies: [
-        .package(url: "https://github.com/apple/swift-argument-parser", from: "0.4.4"),
+        .package(url: "https://github.com/apple/swift-argument-parser", from: "1.0.1"),
         .package(url: "https://github.com/jpsim/Yams", from: "4.0.6"),
         .package(url: "https://github.com/JohnSundell/Ink", from: "0.5.1"),
         .package(name: "SwiftSMTP", url: "https://github.com/Kitura/Swift-SMTP", from: "5.1.200")
