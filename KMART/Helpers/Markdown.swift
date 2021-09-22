@@ -158,12 +158,12 @@ struct Markdown {
 
                 guard let line: Int = item["line"] as? Int,
                     let column: Int = item["column"] as? Int,
-                    let code: Int = item["code"] as? Int,
+                    let code: String = item["code"] as? String,
                     let message: String = item["message"] as? String  else {
                     return nil
                 }
 
-                let formattedCode: String = "https://github.com/koalaman/shellcheck/wiki/SC\(code)"
+                let formattedCode: String = Lint.url(for: code)
                 let formattedMessage: String = message.escapingMarkdown().trimmingCharacters(in: .newlines)
                 let stringWithIdentifier: String = "| [\(identifier)](\(link)) | \(formattedName) | \(line) | \(column) | \(formattedMessage) | [\(code)](\(formattedCode)) |\n"
                 let stringWithoutIdentifier: String = "|  |  | \(line) | \(column) | \(formattedMessage) | [\(code)](\(formattedCode)) |\n"

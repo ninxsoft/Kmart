@@ -34,6 +34,15 @@ extension String {
     static let abstract: String = "Kick-Ass Mac Admin Reporting Tool"
     static let discussion: String = "Generate kick-ass Jamf Pro reports."
 
+    var scriptType: ScriptType? {
+
+        guard let line: String = self.components(separatedBy: .newlines).first else {
+            return nil
+        }
+
+        return line.lowercased().contains("python") ? .python : .shell
+    }
+
     func color(_ color: Color) -> String {
         color.rawValue + self + Color.reset.rawValue
     }
@@ -44,5 +53,40 @@ extension String {
             .replacingOccurrences(of: "]", with: "&#93;")
             .replacingOccurrences(of: "_", with: "&#95;")
             .replacingOccurrences(of: "|", with: "&#124;")
+    }
+
+    func lintArray() -> [[String: Any]] {
+        var dictionaries: [[String: Any]] = []
+
+        for substring in self.components(separatedBy: .newlines) {
+            let components: [String] = substring.components(separatedBy: ":")
+
+            guard components.count == 4,
+                let line: Int = Int(components[1]),
+                let column: Int = Int(components[2]) else {
+                continue
+            }
+
+            let codeAndMessage: String = components[3].trimmingCharacters(in: .whitespaces)
+
+            guard let code: String = codeAndMessage.components(separatedBy: " ").first else {
+                continue
+            }
+
+            let level: String = code.range(of: "^[CEF]", options: .regularExpression) != nil ? "error" : "warning"
+            let message: String = codeAndMessage.replacingOccurrences(of: code, with: "").trimmingCharacters(in: .whitespaces)
+
+            let dictionary: [String: Any] = [
+                "level": level,
+                "line": line,
+                "column": column,
+                "code": code,
+                "message": message
+            ]
+
+            dictionaries.append(dictionary)
+        }
+
+        return dictionaries
     }
 }

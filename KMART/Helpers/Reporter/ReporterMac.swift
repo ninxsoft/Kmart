@@ -189,16 +189,22 @@ struct ReporterMac {
             return []
         }
 
+        guard FileManager.default.fileExists(atPath: "/usr/local/bin/flake8") else {
+            PrettyPrint.print("flake8 is not installed, please visit https://github.com/PyCQA/flake8")
+            return []
+        }
+
         var extensionAttributes: [MacExtensionAttribute] = []
 
         for macExtensionAttribute in macExtensionAttributes {
 
             guard macExtensionAttribute.inputType == "script",
-                let inputData: Data = macExtensionAttribute.scriptContents.data(using: .utf8) else {
+                let inputData: Data = macExtensionAttribute.scriptContents.data(using: .utf8),
+                let scriptType: ScriptType = macExtensionAttribute.scriptContents.scriptType else {
                 continue
             }
 
-            let lints: [Lint] = Shell.shellcheck(inputData, level: level)
+            let lints: [Lint] = Shell.lintCheck(inputData, type: scriptType, level: level)
 
             guard !lints.isEmpty else {
                 continue
@@ -301,15 +307,21 @@ struct ReporterMac {
             return []
         }
 
+        guard FileManager.default.fileExists(atPath: "/usr/local/bin/flake8") else {
+            PrettyPrint.print("flake8 is not installed, please visit https://github.com/PyCQA/flake8")
+            return []
+        }
+
         var scripts: [MacScript] = []
 
         for macScript in macScripts {
 
-            guard let inputData: Data = macScript.scriptContents.data(using: .utf8) else {
+            guard let inputData: Data = macScript.scriptContents.data(using: .utf8),
+                let scriptType: ScriptType = macScript.scriptContents.scriptType else {
                 continue
             }
 
-            let lints: [Lint] = Shell.shellcheck(inputData, level: level)
+            let lints: [Lint] = Shell.lintCheck(inputData, type: scriptType, level: level)
 
             guard !lints.isEmpty else {
                 continue

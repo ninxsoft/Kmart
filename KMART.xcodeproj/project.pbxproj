@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		350CBBB925E5AD21002F44D6 /* Double+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 350CBBB825E5AD21002F44D6 /* Double+Extension.swift */; };
+		393356C426FAF267009A6DAA /* ScriptType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 393356C326FAF267009A6DAA /* ScriptType.swift */; };
 		395DE66226CF72E3004FEF25 /* Slacker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395DE66126CF72E3004FEF25 /* Slacker.swift */; };
 		395DE66426CF73DE004FEF25 /* Slack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395DE66326CF73DE004FEF25 /* Slack.swift */; };
 		3967934F26D5F7F500DC2D2D /* Slack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395DE66326CF73DE004FEF25 /* Slack.swift */; };
@@ -153,6 +154,7 @@
 
 /* Begin PBXFileReference section */
 		350CBBB825E5AD21002F44D6 /* Double+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Extension.swift"; sourceTree = "<group>"; };
+		393356C326FAF267009A6DAA /* ScriptType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptType.swift; sourceTree = "<group>"; };
 		395DE66126CF72E3004FEF25 /* Slacker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Slacker.swift; sourceTree = "<group>"; };
 		395DE66326CF73DE004FEF25 /* Slack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Slack.swift; sourceTree = "<group>"; };
 		5743A36925EBAD4A00919383 /* KMARTMobileTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KMARTMobileTests.swift; sourceTree = "<group>"; };
@@ -310,6 +312,7 @@
 				57B4F64426195B12006F894F /* ReportOptionType.swift */,
 				57E253CA25D8E74100931A0B /* ReportType.swift */,
 				5793805D25DB898100A76D7D /* Reports.swift */,
+				393356C326FAF267009A6DAA /* ScriptType.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -610,6 +613,7 @@
 			files = (
 				57CD1EEA25EA401500FBF34B /* ReporterMac.swift in Sources */,
 				57E2542625DA3A2600931A0B /* MobileConfigurationProfile.swift in Sources */,
+				393356C426FAF267009A6DAA /* ScriptType.swift in Sources */,
 				57E2541125DA39EF00931A0B /* MacPackage.swift in Sources */,
 				57E253CF25D8F64A00931A0B /* HTTP.swift in Sources */,
 				5756B94A25DF60ED001215DF /* MacDeviceHistory.swift in Sources */,

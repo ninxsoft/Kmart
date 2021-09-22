@@ -9,7 +9,18 @@ import Foundation
 
 struct Shell {
 
-    static func shellcheck(_ inputData: Data, level: LintLevel) -> [Lint] {
+    static func lintCheck(_ inputData: Data, type scriptType: ScriptType, level: LintLevel) -> [Lint] {
+
+        switch scriptType {
+        case .shell:
+            return shellcheck(inputData, level: level)
+        case .python:
+            return flake8(inputData, level: level)
+        }
+    }
+
+    private static func shellcheck(_ inputData: Data, level: LintLevel) -> [Lint] {
+
         let process: Process = Process()
         let inputPipe: Pipe = Pipe()
         let url: URL = URL(fileURLWithPath: "\(NSTemporaryDirectory())\(String.identifier).\(UUID().uuidString)")
@@ -48,8 +59,38 @@ struct Shell {
                 return []
             }
 
+            let data: Data = try JSONSerialization.data(withJSONObject: array.replacingCodeType(), options: [])
+            let lints: [Lint] = try JSONDecoder().decode([Lint].self, from: data).filter { $0.level == level && $0.code != "1071" } // https://github.com/koalaman/shellcheck/wiki/SC1071
+            return lints
+        } catch {
+            PrettyPrint.print(error.localizedDescription)
+            return []
+        }
+    }
+
+    private static func flake8(_ inputData: Data, level: LintLevel) -> [Lint] {
+        let inputPipe: Pipe = Pipe()
+        inputPipe.fileHandleForWriting.write(inputData)
+        inputPipe.fileHandleForWriting.closeFile()
+        let outputPipe: Pipe = Pipe()
+        let process: Process = Process()
+        process.executableURL = URL(fileURLWithPath: "/usr/local/bin/flake8")
+        process.arguments = ["-"]
+        process.standardInput = inputPipe
+        process.standardOutput = outputPipe
+
+        do {
+            try process.run()
+            process.waitUntilExit()
+            let outputData: Data = outputPipe.fileHandleForReading.readDataToEndOfFile()
+
+            guard let string: String = String(data: outputData, encoding: .utf8) else {
+                return []
+            }
+
+            let array: [[String: Any]] = string.lintArray()
             let data: Data = try JSONSerialization.data(withJSONObject: array, options: [])
-            let lints: [Lint] = try JSONDecoder().decode([Lint].self, from: data).filter { $0.level == level && $0.code != 1_071 } // https://github.com/koalaman/shellcheck/wiki/SC1071
+            let lints: [Lint] = try JSONDecoder().decode([Lint].self, from: data).filter { $0.level == level }
             return lints
         } catch {
             PrettyPrint.print(error.localizedDescription)
