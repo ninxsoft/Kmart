@@ -10,54 +10,103 @@ import Yams
 
 // swiftlint:disable:next type_body_length
 struct Reports {
+    /// buildings not linked
     var buildingsNotLinked: [Building] = []
+    /// categories not linked
     var categoriesNotLinked: [Category] = []
+    /// departments not linked
     var departmentsNotLinked: [Department] = []
+    /// ebooks no scope
     var eBooksNoScope: [EBook] = []
+    // ibeacons not linked
     var iBeaconsNotLinked: [IBeacon] = []
+    /// mac advanceds searches no criteria
     var macAdvancedSearchesNoCriteria: [MacAdvancedSearch] = []
+    /// mac advanced searches invalid criteria
     var macAdvancedSearchesInvalidCriteria: [MacAdvancedSearch] = []
+    /// mac applications no scope
     var macApplicationsNoScope: [MacApplication] = []
+    /// mac configuration profiles no scope
     var macConfigurationProfilesNoScope: [MacConfigurationProfile] = []
+    /// mac devices duplicate names
     var macDevicesDuplicateNames: [MacDevice] = []
+    /// mac devices duplicate serial numbers
     var macDevicesDuplicateSerialNumbers: [MacDevice] = []
+    /// mac devices last check in
     var macDevicesLastCheckIn: [MacDevice] = []
+    /// mac devices last inventory
     var macDevicesLastInventory: [MacDevice] = []
+    /// mac devices unmanaged
     var macDevicesUnmanaged: [MacDevice] = []
+    /// mac directory bindings not linked
     var macDirectoryBindingsNotLinked: [MacDirectoryBinding] = []
+    /// mac disk encryptions not linked
     var macDiskEncryptionsNotLinked: [MacDiskEncryption] = []
+    /// mac dock items not linked
     var macDockItemsNotLinked: [MacDockItem] = []
+    /// mac extension attributes not linked
     var macExtensionAttributesNotLinked: [MacExtensionAttribute] = []
+    /// mac extension attributes disabled
     var macExtensionAttributesDisabled: [MacExtensionAttribute] = []
+    /// mac extension attributes linter errors
     var macExtensionAttributesLinterErrors: [MacExtensionAttribute] = []
+    /// mac extension attributes linter warnings
     var macExtensionAttributesLinterWarnings: [MacExtensionAttribute] = []
+    /// mac packages not linked
     var macPackagesNotLinked: [MacPackage] = []
+    /// mac policies no scope
     var macPoliciesNoScope: [MacPolicy] = []
+    /// mac policies disabled
     var macPoliciesDisabled: [MacPolicy] = []
+    /// mac policies no payload
     var macPoliciesNoPayload: [MacPolicy] = []
+    /// mac policies jamf remote
     var macPoliciesJamfRemote: [MacPolicy] = []
+    /// mac policies last executed
     var macPoliciesLastExecuted: [MacPolicy] = []
+    /// mac policies failed threshold
     var macPoliciesFailedThreshold: [MacPolicy] = []
+    /// mac printers not linked
     var macPrintersNotLinked: [MacPrinter] = []
+    /// mac restricted softwares no scope
     var macRestrictedSoftwaresNoScope: [MacRestrictedSoftware] = []
+    /// mac scripts not linked
     var macScriptsNotLinked: [MacScript] = []
+    /// mac scripts linter errors
     var macScriptsLinterErrors: [MacScript] = []
+    /// mac scripts linter warnings
     var macScriptsLinterWarnings: [MacScript] = []
+    /// mac smart groups not linked
     var macSmartGroupsNotLinked: [SmartGroup] = []
+    /// mac smart groups no criteria
     var macSmartGroupsNoCriteria: [SmartGroup] = []
+    /// mac static groups not linked
     var macStaticGroupsNotLinked: [StaticGroup] = []
+    /// mac static groups empty
     var macStaticGroupsEmpty: [StaticGroup] = []
+    /// mobile advanced searches no criteria
     var mobileAdvancedSearchesNoCriteria: [MobileAdvancedSearch] = []
+    /// mobile advanced searches invalid criteria
     var mobileAdvancedSearchesInvalidCriteria: [MobileAdvancedSearch] = []
+    /// mobile applications no scope
     var mobileApplicationsNoScope: [MobileApplication] = []
+    /// mobile configuration profiles no scope
     var mobileConfigurationProfilesNoScope: [MobileConfigurationProfile] = []
+    /// mobile devices last inventory
     var mobileDevicesLastInventory: [MobileDevice] = []
+    /// mobile devices unmanaged
     var mobileDevicesUnmanaged: [MobileDevice] = []
+    /// mobile extension attributes not linked
     var mobileExtensionAttributesNotLinked: [MobileExtensionAttribute] = []
+    /// mobile smart groups not linked
     var mobileSmartGroupsNotLinked: [SmartGroup] = []
+    /// mobile smart groups no criteria
     var mobileSmartGroupsNoCriteria: [SmartGroup] = []
+    /// mobile static groups not linked
     var mobileStaticGroupsNotLinked: [StaticGroup] = []
+    /// mobile static groups empty
     var mobileStaticGroupsEmpty: [StaticGroup] = []
+    /// network segments not linked
     var networkSegmentsNotLinked: [NetworkSegment] = []
 
     private func getDictionary(reports: [ReportType], using configuration: Configuration) -> [String: Any] {

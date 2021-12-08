@@ -8,7 +8,6 @@
 import Foundation
 
 struct MacDeviceHistory: Codable {
-    // swiftlint:disable:next identifier_name
     var id: Int = -1
     var macPolicyLogs: [MacPolicyLog] = []
 }

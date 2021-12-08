@@ -9,34 +9,63 @@ import Foundation
 
 // swiftlint:disable:next type_body_length
 struct Objects {
+    /// buildings
     var buildings: [Building] = []
+    /// categories
     var categories: [Category] = []
+    /// departments
     var departments: [Department] = []
+    /// ebooks
     var eBooks: [EBook] = []
+    /// ibeacons
     var iBeacons: [IBeacon] = []
+    /// network segments
     var networkSegments: [NetworkSegment] = []
+    /// mac advanced searches
     var macAdvancedSearches: [MacAdvancedSearch] = []
+    /// mac applications
     var macApplications: [MacApplication] = []
+    /// mac configuration profiles
     var macConfigurationProfiles: [MacConfigurationProfile] = []
+    /// mac devices
     var macDevices: [MacDevice] = []
+    /// mac devices history
     var macDevicesHistory: [MacDeviceHistory] = []
+    /// mac directory bindings
     var macDirectoryBindings: [MacDirectoryBinding] = []
+    /// mac disk encrpytions
     var macDiskEncryptions: [MacDiskEncryption] = []
+    /// mac dock items
     var macDockItems: [MacDockItem] = []
+    /// mac extension attributes
     var macExtensionAttributes: [MacExtensionAttribute] = []
+    /// mac packages
     var macPackages: [MacPackage] = []
+    /// mac policies
     var macPolicies: [MacPolicy] = []
+    /// mac printers
     var macPrinters: [MacPrinter] = []
+    /// mac restricted softwares
     var macRestrictedSoftwares: [MacRestrictedSoftware] = []
+    /// mac scripts
     var macScripts: [MacScript] = []
+    /// mac smart groups
     var macSmartGroups: [SmartGroup] = []
+    /// mac static groups
     var macStaticGroups: [StaticGroup] = []
+    /// mobile advanced searches
     var mobileAdvancedSearches: [MobileAdvancedSearch] = []
+    /// mobile applications
     var mobileApplications: [MobileApplication] = []
+    /// mobile configuration profiles
     var mobileConfigurationProfiles: [MobileConfigurationProfile] = []
+    /// mobile devices
     var mobileDevices: [MobileDevice] = []
+    /// mobile extension attributes
     var mobileExtensionAttributes: [MobileExtensionAttribute] = []
+    /// mobile smart groups
     var mobileSmartGroups: [SmartGroup] = []
+    /// mobile static groups
     var mobileStaticGroups: [StaticGroup] = []
 
     mutating func insert(_ dictionary: [String: Any], for endpoint: Endpoint) {
