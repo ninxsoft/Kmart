@@ -14,6 +14,12 @@
 		3967934F26D5F7F500DC2D2D /* SlackConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395DE66326CF73DE004FEF25 /* SlackConfiguration.swift */; };
 		39708B432767223000DD5C3F /* ConfigurationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39708B422767223000DD5C3F /* ConfigurationType.swift */; };
 		39708B452767224200DD5C3F /* ConfigurationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39708B442767224200DD5C3F /* ConfigurationError.swift */; };
+		39708B482767309E00DD5C3F /* ReportOptionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B4F64426195B12006F894F /* ReportOptionType.swift */; };
+		39708B49276730B100DD5C3F /* ScriptType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 393356C326FAF267009A6DAA /* ScriptType.swift */; };
+		39708B4A276730C100DD5C3F /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E2539E25D8CC8000931A0B /* Endpoint.swift */; };
+		39708B4B276730CB00DD5C3F /* ReportType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E253CA25D8E74100931A0B /* ReportType.swift */; };
+		39708B4C276730D500DD5C3F /* OutputType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5756B95325DFA9DB001215DF /* OutputType.swift */; };
+		39708B4D276730E100DD5C3F /* ConfigurationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39708B422767223000DD5C3F /* ConfigurationType.swift */; };
 		573CD6E52611E62700CE156E /* Ink in Frameworks */ = {isa = PBXBuildFile; productRef = 573CD6E42611E62700CE156E /* Ink */; };
 		5743A36A25EBAD4A00919383 /* KMARTMobileTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5743A36925EBAD4A00919383 /* KMARTMobileTests.swift */; };
 		5743A37025EBB1D200919383 /* KMARTCommonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5743A36F25EBB1D200919383 /* KMARTCommonTests.swift */; };
@@ -532,18 +538,21 @@
 			files = (
 				578B888A25E65FA9003A89BF /* MacPackage.swift in Sources */,
 				578B88A425E65FA9003A89BF /* MacDockItem.swift in Sources */,
+				39708B482767309E00DD5C3F /* ReportOptionType.swift in Sources */,
 				578B88A025E65FA9003A89BF /* MacPolicy.swift in Sources */,
 				578B88B225E65FC9003A89BF /* Reporter.swift in Sources */,
 				578B888B25E65FA9003A89BF /* MacPolicyLog.swift in Sources */,
 				578B889925E65FA9003A89BF /* MacConfigurationProfile.swift in Sources */,
 				57B4F66026195C39006F894F /* Markdown.swift in Sources */,
 				578B888925E65FA9003A89BF /* Criterion.swift in Sources */,
+				39708B4A276730C100DD5C3F /* Endpoint.swift in Sources */,
 				578B88E925E66256003A89BF /* Configuration.swift in Sources */,
 				578B889E25E65FA9003A89BF /* MobileConfigurationProfile.swift in Sources */,
 				578B885925E658E9003A89BF /* KMARTMacTests.swift in Sources */,
 				578B88A525E65FA9003A89BF /* MobileDevice.swift in Sources */,
 				578B889525E65FA9003A89BF /* MacDeviceHistory.swift in Sources */,
 				578B889A25E65FA9003A89BF /* MobileExclusions.swift in Sources */,
+				39708B4C276730D500DD5C3F /* OutputType.swift in Sources */,
 				578B889025E65FA9003A89BF /* MobileExtensionAttribute.swift in Sources */,
 				578B888525E65FA9003A89BF /* StaticGroup.swift in Sources */,
 				578B888E25E65FA9003A89BF /* IBeacon.swift in Sources */,
@@ -565,10 +574,13 @@
 				578B889125E65FA9003A89BF /* SmartGroup.swift in Sources */,
 				578B88C525E66196003A89BF /* Objects.swift in Sources */,
 				578B889325E65FA9003A89BF /* Limitations.swift in Sources */,
+				39708B49276730B100DD5C3F /* ScriptType.swift in Sources */,
 				578B889C25E65FA9003A89BF /* MacExtensionAttribute.swift in Sources */,
 				578B889825E65FA9003A89BF /* MacDirectoryBinding.swift in Sources */,
 				57B4F65D26195C35006F894F /* EmailConfiguration.swift in Sources */,
+				39708B4B276730CB00DD5C3F /* ReportType.swift in Sources */,
 				578B889425E65FA9003A89BF /* MacRestrictedSoftware.swift in Sources */,
+				39708B4D276730E100DD5C3F /* ConfigurationType.swift in Sources */,
 				578B88CB25E661A4003A89BF /* PrettyPrint.swift in Sources */,
 				578B88B825E65FCE003A89BF /* Double+Extension.swift in Sources */,
 				578B88A125E65FA9003A89BF /* MobileTargets.swift in Sources */,
@@ -744,7 +756,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -799,7 +811,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = macosx;
@@ -815,7 +827,7 @@
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 7K3HVCLV7Z;
 				ENABLE_HARDENED_RUNTIME = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ninxsoft.kmart;
 				PRODUCT_NAME = kmart;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -830,7 +842,7 @@
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 7K3HVCLV7Z;
 				ENABLE_HARDENED_RUNTIME = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ninxsoft.kmart;
 				PRODUCT_NAME = kmart;
 				PROVISIONING_PROFILE_SPECIFIER = "";

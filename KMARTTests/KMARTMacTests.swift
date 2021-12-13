@@ -13,13 +13,13 @@ class KMARTMacTests: XCTestCase {
 
     func testMacAdvancedSearchesCriteria() throws {
         let macAdvancedSearches: [MacAdvancedSearch] = [MacAdvancedSearch(id: 1)]
-        let results: [MacAdvancedSearch] = ReporterMac.macAdvancedSearchesNoCriteria(macAdvancedSearches)
+        let results: [MacAdvancedSearch] = Reporter.macAdvancedSearchesNoCriteria(macAdvancedSearches)
         XCTAssertFalse(results.isEmpty)
     }
 
     func testMacAdvancedSearchesNoCriteria() throws {
         let macAdvancedSearches: [MacAdvancedSearch] = [MacAdvancedSearch(id: 1, criteria: [Criterion(name: "Name", type: "Type", value: "Value")])]
-        let results: [MacAdvancedSearch] = ReporterMac.macAdvancedSearchesNoCriteria(macAdvancedSearches)
+        let results: [MacAdvancedSearch] = Reporter.macAdvancedSearchesNoCriteria(macAdvancedSearches)
         XCTAssertTrue(results.isEmpty)
     }
 
@@ -29,7 +29,7 @@ class KMARTMacTests: XCTestCase {
         let macSmartGroups: [SmartGroup] = [SmartGroup(id: 1, name: "Smart Group")]
         let macStaticGroups: [StaticGroup] = [StaticGroup(id: 2, name: "Static Group")]
         let objects: Objects = Objects(macAdvancedSearches: macAdvancedSearches, macSmartGroups: macSmartGroups, macStaticGroups: macStaticGroups)
-        let results: [MacAdvancedSearch] = ReporterMac.macAdvancedSearchesInvalidCriteria(objects)
+        let results: [MacAdvancedSearch] = Reporter.macAdvancedSearchesInvalidCriteria(objects)
         XCTAssertTrue(results.isEmpty)
     }
 
@@ -39,7 +39,7 @@ class KMARTMacTests: XCTestCase {
         let macSmartGroups: [SmartGroup] = [SmartGroup(id: 1, name: "Smart Group")]
         let macStaticGroups: [StaticGroup] = [StaticGroup(id: 2, name: "Static Group")]
         let objects: Objects = Objects(macAdvancedSearches: macAdvancedSearches, macSmartGroups: macSmartGroups, macStaticGroups: macStaticGroups)
-        let results: [MacAdvancedSearch] = ReporterMac.macAdvancedSearchesInvalidCriteria(objects)
+        let results: [MacAdvancedSearch] = Reporter.macAdvancedSearchesInvalidCriteria(objects)
         XCTAssertFalse(results.isEmpty)
     }
 
@@ -63,13 +63,13 @@ class KMARTMacTests: XCTestCase {
             MacApplication(id: 16, limitations: Limitations(networkSegments: [1])),
             MacApplication(id: 17, limitations: Limitations(iBeacons: [1]))
         ]
-        let results: [MacApplication] = ReporterMac.macApplicationsNoScope(macApplications)
+        let results: [MacApplication] = Reporter.macApplicationsNoScope(macApplications)
         XCTAssertTrue(results.isEmpty)
     }
 
     func testMacApplicationsNoScope() throws {
         let macApplications: [MacApplication] = [MacApplication(id: 1)]
-        let results: [MacApplication] = ReporterMac.macApplicationsNoScope(macApplications)
+        let results: [MacApplication] = Reporter.macApplicationsNoScope(macApplications)
         XCTAssertFalse(results.isEmpty)
     }
 
@@ -93,13 +93,13 @@ class KMARTMacTests: XCTestCase {
             MacConfigurationProfile(id: 16, limitations: Limitations(networkSegments: [1])),
             MacConfigurationProfile(id: 17, limitations: Limitations(iBeacons: [1]))
         ]
-        let results: [MacConfigurationProfile] = ReporterMac.macConfigurationProfilesNoScope(macConfigurationProfiles)
+        let results: [MacConfigurationProfile] = Reporter.macConfigurationProfilesNoScope(macConfigurationProfiles)
         XCTAssertTrue(results.isEmpty)
     }
 
     func testMacConfigurationProfilesNoScope() throws {
         let macConfigurationProfiles: [MacConfigurationProfile] = [MacConfigurationProfile(id: 1)]
-        let results: [MacConfigurationProfile] = ReporterMac.macConfigurationProfilesNoScope(macConfigurationProfiles)
+        let results: [MacConfigurationProfile] = Reporter.macConfigurationProfilesNoScope(macConfigurationProfiles)
         XCTAssertFalse(results.isEmpty)
     }
 
@@ -108,7 +108,7 @@ class KMARTMacTests: XCTestCase {
             MacDevice(id: 1, name: "Name"),
             MacDevice(id: 2, name: "Name")
         ]
-        let results: [MacDevice] = ReporterMac.macDevicesDuplicateNames(macDevices)
+        let results: [MacDevice] = Reporter.macDevicesDuplicateNames(macDevices)
         XCTAssertFalse(results.isEmpty)
     }
 
@@ -117,7 +117,7 @@ class KMARTMacTests: XCTestCase {
             MacDevice(id: 1, name: "Unique Name #1"),
             MacDevice(id: 2, name: "Unique Name #2")
         ]
-        let results: [MacDevice] = ReporterMac.macDevicesDuplicateNames(macDevices)
+        let results: [MacDevice] = Reporter.macDevicesDuplicateNames(macDevices)
         XCTAssertTrue(results.isEmpty)
     }
 
@@ -126,7 +126,7 @@ class KMARTMacTests: XCTestCase {
             MacDevice(id: 1, serialNumber: "Serial Number"),
             MacDevice(id: 2, serialNumber: "Serial Number")
         ]
-        let results: [MacDevice] = ReporterMac.macDevicesDuplicateSerialNumbers(macDevices)
+        let results: [MacDevice] = Reporter.macDevicesDuplicateSerialNumbers(macDevices)
         XCTAssertFalse(results.isEmpty)
     }
 
@@ -135,7 +135,7 @@ class KMARTMacTests: XCTestCase {
             MacDevice(id: 1, serialNumber: "Unique Serial Number #1"),
             MacDevice(id: 2, serialNumber: "Unique Serial Number #2")
         ]
-        let results: [MacDevice] = ReporterMac.macDevicesDuplicateSerialNumbers(macDevices)
+        let results: [MacDevice] = Reporter.macDevicesDuplicateSerialNumbers(macDevices)
         XCTAssertTrue(results.isEmpty)
     }
 
@@ -157,7 +157,7 @@ class KMARTMacTests: XCTestCase {
             MacDevice(id: 6, lastCheckIn: fortyFiveDays.timeIntervalSince1970, managed: false)
         ]
         let options: [ReportOptionType: Int] = [.macDevicesLastCheckIn: 30]
-        let results: [MacDevice] = ReporterMac.macDevicesLastCheckIn(macDevices, options: options)
+        let results: [MacDevice] = Reporter.macDevicesLastCheckIn(macDevices, options: options)
         XCTAssertTrue(results.count == 2)
         XCTAssertTrue(results[0].id == 2)
         XCTAssertTrue(results[1].id == 3)
@@ -181,7 +181,7 @@ class KMARTMacTests: XCTestCase {
             MacDevice(id: 6, lastInventory: fortyFiveDays.timeIntervalSince1970, managed: false)
         ]
         let options: [ReportOptionType: Int] = [.macDevicesLastInventory: 30]
-        let results: [MacDevice] = ReporterMac.macDevicesLastInventory(macDevices, options: options)
+        let results: [MacDevice] = Reporter.macDevicesLastInventory(macDevices, options: options)
         XCTAssertTrue(results.count == 2)
         XCTAssertTrue(results[0].id == 2)
         XCTAssertTrue(results[1].id == 3)
@@ -192,7 +192,7 @@ class KMARTMacTests: XCTestCase {
             MacDevice(id: 1, managed: true),
             MacDevice(id: 2, managed: true)
         ]
-        let results: [MacDevice] = ReporterMac.macDevicesUnmanaged(macDevices)
+        let results: [MacDevice] = Reporter.macDevicesUnmanaged(macDevices)
         XCTAssertTrue(results.isEmpty)
     }
 
@@ -201,7 +201,7 @@ class KMARTMacTests: XCTestCase {
             MacDevice(id: 1, managed: false),
             MacDevice(id: 2, managed: false)
         ]
-        let results: [MacDevice] = ReporterMac.macDevicesUnmanaged(macDevices)
+        let results: [MacDevice] = Reporter.macDevicesUnmanaged(macDevices)
         XCTAssertFalse(results.isEmpty)
     }
 
@@ -209,7 +209,7 @@ class KMARTMacTests: XCTestCase {
         let macDirectoryBindings: [MacDirectoryBinding] = [MacDirectoryBinding(id: 1)]
         let macPolicies: [MacPolicy] = [MacPolicy(id: 1, directoryBindings: [1])]
         let objects: Objects = Objects(macDirectoryBindings: macDirectoryBindings, macPolicies: macPolicies)
-        let results: [MacDirectoryBinding] = ReporterMac.macDirectoryBindingsNotLinked(objects)
+        let results: [MacDirectoryBinding] = Reporter.macDirectoryBindingsNotLinked(objects)
         XCTAssertTrue(results.isEmpty)
     }
 
@@ -217,7 +217,7 @@ class KMARTMacTests: XCTestCase {
         let macDirectoryBindings: [MacDirectoryBinding] = [MacDirectoryBinding(id: 1)]
         let macPolicies: [MacPolicy] = [MacPolicy(id: 1, directoryBindings: [2])]
         let objects: Objects = Objects(macDirectoryBindings: macDirectoryBindings, macPolicies: macPolicies)
-        let results: [MacDirectoryBinding] = ReporterMac.macDirectoryBindingsNotLinked(objects)
+        let results: [MacDirectoryBinding] = Reporter.macDirectoryBindingsNotLinked(objects)
         XCTAssertFalse(results.isEmpty)
     }
 
@@ -225,7 +225,7 @@ class KMARTMacTests: XCTestCase {
         let macDiskEncryptions: [MacDiskEncryption] = [MacDiskEncryption(id: 1)]
         let macPolicies: [MacPolicy] = [MacPolicy(id: 1, diskEncryption: 1)]
         let objects: Objects = Objects(macDiskEncryptions: macDiskEncryptions, macPolicies: macPolicies)
-        let results: [MacDiskEncryption] = ReporterMac.macDiskEncryptionsNotLinked(objects)
+        let results: [MacDiskEncryption] = Reporter.macDiskEncryptionsNotLinked(objects)
         XCTAssertTrue(results.isEmpty)
     }
 
@@ -233,7 +233,7 @@ class KMARTMacTests: XCTestCase {
         let macDiskEncryptions: [MacDiskEncryption] = [MacDiskEncryption(id: 1)]
         let macPolicies: [MacPolicy] = [MacPolicy(id: 1, diskEncryption: 2)]
         let objects: Objects = Objects(macDiskEncryptions: macDiskEncryptions, macPolicies: macPolicies)
-        let results: [MacDiskEncryption] = ReporterMac.macDiskEncryptionsNotLinked(objects)
+        let results: [MacDiskEncryption] = Reporter.macDiskEncryptionsNotLinked(objects)
         XCTAssertFalse(results.isEmpty)
     }
 
@@ -241,7 +241,7 @@ class KMARTMacTests: XCTestCase {
         let macDockItems: [MacDockItem] = [MacDockItem(id: 1)]
         let macPolicies: [MacPolicy] = [MacPolicy(id: 1, dockItems: [1])]
         let objects: Objects = Objects(macDockItems: macDockItems, macPolicies: macPolicies)
-        let results: [MacDockItem] = ReporterMac.macDockItemsNotLinked(objects)
+        let results: [MacDockItem] = Reporter.macDockItemsNotLinked(objects)
         XCTAssertTrue(results.isEmpty)
     }
 
@@ -249,7 +249,7 @@ class KMARTMacTests: XCTestCase {
         let macDockItems: [MacDockItem] = [MacDockItem(id: 1)]
         let macPolicies: [MacPolicy] = [MacPolicy(id: 1, dockItems: [2])]
         let objects: Objects = Objects(macDockItems: macDockItems, macPolicies: macPolicies)
-        let results: [MacDockItem] = ReporterMac.macDockItemsNotLinked(objects)
+        let results: [MacDockItem] = Reporter.macDockItemsNotLinked(objects)
         XCTAssertFalse(results.isEmpty)
     }
 
@@ -258,7 +258,7 @@ class KMARTMacTests: XCTestCase {
         let macExtensionAttributes: [MacExtensionAttribute] = [MacExtensionAttribute(id: 1, name: "Name")]
         let macSmartGroups: [SmartGroup] = [SmartGroup(id: 1, criteria: [Criterion(name: "Name")])]
         let objects: Objects = Objects(macAdvancedSearches: macAdvancedSearches, macExtensionAttributes: macExtensionAttributes, macSmartGroups: macSmartGroups)
-        let results: [MacExtensionAttribute] = ReporterMac.macExtensionAttributesNotLinked(objects)
+        let results: [MacExtensionAttribute] = Reporter.macExtensionAttributesNotLinked(objects)
         XCTAssertTrue(results.isEmpty)
     }
 
@@ -267,7 +267,7 @@ class KMARTMacTests: XCTestCase {
         let macExtensionAttributes: [MacExtensionAttribute] = [MacExtensionAttribute(id: 1, name: "Name")]
         let macSmartGroups: [SmartGroup] = [SmartGroup(id: 1, criteria: [Criterion()])]
         let objects: Objects = Objects(macAdvancedSearches: macAdvancedSearches, macExtensionAttributes: macExtensionAttributes, macSmartGroups: macSmartGroups)
-        let results: [MacExtensionAttribute] = ReporterMac.macExtensionAttributesNotLinked(objects)
+        let results: [MacExtensionAttribute] = Reporter.macExtensionAttributesNotLinked(objects)
         XCTAssertFalse(results.isEmpty)
     }
 
@@ -275,7 +275,7 @@ class KMARTMacTests: XCTestCase {
         let macExtensionAttributeScript: MacExtensionAttribute = MacExtensionAttribute(id: 1, enabled: true, inputType: "Script")
         let macExtensionAttributeLDAP: MacExtensionAttribute = MacExtensionAttribute(id: 2, enabled: true, inputType: "LDAP")
         let macExtensionAttributes: [MacExtensionAttribute] = [macExtensionAttributeScript, macExtensionAttributeLDAP]
-        let results: [MacExtensionAttribute] = ReporterMac.macExtensionAttributesDisabled(macExtensionAttributes)
+        let results: [MacExtensionAttribute] = Reporter.macExtensionAttributesDisabled(macExtensionAttributes)
         XCTAssertTrue(results.isEmpty)
     }
 
@@ -283,7 +283,7 @@ class KMARTMacTests: XCTestCase {
         let macExtensionAttributeScript: MacExtensionAttribute = MacExtensionAttribute(id: 1, enabled: false, inputType: "Script")
         let macExtensionAttributeLDAP: MacExtensionAttribute = MacExtensionAttribute(id: 2, enabled: false, inputType: "LDAP")
         let macExtensionAttributes: [MacExtensionAttribute] = [macExtensionAttributeScript, macExtensionAttributeLDAP]
-        let results: [MacExtensionAttribute] = ReporterMac.macExtensionAttributesDisabled(macExtensionAttributes)
+        let results: [MacExtensionAttribute] = Reporter.macExtensionAttributesDisabled(macExtensionAttributes)
         XCTAssertEqual(results.count, 1)
     }
 
@@ -299,7 +299,7 @@ class KMARTMacTests: XCTestCase {
 
         """
         let macExtensionAttribute: MacExtensionAttribute = MacExtensionAttribute(id: 1, inputType: "script", scriptContents: script)
-        let results: [MacExtensionAttribute] = ReporterMac.macExtensionAttributesLinterErrors([macExtensionAttribute])
+        let results: [MacExtensionAttribute] = Reporter.macExtensionAttributesLinterErrors([macExtensionAttribute])
         XCTAssertTrue(results.isEmpty)
     }
 
@@ -314,7 +314,7 @@ class KMARTMacTests: XCTestCase {
 
         """
         let macExtensionAttribute: MacExtensionAttribute = MacExtensionAttribute(id: 1, inputType: "script", scriptContents: script)
-        let results: [MacExtensionAttribute] = ReporterMac.macExtensionAttributesLinterErrors([macExtensionAttribute])
+        let results: [MacExtensionAttribute] = Reporter.macExtensionAttributesLinterErrors([macExtensionAttribute])
         XCTAssertFalse(results.isEmpty)
     }
 
@@ -329,7 +329,7 @@ class KMARTMacTests: XCTestCase {
 
         """
         let macExtensionAttribute: MacExtensionAttribute = MacExtensionAttribute(id: 1, inputType: "script", scriptContents: script)
-        let results: [MacExtensionAttribute] = ReporterMac.macExtensionAttributesLinterWarnings([macExtensionAttribute])
+        let results: [MacExtensionAttribute] = Reporter.macExtensionAttributesLinterWarnings([macExtensionAttribute])
         XCTAssertTrue(results.isEmpty)
     }
 
@@ -344,7 +344,7 @@ class KMARTMacTests: XCTestCase {
 
         """
         let macExtensionAttribute: MacExtensionAttribute = MacExtensionAttribute(id: 1, inputType: "script", scriptContents: script)
-        let results: [MacExtensionAttribute] = ReporterMac.macExtensionAttributesLinterWarnings([macExtensionAttribute])
+        let results: [MacExtensionAttribute] = Reporter.macExtensionAttributesLinterWarnings([macExtensionAttribute])
         XCTAssertFalse(results.isEmpty)
     }
 
@@ -352,7 +352,7 @@ class KMARTMacTests: XCTestCase {
         let macPackages: [MacPackage] = [MacPackage(id: 1)]
         let macPolicies: [MacPolicy] = [MacPolicy(id: 1, packages: [1])]
         let objects: Objects = Objects(macPackages: macPackages, macPolicies: macPolicies)
-        let results: [MacPackage] = ReporterMac.macPackagesNotLinked(objects)
+        let results: [MacPackage] = Reporter.macPackagesNotLinked(objects)
         XCTAssertTrue(results.isEmpty)
     }
 
@@ -360,7 +360,7 @@ class KMARTMacTests: XCTestCase {
         let macPackages: [MacPackage] = [MacPackage(id: 1)]
         let macPolicies: [MacPolicy] = [MacPolicy(id: 1, packages: [2])]
         let objects: Objects = Objects(macPackages: macPackages, macPolicies: macPolicies)
-        let results: [MacPackage] = ReporterMac.macPackagesNotLinked(objects)
+        let results: [MacPackage] = Reporter.macPackagesNotLinked(objects)
         XCTAssertFalse(results.isEmpty)
     }
 
@@ -384,25 +384,25 @@ class KMARTMacTests: XCTestCase {
             MacPolicy(id: 16, limitations: Limitations(networkSegments: [1])),
             MacPolicy(id: 17, limitations: Limitations(iBeacons: [1]))
         ]
-        let results: [MacPolicy] = ReporterMac.macPoliciesNoScope(macPolicies)
+        let results: [MacPolicy] = Reporter.macPoliciesNoScope(macPolicies)
         XCTAssertTrue(results.isEmpty)
     }
 
     func testMacPolicyNoScope() throws {
         let macPolicies: [MacPolicy] = [MacPolicy(id: 1)]
-        let results: [MacPolicy] = ReporterMac.macPoliciesNoScope(macPolicies)
+        let results: [MacPolicy] = Reporter.macPoliciesNoScope(macPolicies)
         XCTAssertFalse(results.isEmpty)
     }
 
     func testMacPoliciesEnabled() throws {
         let macPolicies: [MacPolicy] = [MacPolicy(id: 1, enabled: true)]
-        let results: [MacPolicy] = ReporterMac.macPoliciesDisabled(macPolicies)
+        let results: [MacPolicy] = Reporter.macPoliciesDisabled(macPolicies)
         XCTAssertTrue(results.isEmpty)
     }
 
     func testMacPoliciesDisabled() throws {
         let macPolicies: [MacPolicy] = [MacPolicy(id: 1)]
-        let results: [MacPolicy] = ReporterMac.macPoliciesDisabled(macPolicies)
+        let results: [MacPolicy] = Reporter.macPoliciesDisabled(macPolicies)
         XCTAssertFalse(results.isEmpty)
     }
 
@@ -421,25 +421,25 @@ class KMARTMacTests: XCTestCase {
             MacPolicy(id: 11, restart: true),
             MacPolicy(id: 12, softwareUpdates: true)
         ]
-        let results: [MacPolicy] = ReporterMac.macPoliciesNoPayload(macPolicies)
+        let results: [MacPolicy] = Reporter.macPoliciesNoPayload(macPolicies)
         XCTAssertTrue(results.isEmpty)
     }
 
     func testMacPoliciesNoPayload() throws {
         let macPolicies: [MacPolicy] = [MacPolicy(id: 1)]
-        let results: [MacPolicy] = ReporterMac.macPoliciesNoPayload(macPolicies)
+        let results: [MacPolicy] = Reporter.macPoliciesNoPayload(macPolicies)
         XCTAssertFalse(results.isEmpty)
     }
 
     func testMacPoliciesNotJamfRemote() throws {
         let macPolicies: [MacPolicy] = [MacPolicy(id: 1, name: "Test Policy")]
-        let results: [MacPolicy] = ReporterMac.macPoliciesJamfRemote(macPolicies)
+        let results: [MacPolicy] = Reporter.macPoliciesJamfRemote(macPolicies)
         XCTAssertTrue(results.isEmpty)
     }
 
     func testMacPoliciesJamfRemote() throws {
         let macPolicies: [MacPolicy] = [MacPolicy(id: 1, name: "2021-04-20 at 04:20 PM | ninxsoft | 420 Computers")]
-        let results: [MacPolicy] = ReporterMac.macPoliciesJamfRemote(macPolicies)
+        let results: [MacPolicy] = Reporter.macPoliciesJamfRemote(macPolicies)
         XCTAssertFalse(results.isEmpty)
     }
 
@@ -460,7 +460,7 @@ class KMARTMacTests: XCTestCase {
         let macPolicies: [MacPolicy] = [MacPolicy(id: 1), MacPolicy(id: 2), MacPolicy(id: 3)]
         let objects: Objects = Objects(macDevicesHistory: macDevicesHistory, macPolicies: macPolicies)
         let options: [ReportOptionType: Int] = [.macPoliciesLastExecuted: 30]
-        let results: [MacPolicy] = ReporterMac.macPoliciesLastExecuted(objects, options: options)
+        let results: [MacPolicy] = Reporter.macPoliciesLastExecuted(objects, options: options)
         XCTAssertTrue(results.count == 2)
         XCTAssertTrue(results[0].id == 2)
         XCTAssertTrue(results[1].id == 3)
@@ -487,7 +487,7 @@ class KMARTMacTests: XCTestCase {
         let macPolicies: [MacPolicy] = [MacPolicy(id: 1), MacPolicy(id: 2), MacPolicy(id: 3)]
         let objects: Objects = Objects(macDevicesHistory: macDevicesHistory, macPolicies: macPolicies)
         let options: [ReportOptionType: Int] = [.macPoliciesFailedThreshold: 20]
-        let results: [MacPolicy] = ReporterMac.macPoliciesFailedThreshold(objects, options: options)
+        let results: [MacPolicy] = Reporter.macPoliciesFailedThreshold(objects, options: options)
         XCTAssertTrue(results.count == 2)
         XCTAssertTrue(results[0].id == 2)
         XCTAssertTrue(results[1].id == 3)
@@ -497,7 +497,7 @@ class KMARTMacTests: XCTestCase {
         let macPrinters: [MacPrinter] = [MacPrinter(id: 1)]
         let macPolicies: [MacPolicy] = [MacPolicy(id: 1, printers: [1])]
         let objects: Objects = Objects(macPolicies: macPolicies, macPrinters: macPrinters)
-        let results: [MacPrinter] = ReporterMac.macPrintersNotLinked(objects)
+        let results: [MacPrinter] = Reporter.macPrintersNotLinked(objects)
         XCTAssertTrue(results.isEmpty)
     }
 
@@ -505,7 +505,7 @@ class KMARTMacTests: XCTestCase {
         let macPrinters: [MacPrinter] = [MacPrinter(id: 1)]
         let macPolicies: [MacPolicy] = [MacPolicy(id: 1, printers: [2])]
         let objects: Objects = Objects(macPolicies: macPolicies, macPrinters: macPrinters)
-        let results: [MacPrinter] = ReporterMac.macPrintersNotLinked(objects)
+        let results: [MacPrinter] = Reporter.macPrintersNotLinked(objects)
         XCTAssertFalse(results.isEmpty)
     }
 
@@ -525,13 +525,13 @@ class KMARTMacTests: XCTestCase {
             MacRestrictedSoftware(id: 12, macExclusions: MacExclusions(networkSegments: [1])),
             MacRestrictedSoftware(id: 13, macExclusions: MacExclusions(iBeacons: [1]))
         ]
-        let results: [MacRestrictedSoftware] = ReporterMac.macRestrictedSoftwaresNoScope(macRestrictedSoftwares)
+        let results: [MacRestrictedSoftware] = Reporter.macRestrictedSoftwaresNoScope(macRestrictedSoftwares)
         XCTAssertTrue(results.isEmpty)
     }
 
     func testMacRestrictedSoftwaresNoScope() throws {
         let macRestrictedSoftwares: [MacRestrictedSoftware] = [MacRestrictedSoftware(id: 1)]
-        let results: [MacRestrictedSoftware] = ReporterMac.macRestrictedSoftwaresNoScope(macRestrictedSoftwares)
+        let results: [MacRestrictedSoftware] = Reporter.macRestrictedSoftwaresNoScope(macRestrictedSoftwares)
         XCTAssertFalse(results.isEmpty)
     }
 
@@ -539,7 +539,7 @@ class KMARTMacTests: XCTestCase {
         let macScripts: [MacScript] = [MacScript(id: 1)]
         let macPolicies: [MacPolicy] = [MacPolicy(id: 1, scripts: [1])]
         let objects: Objects = Objects(macPolicies: macPolicies, macScripts: macScripts)
-        let results: [MacScript] = ReporterMac.macScriptsNotLinked(objects)
+        let results: [MacScript] = Reporter.macScriptsNotLinked(objects)
         XCTAssertTrue(results.isEmpty)
     }
 
@@ -547,7 +547,7 @@ class KMARTMacTests: XCTestCase {
         let macScripts: [MacScript] = [MacScript(id: 1)]
         let macPolicies: [MacPolicy] = [MacPolicy(id: 1, scripts: [2])]
         let objects: Objects = Objects(macPolicies: macPolicies, macScripts: macScripts)
-        let results: [MacScript] = ReporterMac.macScriptsNotLinked(objects)
+        let results: [MacScript] = Reporter.macScriptsNotLinked(objects)
         XCTAssertFalse(results.isEmpty)
     }
 
@@ -563,7 +563,7 @@ class KMARTMacTests: XCTestCase {
 
         """
         let macScript: MacScript = MacScript(id: 1, scriptContents: script)
-        let results: [MacScript] = ReporterMac.macScriptsLinterErrors([macScript])
+        let results: [MacScript] = Reporter.macScriptsLinterErrors([macScript])
         XCTAssertTrue(results.isEmpty)
     }
 
@@ -578,7 +578,7 @@ class KMARTMacTests: XCTestCase {
 
         """
         let macScript: MacScript = MacScript(id: 1, scriptContents: script)
-        let results: [MacScript] = ReporterMac.macScriptsLinterErrors([macScript])
+        let results: [MacScript] = Reporter.macScriptsLinterErrors([macScript])
         XCTAssertFalse(results.isEmpty)
     }
 
@@ -593,7 +593,7 @@ class KMARTMacTests: XCTestCase {
 
         """
         let macScript: MacScript = MacScript(id: 1, scriptContents: script)
-        let results: [MacScript] = ReporterMac.macScriptsLinterWarnings([macScript])
+        let results: [MacScript] = Reporter.macScriptsLinterWarnings([macScript])
         XCTAssertTrue(results.isEmpty)
     }
 
@@ -608,7 +608,7 @@ class KMARTMacTests: XCTestCase {
 
         """
         let macScript: MacScript = MacScript(id: 1, scriptContents: script)
-        let results: [MacScript] = ReporterMac.macScriptsLinterWarnings([macScript])
+        let results: [MacScript] = Reporter.macScriptsLinterWarnings([macScript])
         XCTAssertFalse(results.isEmpty)
     }
 
@@ -628,7 +628,7 @@ class KMARTMacTests: XCTestCase {
             macRestrictedSoftwares: macRestrictedSoftwares,
             macSmartGroups: macSmartGroups
         )
-        let results: [SmartGroup] = ReporterMac.macSmartGroupsNotLinked(objects)
+        let results: [SmartGroup] = Reporter.macSmartGroupsNotLinked(objects)
         XCTAssertTrue(results.isEmpty)
     }
 
@@ -648,19 +648,19 @@ class KMARTMacTests: XCTestCase {
             macRestrictedSoftwares: macRestrictedSoftwares,
             macSmartGroups: macSmartGroups
         )
-        let results: [SmartGroup] = ReporterMac.macSmartGroupsNotLinked(objects)
+        let results: [SmartGroup] = Reporter.macSmartGroupsNotLinked(objects)
         XCTAssertFalse(results.isEmpty)
     }
 
     func testMacSmartGroupsCriteria() throws {
         let macSmartGroups: [SmartGroup] = [SmartGroup(id: 1)]
-        let results: [SmartGroup] = ReporterMac.macSmartGroupsNoCriteria(macSmartGroups)
+        let results: [SmartGroup] = Reporter.macSmartGroupsNoCriteria(macSmartGroups)
         XCTAssertFalse(results.isEmpty)
     }
 
     func testMacSmartGroupsNoCriteria() throws {
         let macSmartGroups: [SmartGroup] = [SmartGroup(id: 1, criteria: [Criterion(name: "Name", type: "Type", value: "Value")])]
-        let results: [SmartGroup] = ReporterMac.macSmartGroupsNoCriteria(macSmartGroups)
+        let results: [SmartGroup] = Reporter.macSmartGroupsNoCriteria(macSmartGroups)
         XCTAssertTrue(results.isEmpty)
     }
 
@@ -680,7 +680,7 @@ class KMARTMacTests: XCTestCase {
             macRestrictedSoftwares: macRestrictedSoftwares,
             macStaticGroups: macStaticGroups
         )
-        let results: [StaticGroup] = ReporterMac.macStaticGroupsNotLinked(objects)
+        let results: [StaticGroup] = Reporter.macStaticGroupsNotLinked(objects)
         XCTAssertTrue(results.isEmpty)
     }
 
@@ -700,19 +700,19 @@ class KMARTMacTests: XCTestCase {
             macRestrictedSoftwares: macRestrictedSoftwares,
             macStaticGroups: macStaticGroups
         )
-        let results: [StaticGroup] = ReporterMac.macStaticGroupsNotLinked(objects)
+        let results: [StaticGroup] = Reporter.macStaticGroupsNotLinked(objects)
         XCTAssertFalse(results.isEmpty)
     }
 
     func testMacStaticGroupsNotEmpty() throws {
         let macStaticGroups: [StaticGroup] = [StaticGroup(id: 1, devices: [1])]
-        let results: [StaticGroup] = ReporterMac.macStaticGroupsEmpty(macStaticGroups)
+        let results: [StaticGroup] = Reporter.macStaticGroupsEmpty(macStaticGroups)
         XCTAssertTrue(results.isEmpty)
     }
 
     func testMacStaticGroupsEmpty() throws {
         let macStaticGroups: [StaticGroup] = [StaticGroup(id: 1)]
-        let results: [StaticGroup] = ReporterMac.macStaticGroupsEmpty(macStaticGroups)
+        let results: [StaticGroup] = Reporter.macStaticGroupsEmpty(macStaticGroups)
         XCTAssertFalse(results.isEmpty)
     }
 }

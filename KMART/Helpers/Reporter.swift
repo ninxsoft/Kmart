@@ -148,7 +148,7 @@ struct Reporter {
     /// - Parameters:
     ///   - objects: The objects used to generate reports.
     /// - Returns: An array of `Buildings` that are not linked.
-    private static func buildingsNotLinked(_ objects: Objects) -> [Building] {
+    static func buildingsNotLinked(_ objects: Objects) -> [Building] {
 
         var identifiers: [Int] = []
 
@@ -187,7 +187,7 @@ struct Reporter {
     /// - Parameters:
     ///   - objects: The objects used to generate reports.
     /// - Returns: An array of `Categories` that are not linked.
-    private static func categoriesNotLinked(_ objects: Objects) -> [Category] {
+    static func categoriesNotLinked(_ objects: Objects) -> [Category] {
 
         var identifiers: [Int] = []
 
@@ -220,7 +220,7 @@ struct Reporter {
     /// - Parameters:
     ///   - objects: The objects used to generate reports.
     /// - Returns: An array of `Departments` that are not linked.
-    private static func departmentsNotLinked(_ objects: Objects) -> [Department] {
+    static func departmentsNotLinked(_ objects: Objects) -> [Department] {
 
         var identifiers: [Int] = []
         identifiers.append(contentsOf: objects.macApplications.flatMap { $0.macTargets.departments })
@@ -258,7 +258,7 @@ struct Reporter {
     /// - Parameters:
     ///   - objects: The objects used to generate reports.
     /// - Returns: An array of `eBooks` with no scope.
-    private static func eBooksNoScope(_ eBooks: [EBook]) -> [EBook] {
+    static func eBooksNoScope(_ eBooks: [EBook]) -> [EBook] {
         eBooks.filter { !$0.scope }
     }
 
@@ -267,7 +267,7 @@ struct Reporter {
     /// - Parameters:
     ///   - objects: The objects used to generate reports.
     /// - Returns: An array of `iBeacons` that are not linked.
-    private static func iBeaconsNotLinked(_ objects: Objects) -> [IBeacon] {
+    static func iBeaconsNotLinked(_ objects: Objects) -> [IBeacon] {
         var identifiers: [Int] = []
         identifiers.append(contentsOf: objects.macConfigurationProfiles.flatMap { $0.macExclusions.iBeacons })
         identifiers.append(contentsOf: objects.macConfigurationProfiles.flatMap { $0.limitations.iBeacons })
@@ -283,7 +283,7 @@ struct Reporter {
     /// - Parameters:
     ///   - objects: The objects used to generate reports.
     /// - Returns: An array of `Network Segments` that are not linked.
-    private static func networkSegmentsNotLinked(_ objects: Objects) -> [NetworkSegment] {
+    static func networkSegmentsNotLinked(_ objects: Objects) -> [NetworkSegment] {
         var identifiers: [Int] = []
         let buildingNames: [String] = objects.buildings.map { $0.name }
         let departmentNames: [String] = objects.departments.map { $0.name }
@@ -310,7 +310,7 @@ struct Reporter {
     /// - Parameters:
     ///   - objects: The objects used to generate reports.
     /// - Returns: An array of `Mac Advanced Searches` with no criteria.
-    private static func macAdvancedSearchesNoCriteria(_ macAdvancedSearches: [MacAdvancedSearch]) -> [MacAdvancedSearch] {
+    static func macAdvancedSearchesNoCriteria(_ macAdvancedSearches: [MacAdvancedSearch]) -> [MacAdvancedSearch] {
         macAdvancedSearches.filter { $0.criteria.isEmpty }
     }
 
@@ -319,7 +319,7 @@ struct Reporter {
     /// - Parameters:
     ///   - objects: The objects used to generate reports.
     /// - Returns: An array of `Mac Advanced Searches` with invalid criteria.
-    private static func macAdvancedSearchesInvalidCriteria(_ objects: Objects) -> [MacAdvancedSearch] {
+    static func macAdvancedSearchesInvalidCriteria(_ objects: Objects) -> [MacAdvancedSearch] {
         var identifiers: [Int] = []
         let names: [String] = objects.macSmartGroups.map { $0.name } + objects.macStaticGroups.map { $0.name }
 
@@ -338,7 +338,7 @@ struct Reporter {
     /// - Parameters:
     ///   - objects: The objects used to generate reports.
     /// - Returns: An array of `Mac Applications` with no scope.
-    private static func macApplicationsNoScope(_ macApplications: [MacApplication]) -> [MacApplication] {
+    static func macApplicationsNoScope(_ macApplications: [MacApplication]) -> [MacApplication] {
         macApplications.filter { !$0.scope }
     }
 
@@ -347,7 +347,7 @@ struct Reporter {
     /// - Parameters:
     ///   - objects: The objects used to generate reports.
     /// - Returns: An array of `Mac Configuration Profiles` with no scope.
-    private static func macConfigurationProfilesNoScope(_ macConfigurationProfiles: [MacConfigurationProfile]) -> [MacConfigurationProfile] {
+    static func macConfigurationProfilesNoScope(_ macConfigurationProfiles: [MacConfigurationProfile]) -> [MacConfigurationProfile] {
         macConfigurationProfiles.filter { !$0.scope }
     }
 
@@ -356,7 +356,7 @@ struct Reporter {
     /// - Parameters:
     ///   - objects: The objects used to generate reports.
     /// - Returns: An array of `Mac Devices` with duplicate names.
-    private static func macDevicesDuplicateNames(_ macDevices: [MacDevice]) -> [MacDevice] {
+    static func macDevicesDuplicateNames(_ macDevices: [MacDevice]) -> [MacDevice] {
         let identifiers: [Int] = Dictionary(grouping: macDevices) { $0.name }.filter { $1.count == 1 }.flatMap { $1 }.map { $0.id }
         return macDevices.filter { !identifiers.contains($0.id) }.sorted { $0.name < $1.name }
     }
@@ -366,7 +366,7 @@ struct Reporter {
     /// - Parameters:
     ///   - objects: The objects used to generate reports.
     /// - Returns: An array of `Mac Devices` with duplicate serial numbers.
-    private static func macDevicesDuplicateSerialNumbers(_ macDevices: [MacDevice]) -> [MacDevice] {
+    static func macDevicesDuplicateSerialNumbers(_ macDevices: [MacDevice]) -> [MacDevice] {
         let identifiers: [Int] = Dictionary(grouping: macDevices) { $0.serialNumber }.filter { $1.count == 1 }.flatMap { $1 }.map { $0.id }
         return macDevices.filter { !identifiers.contains($0.id) }.sorted { $0.serialNumber < $1.serialNumber }
     }
@@ -376,7 +376,7 @@ struct Reporter {
     /// - Parameters:
     ///   - objects: The objects used to generate reports.
     /// - Returns: An array of `Mac Devices` that have not checked in since the **Last Check-In** threshold.
-    private static func macDevicesLastCheckIn(_ macDevices: [MacDevice], options: [ReportOptionType: Int]) -> [MacDevice] {
+    static func macDevicesLastCheckIn(_ macDevices: [MacDevice], options: [ReportOptionType: Int]) -> [MacDevice] {
         let lastCheckIn: Int = options[.macDevicesLastCheckIn] ?? .defaultOption
         let now: Date = Date()
         return macDevices.filter { $0.lastCheckIn.daysSince(now) >= lastCheckIn && $0.managed }
@@ -387,7 +387,7 @@ struct Reporter {
     /// - Parameters:
     ///   - objects: The objects used to generate reports.
     /// - Returns: An array of `Mac Devices` that have not updated inventory since the **Last Inventory** threshold.
-    private static func macDevicesLastInventory(_ macDevices: [MacDevice], options: [ReportOptionType: Int]) -> [MacDevice] {
+    static func macDevicesLastInventory(_ macDevices: [MacDevice], options: [ReportOptionType: Int]) -> [MacDevice] {
         let lastInventory: Int = options[.macDevicesLastInventory] ?? .defaultOption
         let now: Date = Date()
         return macDevices.filter { $0.lastInventory.daysSince(now) >= lastInventory && $0.managed }
@@ -398,7 +398,7 @@ struct Reporter {
     /// - Parameters:
     ///   - objects: The objects used to generate reports.
     /// - Returns: An array of `Mac Devices` that are unmanaged.
-    private static func macDevicesUnmanaged(_ macDevices: [MacDevice]) -> [MacDevice] {
+    static func macDevicesUnmanaged(_ macDevices: [MacDevice]) -> [MacDevice] {
         macDevices.filter { !$0.managed }
     }
 
@@ -407,7 +407,7 @@ struct Reporter {
     /// - Parameters:
     ///   - objects: The objects used to generate reports.
     /// - Returns: An array of `Mac Directory Bindings` that are not linked.
-    private static func macDirectoryBindingsNotLinked(_ objects: Objects) -> [MacDirectoryBinding] {
+    static func macDirectoryBindingsNotLinked(_ objects: Objects) -> [MacDirectoryBinding] {
         let identifiers: [Int] = objects.macPolicies.flatMap { $0.directoryBindings }
         let macDirectoryBindings: [MacDirectoryBinding] = objects.macDirectoryBindings.filter { !identifiers.contains($0.id) }
         return macDirectoryBindings
@@ -418,7 +418,7 @@ struct Reporter {
     /// - Parameters:
     ///   - objects: The objects used to generate reports.
     /// - Returns: An array of `Mac Disk Encryptions` that are not linked.
-    private static func macDiskEncryptionsNotLinked(_ objects: Objects) -> [MacDiskEncryption] {
+    static func macDiskEncryptionsNotLinked(_ objects: Objects) -> [MacDiskEncryption] {
         let identifiers: [Int] = objects.macPolicies.map { $0.diskEncryption }
         let macDiskEncryptions: [MacDiskEncryption] = objects.macDiskEncryptions.filter { !identifiers.contains($0.id) }
         return macDiskEncryptions
@@ -429,7 +429,7 @@ struct Reporter {
     /// - Parameters:
     ///   - objects: The objects used to generate reports.
     /// - Returns: An array of `Mac Dock Items` that are not linked.
-    private static func macDockItemsNotLinked(_ objects: Objects) -> [MacDockItem] {
+    static func macDockItemsNotLinked(_ objects: Objects) -> [MacDockItem] {
         let identifiers: [Int] = objects.macPolicies.flatMap { $0.dockItems }
         let macDockItems: [MacDockItem] = objects.macDockItems.filter { !identifiers.contains($0.id) }
         return macDockItems
@@ -440,7 +440,7 @@ struct Reporter {
     /// - Parameters:
     ///   - objects: The objects used to generate reports.
     /// - Returns: An array of `Mac Extension Attributes` that are not linked.
-    private static func macExtensionAttributesNotLinked(_ objects: Objects) -> [MacExtensionAttribute] {
+    static func macExtensionAttributesNotLinked(_ objects: Objects) -> [MacExtensionAttribute] {
 
         var names: [String] = []
         let macExtensionAttributeNames: [String] = objects.macExtensionAttributes.map { $0.name }
@@ -462,7 +462,7 @@ struct Reporter {
     /// - Parameters:
     ///   - objects: The objects used to generate reports.
     /// - Returns: An array of `Mac Extension Attributes` that are disabled.
-    private static func macExtensionAttributesDisabled(_ macExtensionAttributes: [MacExtensionAttribute]) -> [MacExtensionAttribute] {
+    static func macExtensionAttributesDisabled(_ macExtensionAttributes: [MacExtensionAttribute]) -> [MacExtensionAttribute] {
         macExtensionAttributes.filter { $0.inputType == "Script" && !$0.enabled }
     }
 
@@ -471,7 +471,7 @@ struct Reporter {
     /// - Parameters:
     ///   - objects: The objects used to generate reports.
     /// - Returns: An array of `Mac Extension Attributes` with linter errors.
-    private static func macExtensionAttributesLinterErrors(_ macExtensionAttributes: [MacExtensionAttribute]) -> [MacExtensionAttribute] {
+    static func macExtensionAttributesLinterErrors(_ macExtensionAttributes: [MacExtensionAttribute]) -> [MacExtensionAttribute] {
         macExtensionAttributesLint(macExtensionAttributes, level: .lintError)
     }
 
@@ -480,7 +480,7 @@ struct Reporter {
     /// - Parameters:
     ///   - objects: The objects used to generate reports.
     /// - Returns: An array of `Mac Extension Attributes` with linter warnings.
-    private static func macExtensionAttributesLinterWarnings(_ macExtensionAttributes: [MacExtensionAttribute]) -> [MacExtensionAttribute] {
+    static func macExtensionAttributesLinterWarnings(_ macExtensionAttributes: [MacExtensionAttribute]) -> [MacExtensionAttribute] {
         macExtensionAttributesLint(macExtensionAttributes, level: .lintWarning)
     }
 
@@ -490,7 +490,7 @@ struct Reporter {
     ///   - macExtensionAttributes: The Mac Extension Attributes to filter.
     ///   - level: The linting level (ie. `.lintError` or `.lintWarning`).
     /// - Returns: An array of `Mac Extension Attributes` with linter errors or warnings.
-    private static func macExtensionAttributesLint(_ macExtensionAttributes: [MacExtensionAttribute], level: LintLevel) -> [MacExtensionAttribute] {
+    static func macExtensionAttributesLint(_ macExtensionAttributes: [MacExtensionAttribute], level: LintLevel) -> [MacExtensionAttribute] {
 
         guard FileManager.default.fileExists(atPath: "/usr/local/bin/shellcheck") else {
             PrettyPrint.print("shellcheck is not installed, please visit https://github.com/koalaman/shellcheck")
@@ -539,7 +539,7 @@ struct Reporter {
     /// - Parameters:
     ///   - objects: The objects used to generate reports.
     /// - Returns: An array of `Mac Packages` that are not linked.
-    private static func macPackagesNotLinked(_ objects: Objects) -> [MacPackage] {
+    static func macPackagesNotLinked(_ objects: Objects) -> [MacPackage] {
         let identifiers: [Int] = objects.macPolicies.flatMap { $0.packages }
         let macPackages: [MacPackage] = objects.macPackages.filter { !identifiers.contains($0.id) }
         return macPackages
@@ -550,7 +550,7 @@ struct Reporter {
     /// - Parameters:
     ///   - objects: The objects used to generate reports.
     /// - Returns: An array of `Mac Policies` with no scope.
-    private static func macPoliciesNoScope(_ macPolicies: [MacPolicy]) -> [MacPolicy] {
+    static func macPoliciesNoScope(_ macPolicies: [MacPolicy]) -> [MacPolicy] {
         macPolicies.filter { !$0.scope }
     }
 
@@ -559,7 +559,7 @@ struct Reporter {
     /// - Parameters:
     ///   - objects: The objects used to generate reports.
     /// - Returns: An array of `Mac Policies` that are disabled.
-    private static func macPoliciesDisabled(_ macPolicies: [MacPolicy]) -> [MacPolicy] {
+    static func macPoliciesDisabled(_ macPolicies: [MacPolicy]) -> [MacPolicy] {
         macPolicies.filter { !$0.enabled }
     }
 
@@ -568,7 +568,7 @@ struct Reporter {
     /// - Parameters:
     ///   - objects: The objects used to generate reports.
     /// - Returns: An array of `Mac Policies` with no payload.
-    private static func macPoliciesNoPayload(_ macPolicies: [MacPolicy]) -> [MacPolicy] {
+    static func macPoliciesNoPayload(_ macPolicies: [MacPolicy]) -> [MacPolicy] {
         macPolicies.filter { !$0.payload }
     }
 
@@ -577,7 +577,7 @@ struct Reporter {
     /// - Parameters:
     ///   - objects: The objects used to generate reports.
     /// - Returns: An array of `Mac Policies` that were executed via **Jamf Remote**.
-    private static func macPoliciesJamfRemote(_ macPolicies: [MacPolicy]) -> [MacPolicy] {
+    static func macPoliciesJamfRemote(_ macPolicies: [MacPolicy]) -> [MacPolicy] {
         let regex: String = "^\\d{4}-\\d{2}-\\d{2} at \\d{1,2}:\\d{2} [AP]M \\| .* \\| \\d+ Computers?$"
         return macPolicies.filter { $0.name.range(of: regex, options: .regularExpression) != nil }
     }
@@ -587,7 +587,7 @@ struct Reporter {
     /// - Parameters:
     ///   - objects: The objects used to generate reports.
     /// - Returns: An array of `Mac Policies` that have not executed since the **Last Executed** threshold.
-    private static func macPoliciesLastExecuted(_ objects: Objects, options: [ReportOptionType: Int]) -> [MacPolicy] {
+    static func macPoliciesLastExecuted(_ objects: Objects, options: [ReportOptionType: Int]) -> [MacPolicy] {
         let lastExecuted: Int = options[.macPoliciesLastExecuted] ?? .defaultOption
         let now: Date = Date()
         let identifiers: [Int] = objects.macDevicesHistory.flatMap { $0.macPolicyLogs }.filter { $0.date.daysSince(now) >= lastExecuted }.map { $0.id }
@@ -600,7 +600,7 @@ struct Reporter {
     /// - Parameters:
     ///   - objects: The objects used to generate reports.
     /// - Returns: An array of `Mac Policies` that have failed according to the **Failed** threshold.
-    private static func macPoliciesFailedThreshold(_ objects: Objects, options: [ReportOptionType: Int]) -> [MacPolicy] {
+    static func macPoliciesFailedThreshold(_ objects: Objects, options: [ReportOptionType: Int]) -> [MacPolicy] {
         let failedThreshold: Int = options[.macPoliciesFailedThreshold] ?? .defaultOption
         let macPolicyLogs: [MacPolicyLog] = objects.macDevicesHistory.flatMap { $0.macPolicyLogs }
         var dictionary: [Int: (failed: Double, total: Double)] = [:]
@@ -624,7 +624,7 @@ struct Reporter {
     /// - Parameters:
     ///   - objects: The objects used to generate reports.
     /// - Returns: An array of `Mac Printers` that are not linked.
-    private static func macPrintersNotLinked(_ objects: Objects) -> [MacPrinter] {
+    static func macPrintersNotLinked(_ objects: Objects) -> [MacPrinter] {
         let identifiers: [Int] = objects.macPolicies.flatMap { $0.printers }
         let macPrinters: [MacPrinter] = objects.macPrinters.filter { !identifiers.contains($0.id) }
         return macPrinters
@@ -635,7 +635,7 @@ struct Reporter {
     /// - Parameters:
     ///   - objects: The objects used to generate reports.
     /// - Returns: An array of `Mac Restricted Softwares` with no scope.
-    private static func macRestrictedSoftwaresNoScope(_ macRestrictedSoftwares: [MacRestrictedSoftware]) -> [MacRestrictedSoftware] {
+    static func macRestrictedSoftwaresNoScope(_ macRestrictedSoftwares: [MacRestrictedSoftware]) -> [MacRestrictedSoftware] {
         macRestrictedSoftwares.filter { !$0.scope }
     }
 
@@ -644,7 +644,7 @@ struct Reporter {
     /// - Parameters:
     ///   - objects: The objects used to generate reports.
     /// - Returns: An array of `Mac Scripts` that are not linked.
-    private static func macScriptsNotLinked(_ objects: Objects) -> [MacScript] {
+    static func macScriptsNotLinked(_ objects: Objects) -> [MacScript] {
         let identifiers: [Int] = objects.macPolicies.flatMap { $0.scripts }
         let macScripts: [MacScript] = objects.macScripts.filter { !identifiers.contains($0.id) }
         return macScripts
@@ -655,7 +655,7 @@ struct Reporter {
     /// - Parameters:
     ///   - objects: The objects used to generate reports.
     /// - Returns: An array of `Mac Scripts` with linter errors.
-    private static func macScriptsLinterErrors(_ macScripts: [MacScript]) -> [MacScript] {
+    static func macScriptsLinterErrors(_ macScripts: [MacScript]) -> [MacScript] {
         macScriptsLint(macScripts, level: .lintError)
     }
 
@@ -664,7 +664,7 @@ struct Reporter {
     /// - Parameters:
     ///   - objects: The objects used to generate reports.
     /// - Returns: An array of `Mac Scripts` with linter warnings.
-    private static func macScriptsLinterWarnings(_ macScripts: [MacScript]) -> [MacScript] {
+    static func macScriptsLinterWarnings(_ macScripts: [MacScript]) -> [MacScript] {
         macScriptsLint(macScripts, level: .lintWarning)
     }
 
@@ -674,7 +674,7 @@ struct Reporter {
     ///   - macScripts: The Mac Scripts to filter.
     ///   - level: The linting level (ie. `.lintError` or `.lintWarning`).
     /// - Returns: An array of `Mac Scripts` with linter errors or warnings.
-    private static func macScriptsLint(_ macScripts: [MacScript], level: LintLevel) -> [MacScript] {
+    static func macScriptsLint(_ macScripts: [MacScript], level: LintLevel) -> [MacScript] {
 
         guard FileManager.default.fileExists(atPath: "/usr/local/bin/shellcheck") else {
             PrettyPrint.print("shellcheck is not installed, please visit https://github.com/koalaman/shellcheck")
@@ -713,7 +713,7 @@ struct Reporter {
     /// - Parameters:
     ///   - objects: The objects used to generate reports.
     /// - Returns: An array of `Mac Smart Groups` that are not linked.
-    private static func macSmartGroupsNotLinked(_ objects: Objects) -> [SmartGroup] {
+    static func macSmartGroupsNotLinked(_ objects: Objects) -> [SmartGroup] {
 
         var identifiers: [Int] = []
 
@@ -740,7 +740,7 @@ struct Reporter {
     /// - Parameters:
     ///   - objects: The objects used to generate reports.
     /// - Returns: An array of `Mac Smart Groups` with no criteria.
-    private static func macSmartGroupsNoCriteria(_ macSmartGroups: [SmartGroup]) -> [SmartGroup] {
+    static func macSmartGroupsNoCriteria(_ macSmartGroups: [SmartGroup]) -> [SmartGroup] {
         macSmartGroups.filter { $0.criteria.isEmpty }
     }
 
@@ -749,7 +749,7 @@ struct Reporter {
     /// - Parameters:
     ///   - objects: The objects used to generate reports.
     /// - Returns: An array of `Mac Static Groups` that are not linked.
-    private static func macStaticGroupsNotLinked(_ objects: Objects) -> [StaticGroup] {
+    static func macStaticGroupsNotLinked(_ objects: Objects) -> [StaticGroup] {
 
         var identifiers: [Int] = []
 
@@ -775,7 +775,7 @@ struct Reporter {
     /// - Parameters:
     ///   - objects: The objects used to generate reports.
     /// - Returns: An array of `Mac Static Groups` that are empty.
-    private static func macStaticGroupsEmpty(_ macStaticGroups: [StaticGroup]) -> [StaticGroup] {
+    static func macStaticGroupsEmpty(_ macStaticGroups: [StaticGroup]) -> [StaticGroup] {
         macStaticGroups.filter { $0.devices.isEmpty }
     }
 
@@ -784,7 +784,7 @@ struct Reporter {
     /// - Parameters:
     ///   - objects: The objects used to generate reports.
     /// - Returns: An array of `Mobile Advanced Searches` with no criteria.
-    private static func mobileAdvancedSearchesNoCriteria(_ mobileAdvancedSearches: [MobileAdvancedSearch]) -> [MobileAdvancedSearch] {
+    static func mobileAdvancedSearchesNoCriteria(_ mobileAdvancedSearches: [MobileAdvancedSearch]) -> [MobileAdvancedSearch] {
         mobileAdvancedSearches.filter { $0.criteria.isEmpty }
     }
 
@@ -793,7 +793,7 @@ struct Reporter {
     /// - Parameters:
     ///   - objects: The objects used to generate reports.
     /// - Returns: An array of `Mobile Advanced Searches` with invalid criteria.
-    private static func mobileAdvancedSearchesInvalidCriteria(_ objects: Objects) -> [MobileAdvancedSearch] {
+    static func mobileAdvancedSearchesInvalidCriteria(_ objects: Objects) -> [MobileAdvancedSearch] {
         var identifiers: [Int] = []
         let names: [String] = objects.mobileSmartGroups.map { $0.name } + objects.mobileStaticGroups.map { $0.name }
 
@@ -812,7 +812,7 @@ struct Reporter {
     /// - Parameters:
     ///   - objects: The objects used to generate reports.
     /// - Returns: An array of `Mobile Applications` with no scope.
-    private static func mobileApplicationsNoScope(_ mobileApplications: [MobileApplication]) -> [MobileApplication] {
+    static func mobileApplicationsNoScope(_ mobileApplications: [MobileApplication]) -> [MobileApplication] {
         mobileApplications.filter { !$0.scope }
     }
 
@@ -821,7 +821,7 @@ struct Reporter {
     /// - Parameters:
     ///   - objects: The objects used to generate reports.
     /// - Returns: An array of `Mobile Configuration Profiles` with no scope.
-    private static func mobileConfigurationProfilesNoScope(_ mobileConfigurationProfiles: [MobileConfigurationProfile]) -> [MobileConfigurationProfile] {
+    static func mobileConfigurationProfilesNoScope(_ mobileConfigurationProfiles: [MobileConfigurationProfile]) -> [MobileConfigurationProfile] {
         mobileConfigurationProfiles.filter { !$0.scope }
     }
 
@@ -830,7 +830,7 @@ struct Reporter {
     /// - Parameters:
     ///   - objects: The objects used to generate reports.
     /// - Returns: An array of `Mobile Devices` that have not updated inventory since the **Last Inventory** threshold.
-    private static func mobileDevicesLastInventory(_ mobileDevices: [MobileDevice], options: [ReportOptionType: Int]) -> [MobileDevice] {
+    static func mobileDevicesLastInventory(_ mobileDevices: [MobileDevice], options: [ReportOptionType: Int]) -> [MobileDevice] {
         let lastInventory: Int = options[.mobileDevicesLastInventory] ?? .defaultOption
         let now: Date = Date()
             let mobileDevices: [MobileDevice] = mobileDevices.filter { $0.lastInventory.daysSince(now) >= lastInventory && $0.managed }
@@ -842,7 +842,7 @@ struct Reporter {
     /// - Parameters:
     ///   - objects: The objects used to generate reports.
     /// - Returns: An array of `Mobile Devices` that are unmanaged.
-    private static func mobileDevicesUnmanaged(_ mobileDevices: [MobileDevice]) -> [MobileDevice] {
+    static func mobileDevicesUnmanaged(_ mobileDevices: [MobileDevice]) -> [MobileDevice] {
         mobileDevices.filter { !$0.managed }
     }
 
@@ -851,7 +851,7 @@ struct Reporter {
     /// - Parameters:
     ///   - objects: The objects used to generate reports.
     /// - Returns: An array of `Mobile Extension Attributes` that are not linked.
-    private static func mobileExtensionAttributesNotLinked(_ objects: Objects) -> [MobileExtensionAttribute] {
+    static func mobileExtensionAttributesNotLinked(_ objects: Objects) -> [MobileExtensionAttribute] {
 
         var names: [String] = []
         let mobileExtensionAttributeNames: [String] = objects.mobileExtensionAttributes.map { $0.name }
@@ -873,7 +873,7 @@ struct Reporter {
     /// - Parameters:
     ///   - objects: The objects used to generate reports.
     /// - Returns: An array of `Mobile Smart Groups` that are not linked.
-    private static func mobileSmartGroupsNotLinked(_ objects: Objects) -> [SmartGroup] {
+    static func mobileSmartGroupsNotLinked(_ objects: Objects) -> [SmartGroup] {
 
         var identifiers: [Int] = []
 
@@ -896,7 +896,7 @@ struct Reporter {
     /// - Parameters:
     ///   - objects: The objects used to generate reports.
     /// - Returns: An array of `Mobile Smart Groups` with no criteria.
-    private static func mobileSmartGroupsNoCriteria(_ mobileSmartGroups: [SmartGroup]) -> [SmartGroup] {
+    static func mobileSmartGroupsNoCriteria(_ mobileSmartGroups: [SmartGroup]) -> [SmartGroup] {
         mobileSmartGroups.filter { $0.criteria.isEmpty }
     }
 
@@ -905,7 +905,7 @@ struct Reporter {
     /// - Parameters:
     ///   - objects: The objects used to generate reports.
     /// - Returns: An array of `Mobile Static Groups` that are not linked.
-    private static func mobileStaticGroupsNotLinked(_ objects: Objects) -> [StaticGroup] {
+    static func mobileStaticGroupsNotLinked(_ objects: Objects) -> [StaticGroup] {
 
         var identifiers: [Int] = []
 
@@ -928,7 +928,7 @@ struct Reporter {
     /// - Parameters:
     ///   - objects: The objects used to generate reports.
     /// - Returns: An array of `Mobile Static Groups` that are empty.
-    private static func mobileStaticGroupsEmpty(_ mobileStaticGroups: [StaticGroup]) -> [StaticGroup] {
+    static func mobileStaticGroupsEmpty(_ mobileStaticGroups: [StaticGroup]) -> [StaticGroup] {
         mobileStaticGroups.filter { $0.devices.isEmpty }
     }
 }

@@ -52,7 +52,7 @@ class KMARTCommonTests: XCTestCase {
             mobileConfigurationProfiles: mobileConfigurationProfiles,
             mobileDevices: mobileDevices
         )
-        let results: [Building] = ReporterCommon.buildingsNotLinked(objects)
+        let results: [Building] = Reporter.buildingsNotLinked(objects)
         XCTAssertTrue(results.isEmpty)
     }
 
@@ -97,7 +97,7 @@ class KMARTCommonTests: XCTestCase {
             mobileConfigurationProfiles: mobileConfigurationProfiles,
             mobileDevices: mobileDevices
         )
-        let results: [Building] = ReporterCommon.buildingsNotLinked(objects)
+        let results: [Building] = Reporter.buildingsNotLinked(objects)
         XCTAssertTrue(results.count == 1)
         XCTAssertTrue(results.first?.id == buildings.last?.id)
     }
@@ -123,7 +123,7 @@ class KMARTCommonTests: XCTestCase {
             mobileApplications: mobileApplications,
             mobileConfigurationProfiles: mobileConfigurationProfiles
         )
-        let results: [Category] = ReporterCommon.categoriesNotLinked(objects)
+        let results: [Category] = Reporter.categoriesNotLinked(objects)
         XCTAssertTrue(results.isEmpty)
     }
 
@@ -148,7 +148,7 @@ class KMARTCommonTests: XCTestCase {
             mobileApplications: mobileApplications,
             mobileConfigurationProfiles: mobileConfigurationProfiles
         )
-        let results: [Category] = ReporterCommon.categoriesNotLinked(objects)
+        let results: [Category] = Reporter.categoriesNotLinked(objects)
         XCTAssertTrue(results.count == 1)
         XCTAssertTrue(results.first?.id == categories.last?.id)
     }
@@ -194,7 +194,7 @@ class KMARTCommonTests: XCTestCase {
             mobileConfigurationProfiles: mobileConfigurationProfiles,
             mobileDevices: mobileDevices
         )
-        let results: [Department] = ReporterCommon.departmentsNotLinked(objects)
+        let results: [Department] = Reporter.departmentsNotLinked(objects)
         XCTAssertTrue(results.isEmpty)
     }
 
@@ -239,7 +239,7 @@ class KMARTCommonTests: XCTestCase {
             mobileConfigurationProfiles: mobileConfigurationProfiles,
             mobileDevices: mobileDevices
         )
-        let results: [Department] = ReporterCommon.departmentsNotLinked(objects)
+        let results: [Department] = Reporter.departmentsNotLinked(objects)
         XCTAssertTrue(results.count == 1)
         XCTAssertTrue(results.first?.id == departments.last?.id)
     }
@@ -281,13 +281,13 @@ class KMARTCommonTests: XCTestCase {
             EBook(id: 33, limitations: Limitations(networkSegments: [1])),
             EBook(id: 34, limitations: Limitations(iBeacons: [1]))
         ]
-        let results: [EBook] = ReporterCommon.eBooksNoScope(eBooks)
+        let results: [EBook] = Reporter.eBooksNoScope(eBooks)
         XCTAssertTrue(results.isEmpty)
     }
 
     func testEBooksNoScope() throws {
         let eBooks: [EBook] = [EBook(id: 1)]
-        let results: [EBook] = ReporterCommon.eBooksNoScope(eBooks)
+        let results: [EBook] = Reporter.eBooksNoScope(eBooks)
         XCTAssertFalse(results.isEmpty)
     }
 
@@ -303,7 +303,7 @@ class KMARTCommonTests: XCTestCase {
         ]
         let mobileConfigurationProfiles: [MobileConfigurationProfile] = [MobileConfigurationProfile(id: 1, limitations: Limitations(iBeacons: [5]))]
         let objects: Objects = Objects(iBeacons: iBeacons, macConfigurationProfiles: macConfigurationProfiles, macPolicies: macPolicies, mobileConfigurationProfiles: mobileConfigurationProfiles)
-        let results: [IBeacon] = ReporterCommon.iBeaconsNotLinked(objects)
+        let results: [IBeacon] = Reporter.iBeaconsNotLinked(objects)
         XCTAssertTrue(results.isEmpty)
     }
 
@@ -319,7 +319,7 @@ class KMARTCommonTests: XCTestCase {
         ]
         let mobileConfigurationProfiles: [MobileConfigurationProfile] = [MobileConfigurationProfile(id: 1, limitations: Limitations(iBeacons: [5]))]
         let objects: Objects = Objects(iBeacons: iBeacons, macConfigurationProfiles: macConfigurationProfiles, macPolicies: macPolicies, mobileConfigurationProfiles: mobileConfigurationProfiles)
-        let results: [IBeacon] = ReporterCommon.iBeaconsNotLinked(objects)
+        let results: [IBeacon] = Reporter.iBeaconsNotLinked(objects)
         XCTAssertTrue(results.count == 1)
         XCTAssertTrue(results.first?.id == iBeacons.last?.id)
     }
@@ -363,7 +363,7 @@ class KMARTCommonTests: XCTestCase {
             mobileApplications: mobileApplications,
             mobileConfigurationProfiles: mobileConfigurationProfiles
         )
-        let results: [NetworkSegment] = ReporterCommon.networkSegmentsNotLinked(objects)
+        let results: [NetworkSegment] = Reporter.networkSegmentsNotLinked(objects)
         XCTAssertTrue(results.isEmpty)
     }
 
@@ -406,7 +406,7 @@ class KMARTCommonTests: XCTestCase {
             mobileApplications: mobileApplications,
             mobileConfigurationProfiles: mobileConfigurationProfiles
         )
-        let results: [NetworkSegment] = ReporterCommon.networkSegmentsNotLinked(objects)
+        let results: [NetworkSegment] = Reporter.networkSegmentsNotLinked(objects)
         XCTAssertTrue(results.count == 1)
         XCTAssertTrue(results.first?.id == networkSegments.last?.id)
     }
