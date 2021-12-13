@@ -236,63 +236,6 @@ enum ReportType: String, CaseIterable {
         }
     }
 
-    var group: GroupType {
-        switch self {
-        case .buildingsNotLinked,
-            .categoriesNotLinked,
-            .departmentsNotLinked,
-            .eBooksNoScope,
-            .iBeaconsNotLinked,
-            .networkSegmentsNotLinked:
-            return .common
-        case .macAdvancedSearchesNoCriteria,
-            .macAdvancedSearchesInvalidCriteria,
-            .macApplicationsNoScope,
-            .macConfigurationProfilesNoScope,
-            .macDevicesDuplicateNames,
-            .macDevicesDuplicateSerialNumbers,
-            .macDevicesLastCheckIn,
-            .macDevicesLastInventory,
-            .macDevicesUnmanaged,
-            .macDirectoryBindingsNotLinked,
-            .macDiskEncryptionsNotLinked,
-            .macDockItemsNotLinked,
-            .macExtensionAttributesNotLinked,
-            .macExtensionAttributesDisabled,
-            .macExtensionAttributesLinterErrors,
-            .macExtensionAttributesLinterWarnings,
-            .macPackagesNotLinked,
-            .macPoliciesNoScope,
-            .macPoliciesDisabled,
-            .macPoliciesNoPayload,
-            .macPoliciesJamfRemote,
-            .macPoliciesLastExecuted,
-            .macPoliciesFailedThreshold,
-            .macPrintersNotLinked,
-            .macRestrictedSoftwareNoScope,
-            .macScriptsNotLinked,
-            .macScriptsLinterErrors,
-            .macScriptsLinterWarnings,
-            .macSmartGroupsNotLinked,
-            .macSmartGroupsNoCriteria,
-            .macStaticGroupsNotLinked,
-            .macStaticGroupsEmpty:
-            return .mac
-        case .mobileAdvancedSearchesNoCriteria,
-            .mobileAdvancedSearchesInvalidCriteria,
-            .mobileApplicationsNoScope,
-            .mobileConfigurationProfilesNoScope,
-            .mobileDevicesLastInventory,
-            .mobileDevicesUnmanaged,
-            .mobileExtensionAttributesNotLinked,
-            .mobileSmartGroupsNotLinked,
-            .mobileSmartGroupsNoCriteria,
-            .mobileStaticGroupsNotLinked,
-            .mobileStaticGroupsEmpty:
-        return .mobile
-        }
-    }
-
     var markdownDescription: String {
         switch self {
         case .buildingsNotLinked:

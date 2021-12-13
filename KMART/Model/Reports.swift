@@ -8,7 +8,9 @@
 import Foundation
 import Yams
 
-// swiftlint:disable:next type_body_length
+// swiftlint:disable type_body_length
+
+/// Reports struct storing all generated reports.
 struct Reports {
     /// buildings not linked
     var buildingsNotLinked: [Building] = []
@@ -18,7 +20,7 @@ struct Reports {
     var departmentsNotLinked: [Department] = []
     /// ebooks no scope
     var eBooksNoScope: [EBook] = []
-    // ibeacons not linked
+    /// ibeacons not linked
     var iBeaconsNotLinked: [IBeacon] = []
     /// mac advanceds searches no criteria
     var macAdvancedSearchesNoCriteria: [MacAdvancedSearch] = []
@@ -109,149 +111,133 @@ struct Reports {
     /// network segments not linked
     var networkSegmentsNotLinked: [NetworkSegment] = []
 
+    // swiftlint:disable cyclomatic_complexity
+    // swiftlint:disable function_body_length
+
+    /// Generates and returns a dictionary containing all requested report types.
+    ///
+    /// - Parameters:
+    ///   - reports: The list of requested reports.
+    ///   - configuration: The configuration used to generate the report data.
+    /// - Returns: A dictionary containing all specified reports.
     private func getDictionary(reports: [ReportType], using configuration: Configuration) -> [String: Any] {
 
         let reportTypes: [ReportType] = reports.sorted { $0.identifier < $1.identifier }
         var reportsDictionary: [String: Any] = [:]
 
         for report in reportTypes {
-            switch report.group {
-            case .common:
-                reportsDictionary[report.identifier] = getCommonDictionaries(for: report)
-            case .mac:
-                reportsDictionary[report.identifier] = getMacDictionaries(for: report)
-            case .mobile:
-                reportsDictionary[report.identifier] = getMobileDictionaries(for: report)
+            switch report {
+            case .buildingsNotLinked:
+                reportsDictionary[report.identifier] = buildingsNotLinked.map { $0.dictionary }
+            case .categoriesNotLinked:
+                reportsDictionary[report.identifier] = categoriesNotLinked.map { $0.dictionary }
+            case .departmentsNotLinked:
+                reportsDictionary[report.identifier] = departmentsNotLinked.map { $0.dictionary }
+            case .eBooksNoScope:
+                reportsDictionary[report.identifier] = eBooksNoScope.map { $0.dictionary }
+            case .iBeaconsNotLinked:
+                reportsDictionary[report.identifier] = iBeaconsNotLinked.map { $0.dictionary }
+            case .networkSegmentsNotLinked:
+                reportsDictionary[report.identifier] = networkSegmentsNotLinked.map { $0.dictionary }
+            case .macAdvancedSearchesNoCriteria:
+                reportsDictionary[report.identifier] = macAdvancedSearchesNoCriteria.map { $0.dictionary }
+            case .macAdvancedSearchesInvalidCriteria:
+                reportsDictionary[report.identifier] = macAdvancedSearchesInvalidCriteria.map { $0.dictionary }
+            case .macApplicationsNoScope:
+                reportsDictionary[report.identifier] = macApplicationsNoScope.map { $0.dictionary }
+            case .macConfigurationProfilesNoScope:
+                reportsDictionary[report.identifier] = macConfigurationProfilesNoScope.map { $0.dictionary }
+            case .macDevicesDuplicateNames:
+                reportsDictionary[report.identifier] = macDevicesDuplicateNames.map { $0.dictionary }
+            case .macDevicesDuplicateSerialNumbers:
+                reportsDictionary[report.identifier] = macDevicesDuplicateSerialNumbers.map { $0.dictionary }
+            case .macDevicesLastCheckIn:
+                reportsDictionary[report.identifier] = macDevicesLastCheckIn.map { $0.dictionary }
+            case .macDevicesLastInventory:
+                reportsDictionary[report.identifier] = macDevicesLastInventory.map { $0.dictionary }
+            case .macDevicesUnmanaged:
+                reportsDictionary[report.identifier] = macDevicesUnmanaged.map { $0.dictionary }
+            case .macDirectoryBindingsNotLinked:
+                reportsDictionary[report.identifier] = macDirectoryBindingsNotLinked.map { $0.dictionary }
+            case .macDiskEncryptionsNotLinked:
+                reportsDictionary[report.identifier] = macDiskEncryptionsNotLinked.map { $0.dictionary }
+            case .macDockItemsNotLinked:
+                reportsDictionary[report.identifier] = macDockItemsNotLinked.map { $0.dictionary }
+            case .macExtensionAttributesNotLinked:
+                reportsDictionary[report.identifier] = macExtensionAttributesNotLinked.map { $0.dictionary }
+            case .macExtensionAttributesDisabled:
+                reportsDictionary[report.identifier] = macExtensionAttributesDisabled.map { $0.dictionary }
+            case .macExtensionAttributesLinterErrors:
+                reportsDictionary[report.identifier] = macExtensionAttributesLinterErrors.map { $0.linterErrorsDictionary }
+            case .macExtensionAttributesLinterWarnings:
+                reportsDictionary[report.identifier] = macExtensionAttributesLinterWarnings.map { $0.linterWarningsDictionary }
+            case .macPackagesNotLinked:
+                reportsDictionary[report.identifier] = macPackagesNotLinked.map { $0.dictionary }
+            case .macPoliciesNoScope:
+                reportsDictionary[report.identifier] = macPoliciesNoScope.map { $0.dictionary }
+            case .macPoliciesDisabled:
+                reportsDictionary[report.identifier] = macPoliciesDisabled.map { $0.dictionary }
+            case .macPoliciesNoPayload:
+                reportsDictionary[report.identifier] = macPoliciesNoPayload.map { $0.dictionary }
+            case .macPoliciesJamfRemote:
+                reportsDictionary[report.identifier] = macPoliciesJamfRemote.map { $0.dictionary }
+            case .macPoliciesLastExecuted:
+                reportsDictionary[report.identifier] = macPoliciesLastExecuted.map { $0.dictionary }
+            case .macPoliciesFailedThreshold:
+                reportsDictionary[report.identifier] = macPoliciesFailedThreshold.map { $0.dictionary }
+            case .macPrintersNotLinked:
+                reportsDictionary[report.identifier] = macPrintersNotLinked.map { $0.dictionary }
+            case .macRestrictedSoftwareNoScope:
+                reportsDictionary[report.identifier] = macRestrictedSoftwaresNoScope.map { $0.dictionary }
+            case .macScriptsNotLinked:
+                reportsDictionary[report.identifier] = macScriptsNotLinked.map { $0.dictionary }
+            case .macScriptsLinterErrors:
+                reportsDictionary[report.identifier] = macScriptsLinterErrors.map { $0.linterErrorsDictionary }
+            case .macScriptsLinterWarnings:
+                reportsDictionary[report.identifier] = macScriptsLinterWarnings.map { $0.linterWarningsDictionary }
+            case .macSmartGroupsNotLinked:
+                reportsDictionary[report.identifier] = macSmartGroupsNotLinked.map { $0.dictionary }
+            case .macSmartGroupsNoCriteria:
+                reportsDictionary[report.identifier] = macSmartGroupsNoCriteria.map { $0.dictionary }
+            case .macStaticGroupsNotLinked:
+                reportsDictionary[report.identifier] = macStaticGroupsNotLinked.map { $0.dictionary }
+            case .macStaticGroupsEmpty:
+                reportsDictionary[report.identifier] = macStaticGroupsEmpty.map { $0.dictionary }
+            case .mobileAdvancedSearchesNoCriteria:
+                reportsDictionary[report.identifier] = mobileAdvancedSearchesNoCriteria.map { $0.dictionary }
+            case .mobileAdvancedSearchesInvalidCriteria:
+                reportsDictionary[report.identifier] = mobileAdvancedSearchesInvalidCriteria.map { $0.dictionary }
+            case .mobileApplicationsNoScope:
+                reportsDictionary[report.identifier] = mobileApplicationsNoScope.map { $0.dictionary }
+            case .mobileConfigurationProfilesNoScope:
+                reportsDictionary[report.identifier] = mobileConfigurationProfilesNoScope.map { $0.dictionary }
+            case .mobileDevicesLastInventory:
+                reportsDictionary[report.identifier] = mobileDevicesLastInventory.map { $0.dictionary }
+            case .mobileDevicesUnmanaged:
+                reportsDictionary[report.identifier] = mobileDevicesUnmanaged.map { $0.dictionary }
+            case .mobileExtensionAttributesNotLinked:
+                reportsDictionary[report.identifier] = mobileExtensionAttributesNotLinked.map { $0.dictionary }
+            case .mobileSmartGroupsNotLinked:
+                reportsDictionary[report.identifier] = mobileSmartGroupsNotLinked.map { $0.dictionary }
+            case .mobileSmartGroupsNoCriteria:
+                reportsDictionary[report.identifier] = mobileSmartGroupsNoCriteria.map { $0.dictionary }
+            case .mobileStaticGroupsNotLinked:
+                reportsDictionary[report.identifier] = mobileStaticGroupsNotLinked.map { $0.dictionary }
+            case .mobileStaticGroupsEmpty:
+                reportsDictionary[report.identifier] = mobileStaticGroupsEmpty.map { $0.dictionary }
             }
         }
 
         return ["name": configuration.name, "url": configuration.url, "reports": reportsDictionary]
     }
 
-    private func getCommonDictionaries(for report: ReportType) -> [[String: Any]] {
+    // swiftlint:enable cyclomatic_complexity
+    // swiftlint:enable function_body_length
 
-        switch report {
-        case .buildingsNotLinked:
-            return buildingsNotLinked.map { $0.dictionary }
-        case .categoriesNotLinked:
-            return categoriesNotLinked.map { $0.dictionary }
-        case .departmentsNotLinked:
-            return departmentsNotLinked.map { $0.dictionary }
-        case .eBooksNoScope:
-            return eBooksNoScope.map { $0.dictionary }
-        case .iBeaconsNotLinked:
-            return iBeaconsNotLinked.map { $0.dictionary }
-        case .networkSegmentsNotLinked:
-            return networkSegmentsNotLinked.map { $0.dictionary }
-        default:
-            return []
-        }
-    }
-
-    // swiftlint:disable:next cyclomatic_complexity function_body_length
-    private func getMacDictionaries(for report: ReportType) -> [[String: Any]] {
-
-        switch report {
-        case .macAdvancedSearchesNoCriteria:
-            return macAdvancedSearchesNoCriteria.map { $0.dictionary }
-        case .macAdvancedSearchesInvalidCriteria:
-            return macAdvancedSearchesInvalidCriteria.map { $0.dictionary }
-        case .macApplicationsNoScope:
-            return macApplicationsNoScope.map { $0.dictionary }
-        case .macConfigurationProfilesNoScope:
-            return macConfigurationProfilesNoScope.map { $0.dictionary }
-        case .macDevicesDuplicateNames:
-            return macDevicesDuplicateNames.map { $0.dictionary }
-        case .macDevicesDuplicateSerialNumbers:
-            return macDevicesDuplicateSerialNumbers.map { $0.dictionary }
-        case .macDevicesLastCheckIn:
-            return macDevicesLastCheckIn.map { $0.dictionary }
-        case .macDevicesLastInventory:
-            return macDevicesLastInventory.map { $0.dictionary }
-        case .macDevicesUnmanaged:
-            return macDevicesUnmanaged.map { $0.dictionary }
-        case .macDirectoryBindingsNotLinked:
-            return macDirectoryBindingsNotLinked.map { $0.dictionary }
-        case .macDiskEncryptionsNotLinked:
-            return macDiskEncryptionsNotLinked.map { $0.dictionary }
-        case .macDockItemsNotLinked:
-            return macDockItemsNotLinked.map { $0.dictionary }
-        case .macExtensionAttributesNotLinked:
-            return macExtensionAttributesNotLinked.map { $0.dictionary }
-        case .macExtensionAttributesDisabled:
-            return macExtensionAttributesDisabled.map { $0.dictionary }
-        case .macExtensionAttributesLinterErrors:
-            return macExtensionAttributesLinterErrors.map { $0.linterErrorsDictionary }
-        case .macExtensionAttributesLinterWarnings:
-            return macExtensionAttributesLinterWarnings.map { $0.linterWarningsDictionary }
-        case .macPackagesNotLinked:
-            return macPackagesNotLinked.map { $0.dictionary }
-        case .macPoliciesNoScope:
-            return macPoliciesNoScope.map { $0.dictionary }
-        case .macPoliciesDisabled:
-            return macPoliciesDisabled.map { $0.dictionary }
-        case .macPoliciesNoPayload:
-            return macPoliciesNoPayload.map { $0.dictionary }
-        case .macPoliciesJamfRemote:
-            return macPoliciesJamfRemote.map { $0.dictionary }
-        case .macPoliciesLastExecuted:
-            return macPoliciesLastExecuted.map { $0.dictionary }
-        case .macPoliciesFailedThreshold:
-            return macPoliciesFailedThreshold.map { $0.dictionary }
-        case .macPrintersNotLinked:
-            return macPrintersNotLinked.map { $0.dictionary }
-        case .macRestrictedSoftwareNoScope:
-            return macRestrictedSoftwaresNoScope.map { $0.dictionary }
-        case .macScriptsNotLinked:
-            return macScriptsNotLinked.map { $0.dictionary }
-        case .macScriptsLinterErrors:
-            return macScriptsLinterErrors.map { $0.linterErrorsDictionary }
-        case .macScriptsLinterWarnings:
-            return macScriptsLinterWarnings.map { $0.linterWarningsDictionary }
-        case .macSmartGroupsNotLinked:
-            return macSmartGroupsNotLinked.map { $0.dictionary }
-        case .macSmartGroupsNoCriteria:
-            return macSmartGroupsNoCriteria.map { $0.dictionary }
-        case .macStaticGroupsNotLinked:
-            return macStaticGroupsNotLinked.map { $0.dictionary }
-        case .macStaticGroupsEmpty:
-            return macStaticGroupsEmpty.map { $0.dictionary }
-        default:
-            return []
-        }
-    }
-
-    // swiftlint:disable:next cyclomatic_complexity
-    private func getMobileDictionaries(for report: ReportType) -> [[String: Any]] {
-
-        switch report {
-        case .mobileAdvancedSearchesNoCriteria:
-            return mobileAdvancedSearchesNoCriteria.map { $0.dictionary }
-        case .mobileAdvancedSearchesInvalidCriteria:
-            return mobileAdvancedSearchesInvalidCriteria.map { $0.dictionary }
-        case .mobileApplicationsNoScope:
-            return mobileApplicationsNoScope.map { $0.dictionary }
-        case .mobileConfigurationProfilesNoScope:
-            return mobileConfigurationProfilesNoScope.map { $0.dictionary }
-        case .mobileDevicesLastInventory:
-            return mobileDevicesLastInventory.map { $0.dictionary }
-        case .mobileDevicesUnmanaged:
-            return mobileDevicesUnmanaged.map { $0.dictionary }
-        case .mobileExtensionAttributesNotLinked:
-            return mobileExtensionAttributesNotLinked.map { $0.dictionary }
-        case .mobileSmartGroupsNotLinked:
-            return mobileSmartGroupsNotLinked.map { $0.dictionary }
-        case .mobileSmartGroupsNoCriteria:
-            return mobileSmartGroupsNoCriteria.map { $0.dictionary }
-        case .mobileStaticGroupsNotLinked:
-            return mobileStaticGroupsNotLinked.map { $0.dictionary }
-        case .mobileStaticGroupsEmpty:
-            return mobileStaticGroupsEmpty.map { $0.dictionary }
-        default:
-            return []
-        }
-    }
-
+    /// Save the generated reports to disk based on the provided configuration.
+    ///
+    /// - Parameters:
+    ///   - configuration: The configuration used to generate the report data.
     func saveToDisk(using configuration: Configuration) {
 
         let reports: [ReportType] = configuration.reports
@@ -299,6 +285,12 @@ struct Reports {
         }
     }
 
+    /// Generate a data blob for the generated reports.
+    ///
+    /// - Parameters:
+    ///   - type:          The `OutputType` (format) the data should be created as.
+    ///   - configuration: The configuration used to generate the report data.
+    /// - Returns: Data if successful, otherwise `nil`.
     func data(type: OutputType, using configuration: Configuration) -> Data? {
 
         let reports: [ReportType] = configuration.reports

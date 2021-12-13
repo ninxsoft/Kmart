@@ -7,8 +7,16 @@
 
 import Foundation
 
+/// Struct used to perform all **Shell** operations.
 struct Shell {
 
+    /// Check for lint and return a list of Lint objects.
+    ///
+    /// - Parameters:
+    ///   - inputData:  The **Shell** or **Python** input data to validate.
+    ///   - scriptType: The Script type to validate (ie. `.shell` or `.python`).
+    ///   - level:      The linting level to filter (ie. `.lintError` or `.lintWarning`).
+    /// - Returns: An array of Lint objects.
     static func lintCheck(_ inputData: Data, type scriptType: ScriptType, level: LintLevel) -> [Lint] {
 
         switch scriptType {
@@ -19,6 +27,12 @@ struct Shell {
         }
     }
 
+    /// Return a list of Lint objects based on the provided **Shell** input data and linting level.
+    ///
+    /// - Parameters:
+    ///   - inputData: The Shell input data to validate.
+    ///   - level:     The linting level to filter (ie. `.lintError` or `.lintWarning`).
+    /// - Returns: An array of Lint objects.
     private static func shellcheck(_ inputData: Data, level: LintLevel) -> [Lint] {
 
         let process: Process = Process()
@@ -68,6 +82,12 @@ struct Shell {
         }
     }
 
+    /// Return a list of Lint objects based on the provided **Python** input data and linting level.
+    ///
+    /// - Parameters:
+    ///   - inputData: The Python input data to validate.
+    ///   - level:     The linting level to filter (ie. `.lintError` or `.lintWarning`).
+    /// - Returns: An array of Lint objects.
     private static func flake8(_ inputData: Data, level: LintLevel) -> [Lint] {
         let inputPipe: Pipe = Pipe()
         inputPipe.fileHandleForWriting.write(inputData)

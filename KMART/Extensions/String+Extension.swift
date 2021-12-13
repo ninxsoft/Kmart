@@ -33,6 +33,8 @@ extension String {
     static let identifier: String = "com.ninxsoft.\(appName)"
     static let abstract: String = "Kick-Ass Mac Admin Reporting Tool"
     static let discussion: String = "Generate kick-ass Jamf Pro reports."
+    static let repositoryURL: String = "https://github.com/ninxsoft/\(appName)"
+    static let latestReleaseURL: String = "https://api.github.com/repos/ninxsoft/\(appName)/releases/latest"
 
     var scriptType: ScriptType? {
 

@@ -7,14 +7,22 @@
 
 import Foundation
 
+/// Struct used to perform all **Slack** operations.
 struct Slacker {
 
+    /// Slack chat.postMessage API endpoint URL
     private static let chatPostMessageURL: String = "https://slack.com/api/chat.postMessage"
+    /// Slack files.upload API endpoint URL
     private static let filesUploadURL: String = "https://slack.com/api/files.upload"
 
+    /// Send a Slack message with an attached report.
+    ///
+    /// - Parameters:
+    ///   - reports:       The reports to send via Slack.
+    ///   - configuration: The configuration containing Slack settings.
     static func send(_ reports: Reports, using configuration: Configuration) {
         let semaphore: DispatchSemaphore = DispatchSemaphore(value: 0)
-        let slack: Slack = configuration.slack
+        let slack: SlackConfiguration = configuration.slack
 
         PrettyPrint.print("Sending Report(s) via Slack")
 
@@ -29,6 +37,14 @@ struct Slacker {
         }
     }
 
+    /// Generate a HTTP POST `URLRequest` from the provided parameters.
+    ///
+    /// - Parameters:
+    ///   - url:         The Slack API endpoint URL.
+    ///   - token:       The Slack API user bearer token.
+    ///   - contentType: The value for the HTTP Content-Type header (eg. `application/json; charset=UTF-8`).
+    ///   - httpBody:    Optional HTTP POST body
+    /// - Returns: A `URLRequest` object.
     private static func urlRequest(_ url: URL, token: String, contentType: String, httpBody: Data?) -> URLRequest {
         var request: URLRequest = URLRequest(url: url)
         request.httpMethod = "POST"
@@ -38,7 +54,13 @@ struct Slacker {
         return request
     }
 
-    private static func message(_ slack: Slack, using semaphore: DispatchSemaphore) -> String? {
+    /// Send a Slack message.
+    ///
+    /// - Parameters:
+    ///   - slack:     The Slack configuration.
+    ///   - semaphore: The common semaphore used to wait for operations to complete.
+    /// - Returns: A timestamp `String` if successful, otherwise `nil`.
+    private static func message(_ slack: SlackConfiguration, using semaphore: DispatchSemaphore) -> String? {
 
         guard let url: URL = URL(string: chatPostMessageURL) else {
             PrettyPrint.print("Invalid URL: \(chatPostMessageURL)")
@@ -65,7 +87,7 @@ struct Slacker {
             }
 
             guard httpResponse.statusCode == 200 else {
-                let string: String = HTTP.errorMessage(httpResponse.statusCode, url: url)
+                let string: String = HTTP.errorMessage(httpResponse.statusCode, for: url)
                 PrettyPrint.print(string)
                 semaphore.signal()
                 return
@@ -103,7 +125,12 @@ struct Slacker {
         return timestamp
     }
 
-    private static func messageData(for slack: Slack) -> Data? {
+    /// Generate HTTP body data from the provided parameters.
+    ///
+    /// - Parameters:
+    ///   - slack: The Slack configuration.
+    /// - Returns: A `Data` object is successful, otherwise `nil`.
+    private static func messageData(for slack: SlackConfiguration) -> Data? {
 
         let dictionary: [String: Any] = [
             "channel": slack.channel,
@@ -116,7 +143,7 @@ struct Slacker {
                     ]
                 ]
             ],
-            "text": Slack.defaultText
+            "text": SlackConfiguration.defaultText
         ]
 
         guard let data: Data = try? JSONSerialization.data(withJSONObject: dictionary, options: []) else {
@@ -127,7 +154,15 @@ struct Slacker {
         return data
     }
 
-    private static func upload(_ data: Data, of outputType: OutputType, for slack: Slack, timestamp: String, using semaphore: DispatchSemaphore) {
+    /// Upload a file to Slack.
+    ///
+    /// - Parameters:
+    ///   - data:       The HTTP body data to upload.
+    ///   - outputType: The output type (file extension) of the file to upload.
+    ///   - slack:      The Slack configuration.
+    ///   - timestamp:  The timestamp of a previous Slack message, used to append / reply via a thread.
+    ///   - semaphore:  The common semaphore used to wait for operations to complete.
+    private static func upload(_ data: Data, of outputType: OutputType, for slack: SlackConfiguration, timestamp: String, using semaphore: DispatchSemaphore) {
 
         guard let url: URL = URL(string: filesUploadURL) else {
             PrettyPrint.print("Invalid URL: \(filesUploadURL)")
@@ -161,7 +196,7 @@ struct Slacker {
             }
 
             guard httpResponse.statusCode == 200 else {
-                let string: String = HTTP.errorMessage(httpResponse.statusCode, url: url)
+                let string: String = HTTP.errorMessage(httpResponse.statusCode, for: url)
                 PrettyPrint.print(string)
                 semaphore.signal()
                 return
@@ -191,7 +226,16 @@ struct Slacker {
         semaphore.wait()
     }
 
-    private static func uploadData(from data: Data, of outputType: OutputType, for slack: Slack, timestamp: String, boundary: String) -> Data? {
+    /// Generate HTTP file data from the provided parameters.
+    ///
+    /// - Parameters:
+    ///   - data:       The file data to upload.
+    ///   - outputType: The output type (file extension) of the file to upload.
+    ///   - slack:      The Slack configuration.
+    ///   - timestamp:  The timestamp of a previous Slack message, used to append / reply via a thread.
+    ///   - boundary:   A unique string used as a boundary to separate file parameters.
+    /// - Returns: A `Data` object is successful, otherwise `nil`.
+    private static func uploadData(from data: Data, of outputType: OutputType, for slack: SlackConfiguration, timestamp: String, boundary: String) -> Data? {
 
         guard let file: String = String(data: data, encoding: .utf8) else {
             PrettyPrint.print("Invalid report file data")
