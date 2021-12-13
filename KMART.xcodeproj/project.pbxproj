@@ -12,6 +12,8 @@
 		395DE66226CF72E3004FEF25 /* Slacker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395DE66126CF72E3004FEF25 /* Slacker.swift */; };
 		395DE66426CF73DE004FEF25 /* SlackConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395DE66326CF73DE004FEF25 /* SlackConfiguration.swift */; };
 		3967934F26D5F7F500DC2D2D /* SlackConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395DE66326CF73DE004FEF25 /* SlackConfiguration.swift */; };
+		39708B432767223000DD5C3F /* ConfigurationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39708B422767223000DD5C3F /* ConfigurationType.swift */; };
+		39708B452767224200DD5C3F /* ConfigurationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39708B442767224200DD5C3F /* ConfigurationError.swift */; };
 		573CD6E52611E62700CE156E /* Ink in Frameworks */ = {isa = PBXBuildFile; productRef = 573CD6E42611E62700CE156E /* Ink */; };
 		5743A36A25EBAD4A00919383 /* KMARTMobileTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5743A36925EBAD4A00919383 /* KMARTMobileTests.swift */; };
 		5743A37025EBB1D200919383 /* KMARTCommonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5743A36F25EBB1D200919383 /* KMARTCommonTests.swift */; };
@@ -59,9 +61,6 @@
 		578B88A325E65FA9003A89BF /* Department.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E253EA25DA31DD00931A0B /* Department.swift */; };
 		578B88A425E65FA9003A89BF /* MacDockItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E2540325DA39D200931A0B /* MacDockItem.swift */; };
 		578B88A525E65FA9003A89BF /* MobileDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E2542825DA3A2900931A0B /* MobileDevice.swift */; };
-		578B88AB25E65FC1003A89BF /* ReportType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E253CA25D8E74100931A0B /* ReportType.swift */; };
-		578B88AD25E65FC1003A89BF /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E2539E25D8CC8000931A0B /* Endpoint.swift */; };
-		578B88AF25E65FC1003A89BF /* OutputType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5756B95325DFA9DB001215DF /* OutputType.swift */; };
 		578B88B225E65FC9003A89BF /* Reporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5793805825DB883C00A76D7D /* Reporter.swift */; };
 		578B88B525E65FCE003A89BF /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E253B925D8CE5200931A0B /* String+Extension.swift */; };
 		578B88B625E65FCE003A89BF /* Dictionary+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E253D725D9DD4600931A0B /* Dictionary+Extension.swift */; };
@@ -87,7 +86,6 @@
 		5793805E25DB898100A76D7D /* Reports.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5793805D25DB898100A76D7D /* Reports.swift */; };
 		57B4F63F26195B07006F894F /* Markdown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B4F63E26195B07006F894F /* Markdown.swift */; };
 		57B4F64526195B12006F894F /* ReportOptionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B4F64426195B12006F894F /* ReportOptionType.swift */; };
-		57B4F65226195BAE006F894F /* ReportOptionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B4F64426195B12006F894F /* ReportOptionType.swift */; };
 		57B4F65726195C06006F894F /* Lint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5743A37B25ECA2B800919383 /* Lint.swift */; };
 		57B4F65D26195C35006F894F /* EmailConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FB8EDC2618771A00464C1F /* EmailConfiguration.swift */; };
 		57B4F66026195C39006F894F /* Markdown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B4F63E26195B07006F894F /* Markdown.swift */; };
@@ -149,6 +147,8 @@
 		393356C326FAF267009A6DAA /* ScriptType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptType.swift; sourceTree = "<group>"; };
 		395DE66126CF72E3004FEF25 /* Slacker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Slacker.swift; sourceTree = "<group>"; };
 		395DE66326CF73DE004FEF25 /* SlackConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlackConfiguration.swift; sourceTree = "<group>"; };
+		39708B422767223000DD5C3F /* ConfigurationType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationType.swift; sourceTree = "<group>"; };
+		39708B442767224200DD5C3F /* ConfigurationError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationError.swift; sourceTree = "<group>"; };
 		5743A36925EBAD4A00919383 /* KMARTMobileTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KMARTMobileTests.swift; sourceTree = "<group>"; };
 		5743A36F25EBB1D200919383 /* KMARTCommonTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KMARTCommonTests.swift; sourceTree = "<group>"; };
 		5743A37B25ECA2B800919383 /* Lint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lint.swift; sourceTree = "<group>"; };
@@ -238,6 +238,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		39708B462767229C00DD5C3F /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				39708B442767224200DD5C3F /* ConfigurationError.swift */,
+				39708B422767223000DD5C3F /* ConfigurationType.swift */,
+				57E2539E25D8CC8000931A0B /* Endpoint.swift */,
+				5756B95325DFA9DB001215DF /* OutputType.swift */,
+				57B4F64426195B12006F894F /* ReportOptionType.swift */,
+				57E253CA25D8E74100931A0B /* ReportType.swift */,
+				393356C326FAF267009A6DAA /* ScriptType.swift */,
+			);
+			path = Enums;
+			sourceTree = "<group>";
+		};
 		578B885725E658E9003A89BF /* KMARTTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -281,16 +295,12 @@
 		57E2539C25D8CC5A00931A0B /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				39708B462767229C00DD5C3F /* Enums */,
 				57E253E125DA2F4400931A0B /* Objects */,
 				57E253BF25D8CF6A00931A0B /* Configuration.swift */,
 				57FB8EDC2618771A00464C1F /* EmailConfiguration.swift */,
-				57E2539E25D8CC8000931A0B /* Endpoint.swift */,
 				57E253D325D8F89500931A0B /* Objects.swift */,
-				5756B95325DFA9DB001215DF /* OutputType.swift */,
-				57B4F64426195B12006F894F /* ReportOptionType.swift */,
-				57E253CA25D8E74100931A0B /* ReportType.swift */,
 				5793805D25DB898100A76D7D /* Reports.swift */,
-				393356C326FAF267009A6DAA /* ScriptType.swift */,
 				395DE66326CF73DE004FEF25 /* SlackConfiguration.swift */,
 			);
 			path = Model;
@@ -526,7 +536,6 @@
 				578B88B225E65FC9003A89BF /* Reporter.swift in Sources */,
 				578B888B25E65FA9003A89BF /* MacPolicyLog.swift in Sources */,
 				578B889925E65FA9003A89BF /* MacConfigurationProfile.swift in Sources */,
-				578B88AB25E65FC1003A89BF /* ReportType.swift in Sources */,
 				57B4F66026195C39006F894F /* Markdown.swift in Sources */,
 				578B888925E65FA9003A89BF /* Criterion.swift in Sources */,
 				578B88E925E66256003A89BF /* Configuration.swift in Sources */,
@@ -536,10 +545,8 @@
 				578B889525E65FA9003A89BF /* MacDeviceHistory.swift in Sources */,
 				578B889A25E65FA9003A89BF /* MobileExclusions.swift in Sources */,
 				578B889025E65FA9003A89BF /* MobileExtensionAttribute.swift in Sources */,
-				57B4F65226195BAE006F894F /* ReportOptionType.swift in Sources */,
 				578B888525E65FA9003A89BF /* StaticGroup.swift in Sources */,
 				578B888E25E65FA9003A89BF /* IBeacon.swift in Sources */,
-				578B88AD25E65FC1003A89BF /* Endpoint.swift in Sources */,
 				578B889225E65FA9003A89BF /* Building.swift in Sources */,
 				578B889725E65FA9003A89BF /* EBook.swift in Sources */,
 				57B4F65726195C06006F894F /* Lint.swift in Sources */,
@@ -552,7 +559,6 @@
 				5743A36A25EBAD4A00919383 /* KMARTMobileTests.swift in Sources */,
 				578B888F25E65FA9003A89BF /* Category.swift in Sources */,
 				578B88B625E65FCE003A89BF /* Dictionary+Extension.swift in Sources */,
-				578B88AF25E65FC1003A89BF /* OutputType.swift in Sources */,
 				578B88B725E65FCE003A89BF /* Int+Extension.swift in Sources */,
 				578B889B25E65FA9003A89BF /* MacApplication.swift in Sources */,
 				578B888625E65FA9003A89BF /* MacTargets.swift in Sources */,
@@ -590,6 +596,7 @@
 				5756B94A25DF60ED001215DF /* MacDeviceHistory.swift in Sources */,
 				57E2540125DA39CE00931A0B /* MacDiskEncryption.swift in Sources */,
 				57E2541A25DA3A0600931A0B /* MacRestrictedSoftware.swift in Sources */,
+				39708B452767224200DD5C3F /* ConfigurationError.swift in Sources */,
 				57E253E525DA2F5800931A0B /* Building.swift in Sources */,
 				57E253FE25DA39C600931A0B /* MacDirectoryBinding.swift in Sources */,
 				57E253F225DA39A900931A0B /* MacAdvancedSearch.swift in Sources */,
@@ -635,6 +642,7 @@
 				5793802E25DB3B7500A76D7D /* MobileTargets.swift in Sources */,
 				57E253FB25DA39C100931A0B /* MacDevice.swift in Sources */,
 				57E2542C25DA3A3100931A0B /* MobileExtensionAttribute.swift in Sources */,
+				39708B432767223000DD5C3F /* ConfigurationType.swift in Sources */,
 				57E2540425DA39D200931A0B /* MacDockItem.swift in Sources */,
 				57E253F525DA39B300931A0B /* MacApplication.swift in Sources */,
 				577AC6D42612D1F20086D80E /* Shell.swift in Sources */,

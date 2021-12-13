@@ -74,7 +74,7 @@ struct HTTP {
     ///
     /// - Parameters:
     ///   - url:           The Jamf API endpoint URL.
-    ///   - authorization: The Jamf API HTTP bearer token.
+    ///   - authorization: The Jamf API HTTP basic authorization token.
     ///   - session:       The (common) URLSession.
     ///   - semaphore:     The common semaphore used to wait for operations to complete.
     /// - Returns: A Jamf API endpoint dictionary object.
