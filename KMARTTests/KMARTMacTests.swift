@@ -287,13 +287,13 @@ class KMARTMacTests: XCTestCase {
         XCTAssertEqual(results.count, 1)
     }
 
-    func testMacExtensionAttributesNoLinterErrors() throws {
+    func testMacExtensionAttributesShellNoLinterErrors() throws {
         // https://github.com/koalaman/shellcheck/wiki/SC1008
         let script: String = """
         #!/bin/mywrapper
         # shellcheck shell=bash
 
-        echo "Hello World"
+        echo "Hello World!"
 
         exit 0
 
@@ -303,12 +303,12 @@ class KMARTMacTests: XCTestCase {
         XCTAssertTrue(results.isEmpty)
     }
 
-    func testMacExtensionAttributesLinterErrors() throws {
+    func testMacExtensionAttributesShellLinterErrors() throws {
         // https://github.com/koalaman/shellcheck/wiki/SC1008
         let script: String = """
         #!/bin/mywrapper
 
-        echo "Hello World"
+        echo "Hello World!"
 
         exit 0
 
@@ -318,12 +318,12 @@ class KMARTMacTests: XCTestCase {
         XCTAssertFalse(results.isEmpty)
     }
 
-    func testMacExtensionAttributesNoLinterWarnings() throws {
+    func testMacExtensionAttributesShellNoLinterWarnings() throws {
         // https://github.com/koalaman/shellcheck/wiki/SC1015
         let script: String = """
         #!/usr/bin/env bash
 
-        echo "Hello World"
+        echo "Hello World!"
 
         exit 0
 
@@ -333,14 +333,82 @@ class KMARTMacTests: XCTestCase {
         XCTAssertTrue(results.isEmpty)
     }
 
-    func testMacExtensionAttributesLinterWarnings() throws {
+    func testMacExtensionAttributesShellLinterWarnings() throws {
         // https://github.com/koalaman/shellcheck/wiki/SC1015
         let script: String = """
         #!/usr/bin/env bash
 
-        echo “Hello World”
+        echo “Hello World!”
 
         exit 0
+
+        """
+        let macExtensionAttribute: MacExtensionAttribute = MacExtensionAttribute(id: 1, inputType: "script", scriptContents: script)
+        let results: [MacExtensionAttribute] = Reporter.macExtensionAttributesLinterWarnings([macExtensionAttribute])
+        XCTAssertFalse(results.isEmpty)
+    }
+
+    func testMacExtensionAttributesPythonNoLinterErrors() throws {
+        // https://flake8.pycqa.org/en/4.0.1/user/error-codes.html
+        let script: String = """
+        #!/usr/bin/env python3
+
+        \"\"\"Sample script to test linting.\"\"\"
+
+        print("Hello World!")
+
+        exit(0)
+
+        """
+        let macExtensionAttribute: MacExtensionAttribute = MacExtensionAttribute(id: 1, inputType: "script", scriptContents: script)
+        let results: [MacExtensionAttribute] = Reporter.macExtensionAttributesLinterErrors([macExtensionAttribute])
+        XCTAssertTrue(results.isEmpty)
+    }
+
+    func testMacExtensionAttributesPythonLinterErrors() throws {
+        // https://flake8.pycqa.org/en/4.0.1/user/error-codes.html
+        let script: String = """
+        #!/usr/bin/env python3
+
+        \"\"\"Sample script to test linting.\"\"\"
+
+        import json
+
+        print("Hello World!")
+
+        exit(0)
+
+        """
+        let macExtensionAttribute: MacExtensionAttribute = MacExtensionAttribute(id: 1, inputType: "script", scriptContents: script)
+        let results: [MacExtensionAttribute] = Reporter.macExtensionAttributesLinterErrors([macExtensionAttribute])
+        XCTAssertFalse(results.isEmpty)
+    }
+
+    func testMacExtensionAttributesPythonNoLinterWarnings() throws {
+        // https://flake8.pycqa.org/en/4.0.1/user/error-codes.html
+        let script: String = """
+        #!/usr/bin/env python3
+
+        \"\"\"Sample script to test linting.\"\"\"
+
+        print("Hello World!")
+
+        exit(0)
+
+        """
+        let macExtensionAttribute: MacExtensionAttribute = MacExtensionAttribute(id: 1, inputType: "script", scriptContents: script)
+        let results: [MacExtensionAttribute] = Reporter.macExtensionAttributesLinterWarnings([macExtensionAttribute])
+        XCTAssertTrue(results.isEmpty)
+    }
+
+    func testMacExtensionAttributesPythonLinterWarnings() throws {
+        // https://flake8.pycqa.org/en/4.0.1/user/error-codes.html
+        let script: String = """
+        #!/usr/bin/env python3
+
+        print("Hello World!")
+
+        exit(0)
 
         """
         let macExtensionAttribute: MacExtensionAttribute = MacExtensionAttribute(id: 1, inputType: "script", scriptContents: script)
@@ -551,13 +619,13 @@ class KMARTMacTests: XCTestCase {
         XCTAssertFalse(results.isEmpty)
     }
 
-    func testMacScriptsNoLinterErrors() throws {
+    func testMacScriptsShellNoLinterErrors() throws {
         // https://github.com/koalaman/shellcheck/wiki/SC1008
         let script: String = """
         #!/bin/mywrapper
         # shellcheck shell=bash
 
-        echo "Hello World"
+        echo "Hello World!"
 
         exit 0
 
@@ -567,12 +635,12 @@ class KMARTMacTests: XCTestCase {
         XCTAssertTrue(results.isEmpty)
     }
 
-    func testMacScriptsLinterErrors() throws {
+    func testMacScriptsShellLinterErrors() throws {
         // https://github.com/koalaman/shellcheck/wiki/SC1008
         let script: String = """
         #!/bin/mywrapper
 
-        echo "Hello World"
+        echo "Hello World!"
 
         exit 0
 
@@ -582,12 +650,12 @@ class KMARTMacTests: XCTestCase {
         XCTAssertFalse(results.isEmpty)
     }
 
-    func testMacScriptsNoLinterWarnings() throws {
+    func testMacScriptsShellNoLinterWarnings() throws {
         // https://github.com/koalaman/shellcheck/wiki/SC1015
         let script: String = """
         #!/usr/bin/env bash
 
-        echo "Hello World"
+        echo "Hello World!"
 
         exit 0
 
@@ -597,14 +665,82 @@ class KMARTMacTests: XCTestCase {
         XCTAssertTrue(results.isEmpty)
     }
 
-    func testMacScriptsLinterWarnings() throws {
+    func testMacScriptsShellLinterWarnings() throws {
         // https://github.com/koalaman/shellcheck/wiki/SC1015
         let script: String = """
         #!/usr/bin/env bash
 
-        echo “Hello World”
+        echo “Hello World!”
 
         exit 0
+
+        """
+        let macScript: MacScript = MacScript(id: 1, scriptContents: script)
+        let results: [MacScript] = Reporter.macScriptsLinterWarnings([macScript])
+        XCTAssertFalse(results.isEmpty)
+    }
+
+    func testMacScriptsPythonNoLinterErrors() throws {
+        // https://pycodestyle.pycqa.org/en/latest/intro.html#error-codes
+        let script: String = """
+        #!/usr/bin/env python3
+
+        \"\"\"Sample script to test linting.\"\"\"
+
+        print("Hello World!")
+
+        exit(0)
+
+        """
+        let macScript: MacScript = MacScript(id: 1, scriptContents: script)
+        let results: [MacScript] = Reporter.macScriptsLinterErrors([macScript])
+        XCTAssertTrue(results.isEmpty)
+    }
+
+    func testMacScriptsPythonLinterErrors() throws {
+        // https://pycodestyle.pycqa.org/en/latest/intro.html#error-codes
+        let script: String = """
+        #!/usr/bin/env python3
+
+        \"\"\"Sample script to test linting.\"\"\"
+
+        import json
+
+        print("Hello World!")
+
+        exit(0)
+
+        """
+        let macScript: MacScript = MacScript(id: 1, scriptContents: script)
+        let results: [MacScript] = Reporter.macScriptsLinterErrors([macScript])
+        XCTAssertFalse(results.isEmpty)
+    }
+
+    func testMacScriptsPythonNoLinterWarnings() throws {
+        // https://pycodestyle.pycqa.org/en/latest/intro.html#error-codes
+        let script: String = """
+        #!/usr/bin/env python3
+
+        \"\"\"Sample script to test linting.\"\"\"
+
+        print("Hello World!")
+
+        exit(0)
+
+        """
+        let macScript: MacScript = MacScript(id: 1, scriptContents: script)
+        let results: [MacScript] = Reporter.macScriptsLinterWarnings([macScript])
+        XCTAssertTrue(results.isEmpty)
+    }
+
+    func testMacScriptsPythonLinterWarnings() throws {
+        // https://pycodestyle.pycqa.org/en/latest/intro.html#error-codes
+        let script: String = """
+        #!/usr/bin/env python3
+
+        print("Hello World!")
+
+        exit(0)
 
         """
         let macScript: MacScript = MacScript(id: 1, scriptContents: script)
