@@ -5,6 +5,7 @@
 //  Created by Nindi Gill on 15/2/21.
 //
 
+// swiftlint:disable file_length
 import Foundation
 
 extension Dictionary where Key == String, Value == Any {
@@ -27,6 +28,10 @@ extension Dictionary where Key == String, Value == Any {
         self.transformMobileStaticGroups(for: endpoint)
     }
 
+    /// Transform the **General** dictionary in-place.
+    ///
+    /// - Parameters:
+    ///   - endpoint: The Jamf API endpoint.
     private mutating func transformGeneral(for endpoint: Endpoint) {
 
         guard [
@@ -73,6 +78,10 @@ extension Dictionary where Key == String, Value == Any {
         self["softwareUpdates"] = ((dictionary["override_default_settings"] as? [String: Any])?["sus"] as? String) != "default"
     }
 
+    /// Transform the **Criteria** dictionary in-place.
+    ///
+    /// - Parameters:
+    ///   - endpoint: The Jamf API endpoint.
     private mutating func transformCriteria(for endpoint: Endpoint) {
 
         guard [.macAdvancedSearches, .macGroups, .mobileAdvancedSearches, .mobileGroups].contains(endpoint) else {
@@ -92,6 +101,10 @@ extension Dictionary where Key == String, Value == Any {
         self["criteria"] = criteria
     }
 
+    /// Transform the **Mac Scope Targets** dictionary in-place.
+    ///
+    /// - Parameters:
+    ///   - endpoint: The Jamf API endpoint.
     private mutating func transformScopeMacTargets(for endpoint: Endpoint) {
 
         guard [.eBooks, .macApplications, .macConfigurationProfiles, .macPolicies, .macRestrictedSoftware, .mobileApplications, .mobileConfigurationProfiles].contains(endpoint) else {
@@ -115,6 +128,10 @@ extension Dictionary where Key == String, Value == Any {
         self["macTargets"] = targets
     }
 
+    /// Transform the **Mac Scope Exclusions** dictionary in-place.
+    ///
+    /// - Parameters:
+    ///   - endpoint: The Jamf API endpoint.
     private mutating func transformScopeMacExclusions(for endpoint: Endpoint) {
 
         guard [.eBooks, .macApplications, .macConfigurationProfiles, .macPolicies, .macRestrictedSoftware, .mobileApplications, .mobileConfigurationProfiles].contains(endpoint) else {
@@ -142,6 +159,10 @@ extension Dictionary where Key == String, Value == Any {
         self["macExclusions"] = exclusions
     }
 
+    /// Transform the **Mobile Scope Targets** dictionary in-place.
+    ///
+    /// - Parameters:
+    ///   - endpoint: The Jamf API endpoint.
     private mutating func transformScopeMobileTargets(for endpoint: Endpoint) {
 
         guard [.eBooks, .mobileApplications, .mobileConfigurationProfiles].contains(endpoint) else {
@@ -171,6 +192,10 @@ extension Dictionary where Key == String, Value == Any {
         self["mobileTargets"] = targets
     }
 
+    /// Transform the **Mobile Scope Exclusions** dictionary in-place.
+    ///
+    /// - Parameters:
+    ///   - endpoint: The Jamf API endpoint.
     private mutating func transformScopeMobileExclusions(for endpoint: Endpoint) {
 
         guard [.eBooks, .mobileApplications, .mobileConfigurationProfiles].contains(endpoint) else {
@@ -203,6 +228,10 @@ extension Dictionary where Key == String, Value == Any {
         self["mobileExclusions"] = exclusions
     }
 
+    /// Transform the **Mac Scope Limitations** dictionary in-place.
+    ///
+    /// - Parameters:
+    ///   - endpoint: The Jamf API endpoint.
     private mutating func transformScopeLimitations(for endpoint: Endpoint) {
 
         guard [.eBooks, .macApplications, .macConfigurationProfiles, .macPolicies, .mobileApplications, .mobileConfigurationProfiles].contains(endpoint) else {
@@ -224,6 +253,10 @@ extension Dictionary where Key == String, Value == Any {
         self["limitations"] = limitations
     }
 
+    /// Transform the **VPP** dictionary in-place.
+    ///
+    /// - Parameters:
+    ///   - endpoint: The Jamf API endpoint.
     private mutating func transformVPP(for endpoint: Endpoint) {
 
         guard [.macApplications, .mobileApplications].contains(endpoint) else {
@@ -238,6 +271,10 @@ extension Dictionary where Key == String, Value == Any {
         self["vppUsed"] = dictionary["used_vpp_licenses"] as? Int ?? 0
     }
 
+    /// Transform the **Location** dictionary in-place.
+    ///
+    /// - Parameters:
+    ///   - endpoint: The Jamf API endpoint.
     private mutating func transformLocation(for endpoint: Endpoint) {
 
         guard [.macDevices, .mobileDevices].contains(endpoint) else {
@@ -254,6 +291,10 @@ extension Dictionary where Key == String, Value == Any {
         self["department"] = department
     }
 
+    /// Transform the **Mac Device History** dictionary in-place.
+    ///
+    /// - Parameters:
+    ///   - endpoint: The Jamf API endpoint.
     private mutating func transformMacDeviceHistory(for endpoint: Endpoint) {
 
         guard [.macDevicesHistory].contains(endpoint) else {
@@ -278,6 +319,10 @@ extension Dictionary where Key == String, Value == Any {
         self["macPolicyLogs"] = policyLogs
     }
 
+    /// Transform the **Mac Extension Attributes** dictionary in-place.
+    ///
+    /// - Parameters:
+    ///   - endpoint: The Jamf API endpoint.
     private mutating func transformMacExtensionAttributes(for endpoint: Endpoint) {
 
         guard [.macExtensionAttributes].contains(endpoint) else {
@@ -297,6 +342,10 @@ extension Dictionary where Key == String, Value == Any {
         self["linterErrors"] = []
     }
 
+    /// Transform the **Mac Policies** dictionary in-place.
+    ///
+    /// - Parameters:
+    ///   - endpoint: The Jamf API endpoint.
     private mutating func transformMacPolicies(for endpoint: Endpoint) {
 
         guard [.macPolicies].contains(endpoint) else {
@@ -340,6 +389,10 @@ extension Dictionary where Key == String, Value == Any {
         self["scripts"] = scripts.identifiers
     }
 
+    /// Transform the **Mac Scripts** dictionary in-place.
+    ///
+    /// - Parameters:
+    ///   - endpoint: The Jamf API endpoint.
     private mutating func transformMacScripts(for endpoint: Endpoint) {
 
         guard [.macScripts].contains(endpoint) else {
@@ -357,6 +410,10 @@ extension Dictionary where Key == String, Value == Any {
         self["linterErrors"] = []
     }
 
+    /// Transform the **Mac Static Groups** dictionary in-place.
+    ///
+    /// - Parameters:
+    ///   - endpoint: The Jamf API endpoint.
     private mutating func transformMacStaticGroups(for endpoint: Endpoint) {
 
         guard [.macGroups].contains(endpoint) else {
@@ -370,6 +427,10 @@ extension Dictionary where Key == String, Value == Any {
         self["devices"] = devices.identifiers
     }
 
+    /// Transform the **Mobile Static Groups** dictionary in-place.
+    ///
+    /// - Parameters:
+    ///   - endpoint: The Jamf API endpoint.
     private mutating func transformMobileStaticGroups(for endpoint: Endpoint) {
 
         guard [.mobileGroups].contains(endpoint) else {

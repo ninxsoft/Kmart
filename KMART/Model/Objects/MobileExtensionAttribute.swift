@@ -8,7 +8,6 @@
 import Foundation
 
 struct MobileExtensionAttribute: Codable {
-    // swiftlint:disable:next identifier_name
     var id: Int
     var name: String
     var dictionary: [String: Any] {

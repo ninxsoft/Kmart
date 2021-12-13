@@ -10,8 +10,14 @@ import Foundation
 import FoundationNetworking
 #endif
 
+/// Struct used to perform all **HTTP** operations.
 struct HTTP {
 
+    /// Retrieve all Jamf API endpoint results.
+    ///
+    /// - Parameters:
+    ///   - configuration: The Jamf API endpoint URL.
+    /// - Returns: An object containing all Jamf API endpoint results.
     static func retrieveObjects(using configuration: Configuration) -> Objects {
 
         var objects: Objects = Objects()
@@ -64,6 +70,14 @@ struct HTTP {
         return objects
     }
 
+    /// Request a Jamf API endpoint object.
+    ///
+    /// - Parameters:
+    ///   - url:           The Jamf API endpoint URL.
+    ///   - authorization: The Jamf API HTTP basic authorization token.
+    ///   - session:       The (common) URLSession.
+    ///   - semaphore:     The common semaphore used to wait for operations to complete.
+    /// - Returns: A Jamf API endpoint dictionary object.
     private static func requestObject(url string: String, with authorization: String, using session: URLSession, semaphore: DispatchSemaphore) -> [String: Any] {
 
         var object: [String: Any] = [:]
@@ -94,7 +108,7 @@ struct HTTP {
             }
 
             guard httpResponse.statusCode == 200 else {
-                let string: String = errorMessage(httpResponse.statusCode, url: url)
+                let string: String = errorMessage(httpResponse.statusCode, for: url)
                 PrettyPrint.print(string, prefix: "\n  ├─ ")
                 semaphore.signal()
                 return
@@ -122,7 +136,13 @@ struct HTTP {
         return object
     }
 
-    static func errorMessage(_ statusCode: Int, url: URL) -> String {
+    /// Return an error message for the provided HTTP status code and URL.
+    ///
+    /// - Parameters:
+    ///   - statusCode: The HTTP status code.
+    ///   - url:        The URL where the HTTP status code was returned from.
+    /// - Returns: An error message `String`.
+    static func errorMessage(_ statusCode: Int, for url: URL) -> String {
 
         switch statusCode {
         case 400:

@@ -1,5 +1,5 @@
 //
-//  Email.swift
+//  EmailConfiguration.swift
 //  KMART
 //
 //  Created by Nindi Gill on 3/4/21.
@@ -7,22 +7,40 @@
 
 import Foundation
 
-struct Email {
+/// Struct used to hold Email configuration.
+struct EmailConfiguration {
 
+    /// Set to `true` to enable reporting via Email.
     var enabled: Bool = false
+    /// Email hostname
     var hostname: String = ""
+    /// Email port
     var port: Int32 = 587
+    /// Email username
     var username: String = ""
+    /// Email password
     var password: String = ""
+    /// Email sender name
     var name: String = ""
+    /// Email sender
     var sender: String = ""
+    /// Email list of recipients
     var recipients: [String] = []
+    /// Email list of CC recipients
     var carbonCopy: [String] = []
+    /// Email list of BCC recipients
     var blindCarbonCopy: [String] = []
+    /// Email subject
     var subject: String = ""
+    /// Email body
     var body: String = ""
+    /// Email attachments
     var attachments: [OutputType: String] = [:]
 
+    /// Initialize an Email struct by passing in a custom dictionary.
+    ///
+    /// - Parameters:
+    ///   - dictionary: Custom dictionary containing Email configuration properties.
     init(_ dictionary: [String: Any] = [:]) {
         enabled = dictionary["enabled"] as? Bool ?? false
         hostname = dictionary["hostname"] as? String ?? ""

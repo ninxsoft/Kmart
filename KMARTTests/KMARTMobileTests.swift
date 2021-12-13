@@ -11,13 +11,13 @@ class KMARTMobileTests: XCTestCase {
 
     func testMobileAdvancedSearchesCriteria() throws {
         let mobileAdvancedSearches: [MobileAdvancedSearch] = [MobileAdvancedSearch(id: 1)]
-        let results: [MobileAdvancedSearch] = ReporterMobile.mobileAdvancedSearchesNoCriteria(mobileAdvancedSearches)
+        let results: [MobileAdvancedSearch] = Reporter.mobileAdvancedSearchesNoCriteria(mobileAdvancedSearches)
         XCTAssertFalse(results.isEmpty)
     }
 
     func testMobileAdvancedSearchesNoCriteria() throws {
         let mobileAdvancedSearches: [MobileAdvancedSearch] = [MobileAdvancedSearch(id: 1, criteria: [Criterion(name: "Name", type: "Type", value: "Value")])]
-        let results: [MobileAdvancedSearch] = ReporterMobile.mobileAdvancedSearchesNoCriteria(mobileAdvancedSearches)
+        let results: [MobileAdvancedSearch] = Reporter.mobileAdvancedSearchesNoCriteria(mobileAdvancedSearches)
         XCTAssertTrue(results.isEmpty)
     }
 
@@ -27,7 +27,7 @@ class KMARTMobileTests: XCTestCase {
         let mobileSmartGroups: [SmartGroup] = [SmartGroup(id: 1, name: "Smart Group")]
         let mobileStaticGroups: [StaticGroup] = [StaticGroup(id: 2, name: "Static Group")]
         let objects: Objects = Objects(mobileAdvancedSearches: mobileAdvancedSearches, mobileSmartGroups: mobileSmartGroups, mobileStaticGroups: mobileStaticGroups)
-        let results: [MobileAdvancedSearch] = ReporterMobile.mobileAdvancedSearchesInvalidCriteria(objects)
+        let results: [MobileAdvancedSearch] = Reporter.mobileAdvancedSearchesInvalidCriteria(objects)
         XCTAssertTrue(results.isEmpty)
     }
 
@@ -37,7 +37,7 @@ class KMARTMobileTests: XCTestCase {
         let mobileSmartGroups: [SmartGroup] = [SmartGroup(id: 1, name: "Smart Group")]
         let mobileStaticGroups: [StaticGroup] = [StaticGroup(id: 2, name: "Static Group")]
         let objects: Objects = Objects(mobileAdvancedSearches: mobileAdvancedSearches, mobileSmartGroups: mobileSmartGroups, mobileStaticGroups: mobileStaticGroups)
-        let results: [MobileAdvancedSearch] = ReporterMobile.mobileAdvancedSearchesInvalidCriteria(objects)
+        let results: [MobileAdvancedSearch] = Reporter.mobileAdvancedSearchesInvalidCriteria(objects)
         XCTAssertFalse(results.isEmpty)
     }
 
@@ -60,13 +60,13 @@ class KMARTMobileTests: XCTestCase {
             MobileApplication(id: 15, limitations: Limitations(networkSegments: [1])),
             MobileApplication(id: 16, limitations: Limitations(iBeacons: [1]))
         ]
-        let results: [MobileApplication] = ReporterMobile.mobileApplicationsNoScope(mobileApplications)
+        let results: [MobileApplication] = Reporter.mobileApplicationsNoScope(mobileApplications)
         XCTAssertTrue(results.isEmpty)
     }
 
     func testMobileApplicationsNoScope() throws {
         let mobileApplications: [MobileApplication] = [MobileApplication(id: 1)]
-        let results: [MobileApplication] = ReporterMobile.mobileApplicationsNoScope(mobileApplications)
+        let results: [MobileApplication] = Reporter.mobileApplicationsNoScope(mobileApplications)
         XCTAssertFalse(results.isEmpty)
     }
 
@@ -89,13 +89,13 @@ class KMARTMobileTests: XCTestCase {
             MobileConfigurationProfile(id: 15, limitations: Limitations(networkSegments: [1])),
             MobileConfigurationProfile(id: 16, limitations: Limitations(iBeacons: [1]))
         ]
-        let results: [MobileConfigurationProfile] = ReporterMobile.mobileConfigurationProfilesNoScope(mobileConfigurationProfiles)
+        let results: [MobileConfigurationProfile] = Reporter.mobileConfigurationProfilesNoScope(mobileConfigurationProfiles)
         XCTAssertTrue(results.isEmpty)
     }
 
     func testMobileConfigurationProfilesNoScope() throws {
         let mobileConfigurationProfiles: [MobileConfigurationProfile] = [MobileConfigurationProfile(id: 1)]
-        let results: [MobileConfigurationProfile] = ReporterMobile.mobileConfigurationProfilesNoScope(mobileConfigurationProfiles)
+        let results: [MobileConfigurationProfile] = Reporter.mobileConfigurationProfilesNoScope(mobileConfigurationProfiles)
         XCTAssertFalse(results.isEmpty)
     }
 
@@ -117,7 +117,7 @@ class KMARTMobileTests: XCTestCase {
             MobileDevice(id: 6, lastInventory: fortyFiveDays.timeIntervalSince1970, managed: false)
         ]
         let options: [ReportOptionType: Int] = [.mobileDevicesLastInventory: 30]
-        let results: [MobileDevice] = ReporterMobile.mobileDevicesLastInventory(mobileDevices, options: options)
+        let results: [MobileDevice] = Reporter.mobileDevicesLastInventory(mobileDevices, options: options)
         XCTAssertTrue(results.count == 2)
         XCTAssertTrue(results[0].id == 2)
         XCTAssertTrue(results[1].id == 3)
@@ -128,7 +128,7 @@ class KMARTMobileTests: XCTestCase {
             MobileDevice(id: 1, managed: true),
             MobileDevice(id: 2, managed: true)
         ]
-        let results: [MobileDevice] = ReporterMobile.mobileDevicesUnmanaged(mobileDevices)
+        let results: [MobileDevice] = Reporter.mobileDevicesUnmanaged(mobileDevices)
         XCTAssertTrue(results.isEmpty)
     }
 
@@ -137,7 +137,7 @@ class KMARTMobileTests: XCTestCase {
             MobileDevice(id: 1, managed: false),
             MobileDevice(id: 2, managed: false)
         ]
-        let results: [MobileDevice] = ReporterMobile.mobileDevicesUnmanaged(mobileDevices)
+        let results: [MobileDevice] = Reporter.mobileDevicesUnmanaged(mobileDevices)
         XCTAssertFalse(results.isEmpty)
     }
 
@@ -146,7 +146,7 @@ class KMARTMobileTests: XCTestCase {
         let mobileExtensionAttributes: [MobileExtensionAttribute] = [MobileExtensionAttribute(id: 1, name: "Name")]
         let mobileSmartGroups: [SmartGroup] = [SmartGroup(id: 1, criteria: [Criterion(name: "Name")])]
         let objects: Objects = Objects(mobileAdvancedSearches: mobileAdvancedSearches, mobileExtensionAttributes: mobileExtensionAttributes, mobileSmartGroups: mobileSmartGroups)
-        let results: [MobileExtensionAttribute] = ReporterMobile.mobileExtensionAttributesNotLinked(objects)
+        let results: [MobileExtensionAttribute] = Reporter.mobileExtensionAttributesNotLinked(objects)
         XCTAssertTrue(results.isEmpty)
     }
 
@@ -155,7 +155,7 @@ class KMARTMobileTests: XCTestCase {
         let mobileExtensionAttributes: [MobileExtensionAttribute] = [MobileExtensionAttribute(id: 1, name: "Name")]
         let mobileSmartGroups: [SmartGroup] = [SmartGroup(id: 1, criteria: [Criterion()])]
         let objects: Objects = Objects(mobileAdvancedSearches: mobileAdvancedSearches, mobileExtensionAttributes: mobileExtensionAttributes, mobileSmartGroups: mobileSmartGroups)
-        let results: [MobileExtensionAttribute] = ReporterMobile.mobileExtensionAttributesNotLinked(objects)
+        let results: [MobileExtensionAttribute] = Reporter.mobileExtensionAttributesNotLinked(objects)
         XCTAssertFalse(results.isEmpty)
     }
 
@@ -171,7 +171,7 @@ class KMARTMobileTests: XCTestCase {
             mobileConfigurationProfiles: mobileConfigurationProfiles,
             mobileSmartGroups: mobileSmartGroups
         )
-        let results: [SmartGroup] = ReporterMobile.mobileSmartGroupsNotLinked(objects)
+        let results: [SmartGroup] = Reporter.mobileSmartGroupsNotLinked(objects)
         XCTAssertTrue(results.isEmpty)
     }
 
@@ -187,19 +187,19 @@ class KMARTMobileTests: XCTestCase {
             mobileConfigurationProfiles: mobileConfigurationProfiles,
             mobileSmartGroups: mobileSmartGroups
         )
-        let results: [SmartGroup] = ReporterMobile.mobileSmartGroupsNotLinked(objects)
+        let results: [SmartGroup] = Reporter.mobileSmartGroupsNotLinked(objects)
         XCTAssertFalse(results.isEmpty)
     }
 
     func testMobileSmartGroupsCriteria() throws {
         let mobileSmartGroups: [SmartGroup] = [SmartGroup(id: 1)]
-        let results: [SmartGroup] = ReporterMobile.mobileSmartGroupsNoCriteria(mobileSmartGroups)
+        let results: [SmartGroup] = Reporter.mobileSmartGroupsNoCriteria(mobileSmartGroups)
         XCTAssertFalse(results.isEmpty)
     }
 
     func testMobileSmartGroupsNoCriteria() throws {
         let mobileSmartGroups: [SmartGroup] = [SmartGroup(id: 1, criteria: [Criterion(name: "Name", type: "Type", value: "Value")])]
-        let results: [SmartGroup] = ReporterMobile.mobileSmartGroupsNoCriteria(mobileSmartGroups)
+        let results: [SmartGroup] = Reporter.mobileSmartGroupsNoCriteria(mobileSmartGroups)
         XCTAssertTrue(results.isEmpty)
     }
 
@@ -215,7 +215,7 @@ class KMARTMobileTests: XCTestCase {
             mobileConfigurationProfiles: mobileConfigurationProfiles,
             mobileStaticGroups: mobileStaticGroups
         )
-        let results: [StaticGroup] = ReporterMobile.mobileStaticGroupsNotLinked(objects)
+        let results: [StaticGroup] = Reporter.mobileStaticGroupsNotLinked(objects)
         XCTAssertTrue(results.isEmpty)
     }
 
@@ -231,19 +231,19 @@ class KMARTMobileTests: XCTestCase {
             mobileConfigurationProfiles: mobileConfigurationProfiles,
             mobileStaticGroups: mobileStaticGroups
         )
-        let results: [StaticGroup] = ReporterMobile.mobileStaticGroupsNotLinked(objects)
+        let results: [StaticGroup] = Reporter.mobileStaticGroupsNotLinked(objects)
         XCTAssertFalse(results.isEmpty)
     }
 
     func testMobileStaticGroupsNotEmpty() throws {
         let mobileStaticGroups: [StaticGroup] = [StaticGroup(id: 1, devices: [1])]
-        let results: [StaticGroup] = ReporterMobile.mobileStaticGroupsEmpty(mobileStaticGroups)
+        let results: [StaticGroup] = Reporter.mobileStaticGroupsEmpty(mobileStaticGroups)
         XCTAssertTrue(results.isEmpty)
     }
 
     func testMobileStaticGroupsEmpty() throws {
         let mobileStaticGroups: [StaticGroup] = [StaticGroup(id: 1)]
-        let results: [StaticGroup] = ReporterMobile.mobileStaticGroupsEmpty(mobileStaticGroups)
+        let results: [StaticGroup] = Reporter.mobileStaticGroupsEmpty(mobileStaticGroups)
         XCTAssertFalse(results.isEmpty)
     }
 }

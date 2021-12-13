@@ -22,7 +22,7 @@ struct Lint: Codable {
     var level: LintLevel = .lintStyle
     var line: Int = -1
     var column: Int = -1
-    var code: Int = -1
+    var code: String = ""
     var message: String = ""
     var dictionary: [String: Any] {
         [
@@ -31,5 +31,16 @@ struct Lint: Codable {
             "code": code,
             "message": message
         ]
+    }
+
+    static func url(for code: String) -> String {
+
+        if code.range(of: "^[CF]", options: .regularExpression) != nil {
+            return "https://flake8.pycqa.org/en/latest/user/error-codes.html"
+        } else if code.range(of: "^[EW]", options: .regularExpression) != nil {
+            return "https://pycodestyle.pycqa.org/en/latest/intro.html#error-codes"
+        } else {
+            return "https://github.com/koalaman/shellcheck/wiki/SC\(code)"
+        }
     }
 }

@@ -8,7 +8,6 @@
 import Foundation
 
 struct MacApplication: Codable {
-    // swiftlint:disable:next identifier_name
     var id: Int = -1
     var name: String = ""
     var category: Int = -1

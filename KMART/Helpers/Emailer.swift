@@ -8,11 +8,17 @@
 import Foundation
 import SwiftSMTP
 
+/// Struct used to perform all **Email** operations.
 struct Emailer {
 
+    /// Send an email with an attached report.
+    ///
+    /// - Parameters:
+    ///   - reports:       The reports to send via Email.
+    ///   - configuration: The configuration containing email settings.
     static func email(_ reports: Reports, using configuration: Configuration) {
         let semaphore: DispatchSemaphore = DispatchSemaphore(value: 0)
-        let email: Email = configuration.email
+        let email: EmailConfiguration = configuration.email
         let smtp: SMTP = SMTP(hostname: email.hostname, email: email.username, password: email.password, port: email.port)
         let sender: Mail.User = Mail.User(name: email.name, email: email.sender)
         let recipients: [Mail.User] = email.recipients.map { Mail.User(name: "", email: $0) }

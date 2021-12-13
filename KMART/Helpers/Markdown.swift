@@ -8,8 +8,16 @@
 import Foundation
 import Ink
 
+/// Struct used to perform all **Markdown** operations.
 struct Markdown {
 
+    /// Generate a Markdown string from the provided parameters.
+    ///
+    /// - Parameters:
+    ///   - dictionary: The dictionary containing all report data.
+    ///   - name:       The name of the report.
+    ///   - url:        The base URL for the report, used for hyperlinks.
+    /// - Returns: A Markdown `String`.
     static func generateMarkdown(from dictionary: [String: Any], name: String, url: String) -> String {
 
         guard let reports: [String: Any] = dictionary["reports"] as? [String: Any] else {
@@ -67,6 +75,13 @@ struct Markdown {
         return string
     }
 
+    /// Generate a HTML string from the provided parameters.
+    ///
+    /// - Parameters:
+    ///   - dictionary: The dictionary containing all report data.
+    ///   - name:       The name of the report.
+    ///   - url:        The base URL for the report, used for hyperlinks.
+    /// - Returns: A HTML `String`.
     static func generateHTML(from dictionary: [String: Any], name: String, url: String) -> String {
         let markdown: String = generateMarkdown(from: dictionary, name: name, url: url)
         var parser: MarkdownParser = MarkdownParser()
@@ -88,6 +103,11 @@ struct Markdown {
         return string
     }
 
+    /// Return a list of Endpoints for the provided dictionary. Used to build the **Table of Contents**.
+    ///
+    /// - Parameters:
+    ///   - dictionary: The dictionary containing all report data.
+    /// - Returns: A list of `Endpoint` objects.
     private static func endpointSections(for dictionary: [String: Any]) -> [Endpoint] {
 
         guard let reports: [String: Any] = dictionary["reports"] as? [String: Any] else {
@@ -105,6 +125,11 @@ struct Markdown {
         return Array(Set(endpoints)).sorted { $0.fullDescription.lowercased() < $1.fullDescription.lowercased() }
     }
 
+    /// Generate a Markdown table header string.
+    ///
+    /// - Parameters:
+    ///   - type: The report type used to determine the Markdown table header structure.
+    /// - Returns: A Markdown table header `String`.
     private static func tableHeader(for type: ReportType) -> String {
 
         var string: String = ""
@@ -130,6 +155,13 @@ struct Markdown {
         return string
     }
 
+    /// Generate a Markdown table row string.
+    ///
+    /// - Parameters:
+    ///   - type:       The report type used to determine the Markdown table row structure.
+    ///   - dictionary: The dictionary containing all report data.
+    ///   - url:        The base URL for the report, used for hyperlinks.
+    /// - Returns: A Markdown table row `String`.
     private static func tableRow(type: ReportType, dictionary: [String: Any], url: String) -> String? {
 
         guard let identifier: Int = dictionary["id"] as? Int,
@@ -158,12 +190,12 @@ struct Markdown {
 
                 guard let line: Int = item["line"] as? Int,
                     let column: Int = item["column"] as? Int,
-                    let code: Int = item["code"] as? Int,
+                    let code: String = item["code"] as? String,
                     let message: String = item["message"] as? String  else {
                     return nil
                 }
 
-                let formattedCode: String = "https://github.com/koalaman/shellcheck/wiki/SC\(code)"
+                let formattedCode: String = Lint.url(for: code)
                 let formattedMessage: String = message.escapingMarkdown().trimmingCharacters(in: .newlines)
                 let stringWithIdentifier: String = "| [\(identifier)](\(link)) | \(formattedName) | \(line) | \(column) | \(formattedMessage) | [\(code)](\(formattedCode)) |\n"
                 let stringWithoutIdentifier: String = "|  |  | \(line) | \(column) | \(formattedMessage) | [\(code)](\(formattedCode)) |\n"
@@ -183,6 +215,12 @@ struct Markdown {
         }
     }
 
+    /// Return a string wrapped in HTML `<head>` and `<body>` tags.
+    ///
+    /// - Parameters:
+    ///   - string: The string to wrap in HTML.
+    ///   - name:   The name of the report.
+    /// - Returns: A HTML `String`.
     private static func wrapInHTML(string: String, name: String) -> String {
         let prefix: String = """
         <!doctype html>
