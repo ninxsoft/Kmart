@@ -34,16 +34,10 @@ struct HTTP {
 
             do {
                 let request: URLRequest = urlRequest(for: url, with: configuration.authorization)
-                var tuple: (data: Data, response: URLResponse)
+                let (data, urlResponse): (Data, URLResponse) = try await session.data(for: request)
 
-                if #available(macOS 12.0, *) {
-                    tuple = try await session.data(for: request)
-                } else {
-                    tuple = try session.synchronousData(for: request)
-                }
-
-                guard let httpURLResponse: HTTPURLResponse = tuple.response as? HTTPURLResponse,
-                    let dictionary: [String: Any] = try JSONSerialization.jsonObject(with: tuple.data, options: []) as? [String: Any],
+                guard let httpURLResponse: HTTPURLResponse = urlResponse as? HTTPURLResponse,
+                    let dictionary: [String: Any] = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
                     let array: [[String: Any]] = dictionary[endpoint.primaryKey] as? [[String: Any]] else {
                     PrettyPrint.print("Unable to find '\(endpoint.primaryKey)' key in URL response", prefixColor: .red)
                     continue
@@ -97,16 +91,10 @@ struct HTTP {
         }
 
         let request: URLRequest = urlRequest(for: url, with: configuration.authorization)
-        var tuple: (data: Data, response: URLResponse)
+        let (data, urlResponse): (Data, URLResponse) = try await session.data(for: request)
 
-        if #available(macOS 12.0, *) {
-            tuple = try await session.data(for: request)
-        } else {
-            tuple = try session.synchronousData(for: request)
-        }
-
-        guard let httpURLResponse: HTTPURLResponse = tuple.response as? HTTPURLResponse,
-            let parentDictionary: [String: Any] = try JSONSerialization.jsonObject(with: tuple.data, options: []) as? [String: Any],
+        guard let httpURLResponse: HTTPURLResponse = urlResponse as? HTTPURLResponse,
+            let parentDictionary: [String: Any] = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
             var dictionary: [String: Any] = parentDictionary[endpoint.secondaryKey] as? [String: Any] else {
             PrettyPrint.print("Unable to find '\(endpoint.secondaryKey)' key in URL response", prefixColor: .red)
             throw KmartError.missingKey

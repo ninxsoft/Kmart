@@ -9,8 +9,7 @@ import Foundation
 
 enum KmartError: Error {
     case invalidFile
-    case invalidData
     case invalidURL
-    case invalidStatusCode
     case missingKey
+    case invalidStatusCode
 }

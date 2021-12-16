@@ -55,15 +55,9 @@ struct Slacker {
         request.httpBody = messageData(for: slack)
 
         do {
-            var tuple: (data: Data, response: URLResponse)
+            let (data, response): (Data, URLResponse) = try await URLSession.shared.data(for: request)
 
-            if #available(macOS 12.0, *) {
-                tuple = try await URLSession.shared.data(for: request)
-            } else {
-                tuple = try URLSession.shared.synchronousData(for: request)
-            }
-
-            guard let httpResponse: HTTPURLResponse = tuple.response as? HTTPURLResponse else {
+            guard let httpResponse: HTTPURLResponse = response as? HTTPURLResponse else {
                 PrettyPrint.print("Unable to get response from URL: \(url)", prefixColor: .red)
                 return nil
             }
@@ -74,7 +68,7 @@ struct Slacker {
                 return nil
             }
 
-            guard let dictionary = try? JSONSerialization.jsonObject(with: tuple.data, options: []) as? [String: Any] else {
+            guard let dictionary = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else {
                 PrettyPrint.print("Invalid response data from URL: \(url)", prefixColor: .red)
                 return nil
             }
@@ -153,15 +147,9 @@ struct Slacker {
         PrettyPrint.print("Uploading \(outputType.description) report via Slack")
 
         do {
-            var tuple: (data: Data, response: URLResponse)
+            let (data, response): (Data, URLResponse) = try await URLSession.shared.data(for: request)
 
-            if #available(macOS 12.0, *) {
-                tuple = try await URLSession.shared.data(for: request)
-            } else {
-                tuple = try URLSession.shared.synchronousData(for: request)
-            }
-
-            guard let httpResponse: HTTPURLResponse = tuple.response as? HTTPURLResponse else {
+            guard let httpResponse: HTTPURLResponse = response as? HTTPURLResponse else {
                 PrettyPrint.print("Unable to get response from URL: \(url)", prefixColor: .red)
                 return
             }

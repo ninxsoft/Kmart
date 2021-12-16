@@ -21,7 +21,6 @@
 		39708B4B276730CB00DD5C3F /* ReportType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E253CA25D8E74100931A0B /* ReportType.swift */; };
 		39708B4C276730D500DD5C3F /* OutputType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5756B95325DFA9DB001215DF /* OutputType.swift */; };
 		39708B4D276730E100DD5C3F /* ConfigurationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39708B422767223000DD5C3F /* ConfigurationType.swift */; };
-		3976D489276B6C7A00B675BC /* URLSession+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3976D488276B6C7A00B675BC /* URLSession+Extension.swift */; };
 		573CD6E52611E62700CE156E /* Ink in Frameworks */ = {isa = PBXBuildFile; productRef = 573CD6E42611E62700CE156E /* Ink */; };
 		5743A36A25EBAD4A00919383 /* KMARTMobileTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5743A36925EBAD4A00919383 /* KMARTMobileTests.swift */; };
 		5743A37025EBB1D200919383 /* KMARTCommonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5743A36F25EBB1D200919383 /* KMARTCommonTests.swift */; };
@@ -158,7 +157,6 @@
 		395DE66326CF73DE004FEF25 /* SlackConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlackConfiguration.swift; sourceTree = "<group>"; };
 		39708B422767223000DD5C3F /* ConfigurationType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationType.swift; sourceTree = "<group>"; };
 		39708B442767224200DD5C3F /* KmartError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KmartError.swift; sourceTree = "<group>"; };
-		3976D488276B6C7A00B675BC /* URLSession+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+Extension.swift"; sourceTree = "<group>"; };
 		5743A36925EBAD4A00919383 /* KMARTMobileTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KMARTMobileTests.swift; sourceTree = "<group>"; };
 		5743A36F25EBB1D200919383 /* KMARTCommonTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KMARTCommonTests.swift; sourceTree = "<group>"; };
 		5743A37B25ECA2B800919383 /* Lint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lint.swift; sourceTree = "<group>"; };
@@ -335,7 +333,6 @@
 				3920D62B2768663F004AD309 /* ParsableCommand+Extension.swift */,
 				57E253DB25D9E4E400931A0B /* Sequence+Extension.swift */,
 				57E253B925D8CE5200931A0B /* String+Extension.swift */,
-				3976D488276B6C7A00B675BC /* URLSession+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -659,7 +656,6 @@
 				5793804A25DB75E400A76D7D /* IBeacon.swift in Sources */,
 				3920D62C2768663F004AD309 /* ParsableCommand+Extension.swift in Sources */,
 				5793802E25DB3B7500A76D7D /* MobileTargets.swift in Sources */,
-				3976D489276B6C7A00B675BC /* URLSession+Extension.swift in Sources */,
 				57E253FB25DA39C100931A0B /* MacDevice.swift in Sources */,
 				57E2542C25DA3A3100931A0B /* MobileExtensionAttribute.swift in Sources */,
 				39708B432767223000DD5C3F /* ConfigurationType.swift in Sources */,
@@ -764,7 +760,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -819,7 +815,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = macosx;
@@ -835,7 +831,7 @@
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 7K3HVCLV7Z;
 				ENABLE_HARDENED_RUNTIME = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ninxsoft.kmart;
 				PRODUCT_NAME = kmart;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -850,7 +846,7 @@
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 7K3HVCLV7Z;
 				ENABLE_HARDENED_RUNTIME = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ninxsoft.kmart;
 				PRODUCT_NAME = kmart;
 				PROVISIONING_PROFILE_SPECIFIER = "";
