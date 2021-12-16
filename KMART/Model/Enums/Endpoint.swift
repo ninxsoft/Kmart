@@ -352,4 +352,14 @@ enum Endpoint: String {
     var markdownIdentifier: String {
         self.rawValue.replacingOccurrences(of: "_", with: "-")
     }
+
+    func primaryURL(url baseURL: String) -> URL? {
+        let string: String = "\(baseURL)/JSSResource/\(self == .macDevicesHistory ? "computers" : self.apiSlug)"
+        return URL(string: string)
+    }
+
+    func secondaryURL(url baseURL: String, identifier: Int) -> URL? {
+        let string: String = "\(baseURL)/JSSResource/\(self.apiSlug)/id/\(identifier)\(self.subset)"
+        return URL(string: string)
+    }
 }

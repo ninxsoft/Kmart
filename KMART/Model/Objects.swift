@@ -140,7 +140,7 @@ struct Objects {
                 try insertMobileGroup(using: data)
             }
         } catch {
-            PrettyPrint.print(error.localizedDescription)
+            PrettyPrint.print(error.localizedDescription, prefixColor: .red)
         }
     }
 

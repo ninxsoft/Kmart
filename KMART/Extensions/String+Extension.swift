@@ -91,4 +91,8 @@ extension String {
 
         return dictionaries
     }
+
+    func leftPadding(toLength: Int, withPad: String) -> String {
+        String(String(reversed()).padding(toLength: toLength, withPad: withPad, startingAt: 0).reversed())
+    }
 }

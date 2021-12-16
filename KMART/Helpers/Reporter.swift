@@ -27,8 +27,8 @@ struct Reporter {
 
         for report in configuration.reports {
             let start: Date = Date()
-            let startString: String = "Generating report \(report.identifier)..."
-            PrettyPrint.print(startString, terminator: "")
+            let prefixString: String = report.identifier
+            PrettyPrint.print("\(prefixString)...")
 
             switch report {
             case .buildingsNotLinked:
@@ -133,8 +133,9 @@ struct Reporter {
 
             let end: Date = Date()
             let delta: TimeInterval = end.timeIntervalSince(start)
-            let endString: String = String(format: " %.1f seconds", delta)
-            PrettyPrint.print(endString, prefix: "")
+            let suffixString: String = String(format: "%.1f seconds", delta)
+            let paddingString: String = String(repeating: ".", count: PrettyPrint.maximumWidth - PrettyPrint.Prefix.default.rawValue.count - prefixString.count - suffixString.count - 1)
+            PrettyPrint.print("\(prefixString)\(paddingString) \(suffixString)", replacing: true)
         }
 
         return reports
@@ -493,12 +494,12 @@ struct Reporter {
     static func macExtensionAttributesLint(_ macExtensionAttributes: [MacExtensionAttribute], level: LintLevel) -> [MacExtensionAttribute] {
 
         guard FileManager.default.fileExists(atPath: "/usr/local/bin/shellcheck") else {
-            PrettyPrint.print("shellcheck is not installed, please visit https://github.com/koalaman/shellcheck")
+            PrettyPrint.print("shellcheck is not installed, please visit https://github.com/koalaman/shellcheck", prefixColor: .red)
             return []
         }
 
         guard FileManager.default.fileExists(atPath: "/usr/local/bin/flake8") else {
-            PrettyPrint.print("flake8 is not installed, please visit https://github.com/PyCQA/flake8")
+            PrettyPrint.print("flake8 is not installed, please visit https://github.com/PyCQA/flake8", prefixColor: .red)
             return []
         }
 
@@ -677,12 +678,12 @@ struct Reporter {
     static func macScriptsLint(_ macScripts: [MacScript], level: LintLevel) -> [MacScript] {
 
         guard FileManager.default.fileExists(atPath: "/usr/local/bin/shellcheck") else {
-            PrettyPrint.print("shellcheck is not installed, please visit https://github.com/koalaman/shellcheck")
+            PrettyPrint.print("shellcheck is not installed, please visit https://github.com/koalaman/shellcheck", prefixColor: .red)
             return []
         }
 
         guard FileManager.default.fileExists(atPath: "/usr/local/bin/flake8") else {
-            PrettyPrint.print("flake8 is not installed, please visit https://github.com/PyCQA/flake8")
+            PrettyPrint.print("flake8 is not installed, please visit https://github.com/PyCQA/flake8", prefixColor: .red)
             return []
         }
 

@@ -48,7 +48,7 @@ struct Emailer {
         smtp.send(mail) { error in
 
             if let error: Error = error {
-                PrettyPrint.print(error.localizedDescription)
+                PrettyPrint.print(error.localizedDescription, prefixColor: .red)
             }
 
             semaphore.signal()
