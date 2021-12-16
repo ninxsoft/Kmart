@@ -75,7 +75,7 @@ struct HTTP {
         return objects
     }
 
-    /// Retrieve a sinhle Jamf API endpoint result.
+    /// Retrieve a single Jamf API endpoint result.
     ///
     /// - Parameters:
     ///   - identifier:    The Jamf API endpoint unique identifier.
