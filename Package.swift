@@ -7,7 +7,7 @@ import PackageDescription
 let package = Package(
     name: "KMART",
     platforms: [
-        .macOS(.v12)
+        .macOS(.v10_15)
     ],
     products: [
         .executable(name: "kmart", targets: ["KMART"])
