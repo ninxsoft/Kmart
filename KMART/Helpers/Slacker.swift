@@ -20,109 +20,78 @@ struct Slacker {
     /// - Parameters:
     ///   - reports:       The reports to send via Slack.
     ///   - configuration: The configuration containing Slack settings.
-    static func send(_ reports: Reports, using configuration: Configuration) {
-        let semaphore: DispatchSemaphore = DispatchSemaphore(value: 0)
+    static func send(_ reports: Reports, using configuration: Configuration) async {
         let slack: SlackConfiguration = configuration.slack
 
         PrettyPrint.print("Sending Report(s) via Slack")
 
-        guard let timestamp: String = message(slack, using: semaphore) else {
+        guard let timestamp: String = await message(slack) else {
             return
         }
 
         for attachment in slack.attachments {
             if let data: Data = reports.data(type: attachment, using: configuration) {
-                upload(data, of: attachment, for: slack, timestamp: timestamp, using: semaphore)
+                await upload(data, of: attachment, for: slack, timestamp: timestamp)
             }
         }
-    }
-
-    /// Generate a HTTP POST `URLRequest` from the provided parameters.
-    ///
-    /// - Parameters:
-    ///   - url:         The Slack API endpoint URL.
-    ///   - token:       The Slack API user bearer token.
-    ///   - contentType: The value for the HTTP Content-Type header (eg. `application/json; charset=UTF-8`).
-    ///   - httpBody:    Optional HTTP POST body
-    /// - Returns: A `URLRequest` object.
-    private static func urlRequest(_ url: URL, token: String, contentType: String, httpBody: Data?) -> URLRequest {
-        var request: URLRequest = URLRequest(url: url)
-        request.httpMethod = "POST"
-        request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
-        request.setValue(contentType, forHTTPHeaderField: "Content-Type")
-        request.httpBody = httpBody
-        return request
     }
 
     /// Send a Slack message.
     ///
     /// - Parameters:
     ///   - slack:     The Slack configuration.
-    ///   - semaphore: The common semaphore used to wait for operations to complete.
     /// - Returns: A timestamp `String` if successful, otherwise `nil`.
-    private static func message(_ slack: SlackConfiguration, using semaphore: DispatchSemaphore) -> String? {
+    private static func message(_ slack: SlackConfiguration) async -> String? {
 
         guard let url: URL = URL(string: chatPostMessageURL) else {
-            PrettyPrint.print("Invalid URL: \(chatPostMessageURL)")
+            PrettyPrint.print("Invalid URL: \(chatPostMessageURL)", prefixColor: .red)
             return nil
         }
 
-        var timestamp: String?
-        let request: URLRequest = urlRequest(url, token: slack.token, contentType: "application/json; charset=UTF-8", httpBody: messageData(for: slack))
+        var request: URLRequest = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("Bearer \(slack.token)", forHTTPHeaderField: "Authorization")
+        request.setValue("application/json; charset=UTF-8", forHTTPHeaderField: "Content-Type")
+        request.httpBody = messageData(for: slack)
 
-        // swiftlint:disable:next closure_body_length
-        let task: URLSessionDataTask = URLSession.shared.dataTask(with: request) { data, response, error in
+        do {
+            let (data, response): (Data, URLResponse) = try await URLSession.shared.data(for: request)
 
-            if let error: Error = error {
-                PrettyPrint.print(error.localizedDescription)
-                semaphore.signal()
-                return
-            }
-
-            guard let response: URLResponse = response,
-                let httpResponse: HTTPURLResponse = response as? HTTPURLResponse else {
-                PrettyPrint.print("Unable to get response from URL: \(url)")
-                semaphore.signal()
-                return
+            guard let httpResponse: HTTPURLResponse = response as? HTTPURLResponse else {
+                PrettyPrint.print("Unable to get response from URL: \(url)", prefixColor: .red)
+                return nil
             }
 
             guard httpResponse.statusCode == 200 else {
                 let string: String = HTTP.errorMessage(httpResponse.statusCode, for: url)
-                PrettyPrint.print(string)
-                semaphore.signal()
-                return
+                PrettyPrint.print(string, prefixColor: .red)
+                return nil
             }
 
-            guard let data: Data = data,
-                let dictionary = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else {
-                PrettyPrint.print("Invalid response data from URL: \(url)")
-                semaphore.signal()
-                return
+            guard let dictionary = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else {
+                PrettyPrint.print("Invalid response data from URL: \(url)", prefixColor: .red)
+                return nil
             }
 
-            if let string: String = dictionary["error"] as? String {
-                PrettyPrint.print("Error response: \(string)")
-                semaphore.signal()
-                return
+            if let error: String = dictionary["error"] as? String {
+                PrettyPrint.print("Error response: \(error)", prefixColor: .red)
+                return nil
             }
 
-            if let string: String = dictionary["warning"] as? String {
-                PrettyPrint.print("Warning response: \(string)")
+            if let warning: String = dictionary["warning"] as? String {
+                PrettyPrint.print("Warning response: \(warning)", prefixColor: .red)
             }
 
-            guard let string: String = dictionary["ts"] as? String else {
-                PrettyPrint.print("Missing 'ts' key in response dictionary")
-                semaphore.signal()
-                return
+            guard let timestamp: String = dictionary["ts"] as? String else {
+                PrettyPrint.print("Missing 'ts' key in response dictionary", prefixColor: .red)
+                return nil
             }
 
-            timestamp = string
-            semaphore.signal()
+            return timestamp
+        } catch {
+            PrettyPrint.print(error.localizedDescription, prefixColor: .red)
+            return nil
         }
-
-        task.resume()
-        semaphore.wait()
-        return timestamp
     }
 
     /// Generate HTTP body data from the provided parameters.
@@ -147,7 +116,7 @@ struct Slacker {
         ]
 
         guard let data: Data = try? JSONSerialization.data(withJSONObject: dictionary, options: []) else {
-            PrettyPrint.print("Invalid dictionary: \(dictionary)")
+            PrettyPrint.print("Invalid dictionary: \(dictionary)", prefixColor: .red)
             return nil
         }
 
@@ -161,69 +130,51 @@ struct Slacker {
     ///   - outputType: The output type (file extension) of the file to upload.
     ///   - slack:      The Slack configuration.
     ///   - timestamp:  The timestamp of a previous Slack message, used to append / reply via a thread.
-    ///   - semaphore:  The common semaphore used to wait for operations to complete.
-    private static func upload(_ data: Data, of outputType: OutputType, for slack: SlackConfiguration, timestamp: String, using semaphore: DispatchSemaphore) {
+    private static func upload(_ data: Data, of outputType: OutputType, for slack: SlackConfiguration, timestamp: String) async {
 
         guard let url: URL = URL(string: filesUploadURL) else {
-            PrettyPrint.print("Invalid URL: \(filesUploadURL)")
+            PrettyPrint.print("Invalid URL: \(filesUploadURL)", prefixColor: .red)
             return
         }
 
         let boundary: String = "\(String.identifier).\(UUID().uuidString)"
-        let request: URLRequest = urlRequest(
-            url,
-            token: slack.token,
-            contentType: "multipart/form-data; boundary=\(boundary)",
-            httpBody: uploadData(from: data, of: outputType, for: slack, timestamp: timestamp, boundary: boundary)
-        )
+        var request: URLRequest = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("Bearer \(slack.token)", forHTTPHeaderField: "Authorization")
+        request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
+        request.httpBody = uploadData(from: data, of: outputType, for: slack, timestamp: timestamp, boundary: boundary)
 
         PrettyPrint.print("Uploading \(outputType.description) report via Slack")
 
-        // swiftlint:disable:next closure_body_length
-        let task: URLSessionDataTask = URLSession.shared.dataTask(with: request) { data, response, error in
+        do {
+            let (data, response): (Data, URLResponse) = try await URLSession.shared.data(for: request)
 
-            if let error: Error = error {
-                PrettyPrint.print(error.localizedDescription)
-                semaphore.signal()
-                return
-            }
-
-            guard let response: URLResponse = response,
-                let httpResponse: HTTPURLResponse = response as? HTTPURLResponse else {
-                PrettyPrint.print("Unable to get response from URL: \(url)")
-                semaphore.signal()
+            guard let httpResponse: HTTPURLResponse = response as? HTTPURLResponse else {
+                PrettyPrint.print("Unable to get response from URL: \(url)", prefixColor: .red)
                 return
             }
 
             guard httpResponse.statusCode == 200 else {
                 let string: String = HTTP.errorMessage(httpResponse.statusCode, for: url)
-                PrettyPrint.print(string)
-                semaphore.signal()
+                PrettyPrint.print(string, prefixColor: .red)
                 return
             }
 
-            guard let data: Data = data,
-                let dictionary = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else {
-                PrettyPrint.print("Invalid response data from URL: \(url)")
-                semaphore.signal()
+            guard let dictionary = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else {
+                PrettyPrint.print("Invalid response data from URL: \(url)", prefixColor: .red)
                 return
             }
 
-            if let string: String = dictionary["error"] as? String {
-                PrettyPrint.print("Error response: \(string)")
-                semaphore.signal()
-                return
+            if let error: String = dictionary["error"] as? String {
+                PrettyPrint.print("Error response: \(error)", prefixColor: .red)
             }
 
-            if let string: String = dictionary["warning"] as? String {
-                PrettyPrint.print("Warning response: \(string)")
+            if let warning: String = dictionary["warning"] as? String {
+                PrettyPrint.print("Warning response: \(warning)", prefixColor: .red)
             }
-
-            semaphore.signal()
+        } catch {
+            PrettyPrint.print(error.localizedDescription, prefixColor: .red)
         }
-
-        task.resume()
-        semaphore.wait()
     }
 
     /// Generate HTTP file data from the provided parameters.
@@ -238,7 +189,7 @@ struct Slacker {
     private static func uploadData(from data: Data, of outputType: OutputType, for slack: SlackConfiguration, timestamp: String, boundary: String) -> Data? {
 
         guard let file: String = String(data: data, encoding: .utf8) else {
-            PrettyPrint.print("Invalid report file data")
+            PrettyPrint.print("Invalid report file data", prefixColor: .red)
             return nil
         }
 

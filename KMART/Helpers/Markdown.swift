@@ -144,7 +144,9 @@ struct Markdown {
         case .macExtensionAttributesLinterErrors, .macScriptsLinterErrors:
             string.append("| **ID** | **Name** | **Line** | **Column** | **Error** | **Reference** |\n")
             string.append("| :----: | :------- | :------: | :--------: | :-------- | :-----------: |\n")
-        case .macPackagesNotLinked:
+        case .macApplicationsNoScope, .macConfigurationProfilesNoScope, .macPackagesNotLinked,
+            .macPoliciesDisabled, .macPoliciesNoScope, .macPoliciesNoPayload, .macPoliciesJamfRemote, .macPoliciesLastExecuted, .macPoliciesFailedThreshold,
+            .mobileApplicationsNoScope, .mobileConfigurationProfilesNoScope:
             string.append("| **ID** | **Name** | **Category** |\n")
             string.append("| :----: | :------- | :----------: |\n")
         default:

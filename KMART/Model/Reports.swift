@@ -280,7 +280,7 @@ struct Reports {
                     PrettyPrint.print("Saving report as HTML: \(path)")
                 }
             } catch {
-                PrettyPrint.print(error.localizedDescription)
+                PrettyPrint.print(error.localizedDescription, prefixColor: .red)
             }
         }
     }
@@ -319,7 +319,7 @@ struct Reports {
                 return string.data(using: .utf8)
             }
         } catch {
-            PrettyPrint.print(error.localizedDescription)
+            PrettyPrint.print(error.localizedDescription, prefixColor: .red)
         }
 
         return nil

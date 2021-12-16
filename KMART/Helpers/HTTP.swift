@@ -16,124 +16,148 @@ struct HTTP {
     /// Retrieve all Jamf API endpoint results.
     ///
     /// - Parameters:
-    ///   - configuration: The Jamf API endpoint URL.
+    ///   - configuration: The Jamf API configuration object.
     /// - Returns: An object containing all Jamf API endpoint results.
-    static func retrieveObjects(using configuration: Configuration) -> Objects {
+    static func retrieveObjects(using configuration: Configuration) async -> Objects {
 
         var objects: Objects = Objects()
-        let authorization: String = configuration.authorization
-        let sessionConfiguration: URLSessionConfiguration = URLSessionConfiguration.default
-        sessionConfiguration.httpMaximumConnectionsPerHost = configuration.requests
-        sessionConfiguration.timeoutIntervalForRequest = configuration.timeout
-        let session: URLSession = URLSession(configuration: sessionConfiguration)
-        let semaphore: DispatchSemaphore = DispatchSemaphore(value: 0)
+        let session: URLSession = urlSession(requests: configuration.requests, timeout: configuration.timeout)
 
         for endpoint in configuration.endpoints {
-            let primaryURL: String = "\(configuration.url)/JSSResource/\(endpoint == .macDevicesHistory ? "computers" : endpoint.apiSlug)"
-            let startString: String = "Retrieving \(endpoint.fullDescription)..."
-            PrettyPrint.print(startString, terminator: "")
 
-            let start: Date = Date()
-            let primary: [String: Any] = requestObject(url: primaryURL, with: authorization, using: session, semaphore: semaphore)
-
-            guard let array: [[String: Any]] = primary[endpoint.primaryKey] as? [[String: Any]] else {
-                PrettyPrint.print("Unable to find '\(endpoint.primaryKey)' key in URL response", prefix: "\n  ├─ ")
+            guard let url: URL = endpoint.primaryURL(url: configuration.url) else {
+                PrettyPrint.print("Invalid URL for \(endpoint.fullDescription)...", prefixColor: .red)
                 continue
             }
 
-            let identifiers: [Int] = array.identifiers
-            let group: DispatchGroup = DispatchGroup()
+            let start: Date = Date()
 
-            for identifier in identifiers {
-                group.enter()
+            do {
+                let request: URLRequest = urlRequest(for: url, with: configuration.authorization)
+                let (data, urlResponse): (Data, URLResponse) = try await session.data(for: request)
 
-                let secondaryURL: String = "\(configuration.url)/JSSResource/\(endpoint.apiSlug)/id/\(identifier)\(endpoint.subset)"
-                let secondary: [String: Any] = requestObject(url: secondaryURL, with: authorization, using: session, semaphore: semaphore)
-
-                guard var dictionary: [String: Any] = secondary[endpoint.secondaryKey] as? [String: Any] else {
-                    PrettyPrint.print("Unable to find '\(endpoint.secondaryKey)' key in URL response", prefix: "\n  ├─ ")
-                    group.leave()
+                guard let httpURLResponse: HTTPURLResponse = urlResponse as? HTTPURLResponse,
+                    let dictionary: [String: Any] = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
+                    let array: [[String: Any]] = dictionary[endpoint.primaryKey] as? [[String: Any]] else {
+                    PrettyPrint.print("Unable to find '\(endpoint.primaryKey)' key in URL response", prefixColor: .red)
                     continue
                 }
 
-                dictionary.transform(endpoint: endpoint)
-                objects.insert(dictionary, for: endpoint)
-                group.leave()
-            }
+                guard httpURLResponse.statusCode == 200 else {
+                    PrettyPrint.print(errorMessage(httpURLResponse.statusCode, for: url), prefixColor: .red)
+                    continue
+                }
 
-            let end: Date = Date()
-            let delta: TimeInterval = end.timeIntervalSince(start)
-            let endString: String = String(format: " %.1f seconds", delta)
-            PrettyPrint.print(endString, prefix: "")
+                var current: Int = 0
+                let total: Int = array.identifiers.count
+                PrettyPrint.print(formattedString(for: endpoint, current: 0, total: total))
+
+                for identifier in array.identifiers {
+
+                    do {
+                        let dictionary: [String: Any] = try await retrieveObject(for: identifier, endpoint: endpoint, configuration: configuration, session: session)
+                        objects.insert(dictionary, for: endpoint)
+                        current += 1
+                        PrettyPrint.print(formattedString(for: endpoint, current: current, total: total), replacing: true)
+                    } catch {
+                        current += 1
+                        PrettyPrint.print(error.localizedDescription, prefixColor: .red)
+                    }
+                }
+
+                let time: String = String(format: "%.1f seconds ", Date().timeIntervalSince(start))
+                PrettyPrint.print(formattedString(for: endpoint, current: total, total: total, time: time), replacing: true)
+            } catch {
+                PrettyPrint.print(error.localizedDescription, prefixColor: .red)
+            }
         }
 
         return objects
     }
 
-    /// Request a Jamf API endpoint object.
+    /// Retrieve a single Jamf API endpoint result.
     ///
     /// - Parameters:
-    ///   - url:           The Jamf API endpoint URL.
-    ///   - authorization: The Jamf API HTTP basic authorization token.
-    ///   - session:       The (common) URLSession.
-    ///   - semaphore:     The common semaphore used to wait for operations to complete.
-    /// - Returns: A Jamf API endpoint dictionary object.
-    private static func requestObject(url string: String, with authorization: String, using session: URLSession, semaphore: DispatchSemaphore) -> [String: Any] {
+    ///   - identifier:    The Jamf API endpoint unique identifier.
+    ///   - endpoint:      The Jamf API endpoint type.
+    ///   - configuration: The Jamf API configuration object.
+    ///   - session:       The common URLSession object.
+    /// - Returns: A dictionary containing a Jamf API endpoint result.
+    private static func retrieveObject(for identifier: Int, endpoint: Endpoint, configuration: Configuration, session: URLSession) async throws -> [String: Any] {
 
-        var object: [String: Any] = [:]
-
-        guard let url: URL = URL(string: string) else {
-            PrettyPrint.print("Invalid URL: \(string)", prefix: "\n  ├─ ")
-            return [:]
+        guard let url: URL = endpoint.secondaryURL(url: configuration.url, identifier: identifier) else {
+            PrettyPrint.print("Invalid URL for \(endpoint.fullDescription)...", prefixColor: .red)
+            throw KmartError.invalidURL
         }
 
+        let request: URLRequest = urlRequest(for: url, with: configuration.authorization)
+        let (data, urlResponse): (Data, URLResponse) = try await session.data(for: request)
+
+        guard let httpURLResponse: HTTPURLResponse = urlResponse as? HTTPURLResponse,
+            let parentDictionary: [String: Any] = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
+            var dictionary: [String: Any] = parentDictionary[endpoint.secondaryKey] as? [String: Any] else {
+            PrettyPrint.print("Unable to find '\(endpoint.secondaryKey)' key in URL response", prefixColor: .red)
+            throw KmartError.missingKey
+        }
+
+        guard httpURLResponse.statusCode == 200 else {
+            PrettyPrint.print(errorMessage(httpURLResponse.statusCode, for: url), prefixColor: .red)
+            throw KmartError.invalidStatusCode
+        }
+
+        dictionary.transform(endpoint: endpoint)
+        return dictionary
+    }
+
+    /// Returns a URLSession object configured with the concurrent requests and timeout values.
+    ///
+    /// - Parameters:
+    ///   - requests: The number of concurrent requests.
+    ///   - timeout:  The timeout interval.
+    /// - Returns: An object containing all Jamf API endpoint results.
+    private static func urlSession(requests: Int, timeout: Double) -> URLSession {
+        let sessionConfiguration: URLSessionConfiguration = .default
+        sessionConfiguration.httpMaximumConnectionsPerHost = requests
+        sessionConfiguration.timeoutIntervalForRequest = timeout
+        let urlSession: URLSession = URLSession(configuration: sessionConfiguration)
+        return urlSession
+    }
+
+    /// Returns a URLRequest object configured with the requested URL and HTTP header fields.
+    ///
+    /// - Parameters:
+    ///   - url:           The requested URL.
+    ///   - authorization: **Basic Auth** credentials.
+    /// - Returns: The configured `URLRequest` object.
+    private static func urlRequest(for url: URL, with authorization: String) -> URLRequest {
         var request: URLRequest = URLRequest(url: url)
         request.setValue("application/json", forHTTPHeaderField: "Accept")
         request.setValue(authorization, forHTTPHeaderField: "Authorization")
+        return request
+    }
 
-        // swiftlint:disable:next closure_body_length
-        let task: URLSessionDataTask = session.dataTask(with: request) { data, response, error in
+    /// Returns a formatted String based on the current status of the HTTP retrieval process.
+    ///
+    /// - Parameters:
+    ///   - endpoint: The Endpoint that is being requested.
+    ///   - current: The index of the current HTTP request being performed.
+    ///   - total: The total HTTP requests to be performed.
+    ///   - time: Optional time string indicating how the time interval of the Endpoint retrieval.
+    /// - Returns: A formatted `String`.
+    private static func formattedString(for endpoint: Endpoint, current: Int, total: Int, time: String? = nil) -> String {
+        let prefixString: String = endpoint.fullDescription
 
-            if let error: Error = error {
-                PrettyPrint.print(error.localizedDescription, prefix: "\n  ├─ ")
-                semaphore.signal()
-                return
-            }
+        let formattedCurrent: String = "\(current)".leftPadding(toLength: 5, withPad: " ")
+        let formattedTotal: String = "\(total)".padding(toLength: 5, withPad: " ", startingAt: 0)
+        let percentage: Double = total > 0 ? Double(current) / Double(total) * 100 : 0
+        let formattedPercentage: String = String(format: percentage == 100 ? "%05.1f%%" : "%05.2f%%", percentage)
+        let suffixString: String = "[ \(formattedCurrent) / \(formattedTotal) (\(formattedPercentage)) ]"
 
-            guard let response: URLResponse = response,
-                let httpResponse: HTTPURLResponse = response as? HTTPURLResponse else {
-                PrettyPrint.print("Unable to get response from URL: \(url)", prefix: "\n  ├─ ")
-                semaphore.signal()
-                return
-            }
+        let paddingSize: Int = PrettyPrint.maximumWidth - PrettyPrint.Prefix.default.rawValue.count - prefixString.count - (time?.count ?? 0) - suffixString.count - 1
+        let paddingString: String = String(repeating: ".", count: paddingSize)
 
-            guard httpResponse.statusCode == 200 else {
-                let string: String = errorMessage(httpResponse.statusCode, for: url)
-                PrettyPrint.print(string, prefix: "\n  ├─ ")
-                semaphore.signal()
-                return
-            }
-
-            guard let data: Data = data else {
-                PrettyPrint.print("Invalid data from URL response", prefix: "\n  ├─ ")
-                semaphore.signal()
-                return
-            }
-
-            do {
-                if let dictionary: [String: Any] = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
-                    object = dictionary
-                }
-            } catch {
-                PrettyPrint.print(error.localizedDescription, prefix: "\n  ├─ ")
-            }
-
-            semaphore.signal()
-        }
-
-        task.resume()
-        semaphore.wait()
-        return object
+        let string: String = "\(prefixString)\(paddingString) \(time ?? "")\(suffixString)"
+        return string
     }
 
     /// Return an error message for the provided HTTP status code and URL.
