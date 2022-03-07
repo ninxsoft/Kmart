@@ -450,7 +450,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1240;
-				LastUpgradeCheck = 1320;
+				LastUpgradeCheck = 1330;
 				TargetAttributes = {
 					578B885525E658E9003A89BF = {
 						CreatedOnToolsVersion = 12.4;
@@ -760,7 +760,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -815,7 +815,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = macosx;
@@ -827,11 +827,11 @@
 		57E2539625D8CB7E00931A0B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "Developer ID Application";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 7K3HVCLV7Z;
 				ENABLE_HARDENED_RUNTIME = YES;
-				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ninxsoft.kmart;
 				PRODUCT_NAME = kmart;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -842,11 +842,11 @@
 		57E2539725D8CB7E00931A0B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "Developer ID Application";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 7K3HVCLV7Z;
 				ENABLE_HARDENED_RUNTIME = YES;
-				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ninxsoft.kmart;
 				PRODUCT_NAME = kmart;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -900,7 +900,7 @@
 			repositoryURL = "https://github.com/jpsim/Yams";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 4.0.6;
+				minimumVersion = 5.0.0;
 			};
 		};
 		577AC6D72613331C0086D80E /* XCRemoteSwiftPackageReference "Swift-SMTP" */ = {
@@ -908,7 +908,7 @@
 			repositoryURL = "https://github.com/Kitura/Swift-SMTP.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 5.1.200;
+				minimumVersion = 6.0.0;
 			};
 		};
 		57E253A225D8CCDE00931A0B /* XCRemoteSwiftPackageReference "swift-argument-parser" */ = {
@@ -916,7 +916,7 @@
 			repositoryURL = "https://github.com/apple/swift-argument-parser";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.2;
+				minimumVersion = 1.0.3;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */

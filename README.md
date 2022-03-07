@@ -10,40 +10,40 @@ Optionally sent via Slack:
 
 ## Features
 
-* [x] Reporting on the following Jamf Pro objects:
-  * :computer: Mac
-    * Advanced Searches
-    * Applications
-    * Configuration Profiles
-    * Devices
-    * Directory Bindings
-    * Disk Encryptions
-    * Dock Items
-    * Extension Attributes
-    * Packages
-    * Policies
-    * Printers
-    * Restricted Software
-    * Scripts
-    * Smart Groups
-    * Static Groups
-  * :iphone: Mobile
-    * Advanced Searches
-    * Applications
-    * Configuration Profiles
-    * Devices
-    * Extension Attributes
-    * Smart Groups
-    * Static Groups
-  * :office: Buildings
-  * :open_file_folder: Categories
-  * :department_store: Departments
-  * :books: eBooks
-  * :b: iBeacons
-  * :signal_strength: Network Segments
-* [x] :ledger: Customise reporting options via **JSON**, **Property List** or **YAML** configuration files
-* [x] :clipboard: Output reports as **JSON**, **Property List**, **YAML**, **Markdown** or **HTML** files
-* [x] :outbox_tray: Email reports to a list of recipients
+- [x] Reporting on the following Jamf Pro objects:
+  - :computer: Mac
+    - Advanced Searches
+    - Applications
+    - Configuration Profiles
+    - Devices
+    - Directory Bindings
+    - Disk Encryptions
+    - Dock Items
+    - Extension Attributes
+    - Packages
+    - Policies
+    - Printers
+    - Restricted Software
+    - Scripts
+    - Smart Groups
+    - Static Groups
+  - :iphone: Mobile
+    - Advanced Searches
+    - Applications
+    - Configuration Profiles
+    - Devices
+    - Extension Attributes
+    - Smart Groups
+    - Static Groups
+  - :office: Buildings
+  - :open_file_folder: Categories
+  - :department_store: Departments
+  - :books: eBooks
+  - :b: iBeacons
+  - :signal_strength: Network Segments
+- [x] :ledger: Customise reporting options via **JSON**, **Property List** or **YAML** configuration files
+- [x] :clipboard: Output reports as **JSON**, **Property List**, **YAML**, **Markdown** or **HTML** files
+- [x] :outbox_tray: Email reports to a list of recipients
 
 ## Usage
 
@@ -64,13 +64,13 @@ OPTIONS:
 
 ## Configuration
 
-* See [Sample Configs](Sample%20Configs) for all configuration options.
+- See [Sample Configs](Sample%20Configs) for all configuration options.
 
   **Note**: Use the following command to encode your credentials in the configuration file:
 
   `printf 'username:password' | iconv --to-code ISO-8859-1 | base64 --input -`
 
-* For Slack integration, read [Basic app setup](https://api.slack.com/authentication/basics) to create a Slack app with a Bot token.
+- For Slack integration, read [Basic app setup](https://api.slack.com/authentication/basics) to create a Slack app with a Bot token.
 
   **Note:** The Bot token will require the `chat:write` and `files:write` [permission scopes](https://api.slack.com/scopes).
 
@@ -80,45 +80,45 @@ OPTIONS:
 
 **Recommendations:**
 
-* Create a separate Jamf Pro User Account
-* Do not just add these permissions to an existing account
-* If you are not reporting on everything, only enable the privileges that are required
+- Create a separate Jamf Pro User Account
+- Do not just add these permissions to an existing account
+- If you are not reporting on everything, only enable the privileges that are required
 
-| **Privilege** | **Create** | **Read** | **Update** | **Delete** |
-| :------------ | :--------: | :------: | :--------: | :--------: |
-| Advanced Computer Searches | - | :white_check_mark: | - | - |
-| Advanced Mobile Device | - | :white_check_mark: | - | - |
-| Buildings | - | :white_check_mark: | - | - |
-| Categories | - | :white_check_mark: | - | - |
-| Computer Extension Attributes | - | :white_check_mark: | - | - |
-| Computers | - | :white_check_mark: | - | - |
-| Departments | - | :white_check_mark: | - | - |
-| Directory Bindings | - | :white_check_mark: | - | - |
-| Disk Encryption Configurations | - | :white_check_mark: | - | - |
-| Dock Items | - | :white_check_mark: | - | - |
-| eBooks | - | :white_check_mark: | - | - |
-| iBeacons | - | :white_check_mark: | - | - |
-| Mac App Store Apps | - | :white_check_mark: | - | - |
-| macOS Configuration Profiles | - | :white_check_mark: | - | - |
-| Mobile Device Apps | - | :white_check_mark: | - | - |
-| Mobile Device Configuration Profiles | - | :white_check_mark: | - | - |
-| Mobile Device Extension Attributes | - | :white_check_mark: | - | - |
-| Mobile Devices | - | :white_check_mark: | - | - |
-| Network Segments | - | :white_check_mark: | - | - |
-| Packages | - | :white_check_mark: | - | - |
-| Policies | - | :white_check_mark: | - | - |
-| Printers | - | :white_check_mark: | - | - |
-| Restricted Software Records | - | :white_check_mark: | - | - |
-| Scripts | - | :white_check_mark: | - | - |
-| Smart Computer Groups | - | :white_check_mark: | - | - |
-| Smart Mobile Device Groups | - | :white_check_mark: | - | - |
-| Static Computer Groups | - | :white_check_mark: | - | - |
-| Static Mobile Device Groups | - | :white_check_mark: | - | - |
+| **Privilege**                        | **Create** |      **Read**      | **Update** | **Delete** |
+| :----------------------------------- | :--------: | :----------------: | :--------: | :--------: |
+| Advanced Computer Searches           |     -      | :white_check_mark: |     -      |     -      |
+| Advanced Mobile Device               |     -      | :white_check_mark: |     -      |     -      |
+| Buildings                            |     -      | :white_check_mark: |     -      |     -      |
+| Categories                           |     -      | :white_check_mark: |     -      |     -      |
+| Computer Extension Attributes        |     -      | :white_check_mark: |     -      |     -      |
+| Computers                            |     -      | :white_check_mark: |     -      |     -      |
+| Departments                          |     -      | :white_check_mark: |     -      |     -      |
+| Directory Bindings                   |     -      | :white_check_mark: |     -      |     -      |
+| Disk Encryption Configurations       |     -      | :white_check_mark: |     -      |     -      |
+| Dock Items                           |     -      | :white_check_mark: |     -      |     -      |
+| eBooks                               |     -      | :white_check_mark: |     -      |     -      |
+| iBeacons                             |     -      | :white_check_mark: |     -      |     -      |
+| Mac App Store Apps                   |     -      | :white_check_mark: |     -      |     -      |
+| macOS Configuration Profiles         |     -      | :white_check_mark: |     -      |     -      |
+| Mobile Device Apps                   |     -      | :white_check_mark: |     -      |     -      |
+| Mobile Device Configuration Profiles |     -      | :white_check_mark: |     -      |     -      |
+| Mobile Device Extension Attributes   |     -      | :white_check_mark: |     -      |     -      |
+| Mobile Devices                       |     -      | :white_check_mark: |     -      |     -      |
+| Network Segments                     |     -      | :white_check_mark: |     -      |     -      |
+| Packages                             |     -      | :white_check_mark: |     -      |     -      |
+| Policies                             |     -      | :white_check_mark: |     -      |     -      |
+| Printers                             |     -      | :white_check_mark: |     -      |     -      |
+| Restricted Software Records          |     -      | :white_check_mark: |     -      |     -      |
+| Scripts                              |     -      | :white_check_mark: |     -      |     -      |
+| Smart Computer Groups                |     -      | :white_check_mark: |     -      |     -      |
+| Smart Mobile Device Groups           |     -      | :white_check_mark: |     -      |     -      |
+| Static Computer Groups               |     -      | :white_check_mark: |     -      |     -      |
+| Static Mobile Device Groups          |     -      | :white_check_mark: |     -      |     -      |
 
 ## Build Requirements
 
-* Swift **5.4**.
-* Runs on macOS Catalina **10.15** and later.
+- Swift **5.5**.
+- Runs on macOS Catalina **10.15** and later.
 
 ## Download
 
@@ -126,43 +126,45 @@ Grab the latest version of KMART from the [releases page](https://github.com/nin
 
 ## Credits / Thank You
 
-* Project created and maintained by Nindi Gill ([ninxsoft](https://github.com/ninxsoft)).
-* Apple ([apple](https://github.com/apple)) for [Swift Argument Parser](https://github.com/apple/swift-argument-parser), used to perform command-line argument and flag operations.
-* JP Simard ([jpsim](https://github.com/jpsim)) for [Yams](https://github.com/jpsim/Yams), used to export YAML.
-* John Sundell ([JohnSundell](https://github.com/JohnSundell)) for [Ink](https://github.com/JohnSundell/Ink), used to generate HTML from Markdown.
-* Kitura ([Kitura](https://github.com/Kitura)) for [Swift-SMTP](https://github.com/Kitura/Swift-SMTP), used to send emails.
-* Sindre Sorhus ([sindresorhus](https://github.com/sindresorhus)) for [github-markdown-css](https://github.com/sindresorhus/github-markdown-css), used to make the HTML output prettier.
+- Project created and maintained by Nindi Gill ([ninxsoft](https://github.com/ninxsoft)).
+- Apple ([apple](https://github.com/apple)) for [Swift Argument Parser](https://github.com/apple/swift-argument-parser), used to perform command-line argument and flag operations.
+- JP Simard ([jpsim](https://github.com/jpsim)) for [Yams](https://github.com/jpsim/Yams), used to export YAML.
+- John Sundell ([JohnSundell](https://github.com/JohnSundell)) for [Ink](https://github.com/JohnSundell/Ink), used to generate HTML from Markdown.
+- Kitura ([Kitura](https://github.com/Kitura)) for [Swift-SMTP](https://github.com/Kitura/Swift-SMTP), used to send emails.
+- Sindre Sorhus ([sindresorhus](https://github.com/sindresorhus)) for [github-markdown-css](https://github.com/sindresorhus/github-markdown-css), used to make the HTML output prettier.
 
 ## Version History
 
-* 1.2
-  * Added support for sending reports via Slack
-    * Read [Basic app setup](https://api.slack.com/authentication/basics) to create a Slack app with a Bot token
-    * **Note:** The Bot token will require the `chat:write` and `files:write` [permission scopes](https://api.slack.com/scopes)
-    * See [Sample Configs](Sample%20Configs#slack) for more information
-  * Added `mac_devices_unmanaged` and `mobile_devices_unmanaged` report types
-    * Mac and Mobile device reports now exclude unmanaged devices
-  * Added support for custom `api_timeout` value (default: `10`)
-  * Mac Packages now also display Categories in Markdown / HTML reports
-  * Improved file handling for Mac Extension Attributes and Mac Scripts over 64KB
-  * Fixed escaping of `\` in JSON reports
-  * Fixed escaping of `_` in Markdown / HTML reports
-  * Reduced verbosity of output messaging (reads much nicer)
+- 1.2
 
-* 1.1
-  * Report on one-off Mac Policies that were created via Jamf Remote (`mac_policies_jamf_remote`)
-  * Less ambiguous descriptions for Markdown / HTML output
-  * Better escaping of ASCII characters for Markdown / HTML output
-  * Fixed false-positive linter errors for Mac Extension Attributes with carriage returns (`\r`)
-  * Fixed Mac Directory Bindings reporting as Mac Disk Encryptions
-  * Fixed emailing report only if enabled is set to `true`
+  - Added support for sending reports via Slack
+    - Read [Basic app setup](https://api.slack.com/authentication/basics) to create a Slack app with a Bot token
+    - **Note:** The Bot token will require the `chat:write` and `files:write` [permission scopes](https://api.slack.com/scopes)
+    - See [Sample Configs](Sample%20Configs#slack) for more information
+  - Added `mac_devices_unmanaged` and `mobile_devices_unmanaged` report types
+    - Mac and Mobile device reports now exclude unmanaged devices
+  - Added support for custom `api_timeout` value (default: `10`)
+  - Mac Packages now also display Categories in Markdown / HTML reports
+  - Improved file handling for Mac Extension Attributes and Mac Scripts over 64KB
+  - Fixed escaping of `\` in JSON reports
+  - Fixed escaping of `_` in Markdown / HTML reports
+  - Reduced verbosity of output messaging (reads much nicer)
 
-* 1.0
-  * Initial release
+- 1.1
+
+  - Report on one-off Mac Policies that were created via Jamf Remote (`mac_policies_jamf_remote`)
+  - Less ambiguous descriptions for Markdown / HTML output
+  - Better escaping of ASCII characters for Markdown / HTML output
+  - Fixed false-positive linter errors for Mac Extension Attributes with carriage returns (`\r`)
+  - Fixed Mac Directory Bindings reporting as Mac Disk Encryptions
+  - Fixed emailing report only if enabled is set to `true`
+
+- 1.0
+  - Initial release
 
 ## License
 
-> Copyright © 2021 Nindi Gill
+> Copyright © 2022 Nindi Gill
 >
 > Permission is hereby granted, free of charge, to any person obtaining a copy
 > of this software and associated documentation files (the "Software"), to deal
