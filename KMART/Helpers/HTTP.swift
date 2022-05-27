@@ -22,6 +22,7 @@ struct HTTP {
 
         var objects: Objects = Objects()
         let session: URLSession = urlSession(requests: configuration.requests, timeout: configuration.timeout)
+        var token: (value: String, expiration: Date) = (value: "", expiration: Date())
 
         for endpoint in configuration.endpoints {
 
@@ -33,7 +34,11 @@ struct HTTP {
             let start: Date = Date()
 
             do {
-                let request: URLRequest = urlRequest(for: url, with: configuration.authorization)
+                if tokenHasExpired(token) {
+                    token = try await refreshToken(using: configuration)
+                }
+
+                let request: URLRequest = urlRequest(for: url, with: "Bearer \(token.value)")
                 let (data, urlResponse): (Data, URLResponse) = try await session.data(for: request)
 
                 guard let httpURLResponse: HTTPURLResponse = urlResponse as? HTTPURLResponse,
@@ -55,7 +60,7 @@ struct HTTP {
                 for identifier in array.identifiers {
 
                     do {
-                        let dictionary: [String: Any] = try await retrieveObject(for: identifier, endpoint: endpoint, configuration: configuration, session: session)
+                        let dictionary: [String: Any] = try await retrieveObject(for: identifier, endpoint: endpoint, configuration: configuration, session: session, token: token)
                         objects.insert(dictionary, for: endpoint)
                         current += 1
                         PrettyPrint.print(formattedString(for: endpoint, current: current, total: total), replacing: true)
@@ -82,15 +87,28 @@ struct HTTP {
     ///   - endpoint:      The Jamf API endpoint type.
     ///   - configuration: The Jamf API configuration object.
     ///   - session:       The common URLSession object.
+    ///   - token:         The Jamf API bearer token.
     /// - Returns: A dictionary containing a Jamf API endpoint result.
-    private static func retrieveObject(for identifier: Int, endpoint: Endpoint, configuration: Configuration, session: URLSession) async throws -> [String: Any] {
+    private static func retrieveObject(
+        for identifier: Int,
+        endpoint: Endpoint,
+        configuration: Configuration,
+        session: URLSession,
+        token: (value: String, expiration: Date)
+    ) async throws -> [String: Any] {
+
+        var token: (value: String, expiration: Date) = token
 
         guard let url: URL = endpoint.secondaryURL(url: configuration.url, identifier: identifier) else {
             PrettyPrint.print("Invalid URL for \(endpoint.fullDescription)...", prefixColor: .red)
             throw KmartError.invalidURL
         }
 
-        let request: URLRequest = urlRequest(for: url, with: configuration.authorization)
+        if tokenHasExpired(token) {
+            token = try await refreshToken(using: configuration)
+        }
+
+        let request: URLRequest = urlRequest(for: url, with: "Bearer \(token.value)")
         let (data, urlResponse): (Data, URLResponse) = try await session.data(for: request)
 
         guard let httpURLResponse: HTTPURLResponse = urlResponse as? HTTPURLResponse,
@@ -127,7 +145,7 @@ struct HTTP {
     ///
     /// - Parameters:
     ///   - url:           The requested URL.
-    ///   - authorization: **Basic Auth** credentials.
+    ///   - authorization: The Jamf API bearer token.
     /// - Returns: The configured `URLRequest` object.
     private static func urlRequest(for url: URL, with authorization: String) -> URLRequest {
         var request: URLRequest = URLRequest(url: url)
@@ -190,5 +208,57 @@ struct HTTP {
         default:
             return "HTTP \(statusCode): \(url)"
         }
+    }
+
+    /// Determines if the Jamf API bearer token has expired and needs to be refreshed.
+    ///
+    /// - Parameters:
+    ///   - token: The Jamf API bearer token.
+    /// - Returns: True if the token has expired, otherwise False.
+    private static func tokenHasExpired(_ token: (value: String, expiration: Date)) -> Bool {
+        token.value.isEmpty || token.expiration < Date.now
+    }
+
+    /// Refreshes the Jamf API bearer token used for authentication
+    ///
+    /// - Parameters:
+    ///   - configuration: The Jamf API configuration object.
+    /// - Returns: A valid Jamf API bearer token.
+    private static func refreshToken(using configuration: Configuration) async throws -> (value: String, expiration: Date) {
+
+        guard let url: URL = URL(string: "\(configuration.url)/api/v1/auth/token") else {
+            throw KmartError.invalidURL
+        }
+
+        var request: URLRequest = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Accept")
+        request.setValue("Basic \(configuration.credentials)", forHTTPHeaderField: "Authorization")
+
+        let (data, urlResponse): (Data, URLResponse) = try await URLSession.shared.data(for: request)
+
+        guard let httpURLResponse: HTTPURLResponse = urlResponse as? HTTPURLResponse,
+            let dictionary: [String: Any] = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
+            let value: String = dictionary["token"] as? String,
+            let expires: String = dictionary["expires"] as? String else {
+            PrettyPrint.print("Unable to find 'token' and 'expires' keys in URL response", prefixColor: .red)
+            throw KmartError.missingKey
+        }
+
+        guard httpURLResponse.statusCode == 200 else {
+            PrettyPrint.print(HTTP.errorMessage(httpURLResponse.statusCode, for: url), prefixColor: .red)
+            throw KmartError.invalidStatusCode
+        }
+
+        let dateFormatter: DateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSZ"
+
+        guard let expiration: Date = dateFormatter.date(from: expires) else {
+            PrettyPrint.print("Invalid token expiry: '\(expires)'", prefixColor: .red)
+            throw KmartError.invalidTokenExpiry
+        }
+
+        return (value: value, expiration: expiration)
     }
 }

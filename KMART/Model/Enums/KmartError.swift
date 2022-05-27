@@ -12,4 +12,5 @@ enum KmartError: Error {
     case invalidURL
     case missingKey
     case invalidStatusCode
+    case invalidTokenExpiry
 }

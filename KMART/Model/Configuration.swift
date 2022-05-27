@@ -16,10 +16,6 @@ struct Configuration {
     var url: String = ""
     /// Jamf Pro API credentials.
     var credentials: String = ""
-    /// Jamf Pro API basic authorization token.
-    var authorization: String {
-        "Basic \(credentials)"
-    }
     /// Number of concurrent API requests.
     var requests: Int = 4
     /// Number of seconds before a timeout.
