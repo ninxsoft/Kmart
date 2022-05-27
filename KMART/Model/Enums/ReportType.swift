@@ -73,7 +73,11 @@ enum ReportType: String, CaseIterable {
                 .mobileApplications, .mobileConfigurationProfiles, .mobileDevices
             ]
         case .categoriesNotLinked:
-            return [.categories, .macApplications, .macConfigurationProfiles, .macPackages, .macPolicies, .macPrinters, .macScripts, .mobileApplications, .mobileConfigurationProfiles]
+            return [
+                .categories, .macApplications, .macConfigurationProfiles,
+                .macPackages, .macPatchSoftwareTitles, .macPolicies,
+                .macPrinters, .macScripts, .mobileApplications, .mobileConfigurationProfiles
+            ]
         case .departmentsNotLinked:
             return [
                 .departments, .networkSegments,

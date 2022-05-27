@@ -199,6 +199,7 @@ struct Reporter {
             identifiers.append(contentsOf: objects.categories.filter { $0.name == macPackage.category }.map { $0.id })
         }
 
+        identifiers.append(contentsOf: objects.macPatchSoftwareTitles.map { $0.category })
         identifiers.append(contentsOf: objects.macPolicies.map { $0.category })
 
         for macPrinter in objects.macPrinters {

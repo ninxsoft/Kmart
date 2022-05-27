@@ -25,6 +25,7 @@ enum Endpoint: String {
     case macExtensionAttributes = "mac_extension_attributes"
     case macGroups = "mac_groups"
     case macPackages = "mac_packages"
+    case macPatchSoftwareTitles = "mac_patch_software_titles"
     case macPolicies = "mac_policies"
     case macPrinters = "mac_printers"
     case macRestrictedSoftware = "mac_restricted_software"
@@ -75,6 +76,8 @@ enum Endpoint: String {
             return "Mac Groups"
         case .macPackages:
             return "Mac Packages"
+        case .macPatchSoftwareTitles:
+            return "Mac Patch Software Titles"
         case .macPolicies:
             return "Mac Policies"
         case .macPrinters:
@@ -134,6 +137,8 @@ enum Endpoint: String {
             return "Mac Group"
         case .macPackages:
             return "Mac Package"
+        case .macPatchSoftwareTitles:
+            return "Mac Patch Software Title"
         case .macPolicies:
             return "Mac Policy"
         case .macPrinters:
@@ -193,6 +198,8 @@ enum Endpoint: String {
             return "computergroups"
         case .macPackages:
             return "packages"
+        case .macPatchSoftwareTitles:
+            return "patchsoftwaretitles"
         case .macPolicies:
             return "policies"
         case .macPrinters:
@@ -252,6 +259,8 @@ enum Endpoint: String {
             return "computer_groups"
         case .macPackages:
             return "packages"
+        case .macPatchSoftwareTitles:
+            return "patch_software_titles"
         case .macPolicies:
             return "policies"
         case .macPrinters:
@@ -311,6 +320,8 @@ enum Endpoint: String {
             return "computer_group"
         case .macPackages:
             return "package"
+        case .macPatchSoftwareTitles:
+            return "patch_software_title"
         case .macPolicies:
             return "policy"
         case .macPrinters:
