@@ -107,16 +107,18 @@ class KMARTCommonTests: XCTestCase {
         let macApplications: [MacApplication] = [MacApplication(id: 1, category: 1)]
         let macConfigurationProfiles: [MacConfigurationProfile] = [MacConfigurationProfile(id: 1, category: 2)]
         let macPackages: [MacPackage] = [MacPackage(id: 1, category: "Category #3")]
-        let macPolicies: [MacPolicy] = [MacPolicy(id: 1, category: 4)]
-        let macPrinters: [MacPrinter] = [MacPrinter(id: 1, category: "Category #5")]
-        let macScripts: [MacScript] = [MacScript(id: 1, category: "Category #6")]
-        let mobileApplications: [MobileApplication] = [MobileApplication(id: 1, category: 7)]
-        let mobileConfigurationProfiles: [MobileConfigurationProfile] = [MobileConfigurationProfile(id: 1, category: 8)]
+        let macPatchSoftwareTitles: [MacPatchSoftwareTitle] = [MacPatchSoftwareTitle(id: 1, category: 4)]
+        let macPolicies: [MacPolicy] = [MacPolicy(id: 1, category: 5)]
+        let macPrinters: [MacPrinter] = [MacPrinter(id: 1, category: "Category #6")]
+        let macScripts: [MacScript] = [MacScript(id: 1, category: "Category #7")]
+        let mobileApplications: [MobileApplication] = [MobileApplication(id: 1, category: 8)]
+        let mobileConfigurationProfiles: [MobileConfigurationProfile] = [MobileConfigurationProfile(id: 1, category: 9)]
         let objects: Objects = Objects(
             categories: categories,
             macApplications: macApplications,
             macConfigurationProfiles: macConfigurationProfiles,
             macPackages: macPackages,
+            macPatchSoftwareTitles: macPatchSoftwareTitles,
             macPolicies: macPolicies,
             macPrinters: macPrinters,
             macScripts: macScripts,
@@ -128,20 +130,22 @@ class KMARTCommonTests: XCTestCase {
     }
 
     func testCategoriesNotLinked() throws {
-        let categories: [Category] = (1...9).map { Category(id: $0, name: "Category #\($0)") }
+        let categories: [Category] = (1...10).map { Category(id: $0, name: "Category #\($0)") }
         let macApplications: [MacApplication] = [MacApplication(id: 1, category: 1)]
         let macConfigurationProfiles: [MacConfigurationProfile] = [MacConfigurationProfile(id: 1, category: 2)]
         let macPackages: [MacPackage] = [MacPackage(id: 1, category: "Category #3")]
-        let macPolicies: [MacPolicy] = [MacPolicy(id: 1, category: 4)]
-        let macPrinters: [MacPrinter] = [MacPrinter(id: 1, category: "Category #5")]
-        let macScripts: [MacScript] = [MacScript(id: 1, category: "Category #6")]
-        let mobileApplications: [MobileApplication] = [MobileApplication(id: 1, category: 7)]
-        let mobileConfigurationProfiles: [MobileConfigurationProfile] = [MobileConfigurationProfile(id: 1, category: 8)]
+        let macPatchSoftwareTitles: [MacPatchSoftwareTitle] = [MacPatchSoftwareTitle(id: 1, category: 4)]
+        let macPolicies: [MacPolicy] = [MacPolicy(id: 1, category: 5)]
+        let macPrinters: [MacPrinter] = [MacPrinter(id: 1, category: "Category #6")]
+        let macScripts: [MacScript] = [MacScript(id: 1, category: "Category #7")]
+        let mobileApplications: [MobileApplication] = [MobileApplication(id: 1, category: 8)]
+        let mobileConfigurationProfiles: [MobileConfigurationProfile] = [MobileConfigurationProfile(id: 1, category: 9)]
         let objects: Objects = Objects(
             categories: categories,
             macApplications: macApplications,
             macConfigurationProfiles: macConfigurationProfiles,
             macPackages: macPackages,
+            macPatchSoftwareTitles: macPatchSoftwareTitles,
             macPolicies: macPolicies,
             macPrinters: macPrinters,
             macScripts: macScripts,

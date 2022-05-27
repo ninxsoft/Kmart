@@ -353,8 +353,6 @@ class KMARTMacTests: XCTestCase {
         let script: String = """
         #!/usr/bin/env python3
 
-        \"\"\"Sample script to test linting.\"\"\"
-
         print("Hello World!")
 
         exit(0)
@@ -369,8 +367,6 @@ class KMARTMacTests: XCTestCase {
         // https://flake8.pycqa.org/en/4.0.1/user/error-codes.html
         let script: String = """
         #!/usr/bin/env python3
-
-        \"\"\"Sample script to test linting.\"\"\"
 
         import json
 
@@ -388,8 +384,6 @@ class KMARTMacTests: XCTestCase {
         // https://flake8.pycqa.org/en/4.0.1/user/error-codes.html
         let script: String = """
         #!/usr/bin/env python3
-
-        \"\"\"Sample script to test linting.\"\"\"
 
         print("Hello World!")
 
@@ -409,7 +403,6 @@ class KMARTMacTests: XCTestCase {
         print("Hello World!")
 
         exit(0)
-
         """
         let macExtensionAttribute: MacExtensionAttribute = MacExtensionAttribute(id: 1, inputType: "script", scriptContents: script)
         let results: [MacExtensionAttribute] = Reporter.macExtensionAttributesLinterWarnings([macExtensionAttribute])
@@ -685,8 +678,6 @@ class KMARTMacTests: XCTestCase {
         let script: String = """
         #!/usr/bin/env python3
 
-        \"\"\"Sample script to test linting.\"\"\"
-
         print("Hello World!")
 
         exit(0)
@@ -701,8 +692,6 @@ class KMARTMacTests: XCTestCase {
         // https://pycodestyle.pycqa.org/en/latest/intro.html#error-codes
         let script: String = """
         #!/usr/bin/env python3
-
-        \"\"\"Sample script to test linting.\"\"\"
 
         import json
 
@@ -720,8 +709,6 @@ class KMARTMacTests: XCTestCase {
         // https://pycodestyle.pycqa.org/en/latest/intro.html#error-codes
         let script: String = """
         #!/usr/bin/env python3
-
-        \"\"\"Sample script to test linting.\"\"\"
 
         print("Hello World!")
 
@@ -741,7 +728,6 @@ class KMARTMacTests: XCTestCase {
         print("Hello World!")
 
         exit(0)
-
         """
         let macScript: MacScript = MacScript(id: 1, scriptContents: script)
         let results: [MacScript] = Reporter.macScriptsLinterWarnings([macScript])

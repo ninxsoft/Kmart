@@ -11,6 +11,7 @@
 		3920D62C2768663F004AD309 /* ParsableCommand+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3920D62B2768663F004AD309 /* ParsableCommand+Extension.swift */; };
 		393356C426FAF267009A6DAA /* ScriptType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 393356C326FAF267009A6DAA /* ScriptType.swift */; };
 		3942E4D328407B7B00B1DCE2 /* MacPatchSoftwareTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3942E4D228407B7B00B1DCE2 /* MacPatchSoftwareTitle.swift */; };
+		3942E4D42840998800B1DCE2 /* MacPatchSoftwareTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3942E4D228407B7B00B1DCE2 /* MacPatchSoftwareTitle.swift */; };
 		395DE66226CF72E3004FEF25 /* Slacker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395DE66126CF72E3004FEF25 /* Slacker.swift */; };
 		395DE66426CF73DE004FEF25 /* SlackConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395DE66326CF73DE004FEF25 /* SlackConfiguration.swift */; };
 		3967934F26D5F7F500DC2D2D /* SlackConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395DE66326CF73DE004FEF25 /* SlackConfiguration.swift */; };
@@ -581,6 +582,7 @@
 				578B889625E65FA9003A89BF /* MobileAdvancedSearch.swift in Sources */,
 				578B888225E65F9E003A89BF /* MacAdvancedSearch.swift in Sources */,
 				3967934F26D5F7F500DC2D2D /* SlackConfiguration.swift in Sources */,
+				3942E4D42840998800B1DCE2 /* MacPatchSoftwareTitle.swift in Sources */,
 				578B888825E65FA9003A89BF /* MacDiskEncryption.swift in Sources */,
 				57B4F66326195C40006F894F /* Shell.swift in Sources */,
 				578B88A225E65FA9003A89BF /* MobileApplication.swift in Sources */,
