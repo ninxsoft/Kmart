@@ -1,8 +1,8 @@
-name: swift_setup_lint_build_test
+name: swift_setup_lint_test_build
 on: [push, pull_request]
 jobs:
   setup_lint_build_test:
-    name: Setup, Lint, Build and Test
+    name: Setup, Lint, Test and Build
     runs-on: macos-12
     steps:
       - uses: actions/checkout@v3
@@ -13,9 +13,9 @@ jobs:
         run: swiftlint --strict
       # - name: Run DrString
       #   run: drstring check --config-file .drstring.toml
-      - name: Build Xcode project
-        run: swift build --configuration release --arch arm64 --arch x86_64 --verbose
       - name: Test Xcode project
-        run: swift test --verbose || true
+        run: swift test || true
+      - name: Build Xcode project
+        run: swift build --configuration release --arch arm64 --arch x86_64
       - name: Print kmart version
         run: kmart --version
