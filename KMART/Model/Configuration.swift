@@ -30,8 +30,6 @@ struct Configuration {
     var reportOptions: [ReportOptionType: Int] = [:]
     /// List of output types to export.
     var output: [OutputType: String] = [:]
-    /// Email configuration object.
-    var email: EmailConfiguration = EmailConfiguration([:])
     /// Slack configuration object.
     var slack: SlackConfiguration = SlackConfiguration([:])
     /// List of endpoints to report on, derived from the requested report types.
@@ -81,7 +79,6 @@ struct Configuration {
         configureReports(dictionary["reports"] as? [String: Bool] ?? [:])
         configureReportOptions(dictionary["reports_options"] as? [String: Int] ?? [:])
         configureOutput(dictionary["output"] as? [String: String] ?? [:])
-        configureEmail(dictionary["email"] as? [String: Any] ?? [:])
         configureSlack(dictionary["slack"] as? [String: Any] ?? [: ])
     }
 
@@ -173,14 +170,6 @@ struct Configuration {
 
             output[type] = string
         }
-    }
-
-    /// Set the **Email** configuration.
-    ///
-    /// - Parameters:
-    ///   - dictionary: The dictionary containing the **Email** configuration options.
-    private mutating func configureEmail(_ dictionary: [String: Any]) {
-        email = EmailConfiguration(dictionary)
     }
 
     /// Set the **Slack** configuration.
