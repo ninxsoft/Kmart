@@ -66,7 +66,7 @@ struct HTTP {
                         PrettyPrint.print(formattedString(for: endpoint, current: current, total: total), replacing: true)
                     } catch {
                         current += 1
-                        PrettyPrint.print(error.localizedDescription, prefixColor: .red)
+                        PrettyPrint.print("\(endpoint.description) (ID: \(identifier)) - \(error.localizedDescription)", prefixColor: .red)
                         PrettyPrint.print("", prefixColor: .red)
                     }
                 }
@@ -74,7 +74,8 @@ struct HTTP {
                 let time: String = String(format: "%.1f seconds ", Date().timeIntervalSince(start))
                 PrettyPrint.print(formattedString(for: endpoint, current: total, total: total, time: time), replacing: true)
             } catch {
-                PrettyPrint.print(error.localizedDescription, prefixColor: .red)
+                PrettyPrint.print("\(endpoint.fullDescription) - \(error.localizedDescription)", prefixColor: .red)
+                PrettyPrint.print("", prefixColor: .red)
             }
         }
 
