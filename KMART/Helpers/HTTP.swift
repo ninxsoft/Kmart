@@ -225,7 +225,6 @@ struct HTTP {
     ///   - configuration: The Jamf API configuration object.
     /// - Returns: A valid Jamf API bearer token.
     private static func refreshToken(using configuration: Configuration) async throws -> (value: String, expiration: Date) {
-        print("refreshing token...")
 
         guard let url: URL = URL(string: "\(configuration.url)/api/v1/auth/token") else {
             throw KmartError.invalidURL
