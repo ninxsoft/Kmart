@@ -67,6 +67,7 @@ struct HTTP {
                     } catch {
                         current += 1
                         PrettyPrint.print(error.localizedDescription, prefixColor: .red)
+                        PrettyPrint.print("", prefixColor: .red)
                     }
                 }
 
