@@ -59,23 +59,13 @@ struct Kmart: AsyncParsableCommand {
         PrettyPrint.print(apiString)
 
         PrettyPrint.printHeader("GENERATING REPORTS")
-        let reportPrefix: PrettyPrint.Prefix = configuration.email.enabled || configuration.slack.enabled ? .default : .ending
+        let reportPrefix: PrettyPrint.Prefix = configuration.slack.enabled ? .default : .ending
         let reportStart: Date = Date()
         let reports: Reports = Reporter.generateReports(from: objects, using: configuration)
         reports.saveToDisk(using: configuration)
         let reportEnd: Date = Date()
         let reportString: String = String(format: "Total Time: %.1f seconds", reportEnd.timeIntervalSince(reportStart))
         PrettyPrint.print(reportString, prefix: reportPrefix)
-
-        if configuration.email.enabled {
-            PrettyPrint.printHeader("SENDING VIA EMAIL")
-            let emailPrefix: PrettyPrint.Prefix = configuration.slack.enabled ? .default : .ending
-            let emailStart: Date = Date()
-            Emailer.email(reports, using: configuration)
-            let emailEnd: Date = Date()
-            let emailString: String = String(format: "Total Time: %.1f seconds", emailEnd.timeIntervalSince(emailStart))
-            PrettyPrint.print(emailString, prefix: emailPrefix)
-        }
 
         if configuration.slack.enabled {
             PrettyPrint.printHeader("SENDING VIA SLACK")
