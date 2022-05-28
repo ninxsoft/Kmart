@@ -21,6 +21,8 @@ Optionally sent via Slack:
     - Dock Items
     - Extension Attributes
     - Packages
+    - Patch Management Software Titles
+    - Patch Policies
     - Policies
     - Printers
     - Restricted Software
@@ -43,7 +45,7 @@ Optionally sent via Slack:
   - :signal_strength: Network Segments
 - [x] :ledger: Customise reporting options via **JSON**, **Property List** or **YAML** configuration files
 - [x] :clipboard: Output reports as **JSON**, **Property List**, **YAML**, **Markdown** or **HTML** files
-- [x] :outbox_tray: Email reports to a list of recipients
+- [x] :file_cabinet: Send reports via Slack
 
 ## Usage
 
@@ -106,6 +108,8 @@ OPTIONS:
 | Mobile Devices                       |     -      | :white_check_mark: |     -      |     -      |
 | Network Segments                     |     -      | :white_check_mark: |     -      |     -      |
 | Packages                             |     -      | :white_check_mark: |     -      |     -      |
+| Patch Management Software Titles     |     -      | :white_check_mark: |     -      |     -      |
+| Patch Policies                       |     -      | :white_check_mark: |     -      |     -      |
 | Policies                             |     -      | :white_check_mark: |     -      |     -      |
 | Printers                             |     -      | :white_check_mark: |     -      |     -      |
 | Restricted Software Records          |     -      | :white_check_mark: |     -      |     -      |
@@ -118,11 +122,15 @@ OPTIONS:
 ## Build Requirements
 
 - Swift **5.5**.
-- Runs on macOS Catalina **10.15** and later.
+- Runs on macOS Monterey **12** and later.
 
 ## Download
 
 Grab the latest version of KMART from the [releases page](https://github.com/ninxsoft/KMART/releases).
+
+**Note:** Version **1.3** requires **macOS Monterey** or later.
+
+If you need to run **KMART** on an older operating system, you can still use version **1.2**.
 
 ## Credits / Thank You
 
@@ -130,10 +138,24 @@ Grab the latest version of KMART from the [releases page](https://github.com/nin
 - Apple ([apple](https://github.com/apple)) for [Swift Argument Parser](https://github.com/apple/swift-argument-parser), used to perform command-line argument and flag operations.
 - JP Simard ([jpsim](https://github.com/jpsim)) for [Yams](https://github.com/jpsim/Yams), used to export YAML.
 - John Sundell ([JohnSundell](https://github.com/JohnSundell)) for [Ink](https://github.com/JohnSundell/Ink), used to generate HTML from Markdown.
-- Kitura ([Kitura](https://github.com/Kitura)) for [Swift-SMTP](https://github.com/Kitura/Swift-SMTP), used to send emails.
+- David Mohundro ([drmohundro](https://github.com/drmohundro)) for [SWXMLHash](https://github.com/drmohundro/SWXMLHash), used to decode XML.
 - Sindre Sorhus ([sindresorhus](https://github.com/sindresorhus)) for [github-markdown-css](https://github.com/sindresorhus/github-markdown-css), used to make the HTML output prettier.
 
 ## Version History
+
+- 1.3
+
+  - Added support for linting **Python** scripts via [flake8](https://flake8.pycqa.org)
+  - Added support for reporting on **Patch Management Software Titles**:
+    - New report types: `mac_patch_policies_no_scope` and `mac_patch_policies_disabled`
+    - Existing reports now factor in Patch Management Software Titles and Patch Policies
+  - Progress output is now dynamic, updating in-place
+  - Basic Authentication has been replaced with [Bearer Token Authentication](https://developer.jamf.com/jamf-pro/docs/classic-api-authentication-changes)
+  - Option to send reports via **Email** has been removed
+  - Fixed the missing **Serial Number** column header for **Unmanaged Mac/Mobile Device** reports in Markdown and HTML
+  - General cosmetic bugfixes
+
+  **Note:** Kmart now uses [Swift concurrency](https://docs.swift.org/swift-book/LanguageGuide/Concurrency.html) (async await), which significantly reduces the amount and complexity of HTTP code. Concurrency requires macOS Monterey 12, therefore support for macOS Catalina 10.15 and macOS Big Sur 11 has been dropped.
 
 - 1.2
 

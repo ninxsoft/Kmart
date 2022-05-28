@@ -135,7 +135,7 @@ struct Markdown {
         var string: String = ""
 
         switch type {
-        case .macDevicesDuplicateNames, .macDevicesDuplicateSerialNumbers, .macDevicesLastCheckIn, .macDevicesLastInventory, .mobileDevicesLastInventory:
+        case .macDevicesDuplicateNames, .macDevicesDuplicateSerialNumbers, .macDevicesLastCheckIn, .macDevicesLastInventory, .macDevicesUnmanaged, .mobileDevicesLastInventory, .mobileDevicesUnmanaged:
             string.append("| **ID** | **Name** | **Serial Number** |\n")
             string.append("| :----: | :------- | :---------------: |\n")
         case .macExtensionAttributesLinterWarnings, .macScriptsLinterWarnings:
@@ -144,9 +144,7 @@ struct Markdown {
         case .macExtensionAttributesLinterErrors, .macScriptsLinterErrors:
             string.append("| **ID** | **Name** | **Line** | **Column** | **Error** | **Reference** |\n")
             string.append("| :----: | :------- | :------: | :--------: | :-------- | :-----------: |\n")
-        case .macApplicationsNoScope, .macConfigurationProfilesNoScope, .macPackagesNotLinked,
-            .macPoliciesDisabled, .macPoliciesNoScope, .macPoliciesNoPayload, .macPoliciesJamfRemote, .macPoliciesLastExecuted, .macPoliciesFailedThreshold,
-            .mobileApplicationsNoScope, .mobileConfigurationProfilesNoScope:
+        case .macPackagesNotLinked, .macPrintersNotLinked:
             string.append("| **ID** | **Name** | **Category** |\n")
             string.append("| :----: | :------- | :----------: |\n")
         default:

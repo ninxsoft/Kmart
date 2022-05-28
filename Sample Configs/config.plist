@@ -58,6 +58,10 @@
 		<true/>
 		<key>mac_packages_not_linked</key>
 		<true/>
+		<key>mac_patch_policies_no_scope</key>
+		<true/>
+		<key>mac_patch_policies_disabled</key>
+		<true/>
 		<key>mac_policies_no_scope</key>
 		<true/>
 		<key>mac_policies_disabled</key>
@@ -138,46 +142,6 @@
 		<string>/path/to/report.md</string>
 		<key>html</key>
 		<string>/path/to/report.html</string>
-	</dict>
-	<key>email</key>
-	<dict>
-		<key>enabled</key>
-		<true/>
-		<key>hostname</key>
-		<string>smtp.office365.com</string>
-		<key>port</key>
-		<integer>587</integer>
-		<key>username</key>
-		<string>first_last@myorg.com</string>
-		<key>password</key>
-		<string>super_complex_password</string>
-		<key>sender_name</key>
-		<string>KMART Bot 2000</string>
-		<key>sender_email</key>
-		<string>kmart_bot@myorg.com</string>
-		<key>recipients</key>
-		<array>
-			<string>myteam@groups.myorg.com</string>
-		</array>
-		<key>cc</key>
-		<array/>
-		<key>bcc</key>
-		<array/>
-		<key>subject</key>
-		<string>My Org Jamf Pro Report</string>
-		<key>attachments</key>
-		<dict>
-			<key>json</key>
-			<string>filename.json</string>
-			<key>plist</key>
-			<string>filename.plist</string>
-			<key>yaml</key>
-			<string>filename.yaml</string>
-			<key>markdown</key>
-			<string>filename.md</string>
-			<key>html</key>
-			<string>filename.html</string>
-		</dict>
 	</dict>
 	<key>slack</key>
 	<dict>

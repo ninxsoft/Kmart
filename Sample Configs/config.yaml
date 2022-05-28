@@ -27,6 +27,8 @@ reports:
   mac_extension_attributes_linter_warnings: true
   mac_extension_attributes_linter_errors: true
   mac_packages_not_linked: true
+  mac_patch_policies_no_scope: true
+  mac_patch_policies_disabled: true
   mac_policies_no_scope: true
   mac_policies_disabled: true
   mac_policies_no_payload: true
@@ -66,25 +68,6 @@ output:
   yaml: "/path/to/report.yaml"
   markdown: "/path/to/report.md"
   html: "/path/to/report.html"
-email:
-  enabled: true
-  hostname: smtp.office365.com
-  port: 587
-  username: first_last@myorg.com
-  password: super_complex_password
-  sender_name: KMART Bot 2000
-  sender_email: kmart_bot@myorg.com
-  recipients:
-    - myteam@groups.myorg.com
-  cc: []
-  bcc: []
-  subject: My Org Jamf Pro Report
-  attachments:
-    json: filename.json
-    plist: filename.plist
-    yaml: filename.yaml
-    markdown: filename.md
-    html: filename.html
 slack:
   enabled: true
   token: xoxb-your-token
