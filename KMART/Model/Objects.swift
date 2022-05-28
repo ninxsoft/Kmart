@@ -43,6 +43,8 @@ struct Objects {
     var macExtensionAttributes: [MacExtensionAttribute] = []
     /// mac packages
     var macPackages: [MacPackage] = []
+    /// mac patch policies
+    var macPatchPolicies: [MacPatchPolicy] = []
     /// mac patch software titles
     var macPatchSoftwareTitles: [MacPatchSoftwareTitle] = []
     /// mac policies
@@ -120,6 +122,8 @@ struct Objects {
                 try insertMacGroup(using: data)
             case .macPackages:
                 try insertMacPackage(using: data)
+            case .macPatchPolicies:
+                try insertMacPatchPolicy(using: data)
             case .macPatchSoftwareTitles:
                 try insertMacPatchSoftwareTitle(using: data)
             case .macPolicies:
@@ -330,6 +334,16 @@ struct Objects {
     private mutating func insertMacPackage(using data: Data) throws {
         let macPackage: MacPackage = try JSONDecoder().decode(MacPackage.self, from: data)
         macPackages.append(macPackage)
+    }
+
+    /// Inserts the provided dictionary data into the **Mac Patch Policies** array.
+    ///
+    /// - Parameters:
+    ///   - data: The dictionary data to be inserted.
+    /// - Throws: An exception if the provided dictionary data is malformed.
+    private mutating func insertMacPatchPolicy(using data: Data) throws {
+        let macPatchPolicy: MacPatchPolicy = try JSONDecoder().decode(MacPatchPolicy.self, from: data)
+        macPatchPolicies.append(macPatchPolicy)
     }
 
     /// Inserts the provided dictionary data into the **Mac Patch Software Titles** array.

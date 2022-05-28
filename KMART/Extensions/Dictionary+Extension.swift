@@ -22,7 +22,6 @@ extension Dictionary where Key == String, Value == Any {
         self.transformLocation(for: endpoint)
         self.transformMacDeviceHistory(for: endpoint)
         self.transformMacExtensionAttributes(for: endpoint)
-        self.transformMacPatchSoftwareTitles(for: endpoint)
         self.transformMacPolicies(for: endpoint)
         self.transformMacScripts(for: endpoint)
         self.transformMacStaticGroups(for: endpoint)
@@ -37,15 +36,8 @@ extension Dictionary where Key == String, Value == Any {
 
         guard [
             .eBooks,
-            .macApplications,
-            .macConfigurationProfiles,
-            .macDevices,
-            .macPolicies,
-            .macRestrictedSoftware,
-            .mobileApplications,
-            .mobileConfigurationProfiles,
-            .mobileDevices,
-            .macDevicesHistory
+            .macApplications, .macConfigurationProfiles, .macDevices, .macDevicesHistory, .macPolicies, .macRestrictedSoftware,
+            .mobileApplications, .mobileConfigurationProfiles, .mobileDevices
         ].contains(endpoint) else {
             return
         }
@@ -108,7 +100,11 @@ extension Dictionary where Key == String, Value == Any {
     ///   - endpoint: The Jamf API endpoint.
     private mutating func transformScopeMacTargets(for endpoint: Endpoint) {
 
-        guard [.eBooks, .macApplications, .macConfigurationProfiles, .macPolicies, .macRestrictedSoftware, .mobileApplications, .mobileConfigurationProfiles].contains(endpoint) else {
+        guard [
+            .eBooks,
+            .macApplications, .macConfigurationProfiles, .macPolicies, .macRestrictedSoftware,
+            .mobileApplications, .mobileConfigurationProfiles
+        ].contains(endpoint) else {
             return
         }
 
@@ -135,7 +131,11 @@ extension Dictionary where Key == String, Value == Any {
     ///   - endpoint: The Jamf API endpoint.
     private mutating func transformScopeMacExclusions(for endpoint: Endpoint) {
 
-        guard [.eBooks, .macApplications, .macConfigurationProfiles, .macPolicies, .macRestrictedSoftware, .mobileApplications, .mobileConfigurationProfiles].contains(endpoint) else {
+        guard [
+            .eBooks,
+            .macApplications, .macConfigurationProfiles, .macPolicies, .macRestrictedSoftware,
+            .mobileApplications, .mobileConfigurationProfiles
+        ].contains(endpoint) else {
             return
         }
 
@@ -235,7 +235,11 @@ extension Dictionary where Key == String, Value == Any {
     ///   - endpoint: The Jamf API endpoint.
     private mutating func transformScopeLimitations(for endpoint: Endpoint) {
 
-        guard [.eBooks, .macApplications, .macConfigurationProfiles, .macPolicies, .mobileApplications, .mobileConfigurationProfiles].contains(endpoint) else {
+        guard [
+            .eBooks,
+            .macApplications, .macConfigurationProfiles, .macPolicies,
+            .mobileApplications, .mobileConfigurationProfiles
+        ].contains(endpoint) else {
             return
         }
 
@@ -341,28 +345,6 @@ extension Dictionary where Key == String, Value == Any {
         self["scriptContents"] = (dictionary["script"] as? String)?.replacingOccurrences(of: "\r\n", with: "\n") ?? ""
         self["linterWarnings"] = []
         self["linterErrors"] = []
-    }
-
-    /// Transform the **Mac Software Patch Policies** dictionary in-place.
-    ///
-    /// - Parameters:
-    ///   - endpoint: The Jamf API endpoint.
-    private mutating func transformMacPatchSoftwareTitles(for endpoint: Endpoint) {
-
-        guard [.macPatchSoftwareTitles].contains(endpoint) else {
-            return
-        }
-
-        guard let idString: String = self["id"] as? String,
-            let id: Int = Int(idString),
-            let categoryDictionary: [String: Any] = self["category"] as? [String: Any],
-            let categoryString: String = categoryDictionary["id"] as? String,
-            let category: Int = Int(categoryString) else {
-            return
-        }
-
-        self["id"] = id
-        self["category"] = category
     }
 
     /// Transform the **Mac Policies** dictionary in-place.

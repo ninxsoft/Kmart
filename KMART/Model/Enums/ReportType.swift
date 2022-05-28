@@ -32,6 +32,8 @@ enum ReportType: String, CaseIterable {
     case macExtensionAttributesLinterErrors = "mac_extension_attributes_linter_errors"
     case macExtensionAttributesLinterWarnings = "mac_extension_attributes_linter_warnings"
     case macPackagesNotLinked = "mac_packages_not_linked"
+    case macPatchPoliciesNoScope = "mac_patch_policies_no_scope"
+    case macPatchPoliciesDisabled = "mac_patch_policies_disabled"
     case macPoliciesNoScope = "mac_policies_no_scope"
     case macPoliciesDisabled = "mac_policies_disabled"
     case macPoliciesNoPayload = "mac_policies_no_payload"
@@ -69,25 +71,25 @@ enum ReportType: String, CaseIterable {
         case .buildingsNotLinked:
             return [
                 .buildings, .networkSegments,
-                .macApplications, .macConfigurationProfiles, .macDevices, .macPolicies, .macRestrictedSoftware,
+                .macApplications, .macConfigurationProfiles, .macDevices, .macPatchPolicies, .macPolicies, .macRestrictedSoftware,
                 .mobileApplications, .mobileConfigurationProfiles, .mobileDevices
             ]
         case .categoriesNotLinked:
             return [
-                .categories, .macApplications, .macConfigurationProfiles,
-                .macPackages, .macPatchSoftwareTitles, .macPolicies,
-                .macPrinters, .macScripts, .mobileApplications, .mobileConfigurationProfiles
+                .categories,
+                .macApplications, .macConfigurationProfiles, .macPackages, .macPatchSoftwareTitles, .macPolicies, .macPrinters, .macScripts,
+                .mobileApplications, .mobileConfigurationProfiles
             ]
         case .departmentsNotLinked:
             return [
                 .departments, .networkSegments,
-                .macApplications, .macConfigurationProfiles, .macDevices, .macPolicies, .macRestrictedSoftware,
+                .macApplications, .macConfigurationProfiles, .macDevices, .macPatchPolicies, .macPolicies, .macRestrictedSoftware,
                 .mobileApplications, .mobileConfigurationProfiles, .mobileDevices
             ]
         case .eBooksNoScope:
             return [.eBooks]
         case .iBeaconsNotLinked:
-            return [.iBeacons, .macConfigurationProfiles, .macPolicies, .mobileConfigurationProfiles]
+            return [.iBeacons, .macConfigurationProfiles, .macPatchPolicies, .macPolicies, .mobileConfigurationProfiles]
         case .macAdvancedSearchesNoCriteria:
             return [.macAdvancedSearches]
         case .macAdvancedSearchesInvalidCriteria:
@@ -122,6 +124,10 @@ enum ReportType: String, CaseIterable {
             return [.macExtensionAttributes]
         case .macPackagesNotLinked:
             return [.macPackages, .macPatchSoftwareTitles, .macPolicies]
+        case .macPatchPoliciesNoScope:
+            return [.macPatchPolicies]
+        case .macPatchPoliciesDisabled:
+            return [.macPatchPolicies]
         case .macPoliciesNoScope:
             return [.macPolicies]
         case .macPoliciesDisabled:
@@ -145,11 +151,11 @@ enum ReportType: String, CaseIterable {
         case .macScriptsLinterWarnings:
             return [.macScripts]
         case .macSmartGroupsNotLinked:
-            return [.macAdvancedSearches, .macApplications, .macConfigurationProfiles, .macPolicies, .macRestrictedSoftware, .macGroups]
+            return [.macAdvancedSearches, .macApplications, .macConfigurationProfiles, .macPatchPolicies, .macPolicies, .macRestrictedSoftware, .macGroups]
         case .macSmartGroupsNoCriteria:
             return [.macGroups]
         case .macStaticGroupsNotLinked:
-            return [.macAdvancedSearches, .macApplications, .macConfigurationProfiles, .macPolicies, .macRestrictedSoftware, .macGroups]
+            return [.macAdvancedSearches, .macApplications, .macConfigurationProfiles, .macPatchPolicies, .macPolicies, .macRestrictedSoftware, .macGroups]
         case .macStaticGroupsEmpty:
             return [.macGroups]
         case .mobileAdvancedSearchesNoCriteria:
@@ -177,7 +183,7 @@ enum ReportType: String, CaseIterable {
         case .networkSegmentsNotLinked:
             return [
                 .buildings, .departments, .eBooks, .networkSegments,
-                .macApplications, .macConfigurationProfiles, .macPolicies,
+                .macApplications, .macConfigurationProfiles, .macPatchPolicies, .macPolicies,
                 .mobileApplications, .mobileConfigurationProfiles
             ]
         }
@@ -213,6 +219,8 @@ enum ReportType: String, CaseIterable {
             return .macExtensionAttributes
         case .macPackagesNotLinked:
             return .macPackages
+        case .macPatchPoliciesNoScope, .macPatchPoliciesDisabled:
+            return .macPatchPolicies
         case .macPoliciesNoScope, .macPoliciesDisabled, .macPoliciesNoPayload, .macPoliciesJamfRemote, .macPoliciesLastExecuted, .macPoliciesFailedThreshold:
             return .macPolicies
         case .macPrintersNotLinked:
@@ -286,6 +294,10 @@ enum ReportType: String, CaseIterable {
             return "The following Mac Extension Attributes have linter warnings"
         case .macPackagesNotLinked:
             return "The following Mac Packages are not linked to any Policies"
+        case .macPatchPoliciesNoScope:
+            return "The following Mac Patch Policies have no scope"
+        case .macPatchPoliciesDisabled:
+            return "The following Mac Patch Policies are disabled"
         case .macPoliciesNoScope:
             return "The following Mac Policies have no scope"
         case .macPoliciesDisabled:
@@ -373,6 +385,8 @@ enum ReportType: String, CaseIterable {
             return "computerExtensionAttributes.html?id="
         case .macPackagesNotLinked:
             return "packages.html?id="
+        case .macPatchPoliciesNoScope, .macPatchPoliciesDisabled:
+            return "patchDeployment.html?id="
         case .macPoliciesNoScope, .macPoliciesDisabled, .macPoliciesNoPayload, .macPoliciesJamfRemote, .macPoliciesLastExecuted, .macPoliciesFailedThreshold:
             return "policies.html?id="
         case .macPrintersNotLinked:

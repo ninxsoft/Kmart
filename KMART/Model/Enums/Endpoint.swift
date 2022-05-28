@@ -25,6 +25,7 @@ enum Endpoint: String {
     case macExtensionAttributes = "mac_extension_attributes"
     case macGroups = "mac_groups"
     case macPackages = "mac_packages"
+    case macPatchPolicies = "mac_patch_policies"
     case macPatchSoftwareTitles = "mac_patch_software_titles"
     case macPolicies = "mac_policies"
     case macPrinters = "mac_printers"
@@ -76,6 +77,8 @@ enum Endpoint: String {
             return "Mac Groups"
         case .macPackages:
             return "Mac Packages"
+        case .macPatchPolicies:
+            return "Mac Patch Policies"
         case .macPatchSoftwareTitles:
             return "Mac Patch Software Titles"
         case .macPolicies:
@@ -137,6 +140,8 @@ enum Endpoint: String {
             return "Mac Group"
         case .macPackages:
             return "Mac Package"
+        case .macPatchPolicies:
+            return "Mac Patch Policy"
         case .macPatchSoftwareTitles:
             return "Mac Patch Software Title"
         case .macPolicies:
@@ -198,6 +203,8 @@ enum Endpoint: String {
             return "computergroups"
         case .macPackages:
             return "packages"
+        case .macPatchPolicies:
+            return "patchpolicies"
         case .macPatchSoftwareTitles:
             return "patchsoftwaretitles"
         case .macPolicies:
@@ -259,6 +266,8 @@ enum Endpoint: String {
             return "computer_groups"
         case .macPackages:
             return "packages"
+        case .macPatchPolicies:
+            return "patch_policies"
         case .macPatchSoftwareTitles:
             return "patch_software_titles"
         case .macPolicies:
@@ -320,6 +329,8 @@ enum Endpoint: String {
             return "computer_group"
         case .macPackages:
             return "package"
+        case .macPatchPolicies:
+            return "patch_policy"
         case .macPatchSoftwareTitles:
             return "patch_software_title"
         case .macPolicies:
@@ -349,7 +360,7 @@ enum Endpoint: String {
 
     var subset: String {
         switch self {
-        case .eBooks, .macConfigurationProfiles, .mobileConfigurationProfiles:
+        case .eBooks, .macConfigurationProfiles, .macPatchPolicies, .mobileConfigurationProfiles:
             return "/subset/general&scope"
         case .macDevices, .mobileDevices:
             return "/subset/general&location"
@@ -362,6 +373,10 @@ enum Endpoint: String {
 
     var markdownIdentifier: String {
         self.rawValue.replacingOccurrences(of: "_", with: "-")
+    }
+
+    var requestJSON: Bool {
+        ![.macPatchPolicies, .macPatchSoftwareTitles].contains(self)
     }
 
     func primaryURL(url baseURL: String) -> URL? {

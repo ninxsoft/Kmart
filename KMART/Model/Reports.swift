@@ -56,6 +56,10 @@ struct Reports {
     var macExtensionAttributesLinterWarnings: [MacExtensionAttribute] = []
     /// mac packages not linked
     var macPackagesNotLinked: [MacPackage] = []
+    /// mac patch policies no scope
+    var macPatchPoliciesNoScope: [MacPatchPolicy] = []
+    /// mac patch policies disabled
+    var macPatchPoliciesDisabled: [MacPatchPolicy] = []
     /// mac policies no scope
     var macPoliciesNoScope: [MacPolicy] = []
     /// mac policies disabled
@@ -173,6 +177,10 @@ struct Reports {
                 reportsDictionary[report.identifier] = macExtensionAttributesLinterWarnings.map { $0.linterWarningsDictionary }
             case .macPackagesNotLinked:
                 reportsDictionary[report.identifier] = macPackagesNotLinked.map { $0.dictionary }
+            case .macPatchPoliciesNoScope:
+                reportsDictionary[report.identifier] = macPatchPoliciesNoScope.map { $0.dictionary }
+            case .macPatchPoliciesDisabled:
+                reportsDictionary[report.identifier] = macPatchPoliciesDisabled.map { $0.dictionary }
             case .macPoliciesNoScope:
                 reportsDictionary[report.identifier] = macPoliciesNoScope.map { $0.dictionary }
             case .macPoliciesDisabled:

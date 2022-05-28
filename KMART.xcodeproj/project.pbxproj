@@ -13,6 +13,7 @@
 		3942E4D328407B7B00B1DCE2 /* MacPatchSoftwareTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3942E4D228407B7B00B1DCE2 /* MacPatchSoftwareTitle.swift */; };
 		3942E4D42840998800B1DCE2 /* MacPatchSoftwareTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3942E4D228407B7B00B1DCE2 /* MacPatchSoftwareTitle.swift */; };
 		3942E4DA28419ADA00B1DCE2 /* SWXMLHash in Frameworks */ = {isa = PBXBuildFile; productRef = 3942E4D928419ADA00B1DCE2 /* SWXMLHash */; };
+		3942E4DC2841C00000B1DCE2 /* MacPatchPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3942E4DB2841C00000B1DCE2 /* MacPatchPolicy.swift */; };
 		395DE66226CF72E3004FEF25 /* Slacker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395DE66126CF72E3004FEF25 /* Slacker.swift */; };
 		395DE66426CF73DE004FEF25 /* SlackConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395DE66326CF73DE004FEF25 /* SlackConfiguration.swift */; };
 		3967934F26D5F7F500DC2D2D /* SlackConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395DE66326CF73DE004FEF25 /* SlackConfiguration.swift */; };
@@ -153,6 +154,7 @@
 		3920D62B2768663F004AD309 /* ParsableCommand+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "ParsableCommand+Extension.swift"; path = "KMART/Extensions/ParsableCommand+Extension.swift"; sourceTree = SOURCE_ROOT; };
 		393356C326FAF267009A6DAA /* ScriptType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptType.swift; sourceTree = "<group>"; };
 		3942E4D228407B7B00B1DCE2 /* MacPatchSoftwareTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacPatchSoftwareTitle.swift; sourceTree = "<group>"; };
+		3942E4DB2841C00000B1DCE2 /* MacPatchPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacPatchPolicy.swift; sourceTree = "<group>"; };
 		395DE66126CF72E3004FEF25 /* Slacker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Slacker.swift; sourceTree = "<group>"; };
 		395DE66326CF73DE004FEF25 /* SlackConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlackConfiguration.swift; sourceTree = "<group>"; };
 		39708B422767223000DD5C3F /* ConfigurationType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationType.swift; sourceTree = "<group>"; };
@@ -369,6 +371,7 @@
 				5793802525DB317E00A76D7D /* MacExclusions.swift */,
 				57E2540625DA39DA00931A0B /* MacExtensionAttribute.swift */,
 				57E2541025DA39EF00931A0B /* MacPackage.swift */,
+				3942E4DB2841C00000B1DCE2 /* MacPatchPolicy.swift */,
 				3942E4D228407B7B00B1DCE2 /* MacPatchSoftwareTitle.swift */,
 				57E2541325DA39FB00931A0B /* MacPolicy.swift */,
 				5756B94E25DF6732001215DF /* MacPolicyLog.swift */,
@@ -627,6 +630,7 @@
 				395DE66426CF73DE004FEF25 /* SlackConfiguration.swift in Sources */,
 				578B884E25E62766003A89BF /* Int+Extension.swift in Sources */,
 				5793802925DB318500A76D7D /* Limitations.swift in Sources */,
+				3942E4DC2841C00000B1DCE2 /* MacPatchPolicy.swift in Sources */,
 				5793802625DB317E00A76D7D /* MacExclusions.swift in Sources */,
 				57E253DC25D9E4E400931A0B /* Sequence+Extension.swift in Sources */,
 				57B4F63F26195B07006F894F /* Markdown.swift in Sources */,
