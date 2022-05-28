@@ -10,6 +10,12 @@
 		350CBBB925E5AD21002F44D6 /* Double+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 350CBBB825E5AD21002F44D6 /* Double+Extension.swift */; };
 		3920D62C2768663F004AD309 /* ParsableCommand+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3920D62B2768663F004AD309 /* ParsableCommand+Extension.swift */; };
 		393356C426FAF267009A6DAA /* ScriptType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 393356C326FAF267009A6DAA /* ScriptType.swift */; };
+		3942E4D328407B7B00B1DCE2 /* MacPatchSoftwareTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3942E4D228407B7B00B1DCE2 /* MacPatchSoftwareTitle.swift */; };
+		3942E4D42840998800B1DCE2 /* MacPatchSoftwareTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3942E4D228407B7B00B1DCE2 /* MacPatchSoftwareTitle.swift */; };
+		3942E4DA28419ADA00B1DCE2 /* SWXMLHash in Frameworks */ = {isa = PBXBuildFile; productRef = 3942E4D928419ADA00B1DCE2 /* SWXMLHash */; };
+		3942E4DC2841C00000B1DCE2 /* MacPatchPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3942E4DB2841C00000B1DCE2 /* MacPatchPolicy.swift */; };
+		3942E4DD2841F3F200B1DCE2 /* MacPatchPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3942E4DB2841C00000B1DCE2 /* MacPatchPolicy.swift */; };
+		3942E4E02841F7A900B1DCE2 /* SWXMLHash in Frameworks */ = {isa = PBXBuildFile; productRef = 3942E4DF2841F7A900B1DCE2 /* SWXMLHash */; };
 		395DE66226CF72E3004FEF25 /* Slacker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395DE66126CF72E3004FEF25 /* Slacker.swift */; };
 		395DE66426CF73DE004FEF25 /* SlackConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395DE66326CF73DE004FEF25 /* SlackConfiguration.swift */; };
 		3967934F26D5F7F500DC2D2D /* SlackConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395DE66326CF73DE004FEF25 /* SlackConfiguration.swift */; };
@@ -149,6 +155,8 @@
 		350CBBB825E5AD21002F44D6 /* Double+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Extension.swift"; sourceTree = "<group>"; };
 		3920D62B2768663F004AD309 /* ParsableCommand+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "ParsableCommand+Extension.swift"; path = "KMART/Extensions/ParsableCommand+Extension.swift"; sourceTree = SOURCE_ROOT; };
 		393356C326FAF267009A6DAA /* ScriptType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptType.swift; sourceTree = "<group>"; };
+		3942E4D228407B7B00B1DCE2 /* MacPatchSoftwareTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacPatchSoftwareTitle.swift; sourceTree = "<group>"; };
+		3942E4DB2841C00000B1DCE2 /* MacPatchPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacPatchPolicy.swift; sourceTree = "<group>"; };
 		395DE66126CF72E3004FEF25 /* Slacker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Slacker.swift; sourceTree = "<group>"; };
 		395DE66326CF73DE004FEF25 /* SlackConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlackConfiguration.swift; sourceTree = "<group>"; };
 		39708B422767223000DD5C3F /* ConfigurationType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationType.swift; sourceTree = "<group>"; };
@@ -220,6 +228,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3942E4E02841F7A900B1DCE2 /* SWXMLHash in Frameworks */,
 				57B4F66826195C63006F894F /* Ink in Frameworks */,
 				578B88ED25E6626B003A89BF /* ArgumentParser in Frameworks */,
 				578B88D725E661D1003A89BF /* Yams in Frameworks */,
@@ -230,6 +239,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3942E4DA28419ADA00B1DCE2 /* SWXMLHash in Frameworks */,
 				573CD6E52611E62700CE156E /* Ink in Frameworks */,
 				5756B94625DE29CE001215DF /* Yams in Frameworks */,
 				57E253A425D8CCDE00931A0B /* ArgumentParser in Frameworks */,
@@ -239,6 +249,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3942E4DE2841F7A900B1DCE2 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		39708B462767229C00DD5C3F /* Enums */ = {
 			isa = PBXGroup;
 			children = (
@@ -270,6 +287,7 @@
 				57E2539025D8CB7E00931A0B /* KMART */,
 				578B885725E658E9003A89BF /* KMARTTests */,
 				57E2538F25D8CB7E00931A0B /* Products */,
+				3942E4DE2841F7A900B1DCE2 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -364,6 +382,8 @@
 				5793802525DB317E00A76D7D /* MacExclusions.swift */,
 				57E2540625DA39DA00931A0B /* MacExtensionAttribute.swift */,
 				57E2541025DA39EF00931A0B /* MacPackage.swift */,
+				3942E4DB2841C00000B1DCE2 /* MacPatchPolicy.swift */,
+				3942E4D228407B7B00B1DCE2 /* MacPatchSoftwareTitle.swift */,
 				57E2541325DA39FB00931A0B /* MacPolicy.swift */,
 				5756B94E25DF6732001215DF /* MacPolicyLog.swift */,
 				57E2541625DA39FF00931A0B /* MacPrinter.swift */,
@@ -404,6 +424,7 @@
 				578B88D625E661D1003A89BF /* Yams */,
 				578B88EC25E6626B003A89BF /* ArgumentParser */,
 				57B4F66726195C63006F894F /* Ink */,
+				3942E4DF2841F7A900B1DCE2 /* SWXMLHash */,
 			);
 			productName = KMARTTests;
 			productReference = 578B885625E658E9003A89BF /* KMARTTests.xctest */;
@@ -428,6 +449,7 @@
 				57E253A325D8CCDE00931A0B /* ArgumentParser */,
 				5756B94525DE29CE001215DF /* Yams */,
 				573CD6E42611E62700CE156E /* Ink */,
+				3942E4D928419ADA00B1DCE2 /* SWXMLHash */,
 			);
 			productName = kmart;
 			productReference = 57E2538E25D8CB7E00931A0B /* kmart */;
@@ -463,6 +485,7 @@
 				57E253A225D8CCDE00931A0B /* XCRemoteSwiftPackageReference "swift-argument-parser" */,
 				5756B94425DE29CE001215DF /* XCRemoteSwiftPackageReference "Yams" */,
 				573CD6E32611E62700CE156E /* XCRemoteSwiftPackageReference "Ink" */,
+				3942E4D828419ADA00B1DCE2 /* XCRemoteSwiftPackageReference "SWXMLHash" */,
 			);
 			productRefGroup = 57E2538F25D8CB7E00931A0B /* Products */;
 			projectDirPath = "";
@@ -536,6 +559,7 @@
 				578B888B25E65FA9003A89BF /* MacPolicyLog.swift in Sources */,
 				578B889925E65FA9003A89BF /* MacConfigurationProfile.swift in Sources */,
 				57B4F66026195C39006F894F /* Markdown.swift in Sources */,
+				3942E4DD2841F3F200B1DCE2 /* MacPatchPolicy.swift in Sources */,
 				578B888925E65FA9003A89BF /* Criterion.swift in Sources */,
 				39708B4A276730C100DD5C3F /* Endpoint.swift in Sources */,
 				578B88E925E66256003A89BF /* Configuration.swift in Sources */,
@@ -578,6 +602,7 @@
 				578B889625E65FA9003A89BF /* MobileAdvancedSearch.swift in Sources */,
 				578B888225E65F9E003A89BF /* MacAdvancedSearch.swift in Sources */,
 				3967934F26D5F7F500DC2D2D /* SlackConfiguration.swift in Sources */,
+				3942E4D42840998800B1DCE2 /* MacPatchSoftwareTitle.swift in Sources */,
 				578B888825E65FA9003A89BF /* MacDiskEncryption.swift in Sources */,
 				57B4F66326195C40006F894F /* Shell.swift in Sources */,
 				578B88A225E65FA9003A89BF /* MobileApplication.swift in Sources */,
@@ -618,10 +643,12 @@
 				395DE66426CF73DE004FEF25 /* SlackConfiguration.swift in Sources */,
 				578B884E25E62766003A89BF /* Int+Extension.swift in Sources */,
 				5793802925DB318500A76D7D /* Limitations.swift in Sources */,
+				3942E4DC2841C00000B1DCE2 /* MacPatchPolicy.swift in Sources */,
 				5793802625DB317E00A76D7D /* MacExclusions.swift in Sources */,
 				57E253DC25D9E4E400931A0B /* Sequence+Extension.swift in Sources */,
 				57B4F63F26195B07006F894F /* Markdown.swift in Sources */,
 				5793805E25DB898100A76D7D /* Reports.swift in Sources */,
+				3942E4D328407B7B00B1DCE2 /* MacPatchSoftwareTitle.swift in Sources */,
 				57E2542325DA3A1E00931A0B /* MobileApplication.swift in Sources */,
 				5756B95425DFA9DB001215DF /* OutputType.swift in Sources */,
 				57E2541D25DA3A0A00931A0B /* MacScript.swift in Sources */,
@@ -873,6 +900,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		3942E4D828419ADA00B1DCE2 /* XCRemoteSwiftPackageReference "SWXMLHash" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/drmohundro/SWXMLHash";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.0.0;
+			};
+		};
 		573CD6E32611E62700CE156E /* XCRemoteSwiftPackageReference "Ink" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/JohnSundell/Ink";
@@ -900,6 +935,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		3942E4D928419ADA00B1DCE2 /* SWXMLHash */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3942E4D828419ADA00B1DCE2 /* XCRemoteSwiftPackageReference "SWXMLHash" */;
+			productName = SWXMLHash;
+		};
+		3942E4DF2841F7A900B1DCE2 /* SWXMLHash */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3942E4D828419ADA00B1DCE2 /* XCRemoteSwiftPackageReference "SWXMLHash" */;
+			productName = SWXMLHash;
+		};
 		573CD6E42611E62700CE156E /* Ink */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 573CD6E32611E62700CE156E /* XCRemoteSwiftPackageReference "Ink" */;

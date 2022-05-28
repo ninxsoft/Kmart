@@ -10,6 +10,8 @@ import Foundation
 import FoundationNetworking
 #endif
 
+import SWXMLHash
+
 /// Struct used to perform all **HTTP** operations.
 struct HTTP {
 
@@ -38,7 +40,7 @@ struct HTTP {
                     token = try await refreshToken(using: configuration)
                 }
 
-                let request: URLRequest = urlRequest(for: url, with: "Bearer \(token.value)")
+                let request: URLRequest = urlRequest(for: url, with: "Bearer \(token.value)", requestJSON: true)
                 let (data, urlResponse): (Data, URLResponse) = try await session.data(for: request)
 
                 guard let httpURLResponse: HTTPURLResponse = urlResponse as? HTTPURLResponse,
@@ -110,14 +112,12 @@ struct HTTP {
             token = try await refreshToken(using: configuration)
         }
 
-        let request: URLRequest = urlRequest(for: url, with: "Bearer \(token.value)")
+        let request: URLRequest = urlRequest(for: url, with: "Bearer \(token.value)", requestJSON: endpoint.requestJSON)
         let (data, urlResponse): (Data, URLResponse) = try await session.data(for: request)
 
-        guard let httpURLResponse: HTTPURLResponse = urlResponse as? HTTPURLResponse,
-            let parentDictionary: [String: Any] = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
-            var dictionary: [String: Any] = parentDictionary[endpoint.secondaryKey] as? [String: Any] else {
-            PrettyPrint.print("Unable to find '\(endpoint.secondaryKey)' key in URL response", prefixColor: .red)
-            throw KmartError.missingKey
+        guard let httpURLResponse: HTTPURLResponse = urlResponse as? HTTPURLResponse else {
+            PrettyPrint.print("Unable to retrieve HTTP URL Response", prefixColor: .red)
+            throw KmartError.invalidURLResponse
         }
 
         guard httpURLResponse.statusCode == 200 else {
@@ -125,6 +125,33 @@ struct HTTP {
             throw KmartError.invalidStatusCode
         }
 
+        var dictionary: [String: Any] = [:]
+
+        if endpoint.requestJSON {
+
+            guard let dictionaryFromJSON: [String: Any] = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else {
+                PrettyPrint.print("Unable to retrieve dictionary from JSON", prefixColor: .red)
+                throw KmartError.invalidData
+            }
+
+            dictionary = dictionaryFromJSON
+        } else {
+
+            do {
+                let dictionaryFromXML: [String: Any] = try getDictionaryFromXML(data, endpoint: endpoint)
+                dictionary = dictionaryFromXML
+            } catch {
+                PrettyPrint.print("Unable to retrieve dictionary from XML", prefixColor: .red)
+                throw KmartError.invalidData
+            }
+        }
+
+        guard let childDictionary: [String: Any] = dictionary[endpoint.secondaryKey] as? [String: Any] else {
+            PrettyPrint.print("Unable to find '\(endpoint.secondaryKey)' key in URL response", prefixColor: .red)
+            throw KmartError.missingKey
+        }
+
+        dictionary = childDictionary
         dictionary.transform(endpoint: endpoint)
         return dictionary
     }
@@ -149,9 +176,9 @@ struct HTTP {
     ///   - url:           The requested URL.
     ///   - authorization: The Jamf API bearer token.
     /// - Returns: The configured `URLRequest` object.
-    private static func urlRequest(for url: URL, with authorization: String) -> URLRequest {
+    private static func urlRequest(for url: URL, with authorization: String, requestJSON: Bool) -> URLRequest {
         var request: URLRequest = URLRequest(url: url)
-        request.setValue("application/json", forHTTPHeaderField: "Accept")
+        request.setValue("application/\(requestJSON ? "json" : "xml")", forHTTPHeaderField: "Accept")
         request.setValue(authorization, forHTTPHeaderField: "Authorization")
         return request
     }
@@ -262,5 +289,32 @@ struct HTTP {
         }
 
         return (value: value, expiration: expiration)
+    }
+
+    /// Return a valid dictionary from the XML response data.
+    ///
+    /// - Parameters:
+    ///   - data:     The data from the HTTP response.
+    ///   - endpoint: The Endpoint that is being requested.
+    /// - Returns: A valid endpoint dictionary.
+    private static func getDictionaryFromXML(_ data: Data, endpoint: Endpoint) throws -> [String: Any] {
+
+        let xml: XMLIndexer = XMLHash.parse(data)
+        var data: Data
+
+        if endpoint == .macPatchPolicies {
+            let macPatchPolicy: MacPatchPolicy = try MacPatchPolicy.deserialize(xml)
+            data = try JSONEncoder().encode(macPatchPolicy)
+        } else {
+            let macPatchSoftwareTitle: MacPatchSoftwareTitle = try MacPatchSoftwareTitle.deserialize(xml)
+            data = try JSONEncoder().encode(macPatchSoftwareTitle)
+        }
+
+        guard var dictionary: [String: Any] = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else {
+            throw KmartError.invalidData
+        }
+
+        dictionary = [endpoint.secondaryKey: dictionary]
+        return dictionary
     }
 }

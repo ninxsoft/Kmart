@@ -10,7 +10,19 @@ import Foundation
 extension Sequence where Iterator.Element == [String: Any] {
 
     var identifiers: [Int] {
-        self.compactMap { $0["id"] as? Int }
+
+        var identifiers: [Int] = []
+
+        forEach {
+            if let id: Int = $0["id"] as? Int {
+                identifiers.append(id)
+            } else if let string: String = $0["id"] as? String,
+                let id: Int = Int(string) {
+                identifiers.append(id)
+            }
+        }
+
+        return identifiers
     }
 
     var names: [String] {

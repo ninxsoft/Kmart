@@ -353,8 +353,6 @@ class KMARTMacTests: XCTestCase {
         let script: String = """
         #!/usr/bin/env python3
 
-        \"\"\"Sample script to test linting.\"\"\"
-
         print("Hello World!")
 
         exit(0)
@@ -369,8 +367,6 @@ class KMARTMacTests: XCTestCase {
         // https://flake8.pycqa.org/en/4.0.1/user/error-codes.html
         let script: String = """
         #!/usr/bin/env python3
-
-        \"\"\"Sample script to test linting.\"\"\"
 
         import json
 
@@ -388,8 +384,6 @@ class KMARTMacTests: XCTestCase {
         // https://flake8.pycqa.org/en/4.0.1/user/error-codes.html
         let script: String = """
         #!/usr/bin/env python3
-
-        \"\"\"Sample script to test linting.\"\"\"
 
         print("Hello World!")
 
@@ -409,7 +403,6 @@ class KMARTMacTests: XCTestCase {
         print("Hello World!")
 
         exit(0)
-
         """
         let macExtensionAttribute: MacExtensionAttribute = MacExtensionAttribute(id: 1, inputType: "script", scriptContents: script)
         let results: [MacExtensionAttribute] = Reporter.macExtensionAttributesLinterWarnings([macExtensionAttribute])
@@ -418,17 +411,61 @@ class KMARTMacTests: XCTestCase {
 
     func testMacPackagesLinked() throws {
         let macPackages: [MacPackage] = [MacPackage(id: 1)]
+        let macPatchSoftwareTitles: [MacPatchSoftwareTitle] = [MacPatchSoftwareTitle(id: 1, packages: [1])]
         let macPolicies: [MacPolicy] = [MacPolicy(id: 1, packages: [1])]
-        let objects: Objects = Objects(macPackages: macPackages, macPolicies: macPolicies)
+        let objects: Objects = Objects(macPackages: macPackages, macPatchSoftwareTitles: macPatchSoftwareTitles, macPolicies: macPolicies)
         let results: [MacPackage] = Reporter.macPackagesNotLinked(objects)
         XCTAssertTrue(results.isEmpty)
     }
 
     func testMacPackagesNotLinked() throws {
-        let macPackages: [MacPackage] = [MacPackage(id: 1)]
-        let macPolicies: [MacPolicy] = [MacPolicy(id: 1, packages: [2])]
-        let objects: Objects = Objects(macPackages: macPackages, macPolicies: macPolicies)
+        let macPackages: [MacPackage] = [MacPackage(id: 1), MacPackage(id: 2)]
+        let macPatchSoftwareTitles: [MacPatchSoftwareTitle] = [MacPatchSoftwareTitle(id: 1, packages: [1])]
+        let macPolicies: [MacPolicy] = [MacPolicy(id: 1, packages: [1])]
+        let objects: Objects = Objects(macPackages: macPackages, macPatchSoftwareTitles: macPatchSoftwareTitles, macPolicies: macPolicies)
         let results: [MacPackage] = Reporter.macPackagesNotLinked(objects)
+        XCTAssertFalse(results.isEmpty)
+    }
+
+    func testMacPatchPolicyScope() throws {
+        let macPatchPolicies: [MacPatchPolicy] = [
+            MacPatchPolicy(id: 1, macTargets: MacTargets(allDevices: true)),
+            MacPatchPolicy(id: 2, macTargets: MacTargets(buildings: [1])),
+            MacPatchPolicy(id: 3, macTargets: MacTargets(departments: [1])),
+            MacPatchPolicy(id: 4, macTargets: MacTargets(devices: [1])),
+            MacPatchPolicy(id: 5, macTargets: MacTargets(deviceGroups: [1])),
+            MacPatchPolicy(id: 6, macExclusions: MacExclusions(buildings: [1])),
+            MacPatchPolicy(id: 7, macExclusions: MacExclusions(departments: [1])),
+            MacPatchPolicy(id: 8, macExclusions: MacExclusions(devices: [1])),
+            MacPatchPolicy(id: 9, macExclusions: MacExclusions(deviceGroups: [1])),
+            MacPatchPolicy(id: 10, macExclusions: MacExclusions(users: ["User"])),
+            MacPatchPolicy(id: 11, macExclusions: MacExclusions(userGroups: ["User Group"])),
+            MacPatchPolicy(id: 12, macExclusions: MacExclusions(networkSegments: [1])),
+            MacPatchPolicy(id: 13, macExclusions: MacExclusions(iBeacons: [1])),
+            MacPatchPolicy(id: 14, limitations: Limitations(users: ["User"])),
+            MacPatchPolicy(id: 15, limitations: Limitations(userGroups: ["User Group"])),
+            MacPatchPolicy(id: 16, limitations: Limitations(networkSegments: [1])),
+            MacPatchPolicy(id: 17, limitations: Limitations(iBeacons: [1]))
+        ]
+        let results: [MacPatchPolicy] = Reporter.macPatchPoliciesNoScope(macPatchPolicies)
+        XCTAssertTrue(results.isEmpty)
+    }
+
+    func testMacPatchPolicyNoScope() throws {
+        let macPatchPolicies: [MacPatchPolicy] = [MacPatchPolicy(id: 1)]
+        let results: [MacPatchPolicy] = Reporter.macPatchPoliciesNoScope(macPatchPolicies)
+        XCTAssertFalse(results.isEmpty)
+    }
+
+    func testMacPatchPoliciesEnabled() throws {
+        let macPatchPolicies: [MacPatchPolicy] = [MacPatchPolicy(id: 1, enabled: true)]
+        let results: [MacPatchPolicy] = Reporter.macPatchPoliciesDisabled(macPatchPolicies)
+        XCTAssertTrue(results.isEmpty)
+    }
+
+    func testMacPatchPoliciesDisabled() throws {
+        let macPatchPolicies: [MacPatchPolicy] = [MacPatchPolicy(id: 1)]
+        let results: [MacPatchPolicy] = Reporter.macPatchPoliciesDisabled(macPatchPolicies)
         XCTAssertFalse(results.isEmpty)
     }
 
@@ -685,8 +722,6 @@ class KMARTMacTests: XCTestCase {
         let script: String = """
         #!/usr/bin/env python3
 
-        \"\"\"Sample script to test linting.\"\"\"
-
         print("Hello World!")
 
         exit(0)
@@ -701,8 +736,6 @@ class KMARTMacTests: XCTestCase {
         // https://pycodestyle.pycqa.org/en/latest/intro.html#error-codes
         let script: String = """
         #!/usr/bin/env python3
-
-        \"\"\"Sample script to test linting.\"\"\"
 
         import json
 
@@ -720,8 +753,6 @@ class KMARTMacTests: XCTestCase {
         // https://pycodestyle.pycqa.org/en/latest/intro.html#error-codes
         let script: String = """
         #!/usr/bin/env python3
-
-        \"\"\"Sample script to test linting.\"\"\"
 
         print("Hello World!")
 
@@ -741,7 +772,6 @@ class KMARTMacTests: XCTestCase {
         print("Hello World!")
 
         exit(0)
-
         """
         let macScript: MacScript = MacScript(id: 1, scriptContents: script)
         let results: [MacScript] = Reporter.macScriptsLinterWarnings([macScript])
@@ -753,6 +783,7 @@ class KMARTMacTests: XCTestCase {
         let macAdvancedSearches: [MacAdvancedSearch] = [MacAdvancedSearch(id: 1, criteria: [Criterion(name: "Computer Group", type: "Type", value: "Smart Group")])]
         let macApplications: [MacApplication] = [MacApplication(id: 1, macTargets: macTargets)]
         let macConfigurationProfiles: [MacConfigurationProfile] = [MacConfigurationProfile(id: 1, macTargets: macTargets)]
+        let macPatchPolicies: [MacPatchPolicy] = [MacPatchPolicy(id: 1, macTargets: macTargets)]
         let macPolicies: [MacPolicy] = [MacPolicy(id: 1, macTargets: macTargets)]
         let macRestrictedSoftwares: [MacRestrictedSoftware] = [MacRestrictedSoftware(id: 1, macTargets: macTargets)]
         let macSmartGroups: [SmartGroup] = [SmartGroup(id: 1, name: "Smart Group")]
@@ -760,6 +791,7 @@ class KMARTMacTests: XCTestCase {
             macAdvancedSearches: macAdvancedSearches,
             macApplications: macApplications,
             macConfigurationProfiles: macConfigurationProfiles,
+            macPatchPolicies: macPatchPolicies,
             macPolicies: macPolicies,
             macRestrictedSoftwares: macRestrictedSoftwares,
             macSmartGroups: macSmartGroups
@@ -773,6 +805,7 @@ class KMARTMacTests: XCTestCase {
         let macAdvancedSearches: [MacAdvancedSearch] = [MacAdvancedSearch(id: 1, criteria: [Criterion(name: "Computer Group", type: "Type", value: "Unique Smart Group #2")])]
         let macApplications: [MacApplication] = [MacApplication(id: 1, macTargets: macTargets)]
         let macConfigurationProfiles: [MacConfigurationProfile] = [MacConfigurationProfile(id: 1, macTargets: macTargets)]
+        let macPatchPolicies: [MacPatchPolicy] = [MacPatchPolicy(id: 1, macTargets: macTargets)]
         let macPolicies: [MacPolicy] = [MacPolicy(id: 1, macTargets: macTargets)]
         let macRestrictedSoftwares: [MacRestrictedSoftware] = [MacRestrictedSoftware(id: 1, macTargets: macTargets)]
         let macSmartGroups: [SmartGroup] = [SmartGroup(id: 1, name: "Uniqie Smart Group #1")]
@@ -780,6 +813,7 @@ class KMARTMacTests: XCTestCase {
             macAdvancedSearches: macAdvancedSearches,
             macApplications: macApplications,
             macConfigurationProfiles: macConfigurationProfiles,
+            macPatchPolicies: macPatchPolicies,
             macPolicies: macPolicies,
             macRestrictedSoftwares: macRestrictedSoftwares,
             macSmartGroups: macSmartGroups
@@ -805,6 +839,7 @@ class KMARTMacTests: XCTestCase {
         let macAdvancedSearches: [MacAdvancedSearch] = [MacAdvancedSearch(id: 1, criteria: [Criterion(name: "Computer Group", type: "Type", value: "Static Group")])]
         let macApplications: [MacApplication] = [MacApplication(id: 1, macTargets: macTargets)]
         let macConfigurationProfiles: [MacConfigurationProfile] = [MacConfigurationProfile(id: 1, macTargets: macTargets)]
+        let macPatchPolicies: [MacPatchPolicy] = [MacPatchPolicy(id: 1, macTargets: macTargets)]
         let macPolicies: [MacPolicy] = [MacPolicy(id: 1, macTargets: macTargets)]
         let macRestrictedSoftwares: [MacRestrictedSoftware] = [MacRestrictedSoftware(id: 1, macTargets: macTargets)]
         let macStaticGroups: [StaticGroup] = [StaticGroup(id: 1, name: "Static Group")]
@@ -812,6 +847,7 @@ class KMARTMacTests: XCTestCase {
             macAdvancedSearches: macAdvancedSearches,
             macApplications: macApplications,
             macConfigurationProfiles: macConfigurationProfiles,
+            macPatchPolicies: macPatchPolicies,
             macPolicies: macPolicies,
             macRestrictedSoftwares: macRestrictedSoftwares,
             macStaticGroups: macStaticGroups
@@ -825,6 +861,7 @@ class KMARTMacTests: XCTestCase {
         let macAdvancedSearches: [MacAdvancedSearch] = [MacAdvancedSearch(id: 1, criteria: [Criterion(name: "Computer Group", type: "Type", value: "Unique Static Group #2")])]
         let macApplications: [MacApplication] = [MacApplication(id: 1, macTargets: macTargets)]
         let macConfigurationProfiles: [MacConfigurationProfile] = [MacConfigurationProfile(id: 1, macTargets: macTargets)]
+        let macPatchPolicies: [MacPatchPolicy] = [MacPatchPolicy(id: 1, macTargets: macTargets)]
         let macPolicies: [MacPolicy] = [MacPolicy(id: 1, macTargets: macTargets)]
         let macRestrictedSoftwares: [MacRestrictedSoftware] = [MacRestrictedSoftware(id: 1, macTargets: macTargets)]
         let macStaticGroups: [StaticGroup] = [StaticGroup(id: 1, name: "Uniqie Static Group #1")]
@@ -832,6 +869,7 @@ class KMARTMacTests: XCTestCase {
             macAdvancedSearches: macAdvancedSearches,
             macApplications: macApplications,
             macConfigurationProfiles: macConfigurationProfiles,
+            macPatchPolicies: macPatchPolicies,
             macPolicies: macPolicies,
             macRestrictedSoftwares: macRestrictedSoftwares,
             macStaticGroups: macStaticGroups

@@ -77,6 +77,10 @@ struct Reporter {
                 reports.macExtensionAttributesLinterWarnings.append(contentsOf: macExtensionAttributesLinterWarnings(objects.macExtensionAttributes))
             case .macPackagesNotLinked:
                 reports.macPackagesNotLinked.append(contentsOf: macPackagesNotLinked(objects))
+            case .macPatchPoliciesNoScope:
+                reports.macPatchPoliciesNoScope.append(contentsOf: macPatchPoliciesNoScope(objects.macPatchPolicies))
+            case .macPatchPoliciesDisabled:
+                reports.macPatchPoliciesDisabled.append(contentsOf: macPatchPoliciesDisabled(objects.macPatchPolicies))
             case .macPoliciesNoScope:
                 reports.macPoliciesNoScope.append(contentsOf: macPoliciesNoScope(objects.macPolicies))
             case .macPoliciesDisabled:
@@ -166,6 +170,8 @@ struct Reporter {
             identifiers.append(contentsOf: objects.buildings.filter { $0.name == macDevice.building }.map { $0.id })
         }
 
+        identifiers.append(contentsOf: objects.macPatchPolicies.flatMap { $0.macTargets.buildings })
+        identifiers.append(contentsOf: objects.macPatchPolicies.flatMap { $0.macExclusions.buildings })
         identifiers.append(contentsOf: objects.macPolicies.flatMap { $0.macTargets.buildings })
         identifiers.append(contentsOf: objects.macPolicies.flatMap { $0.macExclusions.buildings })
         identifiers.append(contentsOf: objects.macRestrictedSoftwares.flatMap { $0.macTargets.buildings })
@@ -199,6 +205,7 @@ struct Reporter {
             identifiers.append(contentsOf: objects.categories.filter { $0.name == macPackage.category }.map { $0.id })
         }
 
+        identifiers.append(contentsOf: objects.macPatchSoftwareTitles.map { $0.category })
         identifiers.append(contentsOf: objects.macPolicies.map { $0.category })
 
         for macPrinter in objects.macPrinters {
@@ -233,6 +240,8 @@ struct Reporter {
             identifiers.append(contentsOf: objects.departments.filter { $0.name == macDevice.department }.map { $0.id })
         }
 
+        identifiers.append(contentsOf: objects.macPatchPolicies.flatMap { $0.macTargets.departments })
+        identifiers.append(contentsOf: objects.macPatchPolicies.flatMap { $0.macExclusions.departments })
         identifiers.append(contentsOf: objects.macPolicies.flatMap { $0.macTargets.departments })
         identifiers.append(contentsOf: objects.macPolicies.flatMap { $0.macExclusions.departments })
         identifiers.append(contentsOf: objects.macRestrictedSoftwares.flatMap { $0.macTargets.departments })
@@ -272,6 +281,8 @@ struct Reporter {
         var identifiers: [Int] = []
         identifiers.append(contentsOf: objects.macConfigurationProfiles.flatMap { $0.macExclusions.iBeacons })
         identifiers.append(contentsOf: objects.macConfigurationProfiles.flatMap { $0.limitations.iBeacons })
+        identifiers.append(contentsOf: objects.macPatchPolicies.flatMap { $0.macExclusions.iBeacons })
+        identifiers.append(contentsOf: objects.macPatchPolicies.flatMap { $0.limitations.iBeacons })
         identifiers.append(contentsOf: objects.macPolicies.flatMap { $0.macExclusions.iBeacons })
         identifiers.append(contentsOf: objects.macPolicies.flatMap { $0.limitations.iBeacons })
         identifiers.append(contentsOf: objects.mobileConfigurationProfiles.flatMap { $0.limitations.iBeacons })
@@ -296,6 +307,8 @@ struct Reporter {
         identifiers.append(contentsOf: objects.macApplications.flatMap { $0.limitations.networkSegments })
         identifiers.append(contentsOf: objects.macConfigurationProfiles.flatMap { $0.macExclusions.networkSegments })
         identifiers.append(contentsOf: objects.macConfigurationProfiles.flatMap { $0.limitations.networkSegments })
+        identifiers.append(contentsOf: objects.macPatchPolicies.flatMap { $0.macExclusions.networkSegments })
+        identifiers.append(contentsOf: objects.macPatchPolicies.flatMap { $0.limitations.networkSegments })
         identifiers.append(contentsOf: objects.macPolicies.flatMap { $0.macExclusions.networkSegments })
         identifiers.append(contentsOf: objects.macPolicies.flatMap { $0.limitations.networkSegments })
         identifiers.append(contentsOf: objects.mobileApplications.flatMap { $0.mobileExclusions.networkSegments })
@@ -541,9 +554,29 @@ struct Reporter {
     ///   - objects: The objects used to generate reports.
     /// - Returns: An array of `Mac Packages` that are not linked.
     static func macPackagesNotLinked(_ objects: Objects) -> [MacPackage] {
-        let identifiers: [Int] = objects.macPolicies.flatMap { $0.packages }
+        var identifiers: [Int] = []
+        identifiers.append(contentsOf: objects.macPatchSoftwareTitles.flatMap { $0.packages })
+        identifiers.append(contentsOf: objects.macPolicies.flatMap { $0.packages })
         let macPackages: [MacPackage] = objects.macPackages.filter { !identifiers.contains($0.id) }
         return macPackages
+    }
+
+    /// Returns an array of `Mac Patch Policies` with no scope.
+    ///
+    /// - Parameters:
+    ///   - objects: The objects used to generate reports.
+    /// - Returns: An array of `Mac Patch Policies` with no scope.
+    static func macPatchPoliciesNoScope(_ macPatchPolicies: [MacPatchPolicy]) -> [MacPatchPolicy] {
+        macPatchPolicies.filter { !$0.scope }
+    }
+
+    /// Returns an array of `Mac Patch Policies` that are disabled.
+    ///
+    /// - Parameters:
+    ///   - objects: The objects used to generate reports.
+    /// - Returns: An array of `Mac Patch Policies` that are disabled.
+    static func macPatchPoliciesDisabled(_ macPatchPolicies: [MacPatchPolicy]) -> [MacPatchPolicy] {
+        macPatchPolicies.filter { !$0.enabled }
     }
 
     /// Returns an array of `Mac Policies` with no scope.
@@ -727,6 +760,8 @@ struct Reporter {
         identifiers.append(contentsOf: objects.macApplications.flatMap { $0.macExclusions.deviceGroups })
         identifiers.append(contentsOf: objects.macConfigurationProfiles.flatMap { $0.macTargets.deviceGroups })
         identifiers.append(contentsOf: objects.macConfigurationProfiles.flatMap { $0.macExclusions.deviceGroups })
+        identifiers.append(contentsOf: objects.macPatchPolicies.flatMap { $0.macTargets.deviceGroups })
+        identifiers.append(contentsOf: objects.macPatchPolicies.flatMap { $0.macExclusions.deviceGroups })
         identifiers.append(contentsOf: objects.macPolicies.flatMap { $0.macTargets.deviceGroups })
         identifiers.append(contentsOf: objects.macPolicies.flatMap { $0.macExclusions.deviceGroups })
         identifiers.append(contentsOf: objects.macRestrictedSoftwares.flatMap { $0.macTargets.deviceGroups })
@@ -763,6 +798,8 @@ struct Reporter {
         identifiers.append(contentsOf: objects.macApplications.flatMap { $0.macExclusions.deviceGroups })
         identifiers.append(contentsOf: objects.macConfigurationProfiles.flatMap { $0.macTargets.deviceGroups })
         identifiers.append(contentsOf: objects.macConfigurationProfiles.flatMap { $0.macExclusions.deviceGroups })
+        identifiers.append(contentsOf: objects.macPatchPolicies.flatMap { $0.macTargets.deviceGroups })
+        identifiers.append(contentsOf: objects.macPatchPolicies.flatMap { $0.macExclusions.deviceGroups })
         identifiers.append(contentsOf: objects.macPolicies.flatMap { $0.macTargets.deviceGroups })
         identifiers.append(contentsOf: objects.macPolicies.flatMap { $0.macExclusions.deviceGroups })
         identifiers.append(contentsOf: objects.macRestrictedSoftwares.flatMap { $0.macTargets.deviceGroups })

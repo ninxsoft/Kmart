@@ -36,15 +36,8 @@ extension Dictionary where Key == String, Value == Any {
 
         guard [
             .eBooks,
-            .macApplications,
-            .macConfigurationProfiles,
-            .macDevices,
-            .macPolicies,
-            .macRestrictedSoftware,
-            .mobileApplications,
-            .mobileConfigurationProfiles,
-            .mobileDevices,
-            .macDevicesHistory
+            .macApplications, .macConfigurationProfiles, .macDevices, .macDevicesHistory, .macPolicies, .macRestrictedSoftware,
+            .mobileApplications, .mobileConfigurationProfiles, .mobileDevices
         ].contains(endpoint) else {
             return
         }
@@ -107,7 +100,11 @@ extension Dictionary where Key == String, Value == Any {
     ///   - endpoint: The Jamf API endpoint.
     private mutating func transformScopeMacTargets(for endpoint: Endpoint) {
 
-        guard [.eBooks, .macApplications, .macConfigurationProfiles, .macPolicies, .macRestrictedSoftware, .mobileApplications, .mobileConfigurationProfiles].contains(endpoint) else {
+        guard [
+            .eBooks,
+            .macApplications, .macConfigurationProfiles, .macPolicies, .macRestrictedSoftware,
+            .mobileApplications, .mobileConfigurationProfiles
+        ].contains(endpoint) else {
             return
         }
 
@@ -134,7 +131,11 @@ extension Dictionary where Key == String, Value == Any {
     ///   - endpoint: The Jamf API endpoint.
     private mutating func transformScopeMacExclusions(for endpoint: Endpoint) {
 
-        guard [.eBooks, .macApplications, .macConfigurationProfiles, .macPolicies, .macRestrictedSoftware, .mobileApplications, .mobileConfigurationProfiles].contains(endpoint) else {
+        guard [
+            .eBooks,
+            .macApplications, .macConfigurationProfiles, .macPolicies, .macRestrictedSoftware,
+            .mobileApplications, .mobileConfigurationProfiles
+        ].contains(endpoint) else {
             return
         }
 
@@ -234,7 +235,11 @@ extension Dictionary where Key == String, Value == Any {
     ///   - endpoint: The Jamf API endpoint.
     private mutating func transformScopeLimitations(for endpoint: Endpoint) {
 
-        guard [.eBooks, .macApplications, .macConfigurationProfiles, .macPolicies, .mobileApplications, .mobileConfigurationProfiles].contains(endpoint) else {
+        guard [
+            .eBooks,
+            .macApplications, .macConfigurationProfiles, .macPolicies,
+            .mobileApplications, .mobileConfigurationProfiles
+        ].contains(endpoint) else {
             return
         }
 

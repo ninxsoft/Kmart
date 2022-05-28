@@ -15,6 +15,7 @@ let package = Package(
     dependencies: [
         .package(url: "https://github.com/apple/swift-argument-parser", from: "1.1.2"),
         .package(url: "https://github.com/jpsim/Yams", from: "5.0.1"),
+        .package(url: "https://github.com/drmohundro/SWXMLHash", from: "7.0.0"),
         .package(url: "https://github.com/JohnSundell/Ink", from: "0.5.1")
     ],
     targets: [
@@ -23,6 +24,7 @@ let package = Package(
             dependencies: [
                 .product(name: "ArgumentParser", package: "swift-argument-parser"),
                 .product(name: "Yams", package: "Yams"),
+                .product(name: "SWXMLHash", package: "SWXMLHash"),
                 .product(name: "Ink", package: "Ink")
             ],
             path: "KMART"
