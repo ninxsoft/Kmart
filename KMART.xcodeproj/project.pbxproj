@@ -12,6 +12,7 @@
 		393356C426FAF267009A6DAA /* ScriptType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 393356C326FAF267009A6DAA /* ScriptType.swift */; };
 		3942E4D328407B7B00B1DCE2 /* MacPatchSoftwareTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3942E4D228407B7B00B1DCE2 /* MacPatchSoftwareTitle.swift */; };
 		3942E4D42840998800B1DCE2 /* MacPatchSoftwareTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3942E4D228407B7B00B1DCE2 /* MacPatchSoftwareTitle.swift */; };
+		3942E4DA28419ADA00B1DCE2 /* SWXMLHash in Frameworks */ = {isa = PBXBuildFile; productRef = 3942E4D928419ADA00B1DCE2 /* SWXMLHash */; };
 		395DE66226CF72E3004FEF25 /* Slacker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395DE66126CF72E3004FEF25 /* Slacker.swift */; };
 		395DE66426CF73DE004FEF25 /* SlackConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395DE66326CF73DE004FEF25 /* SlackConfiguration.swift */; };
 		3967934F26D5F7F500DC2D2D /* SlackConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395DE66326CF73DE004FEF25 /* SlackConfiguration.swift */; };
@@ -233,6 +234,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3942E4DA28419ADA00B1DCE2 /* SWXMLHash in Frameworks */,
 				573CD6E52611E62700CE156E /* Ink in Frameworks */,
 				5756B94625DE29CE001215DF /* Yams in Frameworks */,
 				57E253A425D8CCDE00931A0B /* ArgumentParser in Frameworks */,
@@ -432,6 +434,7 @@
 				57E253A325D8CCDE00931A0B /* ArgumentParser */,
 				5756B94525DE29CE001215DF /* Yams */,
 				573CD6E42611E62700CE156E /* Ink */,
+				3942E4D928419ADA00B1DCE2 /* SWXMLHash */,
 			);
 			productName = kmart;
 			productReference = 57E2538E25D8CB7E00931A0B /* kmart */;
@@ -467,6 +470,7 @@
 				57E253A225D8CCDE00931A0B /* XCRemoteSwiftPackageReference "swift-argument-parser" */,
 				5756B94425DE29CE001215DF /* XCRemoteSwiftPackageReference "Yams" */,
 				573CD6E32611E62700CE156E /* XCRemoteSwiftPackageReference "Ink" */,
+				3942E4D828419ADA00B1DCE2 /* XCRemoteSwiftPackageReference "SWXMLHash" */,
 			);
 			productRefGroup = 57E2538F25D8CB7E00931A0B /* Products */;
 			projectDirPath = "";
@@ -879,6 +883,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		3942E4D828419ADA00B1DCE2 /* XCRemoteSwiftPackageReference "SWXMLHash" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/drmohundro/SWXMLHash";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.0.0;
+			};
+		};
 		573CD6E32611E62700CE156E /* XCRemoteSwiftPackageReference "Ink" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/JohnSundell/Ink";
@@ -906,6 +918,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		3942E4D928419ADA00B1DCE2 /* SWXMLHash */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3942E4D828419ADA00B1DCE2 /* XCRemoteSwiftPackageReference "SWXMLHash" */;
+			productName = SWXMLHash;
+		};
 		573CD6E42611E62700CE156E /* Ink */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 573CD6E32611E62700CE156E /* XCRemoteSwiftPackageReference "Ink" */;

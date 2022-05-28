@@ -542,7 +542,9 @@ struct Reporter {
     ///   - objects: The objects used to generate reports.
     /// - Returns: An array of `Mac Packages` that are not linked.
     static func macPackagesNotLinked(_ objects: Objects) -> [MacPackage] {
-        let identifiers: [Int] = objects.macPolicies.flatMap { $0.packages }
+        var identifiers: [Int] = []
+        identifiers.append(contentsOf: objects.macPatchSoftwareTitles.flatMap { $0.packages })
+        identifiers.append(contentsOf: objects.macPolicies.flatMap { $0.packages })
         let macPackages: [MacPackage] = objects.macPackages.filter { !identifiers.contains($0.id) }
         return macPackages
     }

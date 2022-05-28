@@ -14,10 +14,10 @@ extension Sequence where Iterator.Element == [String: Any] {
         var identifiers: [Int] = []
 
         forEach {
-            if let string: String = $0["id"] as? String,
-                let id: Int = Int(string) {
+            if let id: Int = $0["id"] as? Int {
                 identifiers.append(id)
-            } else if let id: Int = $0["id"] as? Int {
+            } else if let string: String = $0["id"] as? String,
+                let id: Int = Int(string) {
                 identifiers.append(id)
             }
         }

@@ -121,7 +121,7 @@ enum ReportType: String, CaseIterable {
         case .macExtensionAttributesLinterWarnings:
             return [.macExtensionAttributes]
         case .macPackagesNotLinked:
-            return [.macPackages, .macPolicies]
+            return [.macPackages, .macPatchSoftwareTitles, .macPolicies]
         case .macPoliciesNoScope:
             return [.macPolicies]
         case .macPoliciesDisabled:
