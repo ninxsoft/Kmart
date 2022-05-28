@@ -12,7 +12,7 @@ import XCTest
 class KMARTCommonTests: XCTestCase {
 
     func testBuildingsLinked() throws {
-        let buildings: [Building] = (1...15).map { Building(id: $0, name: "Building #\($0)") }
+        let buildings: [Building] = (1...17).map { Building(id: $0, name: "Building #\($0)") }
         let networkSegments: [NetworkSegment] = [NetworkSegment(id: 1, building: "Building #1")]
         let macApplications: [MacApplication] = [
             MacApplication(id: 1, macTargets: MacTargets(buildings: [2])),
@@ -23,29 +23,34 @@ class KMARTCommonTests: XCTestCase {
             MacConfigurationProfile(id: 2, macExclusions: MacExclusions(buildings: [5]))
         ]
         let macDevices: [MacDevice] = [MacDevice(id: 1, building: "Building #6")]
+        let macPatchPolicies: [MacPatchPolicy] = [
+            MacPatchPolicy(id: 1, macTargets: MacTargets(buildings: [7])),
+            MacPatchPolicy(id: 2, macExclusions: MacExclusions(buildings: [8]))
+        ]
         let macPolicies: [MacPolicy] = [
-            MacPolicy(id: 1, macTargets: MacTargets(buildings: [7])),
-            MacPolicy(id: 2, macExclusions: MacExclusions(buildings: [8]))
+            MacPolicy(id: 1, macTargets: MacTargets(buildings: [9])),
+            MacPolicy(id: 2, macExclusions: MacExclusions(buildings: [10]))
         ]
         let macRestrictedSoftwares: [MacRestrictedSoftware] = [
-            MacRestrictedSoftware(id: 1, macTargets: MacTargets(buildings: [9])),
-            MacRestrictedSoftware(id: 2, macExclusions: MacExclusions(buildings: [10]))
+            MacRestrictedSoftware(id: 1, macTargets: MacTargets(buildings: [11])),
+            MacRestrictedSoftware(id: 2, macExclusions: MacExclusions(buildings: [12]))
         ]
         let mobileApplications: [MobileApplication] = [
-            MobileApplication(id: 1, mobileTargets: MobileTargets(buildings: [11])),
-            MobileApplication(id: 2, mobileExclusions: MobileExclusions(buildings: [12]))
+            MobileApplication(id: 1, mobileTargets: MobileTargets(buildings: [13])),
+            MobileApplication(id: 2, mobileExclusions: MobileExclusions(buildings: [14]))
         ]
         let mobileConfigurationProfiles: [MobileConfigurationProfile] = [
-            MobileConfigurationProfile(id: 1, mobileTargets: MobileTargets(buildings: [13])),
-            MobileConfigurationProfile(id: 2, mobileExclusions: MobileExclusions(buildings: [14]))
+            MobileConfigurationProfile(id: 1, mobileTargets: MobileTargets(buildings: [15])),
+            MobileConfigurationProfile(id: 2, mobileExclusions: MobileExclusions(buildings: [16]))
         ]
-        let mobileDevices: [MobileDevice] = [MobileDevice(id: 1, building: "Building #15")]
+        let mobileDevices: [MobileDevice] = [MobileDevice(id: 1, building: "Building #17")]
         let objects: Objects = Objects(
             buildings: buildings,
             networkSegments: networkSegments,
             macApplications: macApplications,
             macConfigurationProfiles: macConfigurationProfiles,
             macDevices: macDevices,
+            macPatchPolicies: macPatchPolicies,
             macPolicies: macPolicies,
             macRestrictedSoftwares: macRestrictedSoftwares,
             mobileApplications: mobileApplications,
@@ -57,7 +62,7 @@ class KMARTCommonTests: XCTestCase {
     }
 
     func testBuildingsNotLinked() throws {
-        let buildings: [Building] = (1...16).map { Building(id: $0, name: "Building #\($0)") }
+        let buildings: [Building] = (1...18).map { Building(id: $0, name: "Building #\($0)") }
         let networkSegments: [NetworkSegment] = [NetworkSegment(id: 1, building: "Building #1")]
         let macApplications: [MacApplication] = [
             MacApplication(id: 1, macTargets: MacTargets(buildings: [2])),
@@ -68,29 +73,34 @@ class KMARTCommonTests: XCTestCase {
             MacConfigurationProfile(id: 2, macExclusions: MacExclusions(buildings: [5]))
         ]
         let macDevices: [MacDevice] = [MacDevice(id: 1, building: "Building #6")]
+        let macPatchPolicies: [MacPatchPolicy] = [
+            MacPatchPolicy(id: 1, macTargets: MacTargets(buildings: [7])),
+            MacPatchPolicy(id: 2, macExclusions: MacExclusions(buildings: [8]))
+        ]
         let macPolicies: [MacPolicy] = [
-            MacPolicy(id: 1, macTargets: MacTargets(buildings: [7])),
-            MacPolicy(id: 2, macExclusions: MacExclusions(buildings: [8]))
+            MacPolicy(id: 1, macTargets: MacTargets(buildings: [9])),
+            MacPolicy(id: 2, macExclusions: MacExclusions(buildings: [10]))
         ]
         let macRestrictedSoftwares: [MacRestrictedSoftware] = [
-            MacRestrictedSoftware(id: 1, macTargets: MacTargets(buildings: [9])),
-            MacRestrictedSoftware(id: 2, macExclusions: MacExclusions(buildings: [10]))
+            MacRestrictedSoftware(id: 1, macTargets: MacTargets(buildings: [11])),
+            MacRestrictedSoftware(id: 2, macExclusions: MacExclusions(buildings: [12]))
         ]
         let mobileApplications: [MobileApplication] = [
-            MobileApplication(id: 1, mobileTargets: MobileTargets(buildings: [11])),
-            MobileApplication(id: 2, mobileExclusions: MobileExclusions(buildings: [12]))
+            MobileApplication(id: 1, mobileTargets: MobileTargets(buildings: [13])),
+            MobileApplication(id: 2, mobileExclusions: MobileExclusions(buildings: [14]))
         ]
         let mobileConfigurationProfiles: [MobileConfigurationProfile] = [
-            MobileConfigurationProfile(id: 1, mobileTargets: MobileTargets(buildings: [13])),
-            MobileConfigurationProfile(id: 2, mobileExclusions: MobileExclusions(buildings: [14]))
+            MobileConfigurationProfile(id: 1, mobileTargets: MobileTargets(buildings: [15])),
+            MobileConfigurationProfile(id: 2, mobileExclusions: MobileExclusions(buildings: [16]))
         ]
-        let mobileDevices: [MobileDevice] = [MobileDevice(id: 1, building: "Building #15")]
+        let mobileDevices: [MobileDevice] = [MobileDevice(id: 1, building: "Building #17")]
         let objects: Objects = Objects(
             buildings: buildings,
             networkSegments: networkSegments,
             macApplications: macApplications,
             macConfigurationProfiles: macConfigurationProfiles,
             macDevices: macDevices,
+            macPatchPolicies: macPatchPolicies,
             macPolicies: macPolicies,
             macRestrictedSoftwares: macRestrictedSoftwares,
             mobileApplications: mobileApplications,
@@ -103,7 +113,7 @@ class KMARTCommonTests: XCTestCase {
     }
 
     func testCategoriesLinked() throws {
-        let categories: [Category] = (1...8).map { Category(id: $0, name: "Category #\($0)") }
+        let categories: [Category] = (1...9).map { Category(id: $0, name: "Category #\($0)") }
         let macApplications: [MacApplication] = [MacApplication(id: 1, category: 1)]
         let macConfigurationProfiles: [MacConfigurationProfile] = [MacConfigurationProfile(id: 1, category: 2)]
         let macPackages: [MacPackage] = [MacPackage(id: 1, category: "Category #3")]
@@ -158,7 +168,7 @@ class KMARTCommonTests: XCTestCase {
     }
 
     func testDepartmentsLinked() throws {
-        let departments: [Department] = (1...15).map { Department(id: $0, name: "Department #\($0)") }
+        let departments: [Department] = (1...17).map { Department(id: $0, name: "Department #\($0)") }
         let networkSegments: [NetworkSegment] = [NetworkSegment(id: 1, department: "Department #1")]
         let macApplications: [MacApplication] = [
             MacApplication(id: 1, macTargets: MacTargets(departments: [2])),
@@ -169,29 +179,34 @@ class KMARTCommonTests: XCTestCase {
             MacConfigurationProfile(id: 2, macExclusions: MacExclusions(departments: [5]))
         ]
         let macDevices: [MacDevice] = [MacDevice(id: 1, department: "Department #6")]
+        let macPatchPolicies: [MacPatchPolicy] = [
+            MacPatchPolicy(id: 1, macTargets: MacTargets(departments: [7])),
+            MacPatchPolicy(id: 2, macExclusions: MacExclusions(departments: [8]))
+        ]
         let macPolicies: [MacPolicy] = [
-            MacPolicy(id: 1, macTargets: MacTargets(departments: [7])),
-            MacPolicy(id: 2, macExclusions: MacExclusions(departments: [8]))
+            MacPolicy(id: 1, macTargets: MacTargets(departments: [9])),
+            MacPolicy(id: 2, macExclusions: MacExclusions(departments: [10]))
         ]
         let macRestrictedSoftwares: [MacRestrictedSoftware] = [
-            MacRestrictedSoftware(id: 1, macTargets: MacTargets(departments: [9])),
-            MacRestrictedSoftware(id: 2, macExclusions: MacExclusions(departments: [10]))
+            MacRestrictedSoftware(id: 1, macTargets: MacTargets(departments: [11])),
+            MacRestrictedSoftware(id: 2, macExclusions: MacExclusions(departments: [12]))
         ]
         let mobileApplications: [MobileApplication] = [
-            MobileApplication(id: 1, mobileTargets: MobileTargets(departments: [11])),
-            MobileApplication(id: 2, mobileExclusions: MobileExclusions(departments: [12]))
+            MobileApplication(id: 1, mobileTargets: MobileTargets(departments: [13])),
+            MobileApplication(id: 2, mobileExclusions: MobileExclusions(departments: [14]))
         ]
         let mobileConfigurationProfiles: [MobileConfigurationProfile] = [
-            MobileConfigurationProfile(id: 1, mobileTargets: MobileTargets(departments: [13])),
-            MobileConfigurationProfile(id: 2, mobileExclusions: MobileExclusions(departments: [14]))
+            MobileConfigurationProfile(id: 1, mobileTargets: MobileTargets(departments: [15])),
+            MobileConfigurationProfile(id: 2, mobileExclusions: MobileExclusions(departments: [16]))
         ]
-        let mobileDevices: [MobileDevice] = [MobileDevice(id: 1, department: "Department #15")]
+        let mobileDevices: [MobileDevice] = [MobileDevice(id: 1, department: "Department #17")]
         let objects: Objects = Objects(
             departments: departments,
             networkSegments: networkSegments,
             macApplications: macApplications,
             macConfigurationProfiles: macConfigurationProfiles,
             macDevices: macDevices,
+            macPatchPolicies: macPatchPolicies,
             macPolicies: macPolicies,
             macRestrictedSoftwares: macRestrictedSoftwares,
             mobileApplications: mobileApplications,
@@ -203,7 +218,7 @@ class KMARTCommonTests: XCTestCase {
     }
 
     func testDepartmentsNotLinked() throws {
-        let departments: [Department] = (1...16).map { Department(id: $0, name: "Department #\($0)") }
+        let departments: [Department] = (1...18).map { Department(id: $0, name: "Department #\($0)") }
         let networkSegments: [NetworkSegment] = [NetworkSegment(id: 1, department: "Department #1")]
         let macApplications: [MacApplication] = [
             MacApplication(id: 1, macTargets: MacTargets(departments: [2])),
@@ -214,29 +229,34 @@ class KMARTCommonTests: XCTestCase {
             MacConfigurationProfile(id: 2, macExclusions: MacExclusions(departments: [5]))
         ]
         let macDevices: [MacDevice] = [MacDevice(id: 1, department: "Department #6")]
+        let macPatchPolicies: [MacPatchPolicy] = [
+            MacPatchPolicy(id: 1, macTargets: MacTargets(departments: [7])),
+            MacPatchPolicy(id: 2, macExclusions: MacExclusions(departments: [8]))
+        ]
         let macPolicies: [MacPolicy] = [
-            MacPolicy(id: 1, macTargets: MacTargets(departments: [7])),
-            MacPolicy(id: 2, macExclusions: MacExclusions(departments: [8]))
+            MacPolicy(id: 1, macTargets: MacTargets(departments: [9])),
+            MacPolicy(id: 2, macExclusions: MacExclusions(departments: [10]))
         ]
         let macRestrictedSoftwares: [MacRestrictedSoftware] = [
-            MacRestrictedSoftware(id: 1, macTargets: MacTargets(departments: [9])),
-            MacRestrictedSoftware(id: 2, macExclusions: MacExclusions(departments: [10]))
+            MacRestrictedSoftware(id: 1, macTargets: MacTargets(departments: [11])),
+            MacRestrictedSoftware(id: 2, macExclusions: MacExclusions(departments: [12]))
         ]
         let mobileApplications: [MobileApplication] = [
-            MobileApplication(id: 1, mobileTargets: MobileTargets(departments: [11])),
-            MobileApplication(id: 2, mobileExclusions: MobileExclusions(departments: [12]))
+            MobileApplication(id: 1, mobileTargets: MobileTargets(departments: [13])),
+            MobileApplication(id: 2, mobileExclusions: MobileExclusions(departments: [14]))
         ]
         let mobileConfigurationProfiles: [MobileConfigurationProfile] = [
-            MobileConfigurationProfile(id: 1, mobileTargets: MobileTargets(departments: [13])),
-            MobileConfigurationProfile(id: 2, mobileExclusions: MobileExclusions(departments: [14]))
+            MobileConfigurationProfile(id: 1, mobileTargets: MobileTargets(departments: [15])),
+            MobileConfigurationProfile(id: 2, mobileExclusions: MobileExclusions(departments: [16]))
         ]
-        let mobileDevices: [MobileDevice] = [MobileDevice(id: 1, department: "Department #15")]
+        let mobileDevices: [MobileDevice] = [MobileDevice(id: 1, department: "Department #17")]
         let objects: Objects = Objects(
             departments: departments,
             networkSegments: networkSegments,
             macApplications: macApplications,
             macConfigurationProfiles: macConfigurationProfiles,
             macDevices: macDevices,
+            macPatchPolicies: macPatchPolicies,
             macPolicies: macPolicies,
             macRestrictedSoftwares: macRestrictedSoftwares,
             mobileApplications: mobileApplications,
@@ -296,33 +316,53 @@ class KMARTCommonTests: XCTestCase {
     }
 
     func testIBeaconsLinked() throws {
-        let iBeacons: [IBeacon] = (1...5).map { IBeacon(id: $0, name: "iBeacon #\($0)") }
+        let iBeacons: [IBeacon] = (1...7).map { IBeacon(id: $0, name: "iBeacon #\($0)") }
         let macConfigurationProfiles: [MacConfigurationProfile] = [
             MacConfigurationProfile(id: 1, macExclusions: MacExclusions(iBeacons: [1])),
             MacConfigurationProfile(id: 2, limitations: Limitations(iBeacons: [2]))
         ]
-        let macPolicies: [MacPolicy] = [
-            MacPolicy(id: 1, macExclusions: MacExclusions(iBeacons: [3])),
-            MacPolicy(id: 2, limitations: Limitations(iBeacons: [4]))
+        let macPatchPolicies: [MacPatchPolicy] = [
+            MacPatchPolicy(id: 1, macExclusions: MacExclusions(iBeacons: [3])),
+            MacPatchPolicy(id: 2, limitations: Limitations(iBeacons: [4]))
         ]
-        let mobileConfigurationProfiles: [MobileConfigurationProfile] = [MobileConfigurationProfile(id: 1, limitations: Limitations(iBeacons: [5]))]
-        let objects: Objects = Objects(iBeacons: iBeacons, macConfigurationProfiles: macConfigurationProfiles, macPolicies: macPolicies, mobileConfigurationProfiles: mobileConfigurationProfiles)
+        let macPolicies: [MacPolicy] = [
+            MacPolicy(id: 1, macExclusions: MacExclusions(iBeacons: [5])),
+            MacPolicy(id: 2, limitations: Limitations(iBeacons: [6]))
+        ]
+        let mobileConfigurationProfiles: [MobileConfigurationProfile] = [MobileConfigurationProfile(id: 1, limitations: Limitations(iBeacons: [7]))]
+        let objects: Objects = Objects(
+            iBeacons: iBeacons,
+            macConfigurationProfiles: macConfigurationProfiles,
+            macPatchPolicies: macPatchPolicies,
+            macPolicies: macPolicies,
+            mobileConfigurationProfiles: mobileConfigurationProfiles
+        )
         let results: [IBeacon] = Reporter.iBeaconsNotLinked(objects)
         XCTAssertTrue(results.isEmpty)
     }
 
     func testIBeaconsNotLinked() throws {
-        let iBeacons: [IBeacon] = (1...6).map { IBeacon(id: $0, name: "iBeacon #\($0)") }
+        let iBeacons: [IBeacon] = (1...8).map { IBeacon(id: $0, name: "iBeacon #\($0)") }
         let macConfigurationProfiles: [MacConfigurationProfile] = [
             MacConfigurationProfile(id: 1, macExclusions: MacExclusions(iBeacons: [1])),
             MacConfigurationProfile(id: 2, limitations: Limitations(iBeacons: [2]))
         ]
-        let macPolicies: [MacPolicy] = [
-            MacPolicy(id: 1, macExclusions: MacExclusions(iBeacons: [3])),
-            MacPolicy(id: 2, limitations: Limitations(iBeacons: [4]))
+        let macPatchPolicies: [MacPatchPolicy] = [
+            MacPatchPolicy(id: 1, macExclusions: MacExclusions(iBeacons: [3])),
+            MacPatchPolicy(id: 2, limitations: Limitations(iBeacons: [4]))
         ]
-        let mobileConfigurationProfiles: [MobileConfigurationProfile] = [MobileConfigurationProfile(id: 1, limitations: Limitations(iBeacons: [5]))]
-        let objects: Objects = Objects(iBeacons: iBeacons, macConfigurationProfiles: macConfigurationProfiles, macPolicies: macPolicies, mobileConfigurationProfiles: mobileConfigurationProfiles)
+        let macPolicies: [MacPolicy] = [
+            MacPolicy(id: 1, macExclusions: MacExclusions(iBeacons: [5])),
+            MacPolicy(id: 2, limitations: Limitations(iBeacons: [6]))
+        ]
+        let mobileConfigurationProfiles: [MobileConfigurationProfile] = [MobileConfigurationProfile(id: 1, limitations: Limitations(iBeacons: [7]))]
+        let objects: Objects = Objects(
+            iBeacons: iBeacons,
+            macConfigurationProfiles: macConfigurationProfiles,
+            macPatchPolicies: macPatchPolicies,
+            macPolicies: macPolicies,
+            mobileConfigurationProfiles: mobileConfigurationProfiles
+        )
         let results: [IBeacon] = Reporter.iBeaconsNotLinked(objects)
         XCTAssertTrue(results.count == 1)
         XCTAssertTrue(results.first?.id == iBeacons.last?.id)
@@ -335,7 +375,7 @@ class KMARTCommonTests: XCTestCase {
             EBook(id: 1, macExclusions: MacExclusions(networkSegments: [3])),
             EBook(id: 2, limitations: Limitations(networkSegments: [4]))
         ]
-        let networkSegments: [NetworkSegment] = (1...14).map { NetworkSegment(id: $0, name: "Network Segment #\($0)", building: $0 == 1 ? "Building" : "", department: $0 == 2 ? "Department" : "") }
+        let networkSegments: [NetworkSegment] = (1...16).map { NetworkSegment(id: $0, name: "Network Segment #\($0)", building: $0 == 1 ? "Building" : "", department: $0 == 2 ? "Department" : "") }
         let macApplications: [MacApplication] = [
             MacApplication(id: 1, macExclusions: MacExclusions(networkSegments: [5])),
             MacApplication(id: 2, limitations: Limitations(networkSegments: [6]))
@@ -344,17 +384,21 @@ class KMARTCommonTests: XCTestCase {
             MacConfigurationProfile(id: 1, macExclusions: MacExclusions(networkSegments: [7])),
             MacConfigurationProfile(id: 2, limitations: Limitations(networkSegments: [8]))
         ]
+        let macPatchPolicies: [MacPatchPolicy] = [
+            MacPatchPolicy(id: 1, macExclusions: MacExclusions(networkSegments: [9])),
+            MacPatchPolicy(id: 2, limitations: Limitations(networkSegments: [10]))
+        ]
         let macPolicies: [MacPolicy] = [
-            MacPolicy(id: 1, macExclusions: MacExclusions(networkSegments: [9])),
-            MacPolicy(id: 2, limitations: Limitations(networkSegments: [10]))
+            MacPolicy(id: 1, macExclusions: MacExclusions(networkSegments: [11])),
+            MacPolicy(id: 2, limitations: Limitations(networkSegments: [12]))
         ]
         let mobileApplications: [MobileApplication] = [
-            MobileApplication(id: 1, mobileExclusions: MobileExclusions(networkSegments: [11])),
-            MobileApplication(id: 2, limitations: Limitations(networkSegments: [12]))
+            MobileApplication(id: 1, mobileExclusions: MobileExclusions(networkSegments: [13])),
+            MobileApplication(id: 2, limitations: Limitations(networkSegments: [14]))
         ]
         let mobileConfigurationProfiles: [MobileConfigurationProfile] = [
-            MobileConfigurationProfile(id: 1, mobileExclusions: MobileExclusions(networkSegments: [13])),
-            MobileConfigurationProfile(id: 2, limitations: Limitations(networkSegments: [14]))
+            MobileConfigurationProfile(id: 1, mobileExclusions: MobileExclusions(networkSegments: [15])),
+            MobileConfigurationProfile(id: 2, limitations: Limitations(networkSegments: [16]))
         ]
         let objects: Objects = Objects(
             buildings: buildings,
@@ -363,6 +407,7 @@ class KMARTCommonTests: XCTestCase {
             networkSegments: networkSegments,
             macApplications: macApplications,
             macConfigurationProfiles: macConfigurationProfiles,
+            macPatchPolicies: macPatchPolicies,
             macPolicies: macPolicies,
             mobileApplications: mobileApplications,
             mobileConfigurationProfiles: mobileConfigurationProfiles
@@ -378,7 +423,7 @@ class KMARTCommonTests: XCTestCase {
             EBook(id: 1, macExclusions: MacExclusions(networkSegments: [3])),
             EBook(id: 2, limitations: Limitations(networkSegments: [4]))
         ]
-        let networkSegments: [NetworkSegment] = (1...15).map { NetworkSegment(id: $0, name: "Network Segment #\($0)", building: $0 == 1 ? "Building" : "", department: $0 == 2 ? "Department" : "") }
+        let networkSegments: [NetworkSegment] = (1...17).map { NetworkSegment(id: $0, name: "Network Segment #\($0)", building: $0 == 1 ? "Building" : "", department: $0 == 2 ? "Department" : "") }
         let macApplications: [MacApplication] = [
             MacApplication(id: 1, macExclusions: MacExclusions(networkSegments: [5])),
             MacApplication(id: 2, limitations: Limitations(networkSegments: [6]))
@@ -387,17 +432,21 @@ class KMARTCommonTests: XCTestCase {
             MacConfigurationProfile(id: 1, macExclusions: MacExclusions(networkSegments: [7])),
             MacConfigurationProfile(id: 2, limitations: Limitations(networkSegments: [8]))
         ]
+        let macPatchPolicies: [MacPatchPolicy] = [
+            MacPatchPolicy(id: 1, macExclusions: MacExclusions(networkSegments: [9])),
+            MacPatchPolicy(id: 2, limitations: Limitations(networkSegments: [10]))
+        ]
         let macPolicies: [MacPolicy] = [
-            MacPolicy(id: 1, macExclusions: MacExclusions(networkSegments: [9])),
-            MacPolicy(id: 2, limitations: Limitations(networkSegments: [10]))
+            MacPolicy(id: 1, macExclusions: MacExclusions(networkSegments: [11])),
+            MacPolicy(id: 2, limitations: Limitations(networkSegments: [12]))
         ]
         let mobileApplications: [MobileApplication] = [
-            MobileApplication(id: 1, mobileExclusions: MobileExclusions(networkSegments: [11])),
-            MobileApplication(id: 2, limitations: Limitations(networkSegments: [12]))
+            MobileApplication(id: 1, mobileExclusions: MobileExclusions(networkSegments: [13])),
+            MobileApplication(id: 2, limitations: Limitations(networkSegments: [14]))
         ]
         let mobileConfigurationProfiles: [MobileConfigurationProfile] = [
-            MobileConfigurationProfile(id: 1, mobileExclusions: MobileExclusions(networkSegments: [13])),
-            MobileConfigurationProfile(id: 2, limitations: Limitations(networkSegments: [14]))
+            MobileConfigurationProfile(id: 1, mobileExclusions: MobileExclusions(networkSegments: [15])),
+            MobileConfigurationProfile(id: 2, limitations: Limitations(networkSegments: [16]))
         ]
         let objects: Objects = Objects(
             buildings: buildings,
@@ -406,6 +455,7 @@ class KMARTCommonTests: XCTestCase {
             networkSegments: networkSegments,
             macApplications: macApplications,
             macConfigurationProfiles: macConfigurationProfiles,
+            macPatchPolicies: macPatchPolicies,
             macPolicies: macPolicies,
             mobileApplications: mobileApplications,
             mobileConfigurationProfiles: mobileConfigurationProfiles

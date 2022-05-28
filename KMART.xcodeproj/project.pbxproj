@@ -14,6 +14,8 @@
 		3942E4D42840998800B1DCE2 /* MacPatchSoftwareTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3942E4D228407B7B00B1DCE2 /* MacPatchSoftwareTitle.swift */; };
 		3942E4DA28419ADA00B1DCE2 /* SWXMLHash in Frameworks */ = {isa = PBXBuildFile; productRef = 3942E4D928419ADA00B1DCE2 /* SWXMLHash */; };
 		3942E4DC2841C00000B1DCE2 /* MacPatchPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3942E4DB2841C00000B1DCE2 /* MacPatchPolicy.swift */; };
+		3942E4DD2841F3F200B1DCE2 /* MacPatchPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3942E4DB2841C00000B1DCE2 /* MacPatchPolicy.swift */; };
+		3942E4E02841F7A900B1DCE2 /* SWXMLHash in Frameworks */ = {isa = PBXBuildFile; productRef = 3942E4DF2841F7A900B1DCE2 /* SWXMLHash */; };
 		395DE66226CF72E3004FEF25 /* Slacker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395DE66126CF72E3004FEF25 /* Slacker.swift */; };
 		395DE66426CF73DE004FEF25 /* SlackConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395DE66326CF73DE004FEF25 /* SlackConfiguration.swift */; };
 		3967934F26D5F7F500DC2D2D /* SlackConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395DE66326CF73DE004FEF25 /* SlackConfiguration.swift */; };
@@ -226,6 +228,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3942E4E02841F7A900B1DCE2 /* SWXMLHash in Frameworks */,
 				57B4F66826195C63006F894F /* Ink in Frameworks */,
 				578B88ED25E6626B003A89BF /* ArgumentParser in Frameworks */,
 				578B88D725E661D1003A89BF /* Yams in Frameworks */,
@@ -246,6 +249,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3942E4DE2841F7A900B1DCE2 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		39708B462767229C00DD5C3F /* Enums */ = {
 			isa = PBXGroup;
 			children = (
@@ -277,6 +287,7 @@
 				57E2539025D8CB7E00931A0B /* KMART */,
 				578B885725E658E9003A89BF /* KMARTTests */,
 				57E2538F25D8CB7E00931A0B /* Products */,
+				3942E4DE2841F7A900B1DCE2 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -413,6 +424,7 @@
 				578B88D625E661D1003A89BF /* Yams */,
 				578B88EC25E6626B003A89BF /* ArgumentParser */,
 				57B4F66726195C63006F894F /* Ink */,
+				3942E4DF2841F7A900B1DCE2 /* SWXMLHash */,
 			);
 			productName = KMARTTests;
 			productReference = 578B885625E658E9003A89BF /* KMARTTests.xctest */;
@@ -547,6 +559,7 @@
 				578B888B25E65FA9003A89BF /* MacPolicyLog.swift in Sources */,
 				578B889925E65FA9003A89BF /* MacConfigurationProfile.swift in Sources */,
 				57B4F66026195C39006F894F /* Markdown.swift in Sources */,
+				3942E4DD2841F3F200B1DCE2 /* MacPatchPolicy.swift in Sources */,
 				578B888925E65FA9003A89BF /* Criterion.swift in Sources */,
 				39708B4A276730C100DD5C3F /* Endpoint.swift in Sources */,
 				578B88E925E66256003A89BF /* Configuration.swift in Sources */,
@@ -923,6 +936,11 @@
 
 /* Begin XCSwiftPackageProductDependency section */
 		3942E4D928419ADA00B1DCE2 /* SWXMLHash */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3942E4D828419ADA00B1DCE2 /* XCRemoteSwiftPackageReference "SWXMLHash" */;
+			productName = SWXMLHash;
+		};
+		3942E4DF2841F7A900B1DCE2 /* SWXMLHash */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 3942E4D828419ADA00B1DCE2 /* XCRemoteSwiftPackageReference "SWXMLHash" */;
 			productName = SWXMLHash;
