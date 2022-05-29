@@ -62,6 +62,10 @@ struct HTTP {
                 for identifier in array.identifiers {
 
                     do {
+                        if tokenHasExpired(token) {
+                            token = try await refreshToken(using: configuration)
+                        }
+
                         let dictionary: [String: Any] = try await retrieveObject(for: identifier, endpoint: endpoint, configuration: configuration, session: session, token: token)
                         objects.insert(dictionary, for: endpoint)
                         current += 1
@@ -101,15 +105,9 @@ struct HTTP {
         token: (value: String, expiration: Date)
     ) async throws -> [String: Any] {
 
-        var token: (value: String, expiration: Date) = token
-
         guard let url: URL = endpoint.secondaryURL(url: configuration.url, identifier: identifier) else {
             PrettyPrint.print("Invalid URL for \(endpoint.fullDescription)...", prefixColor: .red)
             throw KmartError.invalidURL
-        }
-
-        if tokenHasExpired(token) {
-            token = try await refreshToken(using: configuration)
         }
 
         let request: URLRequest = urlRequest(for: url, with: "Bearer \(token.value)", requestJSON: endpoint.requestJSON)
@@ -245,7 +243,7 @@ struct HTTP {
     ///   - token: The Jamf API bearer token.
     /// - Returns: True if the token has expired, otherwise False.
     private static func tokenHasExpired(_ token: (value: String, expiration: Date)) -> Bool {
-        token.value.isEmpty || token.expiration < Date.now
+        token.value.isEmpty || token.expiration - 60 < Date.now
     }
 
     /// Refreshes the Jamf API bearer token used for authentication

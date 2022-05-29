@@ -1,7 +1,7 @@
 name: swift_setup_lint_test_build
 on: [push, pull_request]
 jobs:
-  setup_lint_build_test:
+  setup_lint_test_build:
     name: Setup, Lint, Test and Build
     runs-on: macos-12
     steps:
