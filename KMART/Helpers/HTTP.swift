@@ -36,9 +36,7 @@ struct HTTP {
             let start: Date = Date()
 
             do {
-                if tokenHasExpired(token) {
-                    token = try await refreshToken(using: configuration)
-                }
+                if tokenHasExpired(token) { token = try await refreshToken(using: configuration) }
 
                 let request: URLRequest = urlRequest(for: url, with: "Bearer \(token.value)", requestJSON: true)
                 let (data, urlResponse): (Data, URLResponse) = try await session.data(for: request)
@@ -62,9 +60,7 @@ struct HTTP {
                 for identifier in array.identifiers {
 
                     do {
-                        if tokenHasExpired(token) {
-                            token = try await refreshToken(using: configuration)
-                        }
+                        if tokenHasExpired(token) { token = try await refreshToken(using: configuration) }
 
                         let dictionary: [String: Any] = try await retrieveObject(for: identifier, endpoint: endpoint, configuration: configuration, session: session, token: token)
                         objects.insert(dictionary, for: endpoint)
