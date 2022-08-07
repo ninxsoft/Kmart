@@ -32,7 +32,10 @@ class KMARTMobileTests: XCTestCase {
     }
 
     func testMobileAdvancedSearchesInvalidCriteria() throws {
-        let criteria: [Criterion] = [Criterion(name: "Mobile Device Group", type: "member of", value: "Incorrect Smart Group"), Criterion(name: "Mobile Device Group", type: "member of", value: "Incorrect Static Group")]
+        let criteria: [Criterion] = [
+            Criterion(name: "Mobile Device Group", type: "member of", value: "Incorrect Smart Group"),
+            Criterion(name: "Mobile Device Group", type: "member of", value: "Incorrect Static Group")
+        ]
         let mobileAdvancedSearches: [MobileAdvancedSearch] = [MobileAdvancedSearch(id: 1, criteria: criteria)]
         let mobileSmartGroups: [SmartGroup] = [SmartGroup(id: 1, name: "Smart Group")]
         let mobileStaticGroups: [StaticGroup] = [StaticGroup(id: 2, name: "Static Group")]

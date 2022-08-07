@@ -34,7 +34,10 @@ class KMARTMacTests: XCTestCase {
     }
 
     func testMacAdvancedSearchesInvalidCriteria() throws {
-        let criteria: [Criterion] = [Criterion(name: "Computer Group", type: "member of", value: "Incorrect Smart Group"), Criterion(name: "Computer Group", type: "member of", value: "Incorrect Static Group")]
+        let criteria: [Criterion] = [
+            Criterion(name: "Computer Group", type: "member of", value: "Incorrect Smart Group"),
+            Criterion(name: "Computer Group", type: "member of", value: "Incorrect Static Group")
+        ]
         let macAdvancedSearches: [MacAdvancedSearch] = [MacAdvancedSearch(id: 1, criteria: criteria)]
         let macSmartGroups: [SmartGroup] = [SmartGroup(id: 1, name: "Smart Group")]
         let macStaticGroups: [StaticGroup] = [StaticGroup(id: 2, name: "Static Group")]
