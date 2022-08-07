@@ -26,9 +26,6 @@ struct Kmart: AsyncParsableCommand {
     """)
     var yaml: String = ""
 
-    @Flag(name: .shortAndLong, help: "Display the version of \(String.appName).")
-    var version: Bool = false
-
     mutating func runAsync() async throws {
 
         if !json.isEmpty {
