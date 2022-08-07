@@ -11,7 +11,7 @@ import Foundation
 struct Version {
 
     /// Current version.
-    private static let version: String = "1.3"
+    private static let version: String = "1.3.1"
     /// Current version with error message when unable to lookup latest version.
     private static var versionWithErrorMessage: String {
         "\(version) (Unable to check for latest version)"

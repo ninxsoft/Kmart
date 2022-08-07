@@ -54,13 +54,13 @@ OVERVIEW: Kick-Ass Mac Admin Reporting Tool
 
 Generate kick-ass Jamf Pro reports.
 
-USAGE: kmart [--json <json>] [--plist <plist>] [--yaml <yaml>] [--version]
+USAGE: kmart [--json <json>] [--plist <plist>] [--yaml <yaml>]
 
 OPTIONS:
   -j, --json <json>       JSON configuration file.
   -p, --plist <plist>     Property List configuration file.
   -y, --yaml <yaml>       YAML configuration file.
-  -v, --version           Display the version of kmart.
+  --version               Show the version.
   -h, --help              Show help information.
 ```
 
@@ -128,7 +128,7 @@ OPTIONS:
 
 Grab the latest version of KMART from the [releases page](https://github.com/ninxsoft/KMART/releases).
 
-**Note:** Version **1.3** requires **macOS Monterey** or later.
+**Note:** Versions **1.3** and later require **macOS Monterey** or later.
 
 If you need to run **KMART** on an older operating system, you can still use version **1.2**.
 
@@ -142,6 +142,10 @@ If you need to run **KMART** on an older operating system, you can still use ver
 - Sindre Sorhus ([sindresorhus](https://github.com/sindresorhus)) for [github-markdown-css](https://github.com/sindresorhus/github-markdown-css), used to make the HTML output prettier.
 
 ## Version History
+
+- 1.3.1
+
+  - Nested Smart Groups are now also detected when generating reports
 
 - 1.3
 
