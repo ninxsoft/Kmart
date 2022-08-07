@@ -17,12 +17,11 @@ struct Version {
         "\(version) (Unable to check for latest version)"
     }
 
-    /// Prints the current version and checks for the latest version.
-    static func run() {
+    /// Returns the current version and checks for the latest version.
+    static func string() -> String {
 
         guard let url: URL = URL(string: .latestReleaseURL) else {
-            print(versionWithErrorMessage)
-            return
+            return versionWithErrorMessage
         }
 
         do {
@@ -31,20 +30,19 @@ struct Version {
             guard let data: Data = string.data(using: .utf8),
                 let dictionary: [String: Any] = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String: Any],
                 let tag: String = dictionary["tag_name"] as? String else {
-                print(versionWithErrorMessage)
-                return
+                return versionWithErrorMessage
             }
 
             let latestVersion: String = tag.replacingOccurrences(of: "v", with: "")
-            print("\(version) (Latest: \(latestVersion))")
+            let version: String = "\(version) (Latest: \(latestVersion))"
 
             guard version.compare(latestVersion, options: .numeric) == .orderedAscending else {
-                return
+                return version
             }
 
-            print("Visit \(String.repositoryURL) to grab the latest release of \(String.appName)")
+            return "\(version)\nVisit \(String.repositoryURL) to grab the latest release of \(String.appName)"
         } catch {
-            print(versionWithErrorMessage)
+            return versionWithErrorMessage
         }
     }
 }

@@ -9,7 +9,7 @@ import ArgumentParser
 import Foundation
 
 struct Kmart: AsyncParsableCommand {
-    static let configuration: CommandConfiguration = CommandConfiguration(abstract: .abstract, discussion: .discussion)
+    static let configuration: CommandConfiguration = CommandConfiguration(abstract: .abstract, discussion: .discussion, version: Version.string())
 
     @Option(name: .shortAndLong, help: """
     JSON configuration file.
@@ -37,8 +37,6 @@ struct Kmart: AsyncParsableCommand {
             try await execute(type: .plist, path: plist)
         } else if !yaml.isEmpty {
             try await execute(type: .yaml, path: yaml)
-        } else if version {
-            Version.run()
         } else {
             let string: String = Kmart.helpMessage()
             print(string)
