@@ -18,13 +18,13 @@ class KMARTMacTests: XCTestCase {
     }
 
     func testMacAdvancedSearchesNoCriteria() throws {
-        let macAdvancedSearches: [MacAdvancedSearch] = [MacAdvancedSearch(id: 1, criteria: [Criterion(name: "Name", type: "Type", value: "Value")])]
+        let macAdvancedSearches: [MacAdvancedSearch] = [MacAdvancedSearch(id: 1, criteria: [Criterion(name: "Name", type: "member of", value: "Value")])]
         let results: [MacAdvancedSearch] = Reporter.macAdvancedSearchesNoCriteria(macAdvancedSearches)
         XCTAssertTrue(results.isEmpty)
     }
 
     func testMacAdvancedSearchesValidCriteria() throws {
-        let criteria: [Criterion] = [Criterion(name: "Computer Group", value: "Smart Group"), Criterion(name: "Computer Group", value: "Static Group")]
+        let criteria: [Criterion] = [Criterion(name: "Computer Group", type: "member of", value: "Smart Group"), Criterion(name: "Computer Group", type: "member of", value: "Static Group")]
         let macAdvancedSearches: [MacAdvancedSearch] = [MacAdvancedSearch(id: 1, criteria: criteria)]
         let macSmartGroups: [SmartGroup] = [SmartGroup(id: 1, name: "Smart Group")]
         let macStaticGroups: [StaticGroup] = [StaticGroup(id: 2, name: "Static Group")]
@@ -34,7 +34,7 @@ class KMARTMacTests: XCTestCase {
     }
 
     func testMacAdvancedSearchesInvalidCriteria() throws {
-        let criteria: [Criterion] = [Criterion(name: "Computer Group", value: "Incorrect Smart Group"), Criterion(name: "Computer Group", value: "Incorrect Static Group")]
+        let criteria: [Criterion] = [Criterion(name: "Computer Group", type: "member of", value: "Incorrect Smart Group"), Criterion(name: "Computer Group", type: "member of", value: "Incorrect Static Group")]
         let macAdvancedSearches: [MacAdvancedSearch] = [MacAdvancedSearch(id: 1, criteria: criteria)]
         let macSmartGroups: [SmartGroup] = [SmartGroup(id: 1, name: "Smart Group")]
         let macStaticGroups: [StaticGroup] = [StaticGroup(id: 2, name: "Static Group")]
@@ -780,13 +780,17 @@ class KMARTMacTests: XCTestCase {
 
     func testMacSmartGroupsLinked() throws {
         let macTargets: MacTargets = MacTargets(deviceGroups: [1])
-        let macAdvancedSearches: [MacAdvancedSearch] = [MacAdvancedSearch(id: 1, criteria: [Criterion(name: "Computer Group", type: "Type", value: "Smart Group")])]
+        let macAdvancedSearches: [MacAdvancedSearch] = [MacAdvancedSearch(id: 1, criteria: [Criterion(name: "Computer Group", type: "member of", value: "Unique Smart Group #1")])]
         let macApplications: [MacApplication] = [MacApplication(id: 1, macTargets: macTargets)]
         let macConfigurationProfiles: [MacConfigurationProfile] = [MacConfigurationProfile(id: 1, macTargets: macTargets)]
         let macPatchPolicies: [MacPatchPolicy] = [MacPatchPolicy(id: 1, macTargets: macTargets)]
         let macPolicies: [MacPolicy] = [MacPolicy(id: 1, macTargets: macTargets)]
         let macRestrictedSoftwares: [MacRestrictedSoftware] = [MacRestrictedSoftware(id: 1, macTargets: macTargets)]
-        let macSmartGroups: [SmartGroup] = [SmartGroup(id: 1, name: "Smart Group")]
+        let macSmartGroups: [SmartGroup] = [
+            SmartGroup(id: 1, name: "Unique Smart Group #1"),
+            SmartGroup(id: 2, name: "Unique Smart Group #2", criteria: [Criterion(name: "Computer Group", type: "member of", value: "Unique Smart Group #3")]),
+            SmartGroup(id: 3, name: "Unique Smart Group #3", criteria: [Criterion(name: "Computer Group", type: "member of", value: "Unique Smart Group #2")])
+        ]
         let objects: Objects = Objects(
             macAdvancedSearches: macAdvancedSearches,
             macApplications: macApplications,
@@ -801,14 +805,18 @@ class KMARTMacTests: XCTestCase {
     }
 
     func testMacSmartGroupsNotLinked() throws {
-        let macTargets: MacTargets = MacTargets(deviceGroups: [2])
-        let macAdvancedSearches: [MacAdvancedSearch] = [MacAdvancedSearch(id: 1, criteria: [Criterion(name: "Computer Group", type: "Type", value: "Unique Smart Group #2")])]
+        let macTargets: MacTargets = MacTargets(deviceGroups: [1])
+        let macAdvancedSearches: [MacAdvancedSearch] = [MacAdvancedSearch(id: 1, criteria: [Criterion(name: "Computer Group", type: "member of", value: "Unique Smart Group #1")])]
         let macApplications: [MacApplication] = [MacApplication(id: 1, macTargets: macTargets)]
         let macConfigurationProfiles: [MacConfigurationProfile] = [MacConfigurationProfile(id: 1, macTargets: macTargets)]
         let macPatchPolicies: [MacPatchPolicy] = [MacPatchPolicy(id: 1, macTargets: macTargets)]
         let macPolicies: [MacPolicy] = [MacPolicy(id: 1, macTargets: macTargets)]
         let macRestrictedSoftwares: [MacRestrictedSoftware] = [MacRestrictedSoftware(id: 1, macTargets: macTargets)]
-        let macSmartGroups: [SmartGroup] = [SmartGroup(id: 1, name: "Uniqie Smart Group #1")]
+        let macSmartGroups: [SmartGroup] = [
+            SmartGroup(id: 1, name: "Unique Smart Group #1"),
+            SmartGroup(id: 2, name: "Unique Smart Group #2", criteria: [Criterion(name: "Computer Group", type: "member of", value: "Unique Smart Group #1")]),
+            SmartGroup(id: 3, name: "Unique Smart Group #3")
+        ]
         let objects: Objects = Objects(
             macAdvancedSearches: macAdvancedSearches,
             macApplications: macApplications,
@@ -829,14 +837,14 @@ class KMARTMacTests: XCTestCase {
     }
 
     func testMacSmartGroupsNoCriteria() throws {
-        let macSmartGroups: [SmartGroup] = [SmartGroup(id: 1, criteria: [Criterion(name: "Name", type: "Type", value: "Value")])]
+        let macSmartGroups: [SmartGroup] = [SmartGroup(id: 1, criteria: [Criterion(name: "Name", type: "member of", value: "Value")])]
         let results: [SmartGroup] = Reporter.macSmartGroupsNoCriteria(macSmartGroups)
         XCTAssertTrue(results.isEmpty)
     }
 
     func testMacStaticGroupsLinked() throws {
         let macTargets: MacTargets = MacTargets(deviceGroups: [1])
-        let macAdvancedSearches: [MacAdvancedSearch] = [MacAdvancedSearch(id: 1, criteria: [Criterion(name: "Computer Group", type: "Type", value: "Static Group")])]
+        let macAdvancedSearches: [MacAdvancedSearch] = [MacAdvancedSearch(id: 1, criteria: [Criterion(name: "Computer Group", type: "member of", value: "Static Group")])]
         let macApplications: [MacApplication] = [MacApplication(id: 1, macTargets: macTargets)]
         let macConfigurationProfiles: [MacConfigurationProfile] = [MacConfigurationProfile(id: 1, macTargets: macTargets)]
         let macPatchPolicies: [MacPatchPolicy] = [MacPatchPolicy(id: 1, macTargets: macTargets)]
@@ -858,13 +866,13 @@ class KMARTMacTests: XCTestCase {
 
     func testMacStaticGroupsNotLinked() throws {
         let macTargets: MacTargets = MacTargets(deviceGroups: [2])
-        let macAdvancedSearches: [MacAdvancedSearch] = [MacAdvancedSearch(id: 1, criteria: [Criterion(name: "Computer Group", type: "Type", value: "Unique Static Group #2")])]
+        let macAdvancedSearches: [MacAdvancedSearch] = [MacAdvancedSearch(id: 1, criteria: [Criterion(name: "Computer Group", type: "member of", value: "Unique Static Group #2")])]
         let macApplications: [MacApplication] = [MacApplication(id: 1, macTargets: macTargets)]
         let macConfigurationProfiles: [MacConfigurationProfile] = [MacConfigurationProfile(id: 1, macTargets: macTargets)]
         let macPatchPolicies: [MacPatchPolicy] = [MacPatchPolicy(id: 1, macTargets: macTargets)]
         let macPolicies: [MacPolicy] = [MacPolicy(id: 1, macTargets: macTargets)]
         let macRestrictedSoftwares: [MacRestrictedSoftware] = [MacRestrictedSoftware(id: 1, macTargets: macTargets)]
-        let macStaticGroups: [StaticGroup] = [StaticGroup(id: 1, name: "Uniqie Static Group #1")]
+        let macStaticGroups: [StaticGroup] = [StaticGroup(id: 1, name: "Unique Static Group #1")]
         let objects: Objects = Objects(
             macAdvancedSearches: macAdvancedSearches,
             macApplications: macApplications,

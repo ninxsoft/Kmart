@@ -16,13 +16,13 @@ class KMARTMobileTests: XCTestCase {
     }
 
     func testMobileAdvancedSearchesNoCriteria() throws {
-        let mobileAdvancedSearches: [MobileAdvancedSearch] = [MobileAdvancedSearch(id: 1, criteria: [Criterion(name: "Name", type: "Type", value: "Value")])]
+        let mobileAdvancedSearches: [MobileAdvancedSearch] = [MobileAdvancedSearch(id: 1, criteria: [Criterion(name: "Name", type: "member of", value: "Value")])]
         let results: [MobileAdvancedSearch] = Reporter.mobileAdvancedSearchesNoCriteria(mobileAdvancedSearches)
         XCTAssertTrue(results.isEmpty)
     }
 
     func testMobileAdvancedSearchesValidCriteria() throws {
-        let criteria: [Criterion] = [Criterion(name: "Mobile Device Group", value: "Smart Group"), Criterion(name: "Mobile Device Group", value: "Static Group")]
+        let criteria: [Criterion] = [Criterion(name: "Mobile Device Group", type: "member of", value: "Smart Group"), Criterion(name: "Mobile Device Group", type: "member of", value: "Static Group")]
         let mobileAdvancedSearches: [MobileAdvancedSearch] = [MobileAdvancedSearch(id: 1, criteria: criteria)]
         let mobileSmartGroups: [SmartGroup] = [SmartGroup(id: 1, name: "Smart Group")]
         let mobileStaticGroups: [StaticGroup] = [StaticGroup(id: 2, name: "Static Group")]
@@ -32,7 +32,7 @@ class KMARTMobileTests: XCTestCase {
     }
 
     func testMobileAdvancedSearchesInvalidCriteria() throws {
-        let criteria: [Criterion] = [Criterion(name: "Mobile Device Group", value: "Incorrect Smart Group"), Criterion(name: "Mobile Device Group", value: "Incorrect Static Group")]
+        let criteria: [Criterion] = [Criterion(name: "Mobile Device Group", type: "member of", value: "Incorrect Smart Group"), Criterion(name: "Mobile Device Group", type: "member of", value: "Incorrect Static Group")]
         let mobileAdvancedSearches: [MobileAdvancedSearch] = [MobileAdvancedSearch(id: 1, criteria: criteria)]
         let mobileSmartGroups: [SmartGroup] = [SmartGroup(id: 1, name: "Smart Group")]
         let mobileStaticGroups: [StaticGroup] = [StaticGroup(id: 2, name: "Static Group")]
@@ -161,10 +161,14 @@ class KMARTMobileTests: XCTestCase {
 
     func testMobileSmartGroupsLinked() throws {
         let mobileTargets: MobileTargets = MobileTargets(deviceGroups: [1])
-        let mobileAdvancedSearches: [MobileAdvancedSearch] = [MobileAdvancedSearch(id: 1, criteria: [Criterion(name: "Mobile Device Group", type: "Type", value: "Smart Group")])]
+        let mobileAdvancedSearches: [MobileAdvancedSearch] = [MobileAdvancedSearch(id: 1, criteria: [Criterion(name: "Mobile Device Group", type: "member of", value: "Unique Smart Group #1")])]
         let mobileApplications: [MobileApplication] = [MobileApplication(id: 1, mobileTargets: mobileTargets)]
         let mobileConfigurationProfiles: [MobileConfigurationProfile] = [MobileConfigurationProfile(id: 1, mobileTargets: mobileTargets)]
-        let mobileSmartGroups: [SmartGroup] = [SmartGroup(id: 1, name: "Smart Group")]
+        let mobileSmartGroups: [SmartGroup] = [
+            SmartGroup(id: 1, name: "Unique Smart Group #1"),
+            SmartGroup(id: 2, name: "Unique Smart Group #2", criteria: [Criterion(name: "Mobile Device Group", type: "member of", value: "Unique Smart Group #3")]),
+            SmartGroup(id: 3, name: "Unique Smart Group #3", criteria: [Criterion(name: "Mobile Device Group", type: "member of", value: "Unique Smart Group #2")])
+        ]
         let objects: Objects = Objects(
             mobileAdvancedSearches: mobileAdvancedSearches,
             mobileApplications: mobileApplications,
@@ -176,11 +180,15 @@ class KMARTMobileTests: XCTestCase {
     }
 
     func testMobileSmartGroupsNotLinked() throws {
-        let mobileTargets: MobileTargets = MobileTargets(deviceGroups: [2])
-        let mobileAdvancedSearches: [MobileAdvancedSearch] = [MobileAdvancedSearch(id: 1, criteria: [Criterion(name: "Mobile Device Group", type: "Type", value: "Unique Smart Group #2")])]
+        let mobileTargets: MobileTargets = MobileTargets(deviceGroups: [1])
+        let mobileAdvancedSearches: [MobileAdvancedSearch] = [MobileAdvancedSearch(id: 1, criteria: [Criterion(name: "Mobile Device Group", type: "member of", value: "Unique Smart Group #1")])]
         let mobileApplications: [MobileApplication] = [MobileApplication(id: 1, mobileTargets: mobileTargets)]
         let mobileConfigurationProfiles: [MobileConfigurationProfile] = [MobileConfigurationProfile(id: 1, mobileTargets: mobileTargets)]
-        let mobileSmartGroups: [SmartGroup] = [SmartGroup(id: 1, name: "Uniqie Smart Group #1")]
+        let mobileSmartGroups: [SmartGroup] = [
+            SmartGroup(id: 1, name: "Unique Smart Group #1"),
+            SmartGroup(id: 2, name: "Unique Smart Group #2", criteria: [Criterion(name: "Mobile Device Group", type: "member of", value: "Unique Smart Group #1")]),
+            SmartGroup(id: 3, name: "Unique Smart Group #3")
+        ]
         let objects: Objects = Objects(
             mobileAdvancedSearches: mobileAdvancedSearches,
             mobileApplications: mobileApplications,
@@ -198,14 +206,14 @@ class KMARTMobileTests: XCTestCase {
     }
 
     func testMobileSmartGroupsNoCriteria() throws {
-        let mobileSmartGroups: [SmartGroup] = [SmartGroup(id: 1, criteria: [Criterion(name: "Name", type: "Type", value: "Value")])]
+        let mobileSmartGroups: [SmartGroup] = [SmartGroup(id: 1, criteria: [Criterion(name: "Name", type: "member of", value: "Value")])]
         let results: [SmartGroup] = Reporter.mobileSmartGroupsNoCriteria(mobileSmartGroups)
         XCTAssertTrue(results.isEmpty)
     }
 
     func testMobileStaticGroupsLinked() throws {
         let mobileTargets: MobileTargets = MobileTargets(deviceGroups: [1])
-        let mobileAdvancedSearches: [MobileAdvancedSearch] = [MobileAdvancedSearch(id: 1, criteria: [Criterion(name: "Mobile Device Group", type: "Type", value: "Static Group")])]
+        let mobileAdvancedSearches: [MobileAdvancedSearch] = [MobileAdvancedSearch(id: 1, criteria: [Criterion(name: "Mobile Device Group", type: "member of", value: "Static Group")])]
         let mobileApplications: [MobileApplication] = [MobileApplication(id: 1, mobileTargets: mobileTargets)]
         let mobileConfigurationProfiles: [MobileConfigurationProfile] = [MobileConfigurationProfile(id: 1, mobileTargets: mobileTargets)]
         let mobileStaticGroups: [StaticGroup] = [StaticGroup(id: 1, name: "Static Group")]
@@ -221,10 +229,10 @@ class KMARTMobileTests: XCTestCase {
 
     func testMobileStaticGroupsNotLinked() throws {
         let mobileTargets: MobileTargets = MobileTargets(deviceGroups: [2])
-        let mobileAdvancedSearches: [MobileAdvancedSearch] = [MobileAdvancedSearch(id: 1, criteria: [Criterion(name: "Mobile Device Group", type: "Type", value: "Unique Static Group #2")])]
+        let mobileAdvancedSearches: [MobileAdvancedSearch] = [MobileAdvancedSearch(id: 1, criteria: [Criterion(name: "Mobile Device Group", type: "member of", value: "Unique Static Group #2")])]
         let mobileApplications: [MobileApplication] = [MobileApplication(id: 1, mobileTargets: mobileTargets)]
         let mobileConfigurationProfiles: [MobileConfigurationProfile] = [MobileConfigurationProfile(id: 1, mobileTargets: mobileTargets)]
-        let mobileStaticGroups: [StaticGroup] = [StaticGroup(id: 1, name: "Uniqie Static Group #1")]
+        let mobileStaticGroups: [StaticGroup] = [StaticGroup(id: 1, name: "Unique Static Group #1")]
         let objects: Objects = Objects(
             mobileAdvancedSearches: mobileAdvancedSearches,
             mobileApplications: mobileApplications,

@@ -767,6 +767,11 @@ struct Reporter {
         identifiers.append(contentsOf: objects.macRestrictedSoftwares.flatMap { $0.macTargets.deviceGroups })
         identifiers.append(contentsOf: objects.macRestrictedSoftwares.flatMap { $0.macExclusions.deviceGroups })
 
+        for macSmartGroup in objects.macSmartGroups {
+            let values: [String] = macSmartGroup.criteria.filter { $0.name == "Computer Group" }.map { $0.value }
+            identifiers.append(contentsOf: objects.macSmartGroups.filter { values.contains($0.name) }.map { $0.id })
+        }
+
         let macSmartGroups: [SmartGroup] = objects.macSmartGroups.filter { !identifiers.contains($0.id) }
         return macSmartGroups
     }
@@ -924,6 +929,11 @@ struct Reporter {
         identifiers.append(contentsOf: objects.mobileApplications.flatMap { $0.mobileExclusions.deviceGroups })
         identifiers.append(contentsOf: objects.mobileConfigurationProfiles.flatMap { $0.mobileTargets.deviceGroups })
         identifiers.append(contentsOf: objects.mobileConfigurationProfiles.flatMap { $0.mobileExclusions.deviceGroups })
+
+        for mobileSmartGroup in objects.mobileSmartGroups {
+            let values: [String] = mobileSmartGroup.criteria.filter { $0.name == "Mobile Device Group" }.map { $0.value }
+            identifiers.append(contentsOf: objects.mobileSmartGroups.filter { values.contains($0.name) }.map { $0.id })
+        }
 
         let mobileSmartGroups: [SmartGroup] = objects.mobileSmartGroups.filter { !identifiers.contains($0.id) }
         return mobileSmartGroups
