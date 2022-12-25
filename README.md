@@ -70,7 +70,7 @@ OPTIONS:
 
   **Note**: Use the following command to encode your credentials in the configuration file:
 
-  `printf 'username:password' | iconv --to-code ISO-8859-1 | base64 --input -`
+  `printf 'username:password' | iconv --to-code ISO-8859-1 | base64`
 
 - For Slack integration, read [Basic app setup](https://api.slack.com/authentication/basics) to create a Slack app with a Bot token.
 
@@ -78,7 +78,7 @@ OPTIONS:
 
 ## Privileges
 
-`kmart` requires the following **user privileges** in order to report correctly.
+**Kmart** requires the following **user privileges** in order to report correctly.
 
 **Recommendations:**
 
@@ -126,11 +126,9 @@ OPTIONS:
 
 ## Download
 
-Grab the latest version of KMART from the [releases page](https://github.com/ninxsoft/KMART/releases).
-
-**Note:** Versions **1.3** and later require **macOS Monterey** or later.
-
-If you need to run **KMART** on an older operating system, you can still use version **1.2**.
+- Grab the latest version of KMART from the [releases page](https://github.com/ninxsoft/KMART/releases).
+- **Note:** Versions **1.3** and later require **macOS Monterey** or later.
+  - If you need to run **KMART** on an older operating system, you can still use version **1.2**.
 
 ## Credits / Thank You
 
@@ -143,6 +141,11 @@ If you need to run **KMART** on an older operating system, you can still use ver
 
 ## Version History
 
+- 1.3.2
+
+  - Fixed an issue where `mac_policies_no_payload` was not reporting correctly (thanks [monodata](https://github.com/monodata))
+  - URL slugs have been updated to match recent Jamf Pro changes (thanks [thomasrmartin](https://github.com/thomasrmartin))
+  
 - 1.3.1
 
   - Nested Smart Groups are now also detected when generating reports
