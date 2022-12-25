@@ -358,11 +358,11 @@ enum ReportType: String, CaseIterable {
     var jamfProSlug: String {
         switch self {
         case .buildingsNotLinked:
-            return "/view/settings/network/buildings/"
+            return "view/settings/network-organization/buildings/"
         case .categoriesNotLinked:
             return "categories.html?id="
         case .departmentsNotLinked:
-            return "/view/settings/network/departments/"
+            return "view/settings/network-organization/departments/"
         case .eBooksNoScope:
             return "eBooks.html?id="
         case .iBeaconsNotLinked:
@@ -394,7 +394,7 @@ enum ReportType: String, CaseIterable {
         case .macRestrictedSoftwareNoScope:
             return "restrictedSoftware.html?id="
         case .macScriptsNotLinked, .macScriptsLinterErrors, .macScriptsLinterWarnings:
-            return "view/settings/computer/scripts/"
+            return "view/settings/computer-management/scripts/"
         case .macSmartGroupsNotLinked, .macSmartGroupsNoCriteria:
             return "smartComputerGroups.html?id="
         case .macStaticGroupsNotLinked, .macStaticGroupsEmpty:
@@ -406,15 +406,15 @@ enum ReportType: String, CaseIterable {
         case .mobileConfigurationProfilesNoScope:
             return "iOSConfigurationProfiles.html?id="
         case .mobileDevicesLastInventory, .mobileDevicesUnmanaged:
-            return "/mobileDevices.html?id="
+            return "mobileDevices.html?id="
         case .mobileExtensionAttributesNotLinked:
-            return "/mobileDeviceExtensionAttributes.html?id="
+            return "mobileDeviceExtensionAttributes.html?id="
         case .mobileSmartGroupsNotLinked, .mobileSmartGroupsNoCriteria:
             return "smartMobileDeviceGroups.html?id="
         case .mobileStaticGroupsNotLinked, .mobileStaticGroupsEmpty:
             return "staticMobileDeviceGroups.html?id="
         case .networkSegmentsNotLinked:
-            return "/networkSegments.html?id="
+            return "networkSegments.html?id="
         }
     }
 }
