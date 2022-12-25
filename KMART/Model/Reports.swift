@@ -8,8 +8,6 @@
 import Foundation
 import Yams
 
-// swiftlint:disable type_body_length
-
 /// Reports struct storing all generated reports.
 struct Reports {
     /// buildings not linked
