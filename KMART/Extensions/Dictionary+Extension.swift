@@ -382,11 +382,11 @@ extension Dictionary where Key == String, Value == Any {
         self["directoryBindings"] = directoryBindings.identifiers
         self["diskEncryption"] = diskEncryptionDictionary["disk_encryption_configuration_id"] as? Int ?? -1
         self["dockItems"] = dockItems.identifiers
-        let filesProcessesKeys: [String] = ["search_by_path", "locate_file", "update_locate_database", "spotlight_search", "search_for_process", "run_command"]
-        self["filesProcesses"] = filesProcessesKeys.compactMap { filesProcesses[$0] as? Bool }.contains(true) || filesProcessesKeys.compactMap { filesProcesses[$0] as? String }.contains("")
+        let filesProcessesKeys: [String] = ["search_by_path", "delete_file", "locate_file", "update_locate_database", "spotlight_search", "search_for_process", "kill_process", "run_command"]
+        self["filesProcesses"] = filesProcessesKeys.compactMap { filesProcesses[$0] as? Bool }.contains(true) || !filesProcessesKeys.compactMap { filesProcesses[$0] as? String }.contains("")
         self["firmware"] = firmwareString != "none"
         self["managementAccount"] = managementAccountString != "doNotChange"
-        let maintenanceKeys: [String] = ["recon", "reset_name", "install_all_cached_packages", "permissions", "byhost", "system_cache", "user_cache", "verify"]
+        let maintenanceKeys: [String] = ["recon", "reset_name", "install_all_cached_packages", "heal", "prebindings", "permissions", "byhost", "system_cache", "user_cache", "verify"]
         self["maintenance"] = maintenanceKeys.compactMap { maintenance[$0] as? Bool }.contains(true)
         self["packages"] = packages.identifiers
         self["printers"] = printers.compactMap { $0 as? [String: Any] }.identifiers
