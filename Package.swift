@@ -4,7 +4,7 @@
 import PackageDescription
 
 /// Package configuration
-let package = Package(
+let package: Package = Package(
     name: "KMART",
     platforms: [
         .macOS(.v12)
@@ -13,10 +13,10 @@ let package = Package(
         .executable(name: "kmart", targets: ["KMART"])
     ],
     dependencies: [
-        .package(url: "https://github.com/apple/swift-argument-parser", from: "1.2.0"),
-        .package(url: "https://github.com/jpsim/Yams", from: "5.0.1"),
+        .package(url: "https://github.com/apple/swift-argument-parser", from: "1.2.2"),
+        .package(url: "https://github.com/jpsim/Yams", from: "5.0.5"),
         .package(url: "https://github.com/drmohundro/SWXMLHash", from: "7.0.0"),
-        .package(url: "https://github.com/JohnSundell/Ink", from: "0.5.1")
+        .package(url: "https://github.com/JohnSundell/Ink", from: "0.6.0")
     ],
     targets: [
         .executableTarget(

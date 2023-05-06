@@ -980,3 +980,4 @@ struct Reporter {
         mobileStaticGroups.filter { $0.devices.isEmpty }
     }
 }
+// swiftlint:enable type_body_length

@@ -343,8 +343,8 @@ extension Dictionary where Key == String, Value == Any {
         self["dataType"] = dataType
         self["inputType"] = inputType
         self["scriptContents"] = (dictionary["script"] as? String)?.replacingOccurrences(of: "\r\n", with: "\n") ?? ""
-        self["linterWarnings"] = []
-        self["linterErrors"] = []
+        self["linterWarnings"] = [[String: Any]]()
+        self["linterErrors"] = [[String: Any]]()
     }
 
     /// Transform the **Mac Policies** dictionary in-place.
@@ -411,8 +411,8 @@ extension Dictionary where Key == String, Value == Any {
 
         self["parameters"] = parameters.map { $1 }
         self["scriptContents"] = scriptContents
-        self["linterWarnings"] = []
-        self["linterErrors"] = []
+        self["linterWarnings"] = [[String: Any]]()
+        self["linterErrors"] = [[String: Any]]()
     }
 
     /// Transform the **Mac Static Groups** dictionary in-place.

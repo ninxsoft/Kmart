@@ -101,17 +101,17 @@ struct Slacker {
     /// - Returns: A `Data` object is successful, otherwise `nil`.
     private static func messageData(for slack: SlackConfiguration) -> Data? {
 
+        let block: [String: Any] = [
+            "type": "section",
+            "text": [
+                "type": "mrkdwn",
+                "text": slack.text
+            ]
+        ]
+
         let dictionary: [String: Any] = [
             "channel": slack.channel,
-            "blocks": [
-                [
-                    "type": "section",
-                    "text": [
-                        "type": "mrkdwn",
-                        "text": slack.text
-                    ]
-                ]
-            ],
+            "blocks": [block],
             "text": SlackConfiguration.defaultText
         ]
 

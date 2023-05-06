@@ -11,4 +11,5 @@ enum ScriptType: String {
     // swiftlint:disable redundant_string_enum_value
     case shell = "shell"
     case python = "python"
+    // swiftlint:enable redundant_string_enum_value
 }
