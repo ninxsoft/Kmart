@@ -1,3 +1,13 @@
+### :mega: Layoffs are less than ideal
+
+I am a seasoned Mac Sys Admin who also makes Mac apps in Swift :hammer_and_wrench:
+
+If you feel I would be a great fit for any job opportunities, please don't hesitate to reach out: [nindi@ninxsoft.com](mailto:nindi@ninxsoft.com) | [LinkedIn](https://www.linkedin.com/in/nindigill/)
+
+Thank you :bow:
+
+---
+
 # KMART - Kick-Ass Mac Admin Reporting Tool
 
 A command-line utility that generates kick-ass Jamf Pro reports:
