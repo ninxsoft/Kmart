@@ -8,6 +8,12 @@ Optionally sent via Slack:
 
 ![Slack](Readme%20Resources/Slack.png)
 
+<!-- markdownlint-disable no-inline-html -->
+
+<a href="https://www.buymeacoffee.com/ninxsoft"><img width="214" height="60" src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy me a coffee"></a>
+
+<!-- markdownlint-enable no-inline-html -->
+
 ## Features
 
 - [x] Reporting on the following Jamf Pro objects:
@@ -138,58 +144,6 @@ OPTIONS:
 - John Sundell ([JohnSundell](https://github.com/JohnSundell)) for [Ink](https://github.com/JohnSundell/Ink), used to generate HTML from Markdown.
 - David Mohundro ([drmohundro](https://github.com/drmohundro)) for [SWXMLHash](https://github.com/drmohundro/SWXMLHash), used to decode XML.
 - Sindre Sorhus ([sindresorhus](https://github.com/sindresorhus)) for [github-markdown-css](https://github.com/sindresorhus/github-markdown-css), used to make the HTML output prettier.
-
-## Version History
-
-- 1.3.2
-
-  - Fixed an issue where `mac_policies_no_payload` was not reporting correctly (thanks [monodata](https://github.com/monodata))
-  - URL slugs have been updated to match recent Jamf Pro changes (thanks [thomasrmartin](https://github.com/thomasrmartin))
-  
-- 1.3.1
-
-  - Nested Smart Groups are now also detected when generating reports
-
-- 1.3
-
-  - Added support for linting **Python** scripts via [flake8](https://flake8.pycqa.org)
-  - Added support for reporting on **Patch Management Software Titles**:
-    - New report types: `mac_patch_policies_no_scope` and `mac_patch_policies_disabled`
-    - Existing reports now factor in Patch Management Software Titles and Patch Policies
-  - Progress output is now dynamic, updating in-place
-  - Basic Authentication has been replaced with [Bearer Token Authentication](https://developer.jamf.com/jamf-pro/docs/classic-api-authentication-changes)
-  - Option to send reports via **Email** has been removed
-  - Fixed the missing **Serial Number** column header for **Unmanaged Mac/Mobile Device** reports in Markdown and HTML
-  - General cosmetic bugfixes
-
-  **Note:** Kmart now uses [Swift concurrency](https://docs.swift.org/swift-book/LanguageGuide/Concurrency.html) (async await), which significantly reduces the amount and complexity of HTTP code. Concurrency requires macOS Monterey 12, therefore support for macOS Catalina 10.15 and macOS Big Sur 11 has been dropped.
-
-- 1.2
-
-  - Added support for sending reports via Slack
-    - Read [Basic app setup](https://api.slack.com/authentication/basics) to create a Slack app with a Bot token
-    - **Note:** The Bot token will require the `chat:write` and `files:write` [permission scopes](https://api.slack.com/scopes)
-    - See [Sample Configs](Sample%20Configs#slack) for more information
-  - Added `mac_devices_unmanaged` and `mobile_devices_unmanaged` report types
-    - Mac and Mobile device reports now exclude unmanaged devices
-  - Added support for custom `api_timeout` value (default: `10`)
-  - Mac Packages now also display Categories in Markdown / HTML reports
-  - Improved file handling for Mac Extension Attributes and Mac Scripts over 64KB
-  - Fixed escaping of `\` in JSON reports
-  - Fixed escaping of `_` in Markdown / HTML reports
-  - Reduced verbosity of output messaging (reads much nicer)
-
-- 1.1
-
-  - Report on one-off Mac Policies that were created via Jamf Remote (`mac_policies_jamf_remote`)
-  - Less ambiguous descriptions for Markdown / HTML output
-  - Better escaping of ASCII characters for Markdown / HTML output
-  - Fixed false-positive linter errors for Mac Extension Attributes with carriage returns (`\r`)
-  - Fixed Mac Directory Bindings reporting as Mac Disk Encryptions
-  - Fixed emailing report only if enabled is set to `true`
-
-- 1.0
-  - Initial release
 
 ## License
 
